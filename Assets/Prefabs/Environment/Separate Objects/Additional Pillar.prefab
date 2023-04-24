@@ -124,6 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1693354821438678998}
+  - component: {fileID: 6473635823898044718}
   m_Layer: 0
   m_Name: Additional Pillar
   m_TagString: Untagged
@@ -149,6 +150,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6473635823898044718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074982476588809580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31495026f5806cf46a1a2488d871c0ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightComponentsList:
+  - {fileID: 8462806059227369558}
+  - {fileID: 8109395428764581201}
 --- !u!1 &3969039243371509507
 GameObject:
   m_ObjectHideFlags: 0
