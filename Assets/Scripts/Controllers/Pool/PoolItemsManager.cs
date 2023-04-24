@@ -23,7 +23,7 @@ public class PoolItemsManager : MonoBehaviour
 
     private void Start()
     {
-        CreatePool(enemyPrefab, PoolItemsTypes.Enemy, "Enemy", enemiesPoolSize);
+        CreatePool(enemyPrefab, "Enemy", enemiesPoolSize);
     }
 
     public PoolItem SpawnItemFromPool(PoolItemsTypes poolItemType, Vector3 _spawnPos, Quaternion _rotation, Transform _parent)
@@ -61,17 +61,17 @@ public class PoolItemsManager : MonoBehaviour
         return poolItem;
     }
 
-    public void ReturnItemToPool(PoolItem _poolItem, PoolItemsTypes poolItemType)
+    public void ReturnItemToPool(PoolItem _poolItem)
     {
-        List<PoolItem> poolItemsList = itemsListsDictionary[poolItemType];
+        List<PoolItem> poolItemsList = itemsListsDictionary[_poolItem.PoolItemType];
 
         _poolItem.gameObject.SetActive(false);
-        _poolItem.transform.SetParent(itemsHoldersDictionary[poolItemType]);
+        _poolItem.transform.SetParent(itemsHoldersDictionary[_poolItem.PoolItemType]);
         _poolItem.transform.localPosition = Vector3.zero;
         poolItemsList.Add(_poolItem);
     }
 
-    private void CreatePool(PoolItem poolItemPrefab, PoolItemsTypes poolItemType, string itemName, int poolSize)
+    private void CreatePool(PoolItem poolItemPrefab, string itemName, int poolSize)
     {
         GameObject poolItemsParent = new GameObject();
         poolItemsParent.transform.SetParent(transform);
@@ -82,8 +82,8 @@ public class PoolItemsManager : MonoBehaviour
 
         activePoolsList.Add(itemsList);
 
-        itemsListsDictionary.Add(poolItemType, itemsList);
-        itemsHoldersDictionary.Add(poolItemType, poolItemsParent.transform);
+        itemsListsDictionary.Add(poolItemPrefab.PoolItemType, itemsList);
+        itemsHoldersDictionary.Add(poolItemPrefab.PoolItemType, poolItemsParent.transform);
 
         for (int i = 0; i < poolSize; i++)
         {
