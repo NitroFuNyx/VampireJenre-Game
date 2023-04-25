@@ -6,9 +6,6 @@ public class PoolItemsManager : MonoBehaviour
     [Header("Pool Data")]
     [Space]
     [SerializeField] private int enemiesPoolSize = 50;
-    [Header("Holders")]
-    [Space]
-    [SerializeField] private Transform spawnedItemsHolder;
     [Header("Active Pools")]
     [Space]
     [SerializeField] private List<List<PoolItem>> activePoolsList = new List<List<PoolItem>>();
@@ -19,7 +16,7 @@ public class PoolItemsManager : MonoBehaviour
     private Dictionary<PoolItemsTypes, List<PoolItem>> itemsListsDictionary = new Dictionary<PoolItemsTypes, List<PoolItem>>();
     private Dictionary<PoolItemsTypes, Transform> itemsHoldersDictionary = new Dictionary<PoolItemsTypes, Transform>();
 
-    private Vector3 poolItemsSpawnPos = new Vector3(0f, 100f, 0f);
+    private Vector3 poolItemsSpawnPos = new Vector3(100f, 100f, 100f);
 
     private void Start()
     {
