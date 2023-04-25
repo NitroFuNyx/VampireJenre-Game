@@ -6,7 +6,7 @@ public enum Languages
 
 public enum UIPanels
 {
-    MainLoaderPanel, MainScreenPanel, GameLevelUI
+    MainLoaderPanel, MainScreenPanel, GameLevelUI , TalentWheelUI
 }
 
 public enum PoolItemsTypes
