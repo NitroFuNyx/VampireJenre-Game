@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class PoolItem : MonoBehaviour
 {
@@ -8,8 +9,12 @@ public class PoolItem : MonoBehaviour
 
     public PoolItemsTypes PoolItemType { get => poolItemType;}
 
+    #region Events Declaration
+    public event Action OnItemResetRequired;
+    #endregion Events Declaration
+
     public void ResetPoolItem()
     {
-        
+        OnItemResetRequired?.Invoke();
     }
 }

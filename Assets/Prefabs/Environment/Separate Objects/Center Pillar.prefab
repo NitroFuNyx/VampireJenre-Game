@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8531845910016285776
 Transform:
   m_ObjectHideFlags: 0
@@ -363,3 +363,4 @@ MonoBehaviour:
   lightComponentsList:
   - {fileID: 1967238040563060450}
   - {fileID: 2389986739437167282}
+  activateLight: 1
