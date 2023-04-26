@@ -31,17 +31,12 @@ public class EnemyComponentsManager : EnemyBehaviour
         }
     }
 
-    public void SetAwakeState()
-    {
-        movementManager.MoveToPlayer();
-        animationsManager.SetAnimation_Moving();
-    }
-
     private void SubscribeOnEvents()
     {
         if(poolItemComponent != null)
         {
             poolItemComponent.OnItemResetRequired += PoolItemComponent_ResetRequired_ExecuteReaction;
+            poolItemComponent.OnObjectAwakeStateSet += PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction;
         }
     }
 
@@ -50,13 +45,20 @@ public class EnemyComponentsManager : EnemyBehaviour
         if (poolItemComponent != null)
         {
             poolItemComponent.OnItemResetRequired -= PoolItemComponent_ResetRequired_ExecuteReaction;
+            poolItemComponent.OnObjectAwakeStateSet -= PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction;
         }
     }
 
     #region Pool Item Component Events Reactions
     private void PoolItemComponent_ResetRequired_ExecuteReaction()
     {
-        
+        // reset enemy
+    }
+
+    private void PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction()
+    {
+        movementManager.MoveToPlayer();
+        animationsManager.SetAnimation_Moving();
     }
     #endregion Pool Item Component Events Reactions
 }

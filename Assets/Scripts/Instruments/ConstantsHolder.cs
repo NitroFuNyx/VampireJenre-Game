@@ -13,6 +13,7 @@ public class EnemyAnimations
 {
     public const string Move = "Move";
     public const string Laugh = "Laugh";
+    public const string Jump = "Jump";
 }
 
 public class TalentSlotAmount

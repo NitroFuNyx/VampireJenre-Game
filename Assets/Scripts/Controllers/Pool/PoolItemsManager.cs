@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class PoolItemsManager : MonoBehaviour
@@ -11,7 +12,9 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private List<List<PoolItem>> activePoolsList = new List<List<PoolItem>>();
     [Header("Prefabs")]
     [Space]
-    [SerializeField] private PoolItem enemyPrefab;
+    [SerializeField] private PoolItem enemySkeletonPrefab;
+    [SerializeField] private PoolItem enemyGhostPrefab;
+    [SerializeField] private PoolItem enemyZombiePrefab;
 
     private Dictionary<PoolItemsTypes, List<PoolItem>> itemsListsDictionary = new Dictionary<PoolItemsTypes, List<PoolItem>>();
     private Dictionary<PoolItemsTypes, Transform> itemsHoldersDictionary = new Dictionary<PoolItemsTypes, Transform>();
@@ -20,7 +23,9 @@ public class PoolItemsManager : MonoBehaviour
 
     private void Start()
     {
-        CreatePool(enemyPrefab, "Enemy", enemiesPoolSize);
+        CreatePool(enemySkeletonPrefab, "Enemy Skeleton", enemiesPoolSize);
+        CreatePool(enemyGhostPrefab, "Enemy Ghost", enemiesPoolSize);
+        CreatePool(enemyZombiePrefab, "Enemy Zombie", enemiesPoolSize);
     }
 
     public PoolItem SpawnItemFromPool(PoolItemsTypes poolItemType, Vector3 _spawnPos, Quaternion _rotation, Transform _parent)
@@ -86,9 +91,21 @@ public class PoolItemsManager : MonoBehaviour
         {
             PoolItem poolItem = Instantiate(poolItemPrefab, Vector3.zero, Quaternion.identity, poolItemsParent.transform);
             poolItem.transform.localPosition = Vector3.zero;
-            poolItem.gameObject.SetActive(false);
+            //poolItem.gameObject.SetActive(false);
             itemsList.Add(poolItem);
             poolItem.name = $"{itemName} {i}";
+        }
+
+        StartCoroutine(TurnNewPoolItemsOffCoroutine(itemsList));
+    }
+
+    private IEnumerator TurnNewPoolItemsOffCoroutine(List<PoolItem> itemsList)
+    {
+        yield return null;
+
+        for(int i = 0; i < itemsList.Count; i++)
+        {
+            itemsList[i].gameObject.SetActive(false);
         }
     }
 }

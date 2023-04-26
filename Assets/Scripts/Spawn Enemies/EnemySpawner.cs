@@ -29,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
     [ContextMenu("Spawn")]
     public void Spawn()
     {
-        SpawnEnemyWave(PoolItemsTypes.Enemy, 200);
+        SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, 200);
     }
 
     public void SpawnEnemyWave(PoolItemsTypes enemyType, int enemiesAmount)
@@ -41,16 +41,17 @@ public class EnemySpawner : MonoBehaviour
 
         for(int i = 0; i < enemiesAmount; i++)
         {
-            SpawnEnemy();
+            SpawnEnemy(enemyType);
         }
 
         StartCoroutine(ResetSpawnPositionsCoroutine());
     }
 
-    public void SpawnEnemy()
+    public void SpawnEnemy(PoolItemsTypes enemyType)
     {
         Transform spawnPoint = GetRandomSpawnPoint();
-        _poolItemsManager.SpawnItemFromPool(PoolItemsTypes.Enemy, spawnPoint.position, spawnPoint.rotation, spawnedObjectsHolder);
+        PoolItem poolItem = _poolItemsManager.SpawnItemFromPool(enemyType, spawnPoint.position, spawnPoint.rotation, spawnedObjectsHolder);
+        poolItem.SetObjectAwakeState();
     }
 
     private Transform GetRandomSpawnPoint()

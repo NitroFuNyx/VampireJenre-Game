@@ -11,10 +11,16 @@ public class PoolItem : MonoBehaviour
 
     #region Events Declaration
     public event Action OnItemResetRequired;
+    public event Action OnObjectAwakeStateSet;
     #endregion Events Declaration
 
     public void ResetPoolItem()
     {
         OnItemResetRequired?.Invoke();
+    }
+
+    public void SetObjectAwakeState()
+    {
+        OnObjectAwakeStateSet?.Invoke();
     }
 }

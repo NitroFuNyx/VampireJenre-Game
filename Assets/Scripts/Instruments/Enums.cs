@@ -11,5 +11,5 @@ public enum UIPanels
 
 public enum PoolItemsTypes
 {
-    Enemy, XP
+    Enemy_Skeleton, Enemy_Ghost, Enemy_Zombie, XP
 }
