@@ -1,10 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class MainUI : MonoBehaviour
 {
     private List<MainCanvasPanel> panelsList = new List<MainCanvasPanel>();
     private Dictionary<UIPanels, MainCanvasPanel> panelsDictionary = new Dictionary<UIPanels, MainCanvasPanel>();
+
+    private MainLoaderUI _mainLoaderUI;
+    private MainScreenUI _mainScreenUI;
 
     private void Awake()
     {
@@ -15,6 +19,15 @@ public class MainUI : MonoBehaviour
     {
         SetStartSettings();
     }
+
+    #region Zenject
+    [Inject]
+    private void Construct(MainLoaderUI mainLoaderUI, MainScreenUI mainScreenUI)
+    {
+        _mainLoaderUI = mainLoaderUI;
+        _mainScreenUI = mainScreenUI;
+    }
+    #endregion Zenject
 
     private void FillPanelsListAndDictionary()
     {
@@ -34,6 +47,7 @@ public class MainUI : MonoBehaviour
     private void SetStartSettings()
     {
         ActivateMainCanvasPanel(UIPanels.MainLoaderPanel);
+        _mainLoaderUI.ShowLoading(MainLoaderAnimationFinished_ExecuteReaction);
     }
 
     private void ActivateMainCanvasPanel(UIPanels panel)
@@ -50,4 +64,9 @@ public class MainUI : MonoBehaviour
             }
         }
     }  
+
+    private void MainLoaderAnimationFinished_ExecuteReaction()
+    {
+        ActivateMainCanvasPanel(UIPanels.GameLevelUI); // Change for Main Screen UI after it will be drawn
+    }
 }
