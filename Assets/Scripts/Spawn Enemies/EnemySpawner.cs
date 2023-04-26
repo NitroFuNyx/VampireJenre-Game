@@ -29,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
     [ContextMenu("Spawn")]
     public void Spawn()
     {
-        SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, 200);
+        SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, 1);
     }
 
     public void SpawnEnemyWave(PoolItemsTypes enemyType, int enemiesAmount)
