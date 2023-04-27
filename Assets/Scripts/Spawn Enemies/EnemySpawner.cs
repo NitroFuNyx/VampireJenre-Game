@@ -8,15 +8,24 @@ public class EnemySpawner : MonoBehaviour
     [Header("Holders")]
     [Space]
     [SerializeField] private Transform spawnedObjectsHolder;
+    [SerializeField] private List<Transform> spawnPositionsHoldersList = new List<Transform>();
     [Header("Spawn Positions")]
     [Space]
     [SerializeField] private List<Transform> spawnPositionsList = new List<Transform>();
+    [Header("VFX")]
+    [Space]
+    [SerializeField] private List<ParticleSystem> vfxSpawnList = new List<ParticleSystem>();
 
     private PoolItemsManager _poolItemsManager;
 
-    [SerializeField] private List<Transform> takenSpawnPositionsList = new List<Transform>();
+    private List<Transform> takenSpawnPositionsList = new List<Transform>();
 
     private float resetSpawnPositionsDelay = 1f;
+
+    private void Awake()
+    {
+        FillSpawnPositionsList();
+    }
 
     #region Zenject
     [Inject]
@@ -25,12 +34,6 @@ public class EnemySpawner : MonoBehaviour
         _poolItemsManager = poolItemsManager;
     }
     #endregion Zenject
-
-    [ContextMenu("Spawn")]
-    public void Spawn()
-    {
-        SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, 1);
-    }
 
     public void SpawnEnemyWave(PoolItemsTypes enemyType, int enemiesAmount)
     {
@@ -66,6 +69,22 @@ public class EnemySpawner : MonoBehaviour
         spawnPositionsList.Remove(spawnPoint);
 
         return spawnPoint;
+    }
+
+    private void ActivateSpawnVFX()
+    {
+        
+    }
+
+    private void FillSpawnPositionsList()
+    {
+        for(int i = 0; i < spawnPositionsHoldersList.Count; i++)
+        {
+            for(int j = 0; j < spawnPositionsHoldersList[i].childCount; j++)
+            {
+                spawnPositionsList.Add(spawnPositionsHoldersList[i].GetChild(j));
+            }
+        }
     }
 
     private IEnumerator ResetSpawnPositionsCoroutine()
