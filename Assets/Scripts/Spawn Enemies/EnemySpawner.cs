@@ -42,6 +42,8 @@ public class EnemySpawner : MonoBehaviour
             enemiesAmount = spawnPositionsList.Count;
         }
 
+        ActivateSpawnVFX();
+
         for(int i = 0; i < enemiesAmount; i++)
         {
             SpawnEnemy(enemyType);
@@ -81,7 +83,13 @@ public class EnemySpawner : MonoBehaviour
 
     private void ActivateSpawnVFX()
     {
-        
+        if(vfxSpawnList.Count > 0)
+        {
+            for (int i = 0; i < vfxSpawnList.Count; i++)
+            {
+                vfxSpawnList[i].Play();
+            }
+        }
     }
 
     private void FillSpawnPositionsList()
