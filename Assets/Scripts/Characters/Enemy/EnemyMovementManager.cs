@@ -18,12 +18,36 @@ public class EnemyMovementManager : MonoBehaviour
         player = FindObjectOfType<PlayerController>();
     }
 
+    private void Update()
+    {
+        if (canMove)
+        {
+            Vector3 targetPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+
+            transform.position = Vector3.Lerp(transform.position, targetPos, moveVelocity * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetPos - transform.position), rotationVelocity * Time.deltaTime);
+
+            //Vector3 startPos = transform.position;
+            //Vector3 originalPlayerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+            //float travelPercent = 0f;
+
+            //while (Vector3.Distance(transform.position, originalPlayerPos) > 0.1f)
+            //{
+            //    Vector3 targetPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+
+            //    travelPercent += moveVelocity * Time.deltaTime;
+            //    transform.position = Vector3.Lerp(startPos, targetPos, travelPercent);
+            //    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetPos - transform.position), rotationVelocity * Time.deltaTime);
+            //}
+        }
+    }
+
     public void MoveToPlayer()
     {
         canMove = true;
         //Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
         //transform.DOMove(playerPos, 10f);
-        StartCoroutine(MoveToPlayerCoroutine());
+        //StartCoroutine(MoveToPlayerCoroutine());
     }
 
     private IEnumerator MoveToPlayerCoroutine()
