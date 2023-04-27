@@ -54,7 +54,15 @@ public class EnemySpawner : MonoBehaviour
     {
         Transform spawnPoint = GetRandomSpawnPoint();
         PoolItem poolItem = _poolItemsManager.SpawnItemFromPool(enemyType, spawnPoint.position, spawnPoint.rotation, spawnedObjectsHolder);
-        poolItem.SetObjectAwakeState();
+
+        if(poolItem != null)
+        {
+            poolItem.SetObjectAwakeState();
+        }
+        else
+        {
+            Debug.LogWarning($"There is no {enemyType} models left in the pool to spawn at {gameObject}", gameObject);
+        }
     }
 
     private Transform GetRandomSpawnPoint()

@@ -52,7 +52,7 @@ public class PanelActivationManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"There is no canvas group component attached to", gameObject);
+            Debug.LogError($"There is no canvas group component attached to {gameObject}", gameObject);
         }
     }
 }
