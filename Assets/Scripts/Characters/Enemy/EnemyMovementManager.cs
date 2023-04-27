@@ -26,19 +26,6 @@ public class EnemyMovementManager : MonoBehaviour
 
             transform.position = Vector3.Lerp(transform.position, targetPos, moveVelocity * Time.deltaTime);
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetPos - transform.position), rotationVelocity * Time.deltaTime);
-
-            //Vector3 startPos = transform.position;
-            //Vector3 originalPlayerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-            //float travelPercent = 0f;
-
-            //while (Vector3.Distance(transform.position, originalPlayerPos) > 0.1f)
-            //{
-            //    Vector3 targetPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-
-            //    travelPercent += moveVelocity * Time.deltaTime;
-            //    transform.position = Vector3.Lerp(startPos, targetPos, travelPercent);
-            //    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetPos - transform.position), rotationVelocity * Time.deltaTime);
-            //}
         }
     }
 
@@ -47,26 +34,5 @@ public class EnemyMovementManager : MonoBehaviour
         canMove = true;
         //Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
         //transform.DOMove(playerPos, 10f);
-        //StartCoroutine(MoveToPlayerCoroutine());
-    }
-
-    private IEnumerator MoveToPlayerCoroutine()
-    {
-        if (canMove)
-        {
-            Vector3 startPos = transform.position;
-            Vector3 originalPlayerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-            float travelPercent = 0f;
-
-            while (Vector3.Distance(transform.position, originalPlayerPos) > 0.1f)
-            {
-                Vector3 targetPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-
-                travelPercent += moveVelocity * Time.deltaTime;
-                transform.position = Vector3.Lerp(startPos, targetPos, travelPercent);
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetPos - transform.position), rotationVelocity * Time.deltaTime);
-                yield return new WaitForEndOfFrame();
-            }
-        }
     }
 }
