@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2178784278238343949}
   - component: {fileID: 5548454165687160820}
   - component: {fileID: 1636898561030288544}
-  m_Layer: 0
+  - component: {fileID: 6294274811698600945}
+  m_Layer: 8
   m_Name: Corner Fence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,3 +100,16 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!65 &6294274811698600945
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6142003508070841128}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7785382, y: 1.3755343, z: 0.24282937}
+  m_Center: {x: -0.9983542, y: 0.68776727, z: 0.0008811466}
