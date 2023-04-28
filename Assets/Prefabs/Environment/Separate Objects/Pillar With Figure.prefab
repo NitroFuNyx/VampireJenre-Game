@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 2531265880829004923}
   - component: {fileID: 8078425852828381314}
   - component: {fileID: 3146655735081192406}
+  - component: {fileID: 5231711168576016229}
   m_Layer: 0
   m_Name: Pillar With Figure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6808275330444179021
 Transform:
@@ -99,3 +100,16 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!65 &5231711168576016229
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503141632418038878}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.37407675, y: 1.8625681, z: 0.4131599}
+  m_Center: {x: 0.009998724, y: 0.9312842, z: 0.019543342}

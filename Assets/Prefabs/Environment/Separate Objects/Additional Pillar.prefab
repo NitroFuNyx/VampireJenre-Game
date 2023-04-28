@@ -125,12 +125,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1693354821438678998}
   - component: {fileID: 6473635823898044718}
+  - component: {fileID: 7878373336881390490}
   m_Layer: 0
   m_Name: Additional Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1693354821438678998
 Transform:
@@ -165,6 +166,20 @@ MonoBehaviour:
   lightComponentsList:
   - {fileID: 8462806059227369558}
   - {fileID: 8109395428764581201}
+  activateLight: 1
+--- !u!65 &7878373336881390490
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074982476588809580}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.33, y: 1.4551404, z: 1.917895}
+  m_Center: {x: 0.089999974, y: 0.7275702, z: 0.3289476}
 --- !u!1 &3969039243371509507
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +196,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1951670691617265066
 Transform:

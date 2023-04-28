@@ -246,7 +246,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8188108372014602942
 Transform:
@@ -323,12 +323,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8239714423944081178}
   - component: {fileID: 6345371606009514782}
+  - component: {fileID: 4623200680921091060}
   m_Layer: 0
   m_Name: Center Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8239714423944081178
 Transform:
@@ -364,3 +365,16 @@ MonoBehaviour:
   - {fileID: 1967238040563060450}
   - {fileID: 2389986739437167282}
   activateLight: 1
+--- !u!65 &4623200680921091060
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8724185169040848288}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.189256, y: 1.4551404, z: 1.917895}
+  m_Center: {x: 0.5196279, y: 0.7275702, z: 0.3289476}

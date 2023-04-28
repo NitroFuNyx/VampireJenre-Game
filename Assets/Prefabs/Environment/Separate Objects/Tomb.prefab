@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 3954414728249172803}
   - component: {fileID: 7339862805116788666}
   - component: {fileID: 4497707817520178414}
+  - component: {fileID: 4779907309604294919}
   m_Layer: 0
   m_Name: Tomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5457203319352220021
 Transform:
@@ -99,3 +100,16 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!65 &4779907309604294919
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9070452344239729510}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.074832, y: 2.288537, z: 2.6265252}
+  m_Center: {x: -0.5052408, y: 1.1562696, z: -0.97824514}
