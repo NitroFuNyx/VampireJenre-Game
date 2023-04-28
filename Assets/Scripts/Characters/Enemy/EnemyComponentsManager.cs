@@ -57,6 +57,7 @@ public class EnemyComponentsManager : EnemyBehaviour
 
     private void PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction()
     {
+        collisionsManager.ChangeColliderActivationState(true);
         movementManager.MoveToPlayer();
         animationsManager.SetAnimation_Moving();
     }

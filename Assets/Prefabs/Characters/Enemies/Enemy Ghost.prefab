@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 6642222442663905484}
   - component: {fileID: 6642222442663905523}
   - component: {fileID: 6642222442663905522}
-  m_Layer: 0
+  - component: {fileID: 6040604414746185528}
+  - component: {fileID: 5192261377575574622}
+  m_Layer: 11
   m_Name: Enemy Ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf0367378905c34e99b25718cc096c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveVelocity: 0.08
+  moveVelocity: 0.1
   rotationVelocity: 10
 --- !u!114 &6642222442663905523
 MonoBehaviour:
@@ -88,6 +90,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolItemType: 1
+--- !u!54 &6040604414746185528
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6642222442663905527}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
+--- !u!65 &5192261377575574622
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6642222442663905527}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.1183826, z: 1}
+  m_Center: {x: 0, y: 0.61919135, z: 0}
 --- !u!1 &8507303233705503247
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8510668398900135105}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: body_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8510412252592153227}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: front_01_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8510229928466080713}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: right_shoulder_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +232,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8510430301876773503}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: back_01_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8510331081953044021}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: back_03_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8510204727235977383}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: root_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +327,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8504333462318942837}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: eyes_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +360,7 @@ GameObject:
   - component: {fileID: 8504411523515567935}
   - component: {fileID: 8594853810959091545}
   - component: {fileID: 8507535900511018176}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: micro_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,7 +425,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8510229118046638105}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: left_03_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +456,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8510321886409916207}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: front_02_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,7 +488,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8510444942014124125}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: left_shoulder_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -489,7 +520,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8504405375389184339}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: chain_03_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -520,7 +551,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8510390760125757161}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: front_03_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -551,7 +582,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8504252439360705251}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: back_02_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +614,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8504398161848417961}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: right_hand_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -614,7 +645,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8504036850120095707}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: left_01_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -647,7 +678,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8503950648859591051}
   - component: {fileID: 8643185615942436733}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -756,7 +787,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8510426249136455269}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: head_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -789,7 +820,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8504158881431979417}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: chain_02_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -821,7 +852,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8504233791681974989}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: right_01_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -853,7 +884,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8504164398065721245}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: right_02_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -885,7 +916,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8504163217313291999}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: left_02_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -917,7 +948,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8504002320520039813}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: right_03_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -948,7 +979,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8510386752587599075}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: left_hand_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -979,7 +1010,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8504190470708506411}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: face_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1010,7 +1041,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8504033015132334011}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: chain_01_ghost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1042,7 +1073,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8510676213966528789}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: spikeball1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
