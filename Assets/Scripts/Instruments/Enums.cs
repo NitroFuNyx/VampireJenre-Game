@@ -13,3 +13,8 @@ public enum PoolItemsTypes
 {
     Enemy_Skeleton, Enemy_Ghost, Enemy_Zombie, XP
 }
+
+public enum Skills
+{
+    SingleShot
+}
