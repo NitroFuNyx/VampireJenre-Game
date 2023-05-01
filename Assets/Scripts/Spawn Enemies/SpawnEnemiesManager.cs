@@ -13,7 +13,7 @@ public class SpawnEnemiesManager : MonoBehaviour
     [ContextMenu("Spawn Beyond Map")]
     public void SpawnEnemiesBeyondMap()
     {
-        spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, 100);
+        spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, 40);
     }
 
     [ContextMenu("Spawn On Map")]
