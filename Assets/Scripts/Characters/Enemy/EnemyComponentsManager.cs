@@ -38,6 +38,9 @@ public class EnemyComponentsManager : EnemyBehaviour
             poolItemComponent.OnItemResetRequired += PoolItemComponent_ResetRequired_ExecuteReaction;
             poolItemComponent.OnObjectAwakeStateSet += PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction;
         }
+
+        collisionsManager.OnPlayerOutOfHp += CollisionManager_PlayerOutOfHp_ExecuteReaction;
+        collisionsManager.OnDamageReceived += CollisionManager_DamageReceived_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
@@ -47,6 +50,9 @@ public class EnemyComponentsManager : EnemyBehaviour
             poolItemComponent.OnItemResetRequired -= PoolItemComponent_ResetRequired_ExecuteReaction;
             poolItemComponent.OnObjectAwakeStateSet -= PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction;
         }
+
+        collisionsManager.OnPlayerOutOfHp -= CollisionManager_PlayerOutOfHp_ExecuteReaction;
+        collisionsManager.OnDamageReceived -= CollisionManager_DamageReceived_ExecuteReaction;
     }
 
     #region Pool Item Component Events Reactions
@@ -62,4 +68,16 @@ public class EnemyComponentsManager : EnemyBehaviour
         animationsManager.SetAnimation_Moving();
     }
     #endregion Pool Item Component Events Reactions
+
+    #region Collision Manager Events Reaction
+    private void CollisionManager_PlayerOutOfHp_ExecuteReaction()
+    {
+
+    }
+
+    private void CollisionManager_DamageReceived_ExecuteReaction()
+    {
+
+    }
+    #endregion Collision Manager Events Reaction
 }
