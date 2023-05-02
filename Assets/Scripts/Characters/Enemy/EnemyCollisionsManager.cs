@@ -51,6 +51,7 @@ public class EnemyCollisionsManager : MonoBehaviour
     {
         canCheckCollisions = true;
         ChangeColliderActivationState(false);
+        currentHp = startHp;
     }
 
     private void CashComponents()

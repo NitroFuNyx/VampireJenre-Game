@@ -22,6 +22,7 @@ public class EnemyAnimations
     public const string Jump = "Jump";
     public const string Die = "Die";
     public const string GetHit = "Get Hit";
+    public const string Idle = "Idle";
 }
 
 public class TalentSlotAmount
