@@ -74,6 +74,7 @@ public class PoolItemsManager : MonoBehaviour
         _poolItem.gameObject.SetActive(false);
         _poolItem.transform.SetParent(itemsHoldersDictionary[_poolItem.PoolItemType]);
         _poolItem.transform.localPosition = Vector3.zero;
+        _poolItem.ResetPoolItem();
         poolItemsList.Add(_poolItem);
     }
 
