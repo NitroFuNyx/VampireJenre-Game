@@ -14,4 +14,9 @@ public class MeteorSkillProjectile : SkillParameterBase , ISkillProjectile
     {
         projectileRigidBody.AddForce(transform.forward * speed,ForceMode.Acceleration);
     }
+
+    protected override void CollideWithMapObstacle()
+    {
+        throw new NotImplementedException();
+    }
 }

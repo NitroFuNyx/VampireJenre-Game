@@ -34,7 +34,9 @@ public class MissilesSkillProjectile : SkillParameterBase, ISkillProjectile
             poolItemComponent.OnObjectAwakeStateSet += PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction;
         }
     }
-
+    
+    
+    
     private void UnsubscribeFromEvents()
     {
         if (poolItemComponent != null)
@@ -47,7 +49,8 @@ public class MissilesSkillProjectile : SkillParameterBase, ISkillProjectile
     #region Pool Item Component Events Reactions
     private void PoolItemComponent_ResetRequired_ExecuteReaction()
     {
-        // reset enemy
+        projectileRigidBody.velocity = Vector3.zero;
+
     }
 
     private void PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction()
@@ -55,4 +58,9 @@ public class MissilesSkillProjectile : SkillParameterBase, ISkillProjectile
         Move();
     }
     #endregion Pool Item Component Events Reactions
+
+    protected override void CollideWithMapObstacle()
+    {
+        poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
+    }
 }

@@ -36,9 +36,9 @@ public class MissilesProjectileSpawner : ProjectileSpawnerBase
             thisTransform.rotation = Quaternion.Euler(0, Random.Range(0, 361), 0);
             PoolItem missile = _poolmanager.SpawnItemFromPool(PoolItemsTypes.Missile_Projectile,
                 spawnPoint.position, thisTransform.rotation, dynamicEnvironment);
+            
             if (missile != null)
             {
-                
                 missile.SetObjectAwakeState();
             }
             projectileSpawnerCounter++;
@@ -47,4 +47,5 @@ public class MissilesProjectileSpawner : ProjectileSpawnerBase
 
         yield return new WaitForSecondsRealtime(skillCooldown);
     }
+    
 }

@@ -2,6 +2,8 @@
 public class Layers
 {
     public const int MapFloorLayer = 6;
+    public const int MapBoundBox = 12;
+    public const int ObstaclesOnMap = 7;
 }
 
 public class PlayerAnimations
