@@ -11,6 +11,11 @@ public class GameProcessManager : MonoBehaviour
 
     private SpawnEnemiesManager _spawnEnemiesManager;
 
+    private void Start()
+    {
+        Input.multiTouchEnabled = false;
+    }
+
     #region Zenject
     [Inject]
     private void Construct(SpawnEnemiesManager spawnEnemiesManager)
