@@ -72,7 +72,9 @@ public class EnemyComponentsManager : EnemyBehaviour
     #region Collision Manager Events Reaction
     private void CollisionManager_PlayerOutOfHp_ExecuteReaction()
     {
-
+        Debug.Log($"Hit");
+        movementManager.StopMoving();
+        animationsManager.SetAnimation_Die();
     }
 
     private void CollisionManager_DamageReceived_ExecuteReaction()

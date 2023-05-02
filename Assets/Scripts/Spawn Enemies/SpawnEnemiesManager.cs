@@ -10,6 +10,11 @@ public class SpawnEnemiesManager : MonoBehaviour
     [SerializeField] private EnemySpawner spawner_OnMap;
     [SerializeField] private EnemySpawner spawner_AtGates;
 
+    public void SpawnEnemies()
+    {
+        StartCoroutine(SpawnEnemiesWavesCoroutine());
+    }
+
     [ContextMenu("Spawn Beyond Map")]
     public void SpawnEnemiesBeyondMap()
     {
@@ -27,4 +32,20 @@ public class SpawnEnemiesManager : MonoBehaviour
     {
         spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, 100);
     }
+
+    public void SpawnEnemiesWave()
+    {
+        spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, 30);
+        spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, 30);
+        spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, 30);
+    }
+
+    private IEnumerator SpawnEnemiesWavesCoroutine()
+    {
+        while(true)
+        {
+            SpawnEnemiesWave();
+            yield return new WaitForSeconds(8f);
+        }
+    }    
 }

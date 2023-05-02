@@ -2,8 +2,12 @@
 public class Layers
 {
     public const int MapFloorLayer = 6;
-    public const int MapBoundBox = 12;
     public const int ObstaclesOnMap = 7;
+    public const int EnemySkeleton = 9;
+    public const int EnemyGhost = 10;
+    public const int EnemyZombie = 11;
+    public const int MapBoundBox = 12;
+    public const int PlayerSkillProjectile = 13;
 }
 
 public class PlayerAnimations

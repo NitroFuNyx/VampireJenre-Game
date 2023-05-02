@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 315287338905643290}
   - component: {fileID: 6906093080961159758}
   - component: {fileID: 277363996685786734}
-  - component: {fileID: 7754467101258978758}
   m_Layer: 8
   m_Name: Gates
   m_TagString: Untagged
@@ -201,21 +200,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2308617, y: 1.9281236, z: 0.7}
-  m_Center: {x: 1.2154312, y: 0.9640618, z: 0}
---- !u!65 &7754467101258978758
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2043778977078975942}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.2308617, y: 1.9281236, z: 0.7}
-  m_Center: {x: -2.17, y: 0.9640618, z: 0}
+  m_Size: {x: 3.43, y: 1.9281236, z: 0.7}
+  m_Center: {x: -0.48, y: 0.9640618, z: 0}
 --- !u!1 &4603008779161985150
 GameObject:
   m_ObjectHideFlags: 0

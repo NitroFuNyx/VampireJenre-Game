@@ -35,6 +35,11 @@ public class EnemyMovementManager : MonoBehaviour
         canMove = true;
     }
 
+    public void StopMoving()
+    {
+        canMove = false;
+    }
+
     private void CashComponents()
     {
         player = FindObjectOfType<PlayerController>();

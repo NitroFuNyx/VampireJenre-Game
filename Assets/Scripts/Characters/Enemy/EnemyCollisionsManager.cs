@@ -10,6 +10,8 @@ public class EnemyCollisionsManager : MonoBehaviour
 
     private Collider _collider;
 
+    private bool canCheckCollisions = true;
+
     #region Events Declaration
     public event Action OnPlayerOutOfHp;
     public event Action OnDamageReceived;
@@ -26,12 +28,29 @@ public class EnemyCollisionsManager : MonoBehaviour
         SetStartSettings();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(canCheckCollisions)
+        {
+            if (collision.gameObject.layer == Layers.PlayerSkillProjectile)
+            {
+                DecreaseHp(startHp);
+            }
+        }    
+    }
+
     public void ChangeColliderActivationState(bool enabled)
     {
         if (_collider != null)
         {
             _collider.enabled = enabled;
         }
+    }
+
+    public void ResetComponent()
+    {
+        canCheckCollisions = true;
+        ChangeColliderActivationState(false);
     }
 
     private void CashComponents()
@@ -54,9 +73,9 @@ public class EnemyCollisionsManager : MonoBehaviour
     private void DecreaseHp(int amount)
     {
         currentHp -= amount;
-
-        if(amount <= 0)
+        if (currentHp <= 0)
         {
+            canCheckCollisions = false;
             OnPlayerOutOfHp?.Invoke();
         }
         else

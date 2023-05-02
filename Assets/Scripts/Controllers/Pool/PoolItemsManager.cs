@@ -7,7 +7,6 @@ public class PoolItemsManager : MonoBehaviour
     [Header("Pool Data")]
     [Space]
     [SerializeField] private int enemiesPoolSize = 50;
-
     [SerializeField] private int skillMissilePoolSize = 75;
     [Header("Active Pools")]
     [Space]

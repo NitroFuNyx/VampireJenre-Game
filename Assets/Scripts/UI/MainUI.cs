@@ -10,6 +10,8 @@ public class MainUI : MonoBehaviour
     private MainLoaderUI _mainLoaderUI;
     private MainScreenUI _mainScreenUI;
 
+    private GameProcessManager _gameProcessManager;
+
     private void Awake()
     {
         FillPanelsListAndDictionary();
@@ -22,10 +24,11 @@ public class MainUI : MonoBehaviour
 
     #region Zenject
     [Inject]
-    private void Construct(MainLoaderUI mainLoaderUI, MainScreenUI mainScreenUI)
+    private void Construct(MainLoaderUI mainLoaderUI, MainScreenUI mainScreenUI, GameProcessManager gameProcessManager)
     {
         _mainLoaderUI = mainLoaderUI;
         _mainScreenUI = mainScreenUI;
+        _gameProcessManager = gameProcessManager;
     }
     #endregion Zenject
 
@@ -67,6 +70,7 @@ public class MainUI : MonoBehaviour
 
     private void MainLoaderAnimationFinished_ExecuteReaction()
     {
-        ActivateMainCanvasPanel(UIPanels.GameLevelUI); // Change for Main Screen UI after it will be drawn
+        ActivateMainCanvasPanel(UIPanels.GameLevelUI);
+        _gameProcessManager.StartGame();// Change for Main Screen UI after it will be drawn
     }
 }

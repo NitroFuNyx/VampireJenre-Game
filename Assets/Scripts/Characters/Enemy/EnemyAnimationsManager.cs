@@ -20,4 +20,9 @@ public class EnemyAnimationsManager : MonoBehaviour
     {
         animator.SetTrigger(EnemyAnimations.Move);
     }
+
+    public void SetAnimation_Die()
+    {
+        animator.SetTrigger(EnemyAnimations.Die);
+    }
 }
