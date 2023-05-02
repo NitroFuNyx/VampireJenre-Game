@@ -7,7 +7,10 @@ public class PoolItem : MonoBehaviour
     [Space]
     [SerializeField] private PoolItemsTypes poolItemType;
 
+    private PoolItemsManager _poolItemsManager;
+
     public PoolItemsTypes PoolItemType { get => poolItemType;}
+    public PoolItemsManager PoolItemsManager { get => _poolItemsManager; private set => _poolItemsManager = value; }
 
     #region Events Declaration
     public event Action OnItemResetRequired;
@@ -22,5 +25,10 @@ public class PoolItem : MonoBehaviour
     public void SetObjectAwakeState()
     {
         OnObjectAwakeStateSet?.Invoke();
+    }
+
+    public void CashComponents(PoolItemsManager poolItemsManager)
+    {
+        _poolItemsManager = poolItemsManager;
     }
 }

@@ -91,6 +91,7 @@ public class PoolItemsManager : MonoBehaviour
         {
             PoolItem poolItem = Instantiate(poolItemPrefab, Vector3.zero, Quaternion.identity, poolItemsParent.transform);
             poolItem.transform.localPosition = Vector3.zero;
+            poolItem.CashComponents(this);
             //poolItem.gameObject.SetActive(false);
             itemsList.Add(poolItem);
             poolItem.name = $"{itemName} {i}";
