@@ -11,10 +11,10 @@ public enum UIPanels
 
 public enum PoolItemsTypes
 {
-    Enemy_Skeleton, Enemy_Ghost, Enemy_Zombie, XP
+    Enemy_Skeleton, Enemy_Ghost, Enemy_Zombie, XP, Missile_Projectile
 }
 
 public enum Skills
 {
-    SingleShot
+    SingleShot, Missile
 }

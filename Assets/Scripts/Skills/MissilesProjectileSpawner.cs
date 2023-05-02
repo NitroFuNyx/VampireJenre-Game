@@ -1,45 +1,50 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Zenject;
 using Random = UnityEngine.Random;
 
 
-
 [Serializable]
-public class MissilesProjectileSpawner : MonoBehaviour
+public class MissilesProjectileSpawner : ProjectileSpawnerBase
 {
-    [SerializeField] private SkillParameterBase skill ;
-    [Range(0,2)]
-    [SerializeField]private  float skillCooldown;
-    [Range(0,1)]
-    [SerializeField] private float skillCooldownBetweenShots;
+    [Range(0, 1)] [SerializeField] protected float skillCooldownBetweenShots;
 
-    [SerializeField]
-    private Transform spawnPoint;
+    [SerializeField] private int maxProjectileSpawnerCount = 0;
 
     private Transform thisTransform;
+    private PoolItemsManager _poolmanager;
 
-    private void Start()
+    [Inject]
+    private void InjectDependencies(PoolItemsManager poolmanager)
     {
-        thisTransform = transform;
-        StartCoroutine(SpawnProjectile());
+        _poolmanager = poolmanager;
     }
 
-    private IEnumerator SpawnProjectile()
+
+    private void OnEnable()
     {
-        while(true)
+        thisTransform = transform;
+        StartCoroutine(SpawningProjectile());
+    }
+
+    protected override IEnumerator SettingUpProjectile()
+    {
+        int projectileSpawnerCounter = 0;
+        while (projectileSpawnerCounter < maxProjectileSpawnerCount)
         {
-            int projectileSpawnerCount=0;
-            while(projectileSpawnerCount<3)
+            thisTransform.rotation = Quaternion.Euler(0, Random.Range(0, 361), 0);
+            PoolItem missile = _poolmanager.SpawnItemFromPool(PoolItemsTypes.Missile_Projectile,
+                spawnPoint.position, thisTransform.rotation, dynamicEnvironment);
+            if (missile != null)
             {
-                thisTransform.rotation = Quaternion.Euler(0, Random.Range(0, 361), 0); //TODO: MAKE TARGET LOCK
-                Instantiate(skill, spawnPoint.position, thisTransform.rotation);
-                projectileSpawnerCount++;
-                yield return new WaitForSecondsRealtime(skillCooldownBetweenShots);
+                
+                missile.SetObjectAwakeState();
             }
-            
-            yield return new WaitForSecondsRealtime(skillCooldown);
+            projectileSpawnerCounter++;
+            yield return new WaitForSecondsRealtime(skillCooldownBetweenShots);
         }
 
+        yield return new WaitForSecondsRealtime(skillCooldown);
     }
 }
