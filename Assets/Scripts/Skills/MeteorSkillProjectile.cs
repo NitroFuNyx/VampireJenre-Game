@@ -41,16 +41,13 @@ public class MeteorSkillProjectile : SkillParameterBase , ISkillProjectile
             explosionVFX.transform.rotation = Quaternion.identity;
             Invoke(nameof(ReturningToPool),2.5f);
 
-            Debug.Log("return");
-
-
-        }
+           }
     }
 
     private void ReturningToPool()
     {
         poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
-        Debug.Log("TIME");
+        
 
     }
 
