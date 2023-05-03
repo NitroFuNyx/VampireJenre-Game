@@ -865,6 +865,51 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6576643802685375380}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &891179632
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 891179633}
+  - component: {fileID: 891179634}
+  m_Layer: 0
+  m_Name: DynamicEnvironmentInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &891179633
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891179632}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1911066127}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &891179634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891179632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79684d834ba2cbd4ca1089940bb7fee4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dynamicEnvironment: {fileID: 1842102949}
 --- !u!4 &899858782 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 484986, guid: d2b6665fd7333674aabe8f4394cf661d,
@@ -962,8 +1007,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataPersistanceManager: {fileID: 877498324}
   poolItemsManager: {fileID: 1200466525}
-  gameProcessManager: {fileID: 2189559505690155245}
-  spawnEnemiesManager: {fileID: 1730966496}
+  gameProcessManager: {fileID: 0}
+  spawnEnemiesManager: {fileID: 0}
 --- !u!1 &1051674024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,18 +1673,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &1730966496 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9088128139588437094, guid: 816abb79dc2ca544fb57ba989c52dcc8,
-    type: 3}
-  m_PrefabInstance: {fileID: 9088128139746467572}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a0e9344d06fc1b4fa85777fdd1d86a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1842102948
 GameObject:
   m_ObjectHideFlags: 0
@@ -1815,6 +1848,7 @@ Transform:
   m_Children:
   - {fileID: 1041931279}
   - {fileID: 114288570}
+  - {fileID: 891179633}
   m_Father: {fileID: 2055194003}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1834,6 +1868,7 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 1041931280}
   - {fileID: 114288571}
+  - {fileID: 891179634}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -8838,18 +8873,6 @@ PrefabInstance:
       objectReference: {fileID: 105794759}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c562b87359475f4890b51c2beffb138, type: 3}
---- !u!114 &2189559505690155245 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8919760217439607208, guid: 0c562b87359475f4890b51c2beffb138,
-    type: 3}
-  m_PrefabInstance: {fileID: 2189559505690155244}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37efc7a53d6959d458387c256a81a098, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2193133952428867449
 Transform:
   m_ObjectHideFlags: 0
@@ -13423,6 +13446,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3700015731398301273, guid: eddca4cb9a45135409512bd231bdbf54,
         type: 3}
+      propertyPath: skillMeteorPrefab
+      value: 
+      objectReference: {fileID: -4800505191692886853, guid: 184437de2fe17a44ca9f52e16fe316d3,
+        type: 3}
+    - target: {fileID: 3700015731398301273, guid: eddca4cb9a45135409512bd231bdbf54,
+        type: 3}
       propertyPath: skillMissilePrefab
       value: 
       objectReference: {fileID: 5496555590015770241, guid: d87b5b0ce384005489acaa13f71bf88e,
@@ -13730,31 +13759,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1408710920}
     m_Modifications:
-    - target: {fileID: 1417123260, guid: 4bfe81a6147a4974e9756300948d8f33, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1417123262, guid: 4bfe81a6147a4974e9756300948d8f33, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1417123263, guid: 4bfe81a6147a4974e9756300948d8f33, type: 3}
-      propertyPath: spawnZoneWidth
-      value: 26.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1417123263, guid: 4bfe81a6147a4974e9756300948d8f33, type: 3}
-      propertyPath: dynamicEnvironment
-      value: 
-      objectReference: {fileID: 1842102949}
     - target: {fileID: 1865405408, guid: 4bfe81a6147a4974e9756300948d8f33, type: 3}
       propertyPath: joystick
       value: 
       objectReference: {fileID: 4745594715618477337}
-    - target: {fileID: 2419590535628946116, guid: 4bfe81a6147a4974e9756300948d8f33,
+    - target: {fileID: 2542014008510468230, guid: 4bfe81a6147a4974e9756300948d8f33,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: dynamicEnvironment
+      value: 
+      objectReference: {fileID: 1842102949}
     - target: {fileID: 3811640028764972930, guid: 4bfe81a6147a4974e9756300948d8f33,
         type: 3}
       propertyPath: m_RootOrder
@@ -13814,11 +13827,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7542355566387754738, guid: 4bfe81a6147a4974e9756300948d8f33,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7542355566387754738, guid: 4bfe81a6147a4974e9756300948d8f33,
         type: 3}
