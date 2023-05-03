@@ -33,6 +33,6 @@ public class GameProcessManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         skillObject.SetActive(true);
-        _spawnEnemiesManager.SpawnEnemies();
+        //_spawnEnemiesManager.SpawnEnemies();
     }
 }
