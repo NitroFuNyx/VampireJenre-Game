@@ -18,9 +18,9 @@ TagManager:
   - Enemy Zombie
   - Enemy Ghost
   - Map Bound Box
-  - Skill
+  - Player Skill Projectile
+  - Main Screen Render
   - GlobalSkill
-  - 
   - 
   - 
   - 
@@ -40,4 +40,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Map Opaque Obstacle
+    uniqueID: 3640842537
+    locked: 0
+  - name: Enemy Appear VFX
+    uniqueID: 3234967429
+    locked: 0
+  - name: Enemies
+    uniqueID: 1685103391
+    locked: 0
+  - name: Map Go Through Obstacles
+    uniqueID: 2393704375
     locked: 0

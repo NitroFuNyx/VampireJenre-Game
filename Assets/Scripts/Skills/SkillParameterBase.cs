@@ -49,7 +49,7 @@ public abstract class SkillParameterBase : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.layer == Layers.ObstaclesOnMap )//
+        if (other.gameObject.layer == Layers.ObstaclesOnMap || other.gameObject.layer == Layers.EnemySkeleton || other.gameObject.layer == Layers.EnemyGhost || other.gameObject.layer == Layers.EnemyZombie)//
         {
             Debug.Log($"collided with {obstacles}");
 

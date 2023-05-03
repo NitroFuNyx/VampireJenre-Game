@@ -41,6 +41,8 @@ public class EnemyComponentsManager : EnemyBehaviour
 
         collisionsManager.OnPlayerOutOfHp += CollisionManager_PlayerOutOfHp_ExecuteReaction;
         collisionsManager.OnDamageReceived += CollisionManager_DamageReceived_ExecuteReaction;
+
+        animationsManager.OnDieAnimationFinished += AnimationManager_DieAnimationFinished_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
@@ -53,12 +55,16 @@ public class EnemyComponentsManager : EnemyBehaviour
 
         collisionsManager.OnPlayerOutOfHp -= CollisionManager_PlayerOutOfHp_ExecuteReaction;
         collisionsManager.OnDamageReceived -= CollisionManager_DamageReceived_ExecuteReaction;
+
+        animationsManager.OnDieAnimationFinished -= AnimationManager_DieAnimationFinished_ExecuteReaction;
     }
 
     #region Pool Item Component Events Reactions
     private void PoolItemComponent_ResetRequired_ExecuteReaction()
     {
         // reset enemy
+        animationsManager.SetAnimation_Idle();
+        collisionsManager.ResetComponent();
     }
 
     private void PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction()
@@ -72,7 +78,9 @@ public class EnemyComponentsManager : EnemyBehaviour
     #region Collision Manager Events Reaction
     private void CollisionManager_PlayerOutOfHp_ExecuteReaction()
     {
-
+        Debug.Log($"Hit");
+        movementManager.StopMoving();
+        animationsManager.SetAnimation_Die();
     }
 
     private void CollisionManager_DamageReceived_ExecuteReaction()
@@ -80,4 +88,11 @@ public class EnemyComponentsManager : EnemyBehaviour
 
     }
     #endregion Collision Manager Events Reaction
+
+    #region Animation Manager Events Reaction
+    private void AnimationManager_DieAnimationFinished_ExecuteReaction()
+    {
+        poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
+    }
+    #endregion Animation Manager Events Reaction
 }

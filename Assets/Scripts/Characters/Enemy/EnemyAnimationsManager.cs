@@ -1,8 +1,13 @@
 using UnityEngine;
+using System;
 
 public class EnemyAnimationsManager : MonoBehaviour
 {
     private Animator animator;
+
+    #region Events Declaration
+    public event Action OnDieAnimationFinished;
+    #endregion Events Declaration
 
     private void Awake()
     {
@@ -16,8 +21,23 @@ public class EnemyAnimationsManager : MonoBehaviour
         }
     }
 
+    public void SetAnimation_Idle()
+    {
+        animator.SetTrigger(EnemyAnimations.Idle);
+    }
+
     public void SetAnimation_Moving()
     {
         animator.SetTrigger(EnemyAnimations.Move);
+    }
+
+    public void SetAnimation_Die()
+    {
+        animator.SetTrigger(EnemyAnimations.Die);
+    }
+
+    public void AnimationEvent_DieAnimationFinished_ExecuteReaction()
+    {
+        OnDieAnimationFinished?.Invoke();
     }
 }
