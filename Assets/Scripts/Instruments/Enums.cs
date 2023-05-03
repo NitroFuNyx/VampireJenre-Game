@@ -11,7 +11,7 @@ public enum UIPanels
 
 public enum PoolItemsTypes
 {
-    Enemy_Skeleton, Enemy_Ghost, Enemy_Zombie, XP, Missile_Projectile
+    Enemy_Skeleton, Enemy_Ghost, Enemy_Zombie, XP, Missile_Projectile,Meteor_Projectile
 }
 
 public enum Skills

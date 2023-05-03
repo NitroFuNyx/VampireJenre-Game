@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Zenject;
 
 
 public abstract class SkillParameterBase : MonoBehaviour
@@ -13,8 +14,15 @@ public abstract class SkillParameterBase : MonoBehaviour
     [SerializeField] private protected int projectileCount;
 
     [SerializeField] private protected Skills skillType;
+    [SerializeField]protected Transform _dynamicEnvironment;
 
     public int ProjectileCount => projectileCount;
+
+    [Inject]
+    private void InjectDependencies(Transform dynamicEnvironment)
+    {
+        _dynamicEnvironment = dynamicEnvironment;
+    }
 
 
     private void Awake()
