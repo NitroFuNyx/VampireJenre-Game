@@ -38,6 +38,12 @@ public class MainUI : MonoBehaviour
         panelsDictionary[UIPanels.MenuButtonsUI].ShowPanel();
     }
 
+    public void PlayButtonPressed_ExecuteReaction()
+    {
+        ActivateMainCanvasPanel(UIPanels.GameLevelUI);
+        _gameProcessManager.StartGame();
+    }
+
     private void FillPanelsListAndDictionary()
     {
         for(int i = 0; i < transform.childCount; i++)
@@ -77,8 +83,6 @@ public class MainUI : MonoBehaviour
 
     private void MainLoaderAnimationFinished_ExecuteReaction()
     {
-        ActivateMainCanvasPanel(UIPanels.MainScreenPanel);
-        ActivateMainCanvasPanel(UIPanels.MenuButtonsUI);
-        //_gameProcessManager.StartGame();// Change for Main Screen UI after it will be drawn
+        MenuButtonPressed_ExecuteReaction(UIPanels.MainScreenPanel);
     }
 }
