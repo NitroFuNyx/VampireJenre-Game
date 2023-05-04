@@ -6,8 +6,13 @@ public enum Languages
 
 public enum UIPanels
 {
-    MainLoaderPanel, MainScreenPanel, GameLevelUI , TalentWheelUI
+    MainLoaderPanel, MainScreenPanel, GameLevelUI , TalentWheelUI, ShopUI, CharacterSelectionUI, SettingsUI, MenuButtonsUI
 }
+
+//public enum MainMenuPanels
+//{
+//    Shop, Talents, Map, CharacterSelection, Settings
+//}
 
 public enum PoolItemsTypes
 {

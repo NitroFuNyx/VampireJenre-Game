@@ -1,5 +1,5 @@
 
-public class MainScreenUI : MainCanvasPanel
+public class CharacterSelectionUI : MainCanvasPanel
 {
     public override void PanelActivated_ExecuteReaction()
     {
@@ -8,6 +8,6 @@ public class MainScreenUI : MainCanvasPanel
 
     public override void PanelDeactivated_ExecuteReaction()
     {
-        
+       
     }
 }

@@ -1,5 +1,5 @@
 
-public class MainScreenUI : MainCanvasPanel
+public class SettingsUI : MainCanvasPanel
 {
     public override void PanelActivated_ExecuteReaction()
     {

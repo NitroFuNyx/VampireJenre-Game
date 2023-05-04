@@ -1,5 +1,5 @@
 
-public class MainScreenUI : MainCanvasPanel
+public class ShopUI : MainCanvasPanel
 {
     public override void PanelActivated_ExecuteReaction()
     {

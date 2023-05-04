@@ -32,6 +32,12 @@ public class MainUI : MonoBehaviour
     }
     #endregion Zenject
 
+    public void MenuButtonPressed_ExecuteReaction(UIPanels panel)
+    {
+        ActivateMainCanvasPanel(panel);
+        panelsDictionary[UIPanels.MenuButtonsUI].ShowPanel();
+    }
+
     private void FillPanelsListAndDictionary()
     {
         for(int i = 0; i < transform.childCount; i++)
@@ -46,6 +52,7 @@ public class MainUI : MonoBehaviour
             }
         }
     }
+
 
     private void SetStartSettings()
     {
@@ -66,11 +73,12 @@ public class MainUI : MonoBehaviour
                 panelsList[i].HidePanel();
             }
         }
-    }  
+    }
 
     private void MainLoaderAnimationFinished_ExecuteReaction()
     {
-        ActivateMainCanvasPanel(UIPanels.GameLevelUI);
-        _gameProcessManager.StartGame();// Change for Main Screen UI after it will be drawn
+        ActivateMainCanvasPanel(UIPanels.MainScreenPanel);
+        ActivateMainCanvasPanel(UIPanels.MenuButtonsUI);
+        //_gameProcessManager.StartGame();// Change for Main Screen UI after it will be drawn
     }
 }
