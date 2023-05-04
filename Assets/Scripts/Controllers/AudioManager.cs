@@ -55,9 +55,18 @@ public class AudioManager : MonoBehaviour, IDataPersistance
     }
     #endregion Save/Load Methods
 
+    public void ChangeMuteState(bool muted)
+    {
+        audioMuted = muted;
+
+        SetAudioSourcesState();
+        _dataPersistanceManager.SaveGame();
+    }
+
     private void SetStartSettings()
     {
         FillAudioSourcesList();
+        musicAudioSource.Play();
     }
 
     private void FillAudioSourcesList()

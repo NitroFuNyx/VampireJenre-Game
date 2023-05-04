@@ -16,6 +16,4 @@ public class PlayButton : ButtonInteractionHandler
         _mainUI = mainUI;
     }
     #endregion Zenject
-
-    
 }
