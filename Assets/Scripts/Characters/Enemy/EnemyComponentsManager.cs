@@ -41,6 +41,8 @@ public class EnemyComponentsManager : EnemyBehaviour
 
         collisionsManager.OnPlayerOutOfHp += CollisionManager_PlayerOutOfHp_ExecuteReaction;
         collisionsManager.OnDamageReceived += CollisionManager_DamageReceived_ExecuteReaction;
+        collisionsManager.OnSpeedDebuffCollision += CollisionManager_SpeedDebuffCollision_ExecuteReaction;
+        collisionsManager.OnSpeedReset += CollisionManager_SpeedReset_ExecuteReaction;
 
         animationsManager.OnDieAnimationFinished += AnimationManager_DieAnimationFinished_ExecuteReaction;
     }
@@ -55,6 +57,8 @@ public class EnemyComponentsManager : EnemyBehaviour
 
         collisionsManager.OnPlayerOutOfHp -= CollisionManager_PlayerOutOfHp_ExecuteReaction;
         collisionsManager.OnDamageReceived -= CollisionManager_DamageReceived_ExecuteReaction;
+        collisionsManager.OnSpeedDebuffCollision -= CollisionManager_SpeedDebuffCollision_ExecuteReaction;
+        collisionsManager.OnSpeedReset -= CollisionManager_SpeedReset_ExecuteReaction;
 
         animationsManager.OnDieAnimationFinished -= AnimationManager_DieAnimationFinished_ExecuteReaction;
     }
@@ -78,14 +82,23 @@ public class EnemyComponentsManager : EnemyBehaviour
     #region Collision Manager Events Reaction
     private void CollisionManager_PlayerOutOfHp_ExecuteReaction()
     {
-        Debug.Log($"Hit");
         movementManager.StopMoving();
         animationsManager.SetAnimation_Die();
     }
 
     private void CollisionManager_DamageReceived_ExecuteReaction()
     {
+        
+    }
 
+    private void CollisionManager_SpeedDebuffCollision_ExecuteReaction()
+    {
+        movementManager.DecreaseMovementSpeed();
+    }
+
+    private void CollisionManager_SpeedReset_ExecuteReaction()
+    {
+        movementManager.ResetMovementSpeed();
     }
     #endregion Collision Manager Events Reaction
 

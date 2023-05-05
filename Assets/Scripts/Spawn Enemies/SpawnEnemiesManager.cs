@@ -23,7 +23,7 @@ public class SpawnEnemiesManager : MonoBehaviour
     [ContextMenu("Spawn On Map")]
     public void SpawnEnemiesOnMap()
     {
-        spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, 100);
+        spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, 1);
     }
 
     [ContextMenu("Spawn At Gates")]

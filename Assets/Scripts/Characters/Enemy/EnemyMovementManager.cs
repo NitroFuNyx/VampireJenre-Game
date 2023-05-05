@@ -7,6 +7,7 @@ public class EnemyMovementManager : MonoBehaviour
     [Space]
     [SerializeField] private float startMoveSpeed = 10f;
     [SerializeField] private float rotationSpeed = 10f;
+    [SerializeField] private int movementDecreasePrecent = 20;
 
     private PlayerController player;
 
@@ -44,11 +45,12 @@ public class EnemyMovementManager : MonoBehaviour
         canMove = false;
     }
 
-    public void DecreaseMovementSpeed(float moveDebuff)
+    public void DecreaseMovementSpeed()
     {
-        currentMoveSpeed -= moveDebuff;
+        float debuffValue = (currentMoveSpeed * movementDecreasePrecent) / 100;
+        currentMoveSpeed -= debuffValue;
 
-        if(currentMoveSpeed < 0f)
+        if (currentMoveSpeed < 0f)
         {
             currentMoveSpeed = 0f;
         }
