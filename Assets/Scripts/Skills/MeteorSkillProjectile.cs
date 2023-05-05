@@ -1,7 +1,5 @@
-
-using System;
-using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
 public class MeteorSkillProjectile : SkillParameterBase , ISkillProjectile
 {
@@ -9,8 +7,12 @@ public class MeteorSkillProjectile : SkillParameterBase , ISkillProjectile
     [Header("Particles")] 
     [SerializeField] private ParticleSystem projectileVFX;
     [SerializeField] private ParticleSystem explosionVFX;
-
-    
+    [SerializeField] private GameObject puddle;
+    [Header("Parameters")]
+    [Range(0.1f, 10)] 
+    [SerializeField] private float explosionColliderRadius;
+    [Range(0.1f, 10)] 
+    [SerializeField] private float puddleLifeTime;
 
     public void Move()
     {
@@ -34,21 +36,15 @@ public class MeteorSkillProjectile : SkillParameterBase , ISkillProjectile
             projectileVFX.gameObject.SetActive(false);
 
 
-            explosionVFX.transform.SetParent(_dynamicEnvironment);
-
+            explosionVFX.transform.SetParent(transform.parent);
+            puddle.transform.SetParent(transform.parent);
             explosionVFX.gameObject.SetActive(true);
-
+           // Physics.OverlapSphere(transform.position, explosionColliderRadius);
+            puddle.transform.DOScale(1, 0.5f);
             explosionVFX.transform.rotation = Quaternion.identity;
-            Invoke(nameof(ReturningToPool),2.5f);
-
-           }
-    }
-
-    private void ReturningToPool()
-    {
-        poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
+            Invoke(nameof(UnScalePuddle),puddleLifeTime);
         
-
+        }
     }
 
     #region Event subsctiption
@@ -72,16 +68,26 @@ public class MeteorSkillProjectile : SkillParameterBase , ISkillProjectile
 
     #endregion
    
-    public void SetDefaultState()
+    public  void SetDefaultStateOfPuddle()
     {
-        projectileVFX.gameObject.SetActive(true);
-        explosionVFX.gameObject.SetActive(false);
-        explosionVFX.transform.SetParent(transform);
+        puddle.transform.SetParent(transform);
+        puddle.transform.localPosition = Vector3.zero;
+        poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
+
+
     }
     #region Pool Item Component Events Reactions
     private void PoolItemComponent_ResetRequired_ExecuteReaction()
     {
-        SetDefaultState();
+        projectileVFX.gameObject.SetActive(true);
+        explosionVFX.transform.SetParent(transform);
+
+        explosionVFX.gameObject.SetActive(false);
+        explosionVFX.transform.position = transform.position;
+
+        puddle.transform.localScale = new Vector3(0.11f, 0.11f, 0.11f);
+        puddle.transform.SetParent(transform);
+        puddle.transform.localPosition = Vector3.zero;
     }
 
     private void PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction()
@@ -92,6 +98,15 @@ public class MeteorSkillProjectile : SkillParameterBase , ISkillProjectile
     }
     #endregion Pool Item Component Events Reactions
 
+    private void UnScalePuddle()
+    {
+        puddle.transform.DOScale(0.11f, 0.5f).OnComplete(() => { SetDefaultStateOfPuddle();});
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(puddle.transform.position,explosionColliderRadius);
+    }
+    
     protected override void CollideWithMapObstacle()
     {
     }
