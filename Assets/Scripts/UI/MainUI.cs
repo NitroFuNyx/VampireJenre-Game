@@ -48,7 +48,7 @@ public class MainUI : MonoBehaviour
     {
         for(int i = 0; i < transform.childCount; i++)
         {
-            if(transform.GetChild(i).TryGetComponent(out MainCanvasPanel mainCanvasPanel))
+            if(transform.GetChild(i).TryGetComponent(out MainCanvasPanel mainCanvasPanel) && transform.GetChild(i).gameObject.activeInHierarchy)
             {
                 panelsList.Add(mainCanvasPanel);
                 if(!panelsDictionary.ContainsValue(mainCanvasPanel))
