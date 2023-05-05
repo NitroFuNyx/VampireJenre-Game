@@ -15,6 +15,9 @@ public class EnemyCollisionsManager : MonoBehaviour
     #region Events Declaration
     public event Action OnPlayerOutOfHp;
     public event Action OnDamageReceived;
+
+    public event Action OnSpeedDebuffCollision;
+    public event Action OnSpeedReset;
     #endregion Events Declaration
 
     private void Awake()

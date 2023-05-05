@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a519bd9c8840294c9cfb87a3366381e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterAppearanceVFX: {fileID: 0}
 --- !u!1 &4611110728184844670
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,8 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf0367378905c34e99b25718cc096c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveVelocity: 0.07
-  rotationVelocity: 10
+  startMoveSpeed: 0.07
+  rotationSpeed: 10
 --- !u!114 &4611110728184844666
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,6 +13,16 @@ public class MainLoaderUI : MainCanvasPanel
         StartCoroutine(FinishLoaderCoroutine(OnLoaderAnimationFinished));
     }
 
+    public override void PanelActivated_ExecuteReaction()
+    {
+
+    }
+
+    public override void PanelDeactivated_ExecuteReaction()
+    {
+
+    }
+
     private IEnumerator FinishLoaderCoroutine(Action OnLoaderAnimationFinished)
     {
         yield return new WaitForSeconds(loaderAnimationDuration);

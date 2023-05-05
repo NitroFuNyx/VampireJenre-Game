@@ -5,12 +5,16 @@ public class UIInstaller : MonoInstaller
 {
     [Header("References")]
     [Space]
+    [SerializeField] private MainUI mainUI;
     [SerializeField] private MainLoaderUI mainLoaderUI;
     [SerializeField] private MainScreenUI mainScreenUI;
+    [SerializeField] private MenuButtonsUI menuButtonsUI;
 
     public override void InstallBindings()
     {
+        Container.Bind<MainUI>().FromInstance(mainUI).AsSingle().NonLazy();
         Container.Bind<MainLoaderUI>().FromInstance(mainLoaderUI).AsSingle().NonLazy();
         Container.Bind<MainScreenUI>().FromInstance(mainScreenUI).AsSingle().NonLazy();
+        Container.Bind<MenuButtonsUI>().FromInstance(menuButtonsUI).AsSingle().NonLazy();
     }
 }

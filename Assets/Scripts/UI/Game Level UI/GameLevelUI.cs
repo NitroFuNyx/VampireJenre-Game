@@ -1,8 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class GameLevelUI : MainCanvasPanel
 {
-    
+    public override void PanelActivated_ExecuteReaction()
+    {
+
+    }
+
+    public override void PanelDeactivated_ExecuteReaction()
+    {
+
+    }
 }
