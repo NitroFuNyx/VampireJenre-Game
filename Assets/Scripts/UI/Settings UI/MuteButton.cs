@@ -8,8 +8,6 @@ public class MuteButton : ButtonInteractionHandler
     [SerializeField] private Sprite soundOnSprite;
     [SerializeField] private Sprite soundOffSprite;
 
-    private AudioManager _audioManager;
-
     private bool muted = false;
 
     private void Start()
@@ -21,14 +19,6 @@ public class MuteButton : ButtonInteractionHandler
     {
         UnsubscribeFromEvents();
     }
-
-    #region Zenject
-    [Inject]
-    private void Construct(AudioManager audioManager)
-    {
-        _audioManager = audioManager;
-    }
-    #endregion Zenject
 
     public override void ButtonActivated()
     {

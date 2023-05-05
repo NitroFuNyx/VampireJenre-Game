@@ -18,7 +18,7 @@ public abstract class ButtonInteractionHandler : MonoBehaviour
     [Space]
     [SerializeField] protected bool standartAudio = true;
 
-    private AudioManager _audioManager;
+    protected AudioManager _audioManager;
 
     private Button _button;
     private Image _image;
