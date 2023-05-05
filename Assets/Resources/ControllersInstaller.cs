@@ -10,6 +10,7 @@ public class ControllersInstaller : MonoInstaller
     [SerializeField] private GameProcessManager gameProcessManager;
     [SerializeField] private SpawnEnemiesManager spawnEnemiesManager;
     [SerializeField] private AudioManager audioManager;
+    [SerializeField] private HapticManager hapticManager;
 
     public override void InstallBindings()
     {
@@ -18,5 +19,6 @@ public class ControllersInstaller : MonoInstaller
         Container.Bind<GameProcessManager>().FromInstance(gameProcessManager).AsSingle().NonLazy();
         Container.Bind<SpawnEnemiesManager>().FromInstance(spawnEnemiesManager).AsSingle().NonLazy();
         Container.Bind<AudioManager>().FromInstance(audioManager).AsSingle().NonLazy();
+        Container.Bind<HapticManager>().FromInstance(hapticManager).AsSingle().NonLazy();
     }
 }
