@@ -7,8 +7,14 @@ public class GameProcessManager : MonoBehaviour
     [Header("Player")]
     [Space]
     [SerializeField] private GameObject skillObject;
+    [Header("Map Progreess Data")]
+    [Space]
+    [SerializeField] private int currentMapProgress = 0;
+    [SerializeField] private int upgradeProgressValue = 100;
 
     private SpawnEnemiesManager _spawnEnemiesManager;
+
+    private int mapProgressDelta = 1;
 
     private void Start()
     {
@@ -26,6 +32,16 @@ public class GameProcessManager : MonoBehaviour
     public void StartGame()
     {
         StartCoroutine(StartGameCoroutine());
+    }
+
+    public void IncreaseCurrentProgressValue()
+    {
+        currentMapProgress += mapProgressDelta;
+
+        if(currentMapProgress >= upgradeProgressValue)
+        {
+            // spawn boss
+        }
     }
 
     private IEnumerator StartGameCoroutine()
