@@ -39,7 +39,7 @@ public class EnemyComponentsManager : EnemyBehaviour
             poolItemComponent.OnObjectAwakeStateSet += PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction;
         }
 
-        collisionsManager.OnPlayerOutOfHp += CollisionManager_PlayerOutOfHp_ExecuteReaction;
+        collisionsManager.OnCharacterOutOfHp += CollisionManager_PlayerOutOfHp_ExecuteReaction;
         collisionsManager.OnDamageReceived += CollisionManager_DamageReceived_ExecuteReaction;
         collisionsManager.OnSpeedDebuffCollision += CollisionManager_SpeedDebuffCollision_ExecuteReaction;
         collisionsManager.OnSpeedReset += CollisionManager_SpeedReset_ExecuteReaction;
@@ -55,7 +55,7 @@ public class EnemyComponentsManager : EnemyBehaviour
             poolItemComponent.OnObjectAwakeStateSet -= PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction;
         }
 
-        collisionsManager.OnPlayerOutOfHp -= CollisionManager_PlayerOutOfHp_ExecuteReaction;
+        collisionsManager.OnCharacterOutOfHp -= CollisionManager_PlayerOutOfHp_ExecuteReaction;
         collisionsManager.OnDamageReceived -= CollisionManager_DamageReceived_ExecuteReaction;
         collisionsManager.OnSpeedDebuffCollision -= CollisionManager_SpeedDebuffCollision_ExecuteReaction;
         collisionsManager.OnSpeedReset -= CollisionManager_SpeedReset_ExecuteReaction;
