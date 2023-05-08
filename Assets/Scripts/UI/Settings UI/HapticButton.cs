@@ -3,6 +3,11 @@ using Zenject;
 
 public class HapticButton : ButtonInteractionHandler
 {
+    [Header("Button Sprites")]
+    [Space]
+    [SerializeField] private Sprite hapticOnSprite;
+    [SerializeField] private Sprite hapticOffSprite;
+
     private HapticManager _hapticManager;
 
     private bool canVibrate;
@@ -28,6 +33,7 @@ public class HapticButton : ButtonInteractionHandler
     public override void ButtonActivated()
     {
         canVibrate = !canVibrate;
+        ShowAnimation_ButtonPressed();
         _hapticManager.ChangeHapticState(canVibrate);
     }
 
@@ -44,6 +50,18 @@ public class HapticButton : ButtonInteractionHandler
     private void HapticStateChanged_ExecuteReaction(bool canVibrateComponent)
     {
         canVibrate = canVibrateComponent;
-        //ChangePanelSprite();
+        ChangePanelSprite();
+    }
+
+    private void ChangePanelSprite()
+    {
+        if (canVibrate)
+        {
+            buttonImage.sprite = hapticOnSprite;
+        }
+        else
+        {
+            buttonImage.sprite = hapticOffSprite;
+        }
     }
 }

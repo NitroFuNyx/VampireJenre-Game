@@ -73,10 +73,12 @@ public class MainUI : MonoBehaviour
             if (panelsList[i].PanelType == panel)
             {
                 panelsList[i].ShowPanel();
+                panelsList[i].PanelActivated_ExecuteReaction();
             }
             else
             {
                 panelsList[i].HidePanel();
+                panelsList[i].PanelDeactivated_ExecuteReaction();
             }
         }
     }

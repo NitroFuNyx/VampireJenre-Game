@@ -9,6 +9,7 @@ public class SettingsUI : MainCanvasPanel
     private void Start()
     {
         FillPanelsListAndDictionary();
+        SetStartSettings();
     }
 
     public override void PanelActivated_ExecuteReaction()
@@ -30,6 +31,14 @@ public class SettingsUI : MainCanvasPanel
                 panelsList.Add(settingsPanel);
                 panelsDictionary.Add(settingsPanel.PanelType, settingsPanel);
             }
+        }
+    }
+
+    private void SetStartSettings()
+    {
+        for(int i = 0; i < panelsList.Count; i++)
+        {
+            panelsList[i].HidePanel();
         }
     }
 }
