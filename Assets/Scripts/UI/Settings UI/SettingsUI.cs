@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class SettingsUI : MainCanvasPanel
 {
@@ -9,7 +8,7 @@ public class SettingsUI : MainCanvasPanel
     private void Start()
     {
         FillPanelsListAndDictionary();
-        SetStartSettings();
+        ShowSettingsPanel(SettingsPanels.MainSettings);
     }
 
     public override void PanelActivated_ExecuteReaction()
@@ -20,6 +19,16 @@ public class SettingsUI : MainCanvasPanel
     public override void PanelDeactivated_ExecuteReaction()
     {
         
+    }
+
+    public void ShowInfoPanel()
+    {
+        ShowSettingsPanel(SettingsPanels.InfoPanel);
+    }
+
+    public void ShowMainSettingsPanel()
+    {
+        ShowSettingsPanel(SettingsPanels.MainSettings);
     }
 
     private void FillPanelsListAndDictionary()
@@ -34,11 +43,26 @@ public class SettingsUI : MainCanvasPanel
         }
     }
 
-    private void SetStartSettings()
+    private void HidePanels()
     {
         for(int i = 0; i < panelsList.Count; i++)
         {
             panelsList[i].HidePanel();
+        }
+    }
+
+    private void ShowSettingsPanel(SettingsPanels settingsPanel)
+    {
+        for (int i = 0; i < panelsList.Count; i++)
+        {
+            if(settingsPanel != panelsList[i].PanelType)
+            {
+                panelsList[i].HidePanel();
+            }
+            else
+            {
+                panelsList[i].ShowPanel();
+            }
         }
     }
 }
