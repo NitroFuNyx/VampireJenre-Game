@@ -11,7 +11,6 @@ public class LanguageManager : MonoBehaviour, IDataPersistance
     [Space]
     [SerializeField] private TextAsset englishTextsJSON;
     [SerializeField] private TextAsset ukrainianTextsJSON;
-    [SerializeField] private TextAsset spanishTextsJSON;
     [Header("Current Language")]
     [Space]
     [SerializeField] private Languages currentLanguage;
@@ -21,16 +20,17 @@ public class LanguageManager : MonoBehaviour, IDataPersistance
 
     private LanguageTextsHolder englishTextsHolder = new LanguageTextsHolder();
     private LanguageTextsHolder ukrainianTextsHolder = new LanguageTextsHolder();
-    private LanguageTextsHolder spanishTextsHolder = new LanguageTextsHolder();
-    private LanguageTextsHolder otherTextsHolder = new LanguageTextsHolder();
 
     private Dictionary<Languages, LanguageTextsHolder> languagesHoldersDictionary = new Dictionary<Languages, LanguageTextsHolder>();
 
     private DataPersistanceManager _dataPersistanceManager;
 
+    private int currentLanguageIndex;
+
+    public Languages CurrentLanguage { get => currentLanguage; private set => currentLanguage = value; }
+
     #region Events Declaration
     public event Action<LanguageTextsHolder> OnLanguageChanged;
-    public event Action<Languages> OnSpriteChanged;
     #endregion Events Declaration
 
     private void Awake()
@@ -48,16 +48,22 @@ public class LanguageManager : MonoBehaviour, IDataPersistance
     }
     #endregion Zenject
 
-    public void ChangeLanguage(Languages language)
+    public void ChangeLanguage()
     {
-        if(languagesHoldersDictionary.ContainsKey(language))
+        currentLanguageIndex = (int)currentLanguage;
+        currentLanguageIndex++;
+        if(currentLanguageIndex == Enum.GetValues(typeof(Languages)).Length)
         {
-            currentLanguage = language;
+            currentLanguageIndex = 0;
+        }
+        Languages newLanguage = (Languages)currentLanguageIndex;
+
+        if(languagesHoldersDictionary.ContainsKey(newLanguage))
+        {
+            currentLanguage = newLanguage;
             _dataPersistanceManager.SaveGame();
             //ChangePrivacyPolicyTexts(language);
-            OnLanguageChanged?.Invoke(languagesHoldersDictionary[language]);
-            OnSpriteChanged?.Invoke(currentLanguage);
-
+            OnLanguageChanged?.Invoke(languagesHoldersDictionary[newLanguage]);
         }
     }
 
@@ -73,14 +79,12 @@ public class LanguageManager : MonoBehaviour, IDataPersistance
     {
         englishTextsHolder = SetLanguageTextHolder(englishTextsJSON);
         ukrainianTextsHolder = SetLanguageTextHolder(ukrainianTextsJSON);
-        spanishTextsHolder = SetLanguageTextHolder(spanishTextsJSON);
     }
 
     private void FillLanguagesHoldersDictionary()
     {
         languagesHoldersDictionary.Add(Languages.English, englishTextsHolder);
         languagesHoldersDictionary.Add(Languages.Ukrainian, ukrainianTextsHolder);
-        languagesHoldersDictionary.Add(Languages.Spanish, spanishTextsHolder);
     }
 
     public void LoadData(GameData data)
@@ -90,8 +94,6 @@ public class LanguageManager : MonoBehaviour, IDataPersistance
             currentLanguage = (Languages)data.languageIndex;
             //ChangePrivacyPolicyTexts(currentLanguage);
             OnLanguageChanged?.Invoke(languagesHoldersDictionary[currentLanguage]); 
-            OnSpriteChanged?.Invoke(currentLanguage);
-
         }
     }
 

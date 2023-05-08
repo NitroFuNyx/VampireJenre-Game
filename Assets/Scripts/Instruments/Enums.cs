@@ -1,7 +1,7 @@
 
 public enum Languages
 {
-    English, Ukrainian, Spanish
+    English, Ukrainian
 }
 
 public enum UIPanels
