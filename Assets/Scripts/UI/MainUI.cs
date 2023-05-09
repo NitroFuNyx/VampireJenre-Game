@@ -59,7 +59,6 @@ public class MainUI : MonoBehaviour
         }
     }
 
-
     private void SetStartSettings()
     {
         ActivateMainCanvasPanel(UIPanels.MainLoaderPanel);

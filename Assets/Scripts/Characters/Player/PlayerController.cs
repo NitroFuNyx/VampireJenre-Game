@@ -12,19 +12,29 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody playerRigidBody;
     [SerializeField] private Animator playerAnimator;
 
-    
+    private bool canMove = true;
+
     //TODO: CHECK GAME STATE
     private void Update()
     {
-        playerRigidBody.velocity = new Vector3(joystick.Horizontal * speed, playerRigidBody.velocity.y
-            , joystick.Vertical * speed);
-        if (joystick.Vertical != 0 || joystick.Horizontal !=0)
+        if(canMove)
         {
-            transform.rotation = Quaternion.LookRotation(playerRigidBody.velocity);
-            playerAnimator.SetBool(PlayerAnimations.IsRunning,true);
-        }
-        else 
-            playerAnimator.SetBool(PlayerAnimations.IsRunning,false);
+            playerRigidBody.velocity = new Vector3(joystick.Horizontal * speed, playerRigidBody.velocity.y, joystick.Vertical * speed);
 
+            if (joystick.Vertical != 0 || joystick.Horizontal != 0)
+            {
+                transform.rotation = Quaternion.LookRotation(playerRigidBody.velocity);
+                playerAnimator.SetBool(PlayerAnimations.IsRunning, true);
+            }
+            else
+            {
+                playerAnimator.SetBool(PlayerAnimations.IsRunning, false);
+            }
+        }
+    }
+
+    public void ChaneCanMoveState(bool canMove)
+    {
+        this.canMove = canMove;
     }
 }

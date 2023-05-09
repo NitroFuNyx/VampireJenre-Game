@@ -14,6 +14,7 @@ public class GameProcessManager : MonoBehaviour
     [SerializeField] private float upgradeProgressValue = 100;
 
     private SpawnEnemiesManager _spawnEnemiesManager;
+    private MainUI _mainUI;
 
     private int mapProgressDelta = 1;
 
@@ -28,9 +29,10 @@ public class GameProcessManager : MonoBehaviour
 
     #region Zenject
     [Inject]
-    private void Construct(SpawnEnemiesManager spawnEnemiesManager)
+    private void Construct(SpawnEnemiesManager spawnEnemiesManager, MainUI mainUI)
     {
         _spawnEnemiesManager = spawnEnemiesManager;
+        _mainUI = mainUI;
     }
     #endregion Zenject
 
@@ -48,6 +50,12 @@ public class GameProcessManager : MonoBehaviour
         {
             // spawn boss
         }
+    }
+
+    public void GameLost_ExecuteReaction()
+    {
+        _mainUI.MenuButtonPressed_ExecuteReaction(UIPanels.MainScreenPanel);
+        _spawnEnemiesManager.StopEnemySpawn();
     }
 
     private IEnumerator StartGameCoroutine()

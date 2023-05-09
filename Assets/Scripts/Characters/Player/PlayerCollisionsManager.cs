@@ -10,6 +10,8 @@ public class PlayerCollisionsManager : MonoBehaviour
 
     private bool canCheckCollisions = true;
 
+    private int damage = 10;
+
     #region Events Declaration
     public event Action OnPlayerOutOfHp;
     public event Action OnDamageReceived;
@@ -18,6 +20,14 @@ public class PlayerCollisionsManager : MonoBehaviour
     private void Start()
     {
         SetStartSettings();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.layer == Layers.EnemySkeleton || collision.gameObject.layer == Layers.EnemyGhost || collision.gameObject.layer == Layers.EnemyZombie)
+        {
+            DecreaseHp(damage);
+        }
     }
 
     public void ResetComponent()

@@ -67,6 +67,17 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    public void ReturnAllEnemiesToPool()
+    {
+        for(int i = 0; i < spawnedObjectsHolder.childCount; i++)
+        {
+            if(spawnedObjectsHolder.GetChild(i).TryGetComponent(out PoolItem poolItem))
+            {
+                poolItem.PoolItemsManager.ReturnItemToPool(poolItem);
+            }
+        }
+    }
+
     private Transform GetRandomSpawnPoint()
     {
         Transform spawnPoint = spawnPositionsList[0];

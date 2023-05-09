@@ -39,6 +39,15 @@ public class SpawnEnemiesManager : MonoBehaviour
         spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, 16);
     }
 
+    public void StopEnemySpawn()
+    {
+        StopAllCoroutines();
+
+        spawner_BeyondMap.ReturnAllEnemiesToPool();
+        spawner_OnMap.ReturnAllEnemiesToPool();
+        spawner_AtGates.ReturnAllEnemiesToPool();
+    }
+
     private IEnumerator SpawnEnemiesWavesCoroutine()
     {
         while(true)
