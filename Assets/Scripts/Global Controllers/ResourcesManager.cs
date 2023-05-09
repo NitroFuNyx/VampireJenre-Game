@@ -8,15 +8,21 @@ public class ResourcesManager : MonoBehaviour
     [SerializeField] private int coinsAmount;
     [SerializeField] private int gemsAmount;
 
+    private int coinsSurplus = 5;
+
     #region Events Declaration
     public event Action<int> OnCoinsAmountChanged;
     public event Action<int> OnGemsAmountChanged;
     #endregion Events Declaration
 
-    public void IncreaseCoinsAmount(int deltaAmount)
+    public void IncreaseCoinsAmount()
     {
-        coinsAmount += deltaAmount;
-        OnCoinsAmountChanged?.Invoke(coinsAmount);
+        int randomIndex = UnityEngine.Random.Range(0, 5);
+        if(randomIndex == 0)
+        {
+            coinsAmount += coinsSurplus;
+            OnCoinsAmountChanged?.Invoke(coinsAmount);
+        }
     }
 
     public void DecreaseCoinsAmount(int deltaAmount)

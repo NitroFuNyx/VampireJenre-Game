@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class PoolItemsManager : MonoBehaviour
 {
@@ -24,6 +25,20 @@ public class PoolItemsManager : MonoBehaviour
     private Dictionary<PoolItemsTypes, Transform> itemsHoldersDictionary = new Dictionary<PoolItemsTypes, Transform>();
 
     private Vector3 poolItemsSpawnPos = new Vector3(100f, 100f, 100f);
+
+    private ResourcesManager _resourcesManager;
+    private GameProcessManager _gameProcessManager;
+    private PlayerExperienceManager _playerExperienceManager;
+
+    #region Zenject
+    [Inject]
+    private void Construct(ResourcesManager resourcesManager, GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager)
+    {
+        _resourcesManager = resourcesManager;
+        _gameProcessManager = gameProcessManager;
+        _playerExperienceManager = playerExperienceManager;
+    }
+    #endregion Zenject
 
     private void Start()
     {
@@ -98,7 +113,7 @@ public class PoolItemsManager : MonoBehaviour
         {
             PoolItem poolItem = Instantiate(poolItemPrefab, Vector3.zero, Quaternion.identity, poolItemsParent.transform);
             poolItem.transform.localPosition = Vector3.zero;
-            poolItem.CashComponents(this);
+            poolItem.CashComponents(this, _resourcesManager, _gameProcessManager, _playerExperienceManager);
             //poolItem.gameObject.SetActive(false);
             itemsList.Add(poolItem);
             poolItem.name = $"{itemName} {i}";

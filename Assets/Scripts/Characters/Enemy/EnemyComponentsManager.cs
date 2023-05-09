@@ -85,9 +85,9 @@ public class EnemyComponentsManager : EnemyBehaviour
         movementManager.StopMoving();
         animationsManager.SetAnimation_Die();
 
-        FindObjectOfType<PlayerExperienceManager>().IncreaseXpValue(5);
-        FindObjectOfType<ResourcesManager>().IncreaseCoinsAmount(5);
-        FindObjectOfType<GameProcessManager>().IncreaseCurrentProgressValue();
+        poolItemComponent.PlayerExperienceManager.IncreaseXpValue(5);
+        poolItemComponent.ResourcesManager.IncreaseCoinsAmount();
+        poolItemComponent.GameProcessManager.IncreaseCurrentProgressValue();
     }
 
     private void CollisionManager_DamageReceived_ExecuteReaction()
