@@ -8,6 +8,7 @@ public class GameProcessManager : MonoBehaviour
     [Header("Player")]
     [Space]
     [SerializeField] private GameObject skillObject;
+    [SerializeField] private PlayerComponentsManager player;
     [Header("Map Progreess Data")]
     [Space]
     [SerializeField] private float currentMapProgress = 0;
@@ -38,6 +39,7 @@ public class GameProcessManager : MonoBehaviour
 
     public void StartGame()
     {
+        player.StartGame();
         StartCoroutine(StartGameCoroutine());
     }
 
@@ -56,6 +58,7 @@ public class GameProcessManager : MonoBehaviour
     {
         _mainUI.MenuButtonPressed_ExecuteReaction(UIPanels.MainScreenPanel);
         _spawnEnemiesManager.StopEnemySpawn();
+        skillObject.SetActive(false);
     }
 
     private IEnumerator StartGameCoroutine()

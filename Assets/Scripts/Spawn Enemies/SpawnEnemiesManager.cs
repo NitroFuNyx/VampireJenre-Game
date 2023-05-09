@@ -9,8 +9,10 @@ public class SpawnEnemiesManager : MonoBehaviour
     [SerializeField] private EnemySpawner spawner_OnMap;
     [SerializeField] private EnemySpawner spawner_AtGates;
 
+    private bool canSpawnEnemies = true;
     public void SpawnEnemies()
     {
+        canSpawnEnemies = true;
         StartCoroutine(SpawnEnemiesWavesCoroutine());
     }
 
@@ -41,19 +43,27 @@ public class SpawnEnemiesManager : MonoBehaviour
 
     public void StopEnemySpawn()
     {
+        canSpawnEnemies = false;
+
         StopAllCoroutines();
 
-        spawner_BeyondMap.ReturnAllEnemiesToPool();
-        spawner_OnMap.ReturnAllEnemiesToPool();
-        spawner_AtGates.ReturnAllEnemiesToPool();
+        StartCoroutine(StopEnemySpawnCoroutine());
     }
 
     private IEnumerator SpawnEnemiesWavesCoroutine()
     {
-        while(true)
+        while(canSpawnEnemies)
         {
             SpawnEnemiesWave();
             yield return new WaitForSeconds(8f);
         }
-    }    
+    }
+
+    private IEnumerator StopEnemySpawnCoroutine()
+    {
+        yield return null;
+        spawner_BeyondMap.ReturnAllEnemiesToPool();
+        spawner_OnMap.ReturnAllEnemiesToPool();
+        spawner_AtGates.ReturnAllEnemiesToPool();
+    }
 }

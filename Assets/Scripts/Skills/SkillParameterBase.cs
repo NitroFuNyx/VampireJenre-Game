@@ -42,7 +42,7 @@ public abstract class SkillParameterBase : MonoBehaviour
     {
         if (other.gameObject.layer == Layers.MapBoundBox)
         {
-            Debug.Log($"collided with {obstacles}");
+            //Debug.Log($"collided with {obstacles}");
             poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
         }
     }
@@ -51,7 +51,7 @@ public abstract class SkillParameterBase : MonoBehaviour
     {
         if (other.gameObject.layer == Layers.ObstaclesOnMap || other.gameObject.layer == Layers.EnemySkeleton || other.gameObject.layer == Layers.EnemyGhost || other.gameObject.layer == Layers.EnemyZombie)//
         {
-            Debug.Log($"collided with {obstacles}");
+            //Debug.Log($"collided with {obstacles}");
 
             CollideWithMapObstacle();
         }

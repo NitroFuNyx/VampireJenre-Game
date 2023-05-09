@@ -34,6 +34,11 @@ public class PlayerComponentsManager : MonoBehaviour
     }
     #endregion Zenject
 
+    public void StartGame()
+    {
+        movementManager.ChaneCanMoveState(true);
+    }
+
     private void SubscribeOnEvents()
     {
         collisionsManager.OnPlayerOutOfHp += CollisionManager_PlayerOutOfHp_ExecuteReaction;
@@ -50,6 +55,8 @@ public class PlayerComponentsManager : MonoBehaviour
     {
         movementManager.ChaneCanMoveState(false);
         _gameProcessManager.GameLost_ExecuteReaction();
+        transform.position = new Vector3(0f, transform.position.y, 0f);
+        collisionsManager.ResetComponent();
     }
 
     private void CollisionManager_DamageReceived_ExecuteReaction()

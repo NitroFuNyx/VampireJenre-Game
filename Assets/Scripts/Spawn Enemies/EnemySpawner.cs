@@ -69,12 +69,19 @@ public class EnemySpawner : MonoBehaviour
 
     public void ReturnAllEnemiesToPool()
     {
+        List<PoolItem> poolItemsList = new List<PoolItem>();
+
         for(int i = 0; i < spawnedObjectsHolder.childCount; i++)
         {
             if(spawnedObjectsHolder.GetChild(i).TryGetComponent(out PoolItem poolItem))
             {
-                poolItem.PoolItemsManager.ReturnItemToPool(poolItem);
+                poolItemsList.Add(poolItem);
             }
+        }
+
+        for(int i = 0; i < poolItemsList.Count; i++)
+        {
+            poolItemsList[i].PoolItemsManager.ReturnItemToPool(poolItemsList[i]);
         }
     }
 
