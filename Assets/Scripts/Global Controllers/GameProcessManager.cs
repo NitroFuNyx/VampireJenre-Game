@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using System;
 using Zenject;
 
 public class GameProcessManager : MonoBehaviour
@@ -9,12 +10,16 @@ public class GameProcessManager : MonoBehaviour
     [SerializeField] private GameObject skillObject;
     [Header("Map Progreess Data")]
     [Space]
-    [SerializeField] private int currentMapProgress = 0;
-    [SerializeField] private int upgradeProgressValue = 100;
+    [SerializeField] private float currentMapProgress = 0;
+    [SerializeField] private float upgradeProgressValue = 100;
 
     private SpawnEnemiesManager _spawnEnemiesManager;
 
     private int mapProgressDelta = 1;
+
+    #region Events Declaration
+    public event Action<float, float> OnMapProgressChanged;
+    #endregion Events Declaration
 
     private void Start()
     {
@@ -37,6 +42,7 @@ public class GameProcessManager : MonoBehaviour
     public void IncreaseCurrentProgressValue()
     {
         currentMapProgress += mapProgressDelta;
+        OnMapProgressChanged?.Invoke(currentMapProgress, upgradeProgressValue);
 
         if(currentMapProgress >= upgradeProgressValue)
         {

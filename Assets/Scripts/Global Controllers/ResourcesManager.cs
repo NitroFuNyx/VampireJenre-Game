@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class ResourcesManager : MonoBehaviour
 {
@@ -7,9 +8,15 @@ public class ResourcesManager : MonoBehaviour
     [SerializeField] private int coinsAmount;
     [SerializeField] private int gemsAmount;
 
+    #region Events Declaration
+    public event Action<int> OnCoinsAmountChanged;
+    public event Action<int> OnGemsAmountChanged;
+    #endregion Events Declaration
+
     public void IncreaseCoinsAmount(int deltaAmount)
     {
         coinsAmount += deltaAmount;
+        OnCoinsAmountChanged?.Invoke(coinsAmount);
     }
 
     public void DecreaseCoinsAmount(int deltaAmount)
@@ -20,6 +27,8 @@ public class ResourcesManager : MonoBehaviour
         {
             coinsAmount = 0;
         }
+
+        OnCoinsAmountChanged?.Invoke(coinsAmount);
     }
 
     public void IncreaseGemsAmount(int deltaAmount)

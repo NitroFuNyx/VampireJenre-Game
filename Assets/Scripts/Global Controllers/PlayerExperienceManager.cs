@@ -1,21 +1,28 @@
 using UnityEngine;
+using System;
 
 public class PlayerExperienceManager : MonoBehaviour
 {
     [Header("Experience Data")]
     [Space]
-    [SerializeField] private int currentXp = 0;
-    [SerializeField] private int upgradeXpValue = 100;
+    [SerializeField] private float currentXp = 0;
+    [SerializeField] private float upgradeXpValue = 100;
 
-    public void IncreaseXpValue(int deltaXp)
+    #region Events Declaration
+    public event Action<float, float> OnPlayerXpAmountChanged;
+    #endregion Events Declaration
+
+    public void IncreaseXpValue(float deltaXp)
     {
         currentXp += deltaXp;
 
         if(currentXp >= upgradeXpValue)
         {
-            int newLevelStartXp = currentXp - upgradeXpValue;
+            float newLevelStartXp = currentXp - upgradeXpValue;
             currentXp = newLevelStartXp;
             upgradeXpValue = 100; // reset upgradeXpValue
         }
+
+        OnPlayerXpAmountChanged?.Invoke(currentXp, upgradeXpValue);
     }
 }
