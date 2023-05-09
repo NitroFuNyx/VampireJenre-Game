@@ -45,9 +45,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemiesPoolSize: 100
+  skillMissilePoolSize: 75
+  skillMeteorPoolSize: 25
   enemySkeletonPrefab: {fileID: 2612514640753569596, guid: 1abe631e5672251489ef5e4f9922ba47,
     type: 3}
   enemyGhostPrefab: {fileID: 6642222442663905522, guid: 0aa0acfac8b4b1e448b32e984fdb7a75,
     type: 3}
   enemyZombiePrefab: {fileID: 4611110728184844667, guid: 2d1b1090a516f8840aee698b992ab854,
+    type: 3}
+  skillMissilePrefab: {fileID: 5496555590015770241, guid: d87b5b0ce384005489acaa13f71bf88e,
+    type: 3}
+  skillMeteorPrefab: {fileID: -4800505191692886853, guid: 184437de2fe17a44ca9f52e16fe316d3,
     type: 3}
