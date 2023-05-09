@@ -20,6 +20,9 @@ public class GameLevelUI : MainCanvasPanel
     private void Start()
     {
         SubscribeOnEvents();
+
+        mapProgressBar.fillAmount = 0f;
+        playerExperinceProgressBar.fillAmount = 0f;
     }
 
     private void OnDestroy()

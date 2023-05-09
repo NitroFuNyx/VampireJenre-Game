@@ -34,9 +34,9 @@ public class SpawnEnemiesManager : MonoBehaviour
 
     public void SpawnEnemiesWave()
     {
-        spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, 30);
-        spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, 30);
-        spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, 30);
+        spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, 16);
+        spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, 16);
+        spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, 16);
     }
 
     private IEnumerator SpawnEnemiesWavesCoroutine()

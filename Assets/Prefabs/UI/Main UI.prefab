@@ -2397,8 +2397,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 207, y: 204.1644}
+  m_AnchoredPosition: {x: 105.57497, y: 0}
+  m_SizeDelta: {x: 207, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5119946549405849641
 CanvasRenderer:
@@ -2668,8 +2668,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 207, y: 204.1644}
+  m_AnchoredPosition: {x: 770.1565, y: 0}
+  m_SizeDelta: {x: 207, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7593594109336978502
 CanvasRenderer:
@@ -3660,8 +3660,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 207, y: 204.1644}
+  m_AnchoredPosition: {x: 308.8249, y: 0}
+  m_SizeDelta: {x: 207, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7962977024598268651
 CanvasRenderer:
@@ -4076,6 +4076,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelType: 2
+  mapProgressBar: {fileID: 1296579951395199161}
+  playerExperinceProgressBar: {fileID: 406352056660426812}
+  coinsAmountText: {fileID: 583790653}
 --- !u!1 &4745594715361131452
 GameObject:
   m_ObjectHideFlags: 0
@@ -6212,8 +6215,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 207, y: 204.1644}
+  m_AnchoredPosition: {x: 973.40643, y: 0}
+  m_SizeDelta: {x: 207, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1254970914217171820
 CanvasRenderer:
@@ -6392,8 +6395,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 261.83173, y: 258.245}
+  m_AnchoredPosition: {x: 539.4907, y: 0}
+  m_SizeDelta: {x: 261.83173, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8438523343754675232
 CanvasRenderer:
@@ -7373,6 +7376,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelType: 7
+  coinsAmountText: {fileID: 4279035962754828140}
+  gemsAmountText: {fileID: 5352022616203316216}
   buttonsList:
   - {fileID: 5092731506748432631}
   - {fileID: 8410044489456136517}
