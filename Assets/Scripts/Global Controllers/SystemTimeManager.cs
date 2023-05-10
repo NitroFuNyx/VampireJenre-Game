@@ -2,13 +2,16 @@ using UnityEngine;
 
 public class SystemTimeManager : MonoBehaviour
 {
+    private readonly float pauseGameSpeed = 0.000000001f;
+    private readonly float normalGameSpeed = 1f;
+
     public void PauseGame()
     {
-        Time.timeScale = 0.000000001f;
+        Time.timeScale = pauseGameSpeed;
     }
 
     public void ResumeGame()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = normalGameSpeed;
     }
 }

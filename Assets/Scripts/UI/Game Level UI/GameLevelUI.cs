@@ -12,10 +12,14 @@ public class GameLevelUI : MainCanvasPanel
     [Header("Resources")]
     [Space]
     [SerializeField] private TextMeshProUGUI coinsAmountText;
+    [Header("Time")]
+    [Space]
+    [SerializeField] private TextMeshProUGUI stopwatchValueText;
 
     private ResourcesManager _resourcesManager;
     private GameProcessManager _gameProcessManager;
     private PlayerExperienceManager _playerExperienceManager;
+    private TimersManager _timersManager;
 
     private void Start()
     {
@@ -32,11 +36,13 @@ public class GameLevelUI : MainCanvasPanel
 
     #region Zenject
     [Inject]
-    private void Construct(ResourcesManager resourcesManager, GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager)
+    private void Construct(ResourcesManager resourcesManager, GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager,
+                           TimersManager timersManager)
     {
         _resourcesManager = resourcesManager;
         _gameProcessManager = gameProcessManager;
         _playerExperienceManager = playerExperienceManager;
+        _timersManager = timersManager;
     }
     #endregion Zenject
 
@@ -48,6 +54,8 @@ public class GameLevelUI : MainCanvasPanel
         _gameProcessManager.OnMapProgressChanged += GameProcessManager_MapProgressChanged_ExecuteReaction;
 
         _playerExperienceManager.OnPlayerXpAmountChanged += PlayerExperienceManager_PlayerXpAmountChanged_ExecuteReaction;
+
+        _timersManager.OnStopwatchValueChanged += TimersManager_OnStopwatchValueChanged_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
@@ -58,6 +66,8 @@ public class GameLevelUI : MainCanvasPanel
         _gameProcessManager.OnMapProgressChanged -= GameProcessManager_MapProgressChanged_ExecuteReaction;
 
         _playerExperienceManager.OnPlayerXpAmountChanged -= PlayerExperienceManager_PlayerXpAmountChanged_ExecuteReaction;
+
+        _timersManager.OnStopwatchValueChanged -= TimersManager_OnStopwatchValueChanged_ExecuteReaction;
     }
 
     public override void PanelActivated_ExecuteReaction()
@@ -88,5 +98,10 @@ public class GameLevelUI : MainCanvasPanel
     private void PlayerExperienceManager_PlayerXpAmountChanged_ExecuteReaction(float currentAmount, float maxAmount)
     {
         playerExperinceProgressBar.fillAmount = currentAmount.Remap(0, maxAmount, 0f, 1f);
+    }
+
+    private void TimersManager_OnStopwatchValueChanged_ExecuteReaction(string timeString)
+    {
+        stopwatchValueText.text = timeString;
     }
 }

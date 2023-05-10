@@ -14,6 +14,8 @@ public class ControllersInstaller : MonoInstaller
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private HapticManager hapticManager;
     [SerializeField] private LanguageManager languageManager;
+    [SerializeField] private TimersManager timersManager;
+    [SerializeField] private SystemTimeManager systemTimeManager;
 
     public override void InstallBindings()
     {
@@ -26,5 +28,7 @@ public class ControllersInstaller : MonoInstaller
         Container.Bind<AudioManager>().FromInstance(audioManager).AsSingle().NonLazy();
         Container.Bind<HapticManager>().FromInstance(hapticManager).AsSingle().NonLazy();
         Container.Bind<LanguageManager>().FromInstance(languageManager).AsSingle().NonLazy();
+        Container.Bind<TimersManager>().FromInstance(timersManager).AsSingle().NonLazy();
+        Container.Bind<SystemTimeManager>().FromInstance(systemTimeManager).AsSingle().NonLazy();
     }
 }

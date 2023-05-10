@@ -46,12 +46,10 @@ public class HapticManager : MonoBehaviour, IDataPersistance
         _dataPersistanceManager.SaveGame();
     }
 
-    [ContextMenu("Vibrate")]
     public void Vibrate()
     {
         if(canVibrate)
         {
-            Debug.Log($"Vibrates");
             Haptic.Vibrate();
         }    
     }

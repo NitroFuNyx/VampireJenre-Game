@@ -20,6 +20,7 @@ public class GameProcessManager : MonoBehaviour
     private int mapProgressDelta = 1;
 
     #region Events Declaration
+    public event Action OnGameStarted;
     public event Action OnPlayerLost;
     public event Action<float, float> OnMapProgressChanged;
     #endregion Events Declaration
@@ -40,6 +41,7 @@ public class GameProcessManager : MonoBehaviour
 
     public void StartGame()
     {
+        OnGameStarted?.Invoke();
         player.StartGame();
         StartCoroutine(StartGameCoroutine());
     }
