@@ -10,6 +10,7 @@ public class UIInstaller : MonoInstaller
     [SerializeField] private MainScreenUI mainScreenUI;
     [SerializeField] private MenuButtonsUI menuButtonsUI;
     [SerializeField] private SettingsUI settingsUI;
+    [SerializeField] private RewardWheelSpinner rewardWheelSpinner;
 
     public override void InstallBindings()
     {
@@ -18,5 +19,6 @@ public class UIInstaller : MonoInstaller
         Container.Bind<MainScreenUI>().FromInstance(mainScreenUI).AsSingle().NonLazy();
         Container.Bind<MenuButtonsUI>().FromInstance(menuButtonsUI).AsSingle().NonLazy();
         Container.Bind<SettingsUI>().FromInstance(settingsUI).AsSingle().NonLazy();
+        Container.Bind<RewardWheelSpinner>().FromInstance(rewardWheelSpinner).AsSingle().NonLazy();
     }
 }

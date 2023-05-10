@@ -9,6 +9,7 @@ public class MainUI : MonoBehaviour
 
     private MainLoaderUI _mainLoaderUI;
     private MainScreenUI _mainScreenUI;
+    private MenuButtonsUI _menuButtonsUI;
 
     private GameProcessManager _gameProcessManager;
 
@@ -30,11 +31,12 @@ public class MainUI : MonoBehaviour
 
     #region Zenject
     [Inject]
-    private void Construct(MainLoaderUI mainLoaderUI, MainScreenUI mainScreenUI, GameProcessManager gameProcessManager)
+    private void Construct(MainLoaderUI mainLoaderUI, MainScreenUI mainScreenUI, GameProcessManager gameProcessManager, MenuButtonsUI menuButtonsUI)
     {
         _mainLoaderUI = mainLoaderUI;
         _mainScreenUI = mainScreenUI;
         _gameProcessManager = gameProcessManager;
+        _menuButtonsUI = menuButtonsUI;
     }
     #endregion Zenject
 
@@ -48,6 +50,13 @@ public class MainUI : MonoBehaviour
     {
         ActivateMainCanvasPanel(UIPanels.GameLevelUI);
         _gameProcessManager.StartGame();
+    }
+
+    public void ShowRewardsUI()
+    {
+        ActivateMainCanvasPanel(UIPanels.RewardsUI);
+        panelsDictionary[UIPanels.MenuButtonsUI].ShowPanel();
+        _menuButtonsUI.ChangeScreenBlockingState(false);
     }
 
     private void SubscribeOnEvents()

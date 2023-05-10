@@ -12,12 +12,16 @@ public class MenuButtonsUI : MainCanvasPanel
     [Header("Buttons")]
     [Space]
     [SerializeField] private List<MenuPanelButton> buttonsList;
+    [Header("Internal References")]
+    [Space]
+    [SerializeField] private GameObject shieldImage;
 
     private ResourcesManager _resourcesManager;
 
     private void Start()
     {
         SubscribeOnEvents();
+        ChangeScreenBlockingState(false);
     }
 
     private void OnDestroy()
@@ -62,6 +66,11 @@ public class MenuButtonsUI : MainCanvasPanel
         {
             buttonsList[i].SetStandartButtonSprite();
         }
+    }
+
+    public void ChangeScreenBlockingState(bool blocked)
+    {
+        shieldImage.SetActive(blocked);
     }
 
     private void ResourcesManager_CoinsAmountChanged_ExecuteReaction(int amount)

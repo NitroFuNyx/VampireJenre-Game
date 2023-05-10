@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Zenject;
 
 public class RewardWheelSpinner : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class RewardWheelSpinner : MonoBehaviour
     [Header("Rewards")]
     [Space]
     [SerializeField] private List<int> rewardsList = new List<int>();
+    [Header("Internal References")]
+    [Space]
+    [SerializeField] private Transform wheelImage;
+
+    private MenuButtonsUI _menuButtonsUI;
 
     private float spinSpeed;
 
@@ -19,7 +25,18 @@ public class RewardWheelSpinner : MonoBehaviour
 
     private int rewardNumber = -1;
 
+    private bool canSpin = true;
     private bool isSpinning = false;
+
+    public bool CanSpin { get => canSpin; private set => canSpin = value; }
+
+    #region Zenject
+    [Inject]
+    private void Construct(MenuButtonsUI menuButtonsUI)
+    {
+        _menuButtonsUI = menuButtonsUI;
+    }
+    #endregion Zenject
 
     private void Update()
     {
@@ -35,7 +52,7 @@ public class RewardWheelSpinner : MonoBehaviour
             }
 
             rotation += 100 * Time.deltaTime * spinSpeed;
-            transform.localRotation = Quaternion.Euler(0f, 0f, -rotation);
+            wheelImage.localRotation = Quaternion.Euler(0f, 0f, -rotation);
 
             if(spinSpeed < 0f)
             {
@@ -43,6 +60,8 @@ public class RewardWheelSpinner : MonoBehaviour
                 isSpinning = false;
                 rewardNumber = (int)((rotation % CircleAngle) / (CircleAngle / rewardsList.Count));
                 DefineRewardIndex();
+                canSpin = true;
+                _menuButtonsUI.ChangeScreenBlockingState(false);
                 //Debug.Log($"Reward {rewardNumber}");
             }
         }
@@ -51,26 +70,31 @@ public class RewardWheelSpinner : MonoBehaviour
     [ContextMenu("Spin")]
     public void Spin()
     {
-        spinSpeed = Random.Range(minSpinSpeed, maxSpinSpeed);
-        rotation = 0f;
-        rewardNumber = -1;
-        isSpinning = true;
+        if(canSpin)
+        {
+            canSpin = false;
+            _menuButtonsUI.ChangeScreenBlockingState(true);
+            spinSpeed = Random.Range(minSpinSpeed, maxSpinSpeed);
+            rotation = 0f;
+            rewardNumber = -1;
+            isSpinning = true;
+        }
     }
 
     private void DefineRewardIndex()
     {
         float lastAngle;
-        if (transform.eulerAngles.z <= 180f)
+        if (wheelImage.eulerAngles.z <= 180f)
         {
-            lastAngle = transform.eulerAngles.z;
+            lastAngle = wheelImage.eulerAngles.z;
         }
         else
         {
-            lastAngle = transform.eulerAngles.z - 360f;
+            lastAngle = wheelImage.eulerAngles.z - 360f;
         }
         //Debug.Log($"{lastAngle}");
 
-        float newAngle = transform.eulerAngles.z;
+        float newAngle = wheelImage.eulerAngles.z;
 
 
         //if (newAngle > -27 && newAngle <= 18)
