@@ -37,6 +37,7 @@ public class PlayerComponentsManager : MonoBehaviour
     public void StartGame()
     {
         movementManager.ChaneCanMoveState(true);
+        collisionsManager.ResetComponent();
     }
 
     private void SubscribeOnEvents()
@@ -63,4 +64,6 @@ public class PlayerComponentsManager : MonoBehaviour
     {
         _hapticManager.Vibrate();
     }
+
+    
 }
