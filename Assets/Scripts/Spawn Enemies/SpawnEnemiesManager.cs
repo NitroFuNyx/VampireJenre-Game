@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class SpawnEnemiesManager : MonoBehaviour
 {
@@ -9,7 +10,28 @@ public class SpawnEnemiesManager : MonoBehaviour
     [SerializeField] private EnemySpawner spawner_OnMap;
     [SerializeField] private EnemySpawner spawner_AtGates;
 
+    private GameProcessManager _gameProcessManager;
+
     private bool canSpawnEnemies = true;
+
+    private void Start()
+    {
+        SubscribeOnEvents();
+    }
+
+    private void OnDestroy()
+    {
+        UnsubscribeFromEvents();
+    }
+
+    #region Zenject
+    [Inject]
+    private void Construct(GameProcessManager gameProcessManager)
+    {
+        _gameProcessManager = gameProcessManager;
+    }
+    #endregion Zenject
+
     public void SpawnEnemies()
     {
         canSpawnEnemies = true;
@@ -41,13 +63,28 @@ public class SpawnEnemiesManager : MonoBehaviour
         spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, 16);
     }
 
-    public void StopEnemySpawn()
+    private void SubscribeOnEvents()
+    {
+        _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
+    }
+
+    private void UnsubscribeFromEvents()
+    {
+        _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
+    }
+
+    private void StopEnemySpawn()
     {
         canSpawnEnemies = false;
 
         StopAllCoroutines();
 
         StartCoroutine(StopEnemySpawnCoroutine());
+    }
+
+    private void GameProcessManager_PlayerLost_ExecuteReaction()
+    {
+        StopEnemySpawn();
     }
 
     private IEnumerator SpawnEnemiesWavesCoroutine()

@@ -37,4 +37,10 @@ public class PlayerController : MonoBehaviour
     {
         this.canMove = canMove;
     }
+
+    public void ResetComponent()
+    {
+        transform.position = new Vector3(0f, transform.position.y, 0f);
+        transform.rotation = Quaternion.identity;
+    }
 }

@@ -53,9 +53,9 @@ public class PlayerComponentsManager : MonoBehaviour
 
     private void CollisionManager_PlayerOutOfHp_ExecuteReaction()
     {
-        movementManager.ChaneCanMoveState(false);
         _gameProcessManager.GameLost_ExecuteReaction();
-        transform.position = new Vector3(0f, transform.position.y, 0f);
+        movementManager.ChaneCanMoveState(false);
+        movementManager.ResetComponent();
         collisionsManager.ResetComponent();
     }
 

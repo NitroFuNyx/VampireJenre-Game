@@ -20,6 +20,7 @@ public class GameProcessManager : MonoBehaviour
     private int mapProgressDelta = 1;
 
     #region Events Declaration
+    public event Action OnPlayerLost;
     public event Action<float, float> OnMapProgressChanged;
     #endregion Events Declaration
 
@@ -56,9 +57,15 @@ public class GameProcessManager : MonoBehaviour
 
     public void GameLost_ExecuteReaction()
     {
-        _mainUI.MenuButtonPressed_ExecuteReaction(UIPanels.MainScreenPanel);
-        _spawnEnemiesManager.StopEnemySpawn();
         skillObject.SetActive(false);
+        OnPlayerLost?.Invoke();
+        ResetMapProgress();
+    }
+
+    private void ResetMapProgress()
+    {
+        currentMapProgress = 0f;
+        OnMapProgressChanged?.Invoke(currentMapProgress, upgradeProgressValue);
     }
 
     private IEnumerator StartGameCoroutine()
