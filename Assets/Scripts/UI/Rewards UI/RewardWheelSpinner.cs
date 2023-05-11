@@ -96,5 +96,6 @@ public class RewardWheelSpinner : MonoBehaviour
     {
         updatedRewardsList = updatedRewardsList.OrderBy(s => Vector3.Distance(s.transform.position, pointer.position)).ToList();
         currentReward = updatedRewardsList[0];
+        Debug.Log($"Reward {currentReward.RewardIndex}");
     }
 }
