@@ -8,6 +8,10 @@ public class Layers
     public const int EnemyZombie = 11;
     public const int MapBoundBox = 12;
     public const int PlayerSkillProjectile = 13;
+    public const int GlobalSkill = 15;
+
+    public const int SkillArea = 16;
+    public const int GlobalSkillProjectile = 17;
 }
 
 public class PlayerAnimations

@@ -9,6 +9,7 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private int enemiesPoolSize = 50;
     [SerializeField] private int skillMissilePoolSize = 75;
     [SerializeField] private int skillMeteorPoolSize = 25;
+    [SerializeField] private int skillLightningBoltrPoolSize = 25;
     [Header("Active Pools")]
     [Space]
     [SerializeField] private List<List<PoolItem>> activePoolsList = new List<List<PoolItem>>();
@@ -19,6 +20,7 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private PoolItem enemyZombiePrefab;
     [SerializeField] private PoolItem skillMissilePrefab;
     [SerializeField] private PoolItem skillMeteorPrefab;
+    [SerializeField] private PoolItem skillLightningBoltPrefab;
 
     private Dictionary<PoolItemsTypes, List<PoolItem>> itemsListsDictionary = new Dictionary<PoolItemsTypes, List<PoolItem>>();
     private Dictionary<PoolItemsTypes, Transform> itemsHoldersDictionary = new Dictionary<PoolItemsTypes, Transform>();
@@ -32,6 +34,7 @@ public class PoolItemsManager : MonoBehaviour
         CreatePool(enemyZombiePrefab, "Enemy Zombie", enemiesPoolSize);
         CreatePool(skillMissilePrefab, "Skill Missile ", skillMissilePoolSize);
         CreatePool(skillMeteorPrefab , "Skill Meteor ", skillMeteorPoolSize);
+        CreatePool(skillLightningBoltPrefab , "Skill Lightning Bolt ", skillLightningBoltrPoolSize);
     }
 
     public PoolItem SpawnItemFromPool(PoolItemsTypes poolItemType, Vector3 _spawnPos, Quaternion _rotation, Transform _parent)

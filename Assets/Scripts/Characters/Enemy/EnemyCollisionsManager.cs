@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 public class EnemyCollisionsManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class EnemyCollisionsManager : MonoBehaviour
     private Collider _collider;
 
     private bool canCheckCollisions = true;
+    [SerializeField] private float auraCooldown=1;//Delete
 
     #region Events Declaration
     public event Action OnPlayerOutOfHp;
@@ -39,7 +41,48 @@ public class EnemyCollisionsManager : MonoBehaviour
             {
                 DecreaseHp(startHp);
             }
+
+            
+            
         }    
+    }
+
+    public void ApplyExplosion()
+    {
+        DecreaseHp(startHp);
+    }
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.layer == Layers.SkillArea)
+        {
+
+            OnSpeedDebuffCollision?.Invoke();
+        }
+
+        if (collision.gameObject.layer == Layers.PlayerSkillProjectile)
+        {
+            DecreaseHp(startHp);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        auraCooldown += Time.fixedDeltaTime;
+        if (auraCooldown > auraCooldown)
+        {
+            Debug.Log("Aura Damages");
+            auraCooldown = 0;
+        }
+        
+    }
+
+    private void OnTriggerExit(Collider collision)
+    {
+        if (collision.gameObject.layer == Layers.SkillArea)
+        {
+
+            OnSpeedReset?.Invoke();
+        }
     }
 
     public void ChangeColliderActivationState(bool enabled)

@@ -14,6 +14,8 @@ public class MeteorSkillProjectile : SkillParameterBase , ISkillProjectile
     [Range(0.1f, 10)] 
     [SerializeField] private float puddleLifeTime;
 
+    [Header("References")] 
+    [SerializeField] private ExplosionCollision explosionCollision;
     public void Move()
     {
         projectileRigidBody.AddForce(transform.forward * speed,ForceMode.Impulse);
@@ -39,7 +41,7 @@ public class MeteorSkillProjectile : SkillParameterBase , ISkillProjectile
             explosionVFX.transform.SetParent(transform.parent);
             puddle.transform.SetParent(transform.parent);
             explosionVFX.gameObject.SetActive(true);
-           // Physics.OverlapSphere(transform.position, explosionColliderRadius);
+            explosionCollision.Explode(explosionColliderRadius);
             puddle.transform.DOScale(1, 0.5f);
             explosionVFX.transform.rotation = Quaternion.identity;
             Invoke(nameof(UnScalePuddle),puddleLifeTime);
