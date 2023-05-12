@@ -5,16 +5,17 @@ public class PlayerCollisionsManager : MonoBehaviour
 {
     [Header("Hp Data")]
     [Space]
-    [SerializeField] private int startHp = 100;
-    [SerializeField] private int currentHp = 100;
+    [SerializeField] private float startHp = 100f;
+    [SerializeField] private float currentHp = 100f;
 
     private bool canCheckCollisions = true;
 
-    private int damage = 10;
+    private float damage = 10f;
 
     #region Events Declaration
     public event Action OnPlayerOutOfHp;
     public event Action OnDamageReceived;
+    public event Action<float, float> OnHpAmountChanged;
     #endregion Events Declaration
 
     private void Start()
@@ -40,7 +41,7 @@ public class PlayerCollisionsManager : MonoBehaviour
         currentHp = startHp;
     }
 
-    private void DecreaseHp(int amount)
+    private void DecreaseHp(float amount)
     {
         currentHp -= amount;
         if (currentHp <= 0)
@@ -52,5 +53,7 @@ public class PlayerCollisionsManager : MonoBehaviour
         {
             OnDamageReceived?.Invoke();
         }
+
+        OnHpAmountChanged?.Invoke(currentHp, startHp);
     }
 }

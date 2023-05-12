@@ -64,6 +64,4 @@ public class PlayerComponentsManager : MonoBehaviour
     {
         _hapticManager.Vibrate();
     }
-
-    
 }
