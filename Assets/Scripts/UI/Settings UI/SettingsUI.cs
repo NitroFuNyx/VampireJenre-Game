@@ -18,7 +18,7 @@ public class SettingsUI : MainCanvasPanel
 
     public override void PanelDeactivated_ExecuteReaction()
     {
-        
+        ShowSettingsPanel(SettingsPanels.MainSettings);
     }
 
     public void ShowInfoPanel()

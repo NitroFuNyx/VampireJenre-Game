@@ -15,6 +15,6 @@ public class BackToMainSettingsButton : ButtonInteractionHandler
     public override void ButtonActivated()
     {
         ShowAnimation_ButtonPressed();
-        _settingsUI.ShowMainSettingsPanel();
+        StartCoroutine(ActivateDelayedButtonMethodCoroutine(_settingsUI.ShowMainSettingsPanel));
     }
 }
