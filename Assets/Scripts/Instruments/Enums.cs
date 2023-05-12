@@ -28,3 +28,13 @@ public enum Skills
 {
     SingleShot, Missile
 }
+
+public enum RewardIndexes
+{
+    Reward_0, Reward_1, Reward_2, Reward_3, Reward_4, Reward_5, Reward_6, Reward_7,
+}
+
+public enum ResourcesTypes
+{
+    Coins, Gems
+}
