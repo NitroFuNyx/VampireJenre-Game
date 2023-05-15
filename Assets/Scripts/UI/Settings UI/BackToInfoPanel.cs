@@ -1,6 +1,6 @@
 using Zenject;
 
-public class InfoButton : ButtonInteractionHandler
+public class BackToInfoPanel : ButtonInteractionHandler
 {
     private SettingsUI _settingsUI;
 

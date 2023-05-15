@@ -11,7 +11,7 @@ public enum UIPanels
 
 public enum SettingsPanels
 {
-    MainSettings, LanguageSettings, InfoPanel, PrivacyPolicyPanel
+    MainSettings, LanguageSettings, InfoPanel, PrivacyPolicyPanel, StoryPanel
 }
 
 public enum GameLevelPanels

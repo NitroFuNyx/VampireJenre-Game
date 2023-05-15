@@ -1,6 +1,6 @@
 using Zenject;
 
-public class InfoButton : ButtonInteractionHandler
+public class StoryButton : ButtonInteractionHandler
 {
     private SettingsUI _settingsUI;
 
@@ -15,6 +15,6 @@ public class InfoButton : ButtonInteractionHandler
     public override void ButtonActivated()
     {
         ShowAnimation_ButtonPressed();
-        StartCoroutine(ActivateDelayedButtonMethodCoroutine(_settingsUI.ShowInfoPanel));
+        StartCoroutine(ActivateDelayedButtonMethodCoroutine(_settingsUI.ShowStoryPanel));
     }
 }

@@ -1,7 +1,10 @@
 using System.Collections.Generic;
+using Zenject;
 
 public class SettingsUI : MainCanvasPanel
 {
+    private MainUI _mainUI;
+
     private List<SettingsPanel> panelsList = new List<SettingsPanel>();
     private Dictionary<SettingsPanels, SettingsPanel> panelsDictionary = new Dictionary<SettingsPanels, SettingsPanel>();
 
@@ -10,6 +13,14 @@ public class SettingsUI : MainCanvasPanel
         FillPanelsListAndDictionary();
         ShowSettingsPanel(SettingsPanels.MainSettings);
     }
+
+    #region Zenject
+    [Inject]
+    private void Construct(MainUI mainUI)
+    {
+        _mainUI = mainUI;
+    }
+    #endregion Zenject
 
     public override void PanelActivated_ExecuteReaction()
     {
@@ -24,6 +35,18 @@ public class SettingsUI : MainCanvasPanel
     public void ShowInfoPanel()
     {
         ShowSettingsPanel(SettingsPanels.InfoPanel);
+        _mainUI.ShowMenuButtonsUI();
+    }
+
+    public void ShowPrivacyPolicyPanel()
+    {
+        ShowSettingsPanel(SettingsPanels.PrivacyPolicyPanel);
+        _mainUI.HideMenuButtonsUI();
+    }
+
+    public void ShowStoryPanel()
+    {
+        ShowSettingsPanel(SettingsPanels.StoryPanel);
     }
 
     public void ShowMainSettingsPanel()

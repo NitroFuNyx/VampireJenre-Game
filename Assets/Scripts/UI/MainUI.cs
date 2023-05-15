@@ -59,6 +59,16 @@ public class MainUI : MonoBehaviour
         _menuButtonsUI.ChangeScreenBlockingState(false);
     }
 
+    public void ShowMenuButtonsUI()
+    {
+        panelsDictionary[UIPanels.MenuButtonsUI].ShowPanel();
+    }
+
+    public void HideMenuButtonsUI()
+    {
+        panelsDictionary[UIPanels.MenuButtonsUI].HidePanel();
+    }
+
     private void SubscribeOnEvents()
     {
         _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
