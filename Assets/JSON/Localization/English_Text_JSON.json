@@ -1,7 +1,39 @@
 {
    "data":{
-      "mainscreenUITexts":{
-         "titleText":"tap to start"
+      "mainScreenUITexts":{
+         "playButtonText":"tap to start game !"
+      },
+      "settingsUITexts":{
+         "changeLanguageButtonText":"English",
+         "storyButtonText":"Story",
+         "privacyPolicyButtonText":"Privacy",
+         "backButtonText":"Back"
+      },
+      "rewardsUITexts":{
+         "spinButtonText":"Spin"
+      },
+      "GameLevelUITexts":
+      {
+         "PausePanelTexts":
+         {
+            "panelTitleText":"Pause",
+            "panelDescribtionText":"your skills",
+            "resumeButtonText":"Resume"
+         },
+         "LevelUpgradePanelTexts":
+         {
+            "panelTitleText":"Level Upgrade !",
+            "panelDescribtionText":"choose upgrade",
+         },
+         "VictoryPanelTexts":
+         {
+            "multiplyButtonText":"Multiply"
+         },
+         "DefeatPanelTexts":
+         {
+            "getUpButtonText":"Get Up"
+         },
+         "menuButtonText":"Menu"
       }
    }
 }

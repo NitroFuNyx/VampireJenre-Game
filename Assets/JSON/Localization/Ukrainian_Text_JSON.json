@@ -1,7 +1,39 @@
 {
    "data":{
-      "mainscreenUITexts":{
-         "titleText":"натисни для початку"
+      "mainScreenUITexts":{
+         "playButtonText":"натисни для початку !"
+      },
+      "settingsUITexts":{
+         "changeLanguageButtonText":"Українська",
+         "storyButtonText":"Історія",
+         "privacyPolicyButtonText":"Конфідеційність",
+         "backButtonText":"Назад"
+      },
+      "rewardsUITexts":{
+         "spinButtonText":"Крутити"
+      },
+      "GameLevelUITexts":
+      {
+         "PausePanelTexts":
+         {
+            "panelTitleText":"Пауза",
+            "panelDescribtionText":"ваші навички",
+            "resumeButtonText":"Продовжити"
+         },
+         "LevelUpgradePanelTexts":
+         {
+            "panelTitleText":"Підвищення Рівня !",
+            "panelDescribtionText":"виберить покращення",
+         },
+         "VictoryPanelTexts":
+         {
+            "multiplyButtonText":"Збільшити"
+         },
+         "DefeatPanelTexts":
+         {
+            "getUpButtonText":"Піднятись"
+         },
+         "menuButtonText":"Меню"
       }
    }
 }
