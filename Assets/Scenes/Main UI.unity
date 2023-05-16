@@ -2386,51 +2386,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1704292186}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2009876525
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2009876526}
-  - component: {fileID: 2009876527}
-  m_Layer: 12
-  m_Name: Map Projectile Bound Box
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2009876526
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009876525}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.639, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1110191667}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2009876527
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009876525}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 90.1, y: 35.12, z: 89.29}
-  m_Center: {x: 0, y: 14.27, z: 0}
 --- !u!1 &2030182512
 GameObject:
   m_ObjectHideFlags: 0
@@ -28010,40 +27965,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 952850661}
     m_Modifications:
-    - target: {fileID: 2009876526, guid: 1753545c6d8051745a04fd70e5324890, type: 3}
-      propertyPath: m_RootOrder
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 1762413147104681856, guid: 1753545c6d8051745a04fd70e5324890,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 1792627139159610673, guid: 1753545c6d8051745a04fd70e5324890,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 5018962349031103548, guid: 1753545c6d8051745a04fd70e5324890,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 6167468054981648881, guid: 1753545c6d8051745a04fd70e5324890,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 7492486806430223539, guid: 1753545c6d8051745a04fd70e5324890,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 8270297600494587683, guid: 1753545c6d8051745a04fd70e5324890,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 8281330382804320498, guid: 1753545c6d8051745a04fd70e5324890,
         type: 3}
       propertyPath: m_RootOrder
@@ -28103,16 +28024,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Static Environment
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281330382804320499, guid: 1753545c6d8051745a04fd70e5324890,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8946103565058950516, guid: 1753545c6d8051745a04fd70e5324890,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1753545c6d8051745a04fd70e5324890, type: 3}
