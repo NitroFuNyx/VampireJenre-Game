@@ -1466,17 +1466,57 @@ PrefabInstance:
     - target: {fileID: 6473635823898044718, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: activateLight
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ebbc059c766b55438adce8631e78c5d, type: 3}
@@ -1556,17 +1596,57 @@ PrefabInstance:
     - target: {fileID: 6473635823898044718, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: activateLight
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ebbc059c766b55438adce8631e78c5d, type: 3}
@@ -1583,6 +1663,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8681584621228373132}
     m_Modifications:
+    - target: {fileID: 5191686632385343702, guid: 6151566cedde4f44ab904dd72484f59f,
+        type: 3}
+      propertyPath: activateLight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863520138490646925, guid: 6151566cedde4f44ab904dd72484f59f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8487452173339408089, guid: 6151566cedde4f44ab904dd72484f59f,
         type: 3}
       propertyPath: m_Name
@@ -1796,17 +1886,57 @@ PrefabInstance:
     - target: {fileID: 6473635823898044718, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: activateLight
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ebbc059c766b55438adce8631e78c5d, type: 3}
@@ -2603,6 +2733,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8681584621228373132}
     m_Modifications:
+    - target: {fileID: 5191686632385343702, guid: 6151566cedde4f44ab904dd72484f59f,
+        type: 3}
+      propertyPath: activateLight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863520138490646925, guid: 6151566cedde4f44ab904dd72484f59f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8487452173339408089, guid: 6151566cedde4f44ab904dd72484f59f,
         type: 3}
       propertyPath: m_Name
@@ -3096,17 +3236,57 @@ PrefabInstance:
     - target: {fileID: 6473635823898044718, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: activateLight
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ebbc059c766b55438adce8631e78c5d, type: 3}
@@ -3123,6 +3303,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8681584621228373132}
     m_Modifications:
+    - target: {fileID: 5191686632385343702, guid: 6151566cedde4f44ab904dd72484f59f,
+        type: 3}
+      propertyPath: activateLight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863520138490646925, guid: 6151566cedde4f44ab904dd72484f59f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8487452173339408089, guid: 6151566cedde4f44ab904dd72484f59f,
         type: 3}
       propertyPath: m_Name
@@ -3300,8 +3490,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
         type: 3}
+      propertyPath: m_Range
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6345371606009514782, guid: 3f75768f50c011d478de09e17586fe44,
         type: 3}
@@ -3621,17 +3831,57 @@ PrefabInstance:
     - target: {fileID: 6473635823898044718, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: activateLight
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ebbc059c766b55438adce8631e78c5d, type: 3}
@@ -3786,17 +4036,57 @@ PrefabInstance:
     - target: {fileID: 6473635823898044718, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: activateLight
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ebbc059c766b55438adce8631e78c5d, type: 3}
@@ -4026,17 +4316,57 @@ PrefabInstance:
     - target: {fileID: 6473635823898044718, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: activateLight
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ebbc059c766b55438adce8631e78c5d, type: 3}
@@ -4116,17 +4446,57 @@ PrefabInstance:
     - target: {fileID: 6473635823898044718, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: activateLight
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ebbc059c766b55438adce8631e78c5d, type: 3}
@@ -4368,6 +4738,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8681584621228373132}
     m_Modifications:
+    - target: {fileID: 5191686632385343702, guid: 6151566cedde4f44ab904dd72484f59f,
+        type: 3}
+      propertyPath: activateLight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863520138490646925, guid: 6151566cedde4f44ab904dd72484f59f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8487452173339408089, guid: 6151566cedde4f44ab904dd72484f59f,
         type: 3}
       propertyPath: m_Name
@@ -4656,17 +5036,57 @@ PrefabInstance:
     - target: {fileID: 6473635823898044718, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: activateLight
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ebbc059c766b55438adce8631e78c5d, type: 3}
@@ -4896,17 +5316,57 @@ PrefabInstance:
     - target: {fileID: 6473635823898044718, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: activateLight
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ebbc059c766b55438adce8631e78c5d, type: 3}
@@ -5436,17 +5896,57 @@ PrefabInstance:
     - target: {fileID: 6473635823898044718, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: activateLight
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ebbc059c766b55438adce8631e78c5d, type: 3}
@@ -5530,8 +6030,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
+      propertyPath: m_Range
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
@@ -5741,17 +6261,57 @@ PrefabInstance:
     - target: {fileID: 6473635823898044718, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: activateLight
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ebbc059c766b55438adce8631e78c5d, type: 3}
@@ -5843,6 +6403,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8681584621228373132}
     m_Modifications:
+    - target: {fileID: 5191686632385343702, guid: 6151566cedde4f44ab904dd72484f59f,
+        type: 3}
+      propertyPath: activateLight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863520138490646925, guid: 6151566cedde4f44ab904dd72484f59f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8487452173339408089, guid: 6151566cedde4f44ab904dd72484f59f,
         type: 3}
       propertyPath: m_Name
@@ -6461,17 +7031,57 @@ PrefabInstance:
     - target: {fileID: 6473635823898044718, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: activateLight
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ebbc059c766b55438adce8631e78c5d, type: 3}
@@ -6626,17 +7236,57 @@ PrefabInstance:
     - target: {fileID: 6473635823898044718, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: activateLight
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ebbc059c766b55438adce8631e78c5d, type: 3}
@@ -6791,17 +7441,57 @@ PrefabInstance:
     - target: {fileID: 6473635823898044718, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: activateLight
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ebbc059c766b55438adce8631e78c5d, type: 3}
@@ -6968,6 +7658,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8681584621228373132}
     m_Modifications:
+    - target: {fileID: 5191686632385343702, guid: 6151566cedde4f44ab904dd72484f59f,
+        type: 3}
+      propertyPath: activateLight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863520138490646925, guid: 6151566cedde4f44ab904dd72484f59f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8487452173339408089, guid: 6151566cedde4f44ab904dd72484f59f,
         type: 3}
       propertyPath: m_Name
@@ -7295,8 +7995,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
         type: 3}
+      propertyPath: m_Range
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6345371606009514782, guid: 3f75768f50c011d478de09e17586fe44,
         type: 3}
@@ -7410,8 +8130,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
         type: 3}
+      propertyPath: m_Range
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6345371606009514782, guid: 3f75768f50c011d478de09e17586fe44,
         type: 3}
@@ -7645,8 +8385,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
+      propertyPath: m_Range
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
@@ -7715,8 +8475,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
         type: 3}
+      propertyPath: m_Range
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389986739437167282, guid: 3f75768f50c011d478de09e17586fe44,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6345371606009514782, guid: 3f75768f50c011d478de09e17586fe44,
         type: 3}
@@ -8098,6 +8878,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8681584621228373132}
     m_Modifications:
+    - target: {fileID: 5191686632385343702, guid: 6151566cedde4f44ab904dd72484f59f,
+        type: 3}
+      propertyPath: activateLight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863520138490646925, guid: 6151566cedde4f44ab904dd72484f59f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8487452173339408089, guid: 6151566cedde4f44ab904dd72484f59f,
         type: 3}
       propertyPath: m_Name
@@ -8461,17 +9251,57 @@ PrefabInstance:
     - target: {fileID: 6473635823898044718, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: activateLight
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8109395428764581201, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Range
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8462806059227369558, guid: 4ebbc059c766b55438adce8631e78c5d,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ebbc059c766b55438adce8631e78c5d, type: 3}
