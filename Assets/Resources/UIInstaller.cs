@@ -11,6 +11,7 @@ public class UIInstaller : MonoInstaller
     [SerializeField] private MenuButtonsUI menuButtonsUI;
     [SerializeField] private SettingsUI settingsUI;
     [SerializeField] private RewardWheelSpinner rewardWheelSpinner;
+    [SerializeField] private TalentWheel talentWheel;
     [SerializeField] private GameLevelUI gameLevelUI;
 
     public override void InstallBindings()
@@ -21,6 +22,7 @@ public class UIInstaller : MonoInstaller
         Container.Bind<MenuButtonsUI>().FromInstance(menuButtonsUI).AsSingle().NonLazy();
         Container.Bind<SettingsUI>().FromInstance(settingsUI).AsSingle().NonLazy();
         Container.Bind<RewardWheelSpinner>().FromInstance(rewardWheelSpinner).AsSingle().NonLazy();
+        Container.Bind<TalentWheel>().FromInstance(talentWheel).AsSingle().NonLazy();
         Container.Bind<GameLevelUI>().FromInstance(gameLevelUI).AsSingle().NonLazy();
     }
 }

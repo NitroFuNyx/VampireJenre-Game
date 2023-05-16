@@ -43,7 +43,7 @@ public class GameProcessManager : MonoBehaviour
     {
         OnGameStarted?.Invoke();
         player.StartGame();
-        //StartCoroutine(StartGameCoroutine());
+        StartCoroutine(StartGameCoroutine());
     }
 
     public void IncreaseCurrentProgressValue()

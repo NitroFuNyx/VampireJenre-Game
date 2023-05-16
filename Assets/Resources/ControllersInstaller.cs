@@ -17,6 +17,7 @@ public class ControllersInstaller : MonoInstaller
     [SerializeField] private TimersManager timersManager;
     [SerializeField] private SystemTimeManager systemTimeManager;
     [SerializeField] private RewardsManager rewardsManager;
+    [SerializeField] private TalentsManager talentsManager;
 
     public override void InstallBindings()
     {
@@ -32,5 +33,6 @@ public class ControllersInstaller : MonoInstaller
         Container.Bind<TimersManager>().FromInstance(timersManager).AsSingle().NonLazy();
         Container.Bind<SystemTimeManager>().FromInstance(systemTimeManager).AsSingle().NonLazy();
         Container.Bind<RewardsManager>().FromInstance(rewardsManager).AsSingle().NonLazy();
+        Container.Bind<TalentsManager>().FromInstance(talentsManager).AsSingle().NonLazy();
     }
 }

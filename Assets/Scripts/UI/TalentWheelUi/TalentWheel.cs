@@ -12,6 +12,9 @@ public class TalentWheel : MonoBehaviour
     private Keyframe frame;
     private Keyframe startKeyframe = new Keyframe(0,0.1f);
     private int counter;
+
+    public System.Action<TalentItem> OnTalentToUpgradeDefined;
+
     [ContextMenu("Talents/StartWheel")]
     public void StartWheel()
     {
@@ -47,17 +50,14 @@ public class TalentWheel : MonoBehaviour
                     if(i==circles-1&& j ==choose)
                     {
                         Items[j].GetComponent<Image>().color = Color.cyan;
-                        
+
+                        OnTalentToUpgradeDefined?.Invoke(Items[j]);
+
                         break;
                     }
 
                     counter++;
             }
-            
-           
-
-            
         }
     }
-
 }

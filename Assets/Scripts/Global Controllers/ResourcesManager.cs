@@ -13,6 +13,8 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
 
     private int coinsSurplus = 5;
 
+    public int CoinsAmount { get => coinsAmount; private set => coinsAmount = value; }
+
     #region Events Declaration
     public event Action<int> OnCoinsAmountChanged;
     public event Action<int> OnGemsAmountChanged;
