@@ -44,8 +44,13 @@ public enum TalentsIndexes
     Talent_0, Talent_1, Talent_2, Talent_3, Talent_4, Talent_5, Talent_6, Talent_7, Talent_8
 }
 
-public enum PassiveSkillsTypes
+public enum PassiveCharacteristicsTypes
 {
     IncreseItemDropChance, IncreseSkillsRadius, IncreaseDamage, IncreaseMovementSpeed, DecreaseIncomeDamage, IncreaseRegeneration,
-    IncreaseCritChance, IncreaseCritPower, IncreaseCoinsSurplus
+    IncreaseCritChance, IncreaseCritPower, IncreaseCoinsSurplus, IncreaseProjectilesAmount
+}
+
+public enum PlayersCharactersTypes
+{
+    Knight, Druid, Wizzard
 }

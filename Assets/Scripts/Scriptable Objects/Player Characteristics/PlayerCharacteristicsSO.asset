@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2099684f77131c345907d7b1968e9b6a, type: 3}
+  m_Name: PlayerCharacteristicsSO
+  m_EditorClassIdentifier: 
+  playerBasicDataLists:
+  - playerCharacterType: 0
+    characterDefaultHp: 100
+    characterDefaultSpeed: 10
+    characterDefaultDamageIncreasePercent: 0
+    characterDefaultDamageReductionPercent: 0
+    characterDefaultCritChance: 0
+    characterDefaultCritPower: 0
+    characterDefaultRegenerationPercent: 0
+    characterDefaultItemDropChancePercent: 0
+    characterDefaultCoinsSurplusPercent: 0
+    playerDefaultSkillsData:
+      playerForceWaveData:
+        defaultDamage: 0
+        defaultRange: 0
+        defaultWidth: 0
+        defaultCooldown: 0
+      singleShotSkillData:
+        defaultDamage: 0
+        defaultProjectilesAmount: 0
+        defaultCooldown: 0
+      magicAuraSkillData:
+        defaultDamage: 0
+        defaultRadius: 0
+        defaultCooldown: 0
+      pulseAuraSkillData:
+        defaultDamage: 0
+        defaultRadius: 0
+        defaultCooldown: 0
+      meteorSkillData:
+        defaultDamage: 0
+        defaultPostEffectDuration: 0
+        defaultProjectilesAmount: 0
+        defaultCooldown: 0
+      lightningBoltSkillData:
+        defaultDamage: 0
+        defaultProjectilesAmount: 0
+        defaultCooldown: 0
+      chainLightningSkillData:
+        defaultDamage: 0
+        defaultJumpsAmount: 0
+        defaultCooldown: 0
+      fireballsSkillData:
+        defaultDamage: 0
+        radius: 0
+        defaultProjectilesAmount: 0
+      allDirectionsShotsSkillData:
+        defaultDamage: 0
+        defaultProjectilesAmount: 0
+        defaultCooldown: 0
+      weaponStrikeSkillData:
+        defaultDamage: 0
+        size: 0
+        defaultCooldown: 0

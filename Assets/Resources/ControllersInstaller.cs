@@ -3,13 +3,12 @@ using Zenject;
 
 public class ControllersInstaller : MonoInstaller
 {
-    [Header("References")]
+    [Header("Main References")]
     [Space]
     [SerializeField] private DataPersistanceManager dataPersistanceManager;
     [SerializeField] private PoolItemsManager poolItemsManager;
     [SerializeField] private GameProcessManager gameProcessManager;
     [SerializeField] private ResourcesManager resourcesManager;
-    [SerializeField] private PlayerExperienceManager playerExperienceManager;
     [SerializeField] private SpawnEnemiesManager spawnEnemiesManager;
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private HapticManager hapticManager;
@@ -18,6 +17,10 @@ public class ControllersInstaller : MonoInstaller
     [SerializeField] private SystemTimeManager systemTimeManager;
     [SerializeField] private RewardsManager rewardsManager;
     [SerializeField] private TalentsManager talentsManager;
+    [Header("Main References")]
+    [Space]
+    [SerializeField] private PlayerExperienceManager playerExperienceManager;
+    [SerializeField] private PlayerCharacteristicsManager playerCharacteristicsManager;
 
     public override void InstallBindings()
     {
@@ -25,7 +28,6 @@ public class ControllersInstaller : MonoInstaller
         Container.Bind<PoolItemsManager>().FromInstance(poolItemsManager).AsSingle().NonLazy();
         Container.Bind<GameProcessManager>().FromInstance(gameProcessManager).AsSingle().NonLazy();
         Container.Bind<ResourcesManager>().FromInstance(resourcesManager).AsSingle().NonLazy();
-        Container.Bind<PlayerExperienceManager>().FromInstance(playerExperienceManager).AsSingle().NonLazy();
         Container.Bind<SpawnEnemiesManager>().FromInstance(spawnEnemiesManager).AsSingle().NonLazy();
         Container.Bind<AudioManager>().FromInstance(audioManager).AsSingle().NonLazy();
         Container.Bind<HapticManager>().FromInstance(hapticManager).AsSingle().NonLazy();
@@ -34,5 +36,8 @@ public class ControllersInstaller : MonoInstaller
         Container.Bind<SystemTimeManager>().FromInstance(systemTimeManager).AsSingle().NonLazy();
         Container.Bind<RewardsManager>().FromInstance(rewardsManager).AsSingle().NonLazy();
         Container.Bind<TalentsManager>().FromInstance(talentsManager).AsSingle().NonLazy();
+
+        Container.Bind<PlayerExperienceManager>().FromInstance(playerExperienceManager).AsSingle().NonLazy();
+        Container.Bind<PlayerCharacteristicsManager>().FromInstance(playerCharacteristicsManager).AsSingle().NonLazy();
     }
 }
