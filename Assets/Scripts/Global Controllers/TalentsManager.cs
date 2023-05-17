@@ -49,7 +49,7 @@ public class TalentsManager : MonoBehaviour
 
     private void TalentToUpgradeDefined_ExecuteReaction(TalentItem talentItem)
     {
+        Debug.Log($"Talent {talentItem.TalentType}");
         OnBuyingProcessFinishedCallback?.Invoke();
-        
     }
 }

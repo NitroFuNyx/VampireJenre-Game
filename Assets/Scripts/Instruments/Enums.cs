@@ -38,3 +38,8 @@ public enum ResourcesTypes
 {
     Coins, Gems
 }
+
+public enum TalentsTypes
+{
+    Talent_0, Talent_1, Talent_2, Talent_3, Talent_4, Talent_5, Talent_6, Talent_7, Talent_8
+}
