@@ -32,14 +32,14 @@ public class TalentsManager : MonoBehaviour
     }
     #endregion Zenject
 
-    public void BuyTalent(Action OnBuyingProcessFinished, Action OnBuyingProcessCanceled)
+    public void BuyTalent(Action OnBuyingProcessLaunced, Action OnBuyingProcessFinished, Action OnBuyingProcessCanceled)
     {
         if(_resourcesManager.CoinsAmount >= talentCostAmount)
         {
+            OnBuyingProcessLaunced?.Invoke();
             OnBuyingProcessFinishedCallback = OnBuyingProcessFinished;
             _resourcesManager.DecreaseCoinsAmount(talentCostAmount);
             _talentWheel.StartWheel();
-            OnBuyingProcessFinished?.Invoke();
         }
         else
         {

@@ -7,3 +7,11 @@ public struct RewardDataStruct
     public ResourcesTypes resourceTypes;
     public int ResourceAmount;
 }
+
+[Serializable]
+public struct TalentDataStruct
+{
+    public TalentsIndexes talentType;
+    public PassiveSkillsTypes passiveSkillType;
+    public float upgradePercent;
+}

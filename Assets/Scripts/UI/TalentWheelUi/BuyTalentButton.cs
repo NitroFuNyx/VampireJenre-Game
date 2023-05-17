@@ -1,10 +1,18 @@
+using UnityEngine;
+using DG.Tweening;
 using Zenject;
 
 public class BuyTalentButton : ButtonInteractionHandler
 {
+    [Header("Process Canceled Animation Data")]
+    [Space]
+    [SerializeField] private Vector3 scaleAnimationPunchVector = new Vector3(1.2f, 1.2f, 1.2f);
+    [SerializeField] private int scaleAnimationFrequency = 2;
+    [SerializeField] private float scaleAnimationDuration = 1f;
+
     private TalentsManager _talentsManager;
 
-    private bool buttonActivated = false;
+    [SerializeField] private bool buttonActivated = false;
 
     #region Zenject
     [Inject]
@@ -18,8 +26,8 @@ public class BuyTalentButton : ButtonInteractionHandler
     {
         if(!buttonActivated)
         {
-            ShowAnimation_ButtonPressed();
-            _talentsManager.BuyTalent(ResetButton, BuyingProcessCanceled_ExecuteReaction);
+            buttonActivated = true;
+            _talentsManager.BuyTalent(BuyingProcessLaunced_ExecuteReaction, ResetButton, BuyingProcessCanceled_ExecuteReaction);
         }
     }
 
@@ -30,6 +38,18 @@ public class BuyTalentButton : ButtonInteractionHandler
 
     public void BuyingProcessCanceled_ExecuteReaction()
     {
-        buttonActivated = false;
+        buttonImage.DOColor(Color.red, scaleAnimationDuration / 2).OnComplete(() =>
+        {
+            buttonImage.DOColor(Color.white, scaleAnimationDuration / 2);
+        });
+        buttonImage.transform.DOPunchScale(scaleAnimationPunchVector, scaleAnimationDuration, scaleAnimationFrequency).OnComplete(() =>
+        {
+            buttonActivated = false;
+        });
+    }
+
+    public void BuyingProcessLaunced_ExecuteReaction()
+    {
+        ShowAnimation_ButtonPressed();
     }
 }

@@ -4,7 +4,7 @@ public class TalentItem : MonoBehaviour
 {
     [Header("Talent Type")]
     [Space]
-    [SerializeField] private TalentsTypes talentType;
+    [SerializeField] private TalentsIndexes talentType;
 
-    public TalentsTypes TalentType { get => talentType; }
+    public TalentsIndexes TalentType { get => talentType; }
 }
