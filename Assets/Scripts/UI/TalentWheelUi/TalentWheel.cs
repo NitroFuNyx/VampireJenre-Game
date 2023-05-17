@@ -8,7 +8,7 @@ public class TalentWheel : MonoBehaviour
 {
     [SerializeField] private List<TalentItem> Items;
     [SerializeField] private AnimationCurve curve;
-    
+
     private Keyframe frame;
     private Keyframe startKeyframe = new Keyframe(0,0.1f);
     private int counter;
@@ -39,17 +39,20 @@ public class TalentWheel : MonoBehaviour
         {
             for (int j = 0; j < TalentSlotAmount.maxSlotAmount; j++)
             {
-                Image image = Items[j].GetComponent<Image>();
-                image.color = Color.blue;
+                //Image image = Items[j].GetComponent<Image>();
+                //image.color = Color.blue;
+                Items[j].ChangeTalentImageColor(Color.blue);
                 var delay = curve.Evaluate(counter);
                 
                 yield return new WaitForSecondsRealtime(delay);
-                Debug.Log($"evaluationParameter: {counter} delay :{delay}");
-               
-                    image.color = Color.white;
-                    if(i==circles-1&& j ==choose)
+                //Debug.Log($"evaluationParameter: {counter} delay :{delay}");
+
+                    //image.color = Color.white;
+                    Items[j].ChangeTalentImageColor(Color.white);
+                    if (i==circles-1&& j ==choose)
                     {
-                        Items[j].GetComponent<Image>().color = Color.cyan;
+                        //Items[j].GetComponent<Image>().color = Color.cyan;
+                        Items[j].ChangeTalentImageColor(Color.cyan);
 
                         OnTalentToUpgradeDefined?.Invoke(Items[j]);
 
