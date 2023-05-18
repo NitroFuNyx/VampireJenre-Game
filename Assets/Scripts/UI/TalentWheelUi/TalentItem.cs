@@ -5,11 +5,11 @@ public class TalentItem : MonoBehaviour
 {
     [Header("Talent Type")]
     [Space]
-    [SerializeField] private TalentsIndexes talentType;
+    [SerializeField] private TalentsIndexes talentIndex;
 
     private Image talentImage;
 
-    public TalentsIndexes TalentType { get => talentType; }
+    public TalentsIndexes TalentIndex { get => talentIndex; }
 
     private void Awake()
     {

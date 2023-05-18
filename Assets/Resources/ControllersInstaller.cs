@@ -17,7 +17,7 @@ public class ControllersInstaller : MonoInstaller
     [SerializeField] private SystemTimeManager systemTimeManager;
     [SerializeField] private RewardsManager rewardsManager;
     [SerializeField] private TalentsManager talentsManager;
-    [Header("Main References")]
+    [Header("Player References")]
     [Space]
     [SerializeField] private PlayerExperienceManager playerExperienceManager;
     [SerializeField] private PlayerCharacteristicsManager playerCharacteristicsManager;

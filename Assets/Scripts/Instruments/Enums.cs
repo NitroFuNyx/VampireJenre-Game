@@ -54,3 +54,8 @@ public enum PlayersCharactersTypes
 {
     Knight, Druid, Wizzard
 }
+
+public enum SkillUpgradesTypes
+{
+    PercentSurplus, PercentOfValue
+}

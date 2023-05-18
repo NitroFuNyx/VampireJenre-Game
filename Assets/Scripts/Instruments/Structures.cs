@@ -11,8 +11,9 @@ public struct RewardDataStruct
 [Serializable]
 public struct TalentDataStruct
 {
-    public TalentsIndexes talentType;
+    public TalentsIndexes talentIndex;
     public PassiveCharacteristicsTypes passiveSkillType;
+    public SkillUpgradesTypes skillUpgradeType;
     public float upgradePercent;
 }
 
@@ -20,17 +21,17 @@ public struct TalentDataStruct
 public struct PlayerBasicCharacteristicsStruct
 {
     public PlayersCharactersTypes playerCharacterType;
-    public float characterDefaultHp; // Talent
-    public float characterDefaultSpeed;
-    public float characterDefaultDamageIncreasePercent;
-    public float characterDefaultDamageReductionPercent;
-    public float characterDefaultCritChance;
-    public float characterDefaultCritPower;
-    public float characterDefaultRegenerationPercent;
-    public float characterDefaultItemDropChancePercent; // Common
-    public float characterDefaultCoinsSurplusPercent;  // Common
+    public float characterHp; // Talent
+    public float characterSpeed;
+    public float characterDamageIncreasePercent;
+    public float characterDamageReductionPercent;
+    public float characterCritChance;
+    public float characterCritPower;
+    public float characterRegenerationPercent;
+    public float characterItemDropChancePercent; // Common
+    public float characterCoinsSurplusPercent;  // Common
 
-    public PlayerSkillsCharacteristicsStruct playerDefaultSkillsData;
+    public PlayerSkillsCharacteristicsStruct playerSkillsData;
 }
 
 [Serializable]
@@ -51,81 +52,81 @@ public struct PlayerSkillsCharacteristicsStruct
 [Serializable]
 public struct PlayerForceWaveSkillDataStruct
 {
-    public float defaultDamage;
-    public float defaultRange;
-    public float defaultWidth;
-    public float defaultCooldown;
+    public float damage;
+    public float range;
+    public float width;
+    public float cooldown;
 }
 
 [Serializable]
 public struct SingleShotSkillDataStruct
 {
-    public float defaultDamage;
-    public float defaultProjectilesAmount;
-    public float defaultCooldown;
+    public float damage;
+    public float projectilesAmount;
+    public float cooldown;
 }
 
 [Serializable]
 public struct MagicAuraSkillDataStruct
 {
-    public float defaultDamage;
-    public float defaultRadius;
-    public float defaultCooldown;
+    public float damage;
+    public float radius;
+    public float cooldown;
 }
 
 [Serializable]
 public struct PulseAuraSkillDataStruct
 {
-    public float defaultDamage;
-    public float defaultRadius;
-    public float defaultCooldown;
+    public float damage;
+    public float radius;
+    public float cooldown;
 }
 
 [Serializable]
 public struct MeteorSkillDataStruct
 {
-    public float defaultDamage;
-    public float defaultPostEffectDuration;
-    public float defaultProjectilesAmount;
-    public float defaultCooldown;
+    public float damage;
+    public float postEffectDuration;
+    public float projectilesAmount;
+    public float cooldown;
 }
 
 [Serializable]
 public struct LightningBoltSkillDataStruct
 {
-    public float defaultDamage;
-    public float defaultProjectilesAmount;
-    public float defaultCooldown;
+    public float damage;
+    public float projectilesAmount;
+    public float cooldown;
 }
 
 [Serializable]
 public struct ChainLightningSkillDataStruct
 {
-    public float defaultDamage;
-    public int defaultJumpsAmount;
-    public float defaultCooldown;
+    public float damage;
+    public int jumpsAmount;
+    public float cooldown;
 }
 
 [Serializable]
 public struct FireballsSkillDataStruct
 {
-    public float defaultDamage;
+    public float damage;
     public float radius;
-    public int defaultProjectilesAmount;
+    public int projectilesAmount;
 }
 
 [Serializable]
 public struct AllDirectionsShotsSkillDataStruct
 {
-    public float defaultDamage;
-    public int defaultProjectilesAmount;
-    public float defaultCooldown;
+    public float damage;
+    public int projectilesAmount;
+    public float cooldown;
 }
 
 [Serializable]
 public struct WeaponStrikeSkillDataStruct
 {
-    public float defaultDamage;
+    public float damage;
     public float size;
-    public float defaultCooldown;
+    public float cooldown;
 }
