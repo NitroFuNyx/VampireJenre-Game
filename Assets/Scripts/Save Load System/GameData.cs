@@ -8,6 +8,7 @@ public class GameData
     public int gemsAmount;
     public bool soundMuted;
     public bool canVibrate;
+    public PlayerBasicCharacteristicsStruct playerCharacteristcsData;
 
     public GameData()
     {
@@ -16,5 +17,7 @@ public class GameData
         gemsAmount = 0;
         soundMuted = false;
         canVibrate = true;
+
+        playerCharacteristcsData = new PlayerBasicCharacteristicsStruct();
     }
 }

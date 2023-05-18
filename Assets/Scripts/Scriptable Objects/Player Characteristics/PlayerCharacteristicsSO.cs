@@ -7,4 +7,6 @@ public class PlayerCharacteristicsSO : ScriptableObject
     [Header("Player Default Characteristics")]
     [Space]
     [SerializeField] private List<PlayerBasicCharacteristicsStruct> playerBasicDataLists = new List<PlayerBasicCharacteristicsStruct>();
+
+    public List<PlayerBasicCharacteristicsStruct> PlayerBasicDataLists { get => playerBasicDataLists; }
 }
