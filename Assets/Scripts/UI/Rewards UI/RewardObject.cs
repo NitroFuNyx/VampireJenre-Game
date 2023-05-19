@@ -44,7 +44,7 @@ public class RewardObject : MonoBehaviour
 
     private void SetResourceImage(RewardDataStruct rewardData)
     {
-        if(rewardData.resourceTypes == ResourcesTypes.Coins)
+        if(rewardData.resourceType == ResourcesTypes.Coins)
         {
             resourceImage.sprite = _rewardsManager.CoinsSprite;
         }

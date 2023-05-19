@@ -35,6 +35,10 @@ public class RewardWheelSpinner : MonoBehaviour
     private bool canSpin = true;
     private bool isSpinning = false;
 
+    #region Events Declartation
+    public event System.Action<RewardObject> OnRewardDefined;
+    #endregion Events Declaration
+
     public bool CanSpin { get => canSpin; private set => canSpin = value; }
 
     private void Start()
@@ -96,6 +100,7 @@ public class RewardWheelSpinner : MonoBehaviour
     {
         updatedRewardsList = updatedRewardsList.OrderBy(s => Vector3.Distance(s.transform.position, pointer.position)).ToList();
         currentReward = updatedRewardsList[0];
+        OnRewardDefined?.Invoke(currentReward);
         Debug.Log($"Reward {currentReward.RewardIndex}");
     }
 }

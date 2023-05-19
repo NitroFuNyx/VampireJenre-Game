@@ -4,7 +4,7 @@ using System;
 public struct RewardDataStruct
 {
     public RewardIndexes rewardIndex;
-    public ResourcesTypes resourceTypes;
+    public ResourcesTypes resourceType;
     public int ResourceAmount;
 }
 

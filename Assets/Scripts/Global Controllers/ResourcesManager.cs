@@ -11,7 +11,10 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
 
     private DataPersistanceManager _dataPersistanceManager;
 
-    private int coinsSurplus = 5;
+    private const int GemSurplusForKillingEnemy = 1;
+
+    private const int CoinsSurplusForKillingEnemy_Min = 1;
+    private const int CoinsSurplusForKillingEnemy_Max = 5;
 
     public int CoinsAmount { get => coinsAmount; private set => coinsAmount = value; }
 
@@ -50,12 +53,13 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     }
     #endregion Save/Load Methods
 
-    public void IncreaseCoinsAmount()
+    #region Basic Resources Methods
+    public void IncreaseCoinsAmount(int deltaAmount)
     {
         int randomIndex = UnityEngine.Random.Range(0, 5);
         if(randomIndex == 0)
         {
-            coinsAmount += coinsSurplus;
+            coinsAmount += deltaAmount;
             OnCoinsAmountChanged?.Invoke(coinsAmount);
         }
     }
@@ -84,6 +88,31 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         if(gemsAmount < 0)
         {
             gemsAmount = 0;
+        }
+    }
+    #endregion Basic Resources Methods
+
+    public void AddResourceForKillingEnemy()
+    {
+        int gemGrantingIndex;
+
+        gemGrantingIndex = UnityEngine.Random.Range(0, 10);
+
+        if(gemGrantingIndex == 0)
+        {
+            IncreaseGemsAmount(GemSurplusForKillingEnemy);
+        }
+        else
+        {
+            int coinsGrantingIndex;
+
+            coinsGrantingIndex = UnityEngine.Random.Range(0, 5);
+
+            if(coinsGrantingIndex == 0)
+            {
+                int coinsAmount = UnityEngine.Random.Range(1, 6);
+                IncreaseCoinsAmount(coinsAmount);
+            }
         }
     }
 }
