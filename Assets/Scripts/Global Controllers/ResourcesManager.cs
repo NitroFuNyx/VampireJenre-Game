@@ -56,12 +56,8 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     #region Basic Resources Methods
     public void IncreaseCoinsAmount(int deltaAmount)
     {
-        int randomIndex = UnityEngine.Random.Range(0, 5);
-        if(randomIndex == 0)
-        {
-            coinsAmount += deltaAmount;
-            OnCoinsAmountChanged?.Invoke(coinsAmount);
-        }
+        coinsAmount += deltaAmount;
+        OnCoinsAmountChanged?.Invoke(coinsAmount);
     }
 
     public void DecreaseCoinsAmount(int deltaAmount)
@@ -79,6 +75,7 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     public void IncreaseGemsAmount(int deltaAmount)
     {
         gemsAmount += deltaAmount;
+        OnGemsAmountChanged?.Invoke(gemsAmount);
     }
 
     public void DecreaseGemsAmount(int deltaAmount)
@@ -89,6 +86,8 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         {
             gemsAmount = 0;
         }
+
+        OnGemsAmountChanged?.Invoke(gemsAmount);
     }
     #endregion Basic Resources Methods
 

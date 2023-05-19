@@ -2316,6 +2316,7 @@ GameObject:
   - component: {fileID: 774581600}
   - component: {fileID: 3441288818997032432}
   - component: {fileID: 6272124294108426751}
+  - component: {fileID: 640277050}
   m_Layer: 0
   m_Name: Coins Panel
   m_TagString: Untagged
@@ -2409,6 +2410,19 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &640277050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774581597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd5cc8a55868d5f428519075adaf97f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceAmountText: {fileID: 583790653}
 --- !u!1 &778648154
 GameObject:
   m_ObjectHideFlags: 0
@@ -14132,6 +14146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 183424419137154568}
   - component: {fileID: 7980046640471958832}
+  - component: {fileID: 32055}
   m_Layer: 0
   m_Name: Gems Panel
   m_TagString: Untagged
@@ -14170,6 +14185,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3898185094663132143}
   m_CullTransparentMesh: 1
+--- !u!114 &32055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3898185094663132143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94bd245b43ade7f43969cd703886ff1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceAmountText: {fileID: 5352022616203316216}
 --- !u!1 &3914579487763590995
 GameObject:
   m_ObjectHideFlags: 0
@@ -15247,7 +15275,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelType: 2
-  coinsAmountText: {fileID: 583790653}
   stopwatchValueText: {fileID: 4163713718456521539}
   subpanelsList:
   - {fileID: 9052891671209805285}
@@ -25020,6 +25047,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6444862376733033463}
   - component: {fileID: 1283166372174784521}
+  - component: {fileID: 629970427}
   m_Layer: 0
   m_Name: Coins Panel
   m_TagString: Untagged
@@ -25058,6 +25086,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7900013212685097413}
   m_CullTransparentMesh: 1
+--- !u!114 &629970427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7900013212685097413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd5cc8a55868d5f428519075adaf97f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceAmountText: {fileID: 4279035962754828140}
 --- !u!1 &7912251299182449398
 GameObject:
   m_ObjectHideFlags: 0
@@ -26095,8 +26136,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelType: 7
-  coinsAmountText: {fileID: 4279035962754828140}
-  gemsAmountText: {fileID: 5352022616203316216}
   buttonsList:
   - {fileID: 5092731506748432631}
   - {fileID: 8410044489456136517}

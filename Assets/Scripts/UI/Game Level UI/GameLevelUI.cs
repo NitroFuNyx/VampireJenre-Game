@@ -5,9 +5,6 @@ using Zenject;
 
 public class GameLevelUI : MainCanvasPanel
 {
-    [Header("Resources")]
-    [Space]
-    [SerializeField] private TextMeshProUGUI coinsAmountText;
     [Header("Time")]
     [Space]
     [SerializeField] private TextMeshProUGUI stopwatchValueText;
@@ -15,7 +12,6 @@ public class GameLevelUI : MainCanvasPanel
     [Space]
     [SerializeField] private List<GameLevelSubPanel> subpanelsList = new List<GameLevelSubPanel>();
 
-    private ResourcesManager _resourcesManager;
     private TimersManager _timersManager;
     private SystemTimeManager _systemTimeManager;
 
@@ -35,9 +31,8 @@ public class GameLevelUI : MainCanvasPanel
 
     #region Zenject
     [Inject]
-    private void Construct(ResourcesManager resourcesManager, TimersManager timersManager, SystemTimeManager systemTimeManager)
+    private void Construct(TimersManager timersManager, SystemTimeManager systemTimeManager)
     {
-        _resourcesManager = resourcesManager;
         _timersManager = timersManager;
         _systemTimeManager = systemTimeManager;
     }
@@ -45,15 +40,11 @@ public class GameLevelUI : MainCanvasPanel
 
     private void SubscribeOnEvents()
     {
-        _resourcesManager.OnCoinsAmountChanged += ResourcesManager_CoinsAmountChanged_ExecuteReaction;
-
         _timersManager.OnStopwatchValueChanged += TimersManager_OnStopwatchValueChanged_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
     {
-        _resourcesManager.OnCoinsAmountChanged -= ResourcesManager_CoinsAmountChanged_ExecuteReaction;
-
         _timersManager.OnStopwatchValueChanged -= TimersManager_OnStopwatchValueChanged_ExecuteReaction;
     }
 
@@ -92,11 +83,6 @@ public class GameLevelUI : MainCanvasPanel
         {
             subpanelsList[i].HidePanel();
         }
-    }
-
-    private void ResourcesManager_CoinsAmountChanged_ExecuteReaction(int amount)
-    {
-        coinsAmountText.text = $"{amount}";
     }
 
     private void TimersManager_OnStopwatchValueChanged_ExecuteReaction(string timeString)
