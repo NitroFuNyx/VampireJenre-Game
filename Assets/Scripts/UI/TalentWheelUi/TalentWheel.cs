@@ -29,7 +29,7 @@ public class TalentWheel : MonoBehaviour
     {
         for(int i = 0; i < Items.Count; i++)
         {
-            Items[i].ChangeTalentImageColor(Color.white);
+            Items[i].ChangeTalentSelectionState(false);
         }
     }
 
@@ -48,16 +48,16 @@ public class TalentWheel : MonoBehaviour
         {
             for (int j = 0; j < TalentSlotAmount.maxSlotAmount; j++)
             {
-                Items[j].ChangeTalentImageColor(Color.blue);
+                Items[j].ChangeTalentSelectionState(true);
                 var delay = curve.Evaluate(counter);
                 
                 yield return new WaitForSecondsRealtime(delay);
                 //Debug.Log($"evaluationParameter: {counter} delay :{delay}");
 
-                    Items[j].ChangeTalentImageColor(Color.white);
+                    Items[j].ChangeTalentSelectionState(false);
                     if (i==circles-1&& j ==choose)
                     {
-                        Items[j].ChangeTalentImageColor(Color.cyan);
+                        Items[j].ChangeTalentSelectionState(true);
 
                         OnTalentToUpgradeDefined?.Invoke(Items[j]);
 
