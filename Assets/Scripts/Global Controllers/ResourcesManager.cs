@@ -14,7 +14,7 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     private const int GemSurplusForKillingEnemy = 1;
 
     private const int CoinsSurplusForKillingEnemy_Min = 1;
-    private const int CoinsSurplusForKillingEnemy_Max = 5;
+    private const int CoinsSurplusForKillingEnemy_Max = 6;
 
     public int CoinsAmount { get => coinsAmount; private set => coinsAmount = value; }
 
@@ -110,7 +110,7 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
 
             if(coinsGrantingIndex == 0)
             {
-                int coinsAmount = UnityEngine.Random.Range(1, 6);
+                int coinsAmount = UnityEngine.Random.Range(CoinsSurplusForKillingEnemy_Min, CoinsSurplusForKillingEnemy_Max);
                 IncreaseCoinsAmount(coinsAmount);
             }
         }

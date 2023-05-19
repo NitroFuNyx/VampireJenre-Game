@@ -6,17 +6,12 @@ public class RewardsManager : MonoBehaviour
     [Header("Scriptable Objects")]
     [Space]
     [SerializeField] private DailyRewardsSO dailyRewardsSO;
-    [Header("Sprite")]
-    [Space]
-    [SerializeField] private Sprite coinsSprite;
-    [SerializeField] private Sprite gemsSprite;
 
     private RewardWheelSpinner _rewardWheelSpinner;
     private ResourcesManager _resourcesManager;
+    private DataPersistanceManager _dataPersistanceManager;
 
     public DailyRewardsSO DailyRewardsSO { get => dailyRewardsSO; }
-    public Sprite CoinsSprite { get => coinsSprite; }
-    public Sprite GemsSprite { get => gemsSprite; }
 
     private void Start()
     {
@@ -30,24 +25,15 @@ public class RewardsManager : MonoBehaviour
 
     #region Zenject
     [Inject]
-    private void Construct(RewardWheelSpinner rewardWheelSpinner, ResourcesManager resourcesManager)
+    private void Construct(RewardWheelSpinner rewardWheelSpinner, ResourcesManager resourcesManager, DataPersistanceManager dataPersistanceManager)
     {
         _rewardWheelSpinner = rewardWheelSpinner;
         _resourcesManager = resourcesManager;
+        _dataPersistanceManager = dataPersistanceManager;
     }
     #endregion Zenject
 
-    private void RewardDefined_ExecuteReaction(RewardObject rewardObject)
-    {
-        RewardDataStruct currentRewardData = GetRewardData(rewardObject);
-
-        if(currentRewardData.resourceType == ResourcesTypes.Coins)
-        {
-            _resourcesManager.IncreaseCoinsAmount(currentRewardData.ResourceAmount);
-        }
-    }
-    
-    private RewardDataStruct GetRewardData(RewardObject rewardObject)
+    public RewardDataStruct GetRewardData(RewardObject rewardObject)
     {
         RewardDataStruct targetRewardData = new RewardDataStruct();
 
@@ -61,5 +47,21 @@ public class RewardsManager : MonoBehaviour
         }
 
         return targetRewardData;
+    }
+
+    private void RewardDefined_ExecuteReaction(RewardObject rewardObject)
+    {
+        RewardDataStruct currentRewardData = GetRewardData(rewardObject);
+
+        if(currentRewardData.resourceType == ResourcesTypes.Coins)
+        {
+            _resourcesManager.IncreaseCoinsAmount(currentRewardData.ResourceAmount);
+        }
+        else
+        {
+            _resourcesManager.IncreaseGemsAmount(currentRewardData.ResourceAmount);
+        }
+
+        _dataPersistanceManager.SaveGame();
     }
 }

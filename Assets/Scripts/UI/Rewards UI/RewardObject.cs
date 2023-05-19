@@ -46,11 +46,11 @@ public class RewardObject : MonoBehaviour
     {
         if(rewardData.resourceType == ResourcesTypes.Coins)
         {
-            resourceImage.sprite = _rewardsManager.CoinsSprite;
+            resourceImage.sprite = _rewardsManager.DailyRewardsSO.CoinsSprite;
         }
         else
         {
-            resourceImage.sprite = _rewardsManager.GemsSprite;
+            resourceImage.sprite = _rewardsManager.DailyRewardsSO.GemsSprite;
         }
     }
 }
