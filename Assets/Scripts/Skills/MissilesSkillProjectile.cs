@@ -21,10 +21,7 @@ public class MissilesSkillProjectile : SkillParameterBase, ISkillProjectile
     }
 
 
-    public void SetObjectDirection()
-    {
-        throw new System.NotImplementedException();
-    }
+    
     
     private void SubscribeOnEvents()
     {
@@ -59,8 +56,13 @@ public class MissilesSkillProjectile : SkillParameterBase, ISkillProjectile
     }
     #endregion Pool Item Component Events Reactions
 
-    protected override void CollideWithMapObstacle()
+    private void OnCollisionEnter(Collision other)
     {
+        if (other.gameObject.layer == Layers.ObstaclesOnMap )
+        {
         poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
+
     }
+    }
+    
 }

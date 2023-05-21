@@ -51,8 +51,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7.24
-  projectileCount: 1
-  skillType: 0
   _dynamicEnvironment: {fileID: 598260997054047926}
   projectileRigidBody: {fileID: 1983959695833583116}
   projectileVFX: {fileID: 598260997653687047}
@@ -102,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc14d910fa2555f4f9ec666ef0cec20b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolItemType: 5
+  poolItemType: 6
 --- !u!1001 &598260997671668863
 PrefabInstance:
   m_ObjectHideFlags: 0

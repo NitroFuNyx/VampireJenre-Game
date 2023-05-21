@@ -12,6 +12,11 @@ public class Layers
 
     public const int SkillArea = 16;
     public const int GlobalSkillProjectile = 17;
+    public const int AuraSkill = 18;
+    public const int FireballSkill = 19;
+    public const int ChainLightning = 20;
+    public const int NovaSkill = 21;
+
 }
 
 public class PlayerAnimations

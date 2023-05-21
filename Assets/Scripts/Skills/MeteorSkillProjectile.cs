@@ -109,7 +109,5 @@ public class MeteorSkillProjectile : SkillParameterBase , ISkillProjectile
         Gizmos.DrawWireSphere(puddle.transform.position,explosionColliderRadius);
     }
     
-    protected override void CollideWithMapObstacle()
-    {
-    }
+    
 }

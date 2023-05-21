@@ -63,17 +63,31 @@ public class EnemyCollisionsManager : MonoBehaviour
         {
             DecreaseHp(startHp);
         }
+        if (collision.gameObject.layer == Layers.FireballSkill)
+        {
+            DecreaseHp(startHp);
+        }
+        if (collision.gameObject.layer == Layers.ChainLightning)
+        {
+            DecreaseHp(startHp);
+        }
+        if (collision.gameObject.layer == Layers.NovaSkill)
+        {
+            DecreaseHp(startHp);
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        auraCooldown += Time.fixedDeltaTime;
-        if (auraCooldown > auraCooldown)
+        if (other.gameObject.layer == Layers.AuraSkill)
         {
-            Debug.Log("Aura Damages");
-            auraCooldown = 0;
+            auraCooldown += Time.fixedDeltaTime;
+            if (auraCooldown > 0.1f)
+            {
+                Debug.Log("Aura Damages");
+                auraCooldown = 0;
+            }
         }
-        
     }
 
     private void OnTriggerExit(Collider collision)

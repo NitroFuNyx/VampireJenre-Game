@@ -48,12 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c8316250d1b11b4a9610b27e04f4406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacles:
-    serializedVersion: 2
-    m_Bits: 7808
   speed: 550
-  projectileCount: 1
-  skillType: 1
+  _dynamicEnvironment: {fileID: 0}
   projectileRigidBody: {fileID: -270657380047296947}
 --- !u!54 &-270657380047296947
 Rigidbody:
@@ -83,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc14d910fa2555f4f9ec666ef0cec20b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolItemType: 4
+  poolItemType: 5
 --- !u!65 &7072169321056677935
 BoxCollider:
   m_ObjectHideFlags: 0
