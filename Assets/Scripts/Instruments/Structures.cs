@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public struct RewardDataStruct
@@ -15,6 +16,13 @@ public struct TalentDataStruct
     public PassiveCharacteristicsTypes passiveSkillType;
     public SkillUpgradesTypes skillUpgradeType;
     public float upgradePercent;
+    public Sprite talentSprite;
+}
+
+public struct TalentLevelStruct
+{
+    public PassiveCharacteristicsTypes passiveSkillType;
+    public int level;
 }
 
 [Serializable]

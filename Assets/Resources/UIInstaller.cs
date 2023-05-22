@@ -3,7 +3,7 @@ using Zenject;
 
 public class UIInstaller : MonoInstaller
 {
-    [Header("References")]
+    [Header("Main References")]
     [Space]
     [SerializeField] private MainUI mainUI;
     [SerializeField] private MainLoaderUI mainLoaderUI;
@@ -11,8 +11,11 @@ public class UIInstaller : MonoInstaller
     [SerializeField] private MenuButtonsUI menuButtonsUI;
     [SerializeField] private SettingsUI settingsUI;
     [SerializeField] private RewardWheelSpinner rewardWheelSpinner;
-    [SerializeField] private TalentWheel talentWheel;
     [SerializeField] private GameLevelUI gameLevelUI;
+    [Header("Talent UI")]
+    [Space]
+    [SerializeField] private TalentWheel talentWheel;
+    [SerializeField] private TalentBoughtInfoPanel talentBoughtInfoPanel;
 
     public override void InstallBindings()
     {
@@ -22,7 +25,9 @@ public class UIInstaller : MonoInstaller
         Container.Bind<MenuButtonsUI>().FromInstance(menuButtonsUI).AsSingle().NonLazy();
         Container.Bind<SettingsUI>().FromInstance(settingsUI).AsSingle().NonLazy();
         Container.Bind<RewardWheelSpinner>().FromInstance(rewardWheelSpinner).AsSingle().NonLazy();
-        Container.Bind<TalentWheel>().FromInstance(talentWheel).AsSingle().NonLazy();
         Container.Bind<GameLevelUI>().FromInstance(gameLevelUI).AsSingle().NonLazy();
+
+        Container.Bind<TalentWheel>().FromInstance(talentWheel).AsSingle().NonLazy();
+        Container.Bind<TalentBoughtInfoPanel>().FromInstance(talentBoughtInfoPanel).AsSingle().NonLazy();
     }
 }

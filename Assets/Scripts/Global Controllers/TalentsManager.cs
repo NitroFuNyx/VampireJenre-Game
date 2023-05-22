@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 using Zenject;
 
 public class TalentsManager : MonoBehaviour
@@ -10,10 +11,13 @@ public class TalentsManager : MonoBehaviour
     [Header("Talents Data")]
     [Space]
     [SerializeField] private TalentsWheelDataSO talentsWheelDataSO;
+    [SerializeField] private List<TalentLevelStruct> talentsLevelsList = new List<TalentLevelStruct>();
 
     private ResourcesManager _resourcesManager;
     private PlayerCharacteristicsManager _playerCharacteristicsManager;
     private TalentWheel _talentWheel;
+    private TalentBoughtInfoPanel _talentBoughtInfoPanel;
+    private DataPersistanceManager _dataPersistanceManager;
 
     private Action OnBuyingProcessFinishedCallback;
 
@@ -29,11 +33,14 @@ public class TalentsManager : MonoBehaviour
 
     #region Zenject
     [Inject]
-    private void Construct(ResourcesManager resourcesManager, PlayerCharacteristicsManager playerCharacteristicsManager, TalentWheel talentWheel)
+    private void Construct(ResourcesManager resourcesManager, PlayerCharacteristicsManager playerCharacteristicsManager, TalentWheel talentWheel, 
+                           TalentBoughtInfoPanel talentBoughtInfoPanel, DataPersistanceManager dataPersistanceManager)
     {
         _resourcesManager = resourcesManager;
         _talentWheel = talentWheel;
         _playerCharacteristicsManager = playerCharacteristicsManager;
+        _talentBoughtInfoPanel = talentBoughtInfoPanel;
+        _dataPersistanceManager = dataPersistanceManager;
     }
     #endregion Zenject
 
@@ -54,8 +61,13 @@ public class TalentsManager : MonoBehaviour
 
     private void TalentToUpgradeDefined_ExecuteReaction(TalentItem talentItem)
     {
-        _playerCharacteristicsManager.UpgradePlayerDataWithSaving(GetTalentData(talentItem));
+        TalentDataStruct currentTalentData = GetTalentData(talentItem);
+
+        _playerCharacteristicsManager.UpgradePlayerDataWithSaving(currentTalentData);
         OnBuyingProcessFinishedCallback?.Invoke();
+
+        talentsWheelDataSO.TalentsLevelsList[(int)currentTalentData.talentIndex]++;
+        _talentBoughtInfoPanel.ShowPanelWithTalentData();
     }
 
     private TalentDataStruct GetTalentData(TalentItem talentItem)

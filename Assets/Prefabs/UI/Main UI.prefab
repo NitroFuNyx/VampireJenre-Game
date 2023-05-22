@@ -1106,7 +1106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelType: 3
-  talentBougtInfoWindow: {fileID: 910751471949861850}
+  talentBougtInfoWindow: {fileID: 0}
 --- !u!1 &303433940
 GameObject:
   m_ObjectHideFlags: 0
@@ -3055,7 +3055,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 848108b3247ef6e4eb2a8f4272d928c5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7d0a236a370f5e744974ef4157eeb051, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7121,7 +7121,7 @@ GameObject:
   - component: {fileID: 1193152971570065907}
   - component: {fileID: 9026167019326041715}
   - component: {fileID: 2563800589068312279}
-  - component: {fileID: 910751471949861850}
+  - component: {fileID: 1257099139}
   m_Layer: 0
   m_Name: Talent Bought Info Window Panel
   m_TagString: Untagged
@@ -7199,11 +7199,11 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 689032924798195732}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &910751471949861850
+--- !u!114 &1257099139
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7212,9 +7212,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 689032924798195732}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5530ddec867602147bbf911f910079ee, type: 3}
+  m_Script: {fileID: 11500000, guid: b95b75ad51c90804aa6f5a2077d870ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  talentImage: {fileID: 0}
+  preveousLevelText: {fileID: 0}
+  newLevelText: {fileID: 0}
+  preveousCharacteristicValueText: {fileID: 0}
+  upgradeCharactersiticValueText: {fileID: 0}
 --- !u!1 &700764963886830594
 GameObject:
   m_ObjectHideFlags: 0
@@ -9842,7 +9847,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000091552734, y: 0}
+  m_AnchoredPosition: {x: 0.000061035156, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2480217515859867342
@@ -10124,7 +10129,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000091552734, y: 0.00012207031}
+  m_AnchoredPosition: {x: 0.000061035156, y: 0.00012207031}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2615362918578126342
@@ -11629,7 +11634,7 @@ GameObject:
   - component: {fileID: 8942711736994935621}
   - component: {fileID: 8018839551029998769}
   m_Layer: 0
-  m_Name: New Value Text
+  m_Name: Upgrade Value Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12858,7 +12863,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 5134379838449501953}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -22479,7 +22484,7 @@ MonoBehaviour:
   minScale: {x: 0.8, y: 0.8, z: 0.8}
   scaleDuration: 0.3
   standartAudio: 1
-  parentPanel: {fileID: 910751471949861850}
+  parentPanel: {fileID: 0}
 --- !u!1 &6867778009906265216
 GameObject:
   m_ObjectHideFlags: 0
@@ -22602,7 +22607,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 751091548119510914}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
