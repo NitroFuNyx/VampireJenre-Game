@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Zenject;
 
-public class TalentsManager : MonoBehaviour
+public class TalentsManager : MonoBehaviour, IDataPersistance
 {
     [Header("Cost Data")]
     [Space]
@@ -11,8 +11,7 @@ public class TalentsManager : MonoBehaviour
     [Header("Talents Data")]
     [Space]
     [SerializeField] private TalentsWheelDataSO talentsWheelDataSO;
-    [SerializeField] private List<TalentLevelStruct> talentsLevelsList_PersistentInGame = new List<TalentLevelStruct>();
-    [SerializeField] private List<TalentLevelStruct> talentsLevelsList_TemporaryInMap = new List<TalentLevelStruct>();
+    [SerializeField] private List<TalentLevelStruct> talentsLevelsList = new List<TalentLevelStruct>();
 
     private ResourcesManager _resourcesManager;
     private PlayerCharacteristicsManager _playerCharacteristicsManager;
@@ -21,6 +20,11 @@ public class TalentsManager : MonoBehaviour
     private DataPersistanceManager _dataPersistanceManager;
 
     private Action OnBuyingProcessFinishedCallback;
+
+    private void Awake()
+    {
+        _dataPersistanceManager.AddObjectToSaveSystemObjectsList(this);
+    }
 
     private void Start()
     {
@@ -45,6 +49,24 @@ public class TalentsManager : MonoBehaviour
     }
     #endregion Zenject
 
+    #region Save/Load Methods
+    public void LoadData(GameData data)
+    {
+        for(int i = 0; i < data.skillsLevelsList.Count; i++)
+        {
+            talentsLevelsList.Add(data.skillsLevelsList[i]);
+        }
+    }
+
+    public void SaveData(GameData data)
+    {
+        for (int i = 0; i < talentsLevelsList.Count; i++)
+        {
+            data.skillsLevelsList[i] = talentsLevelsList[i];
+        }
+    }
+    #endregion Save/Load Methods
+
     public void BuyTalent(Action OnBuyingProcessLaunced, Action OnBuyingProcessFinished, Action OnBuyingProcessCanceled)
     {
         if(_resourcesManager.CoinsAmount >= talentCostAmount)
@@ -60,15 +82,37 @@ public class TalentsManager : MonoBehaviour
         }
     }
 
+    public void InitializeTalentsLevelsData(GameData gameData)
+    {
+        for(int i = 0; i < talentsWheelDataSO.TalentsLists.Count; i++)
+        {
+            TalentLevelStruct talentLevelData = new TalentLevelStruct();
+            talentLevelData.passiveSkillType = talentsWheelDataSO.TalentsLists[i].passiveSkillType;
+            talentLevelData.level = 1;
+            gameData.skillsLevelsList.Add(talentLevelData);
+        }
+    }
+
     private void TalentToUpgradeDefined_ExecuteReaction(TalentItem talentItem)
     {
         TalentDataStruct currentTalentData = GetTalentData(talentItem);
 
+        for(int i = 0; i < talentsLevelsList.Count; i++)
+        {
+            if(talentsLevelsList[i].passiveSkillType == currentTalentData.passiveSkillType)
+            {
+                TalentLevelStruct newTalentLevelStruct = new TalentLevelStruct();
+                newTalentLevelStruct.passiveSkillType = talentsLevelsList[i].passiveSkillType;
+                newTalentLevelStruct.level = talentsLevelsList[i].level + 1;
+                talentsLevelsList[i] = newTalentLevelStruct;
+                Debug.Log($"Talent {talentsLevelsList[i].passiveSkillType} Preveous {talentsLevelsList[i].level - 1} New {talentsLevelsList[i].level}");
+                _talentBoughtInfoPanel.ShowPanelWithTalentData(currentTalentData, talentsLevelsList[i].level);
+                break;
+            }
+        }
+
         _playerCharacteristicsManager.UpgradePlayerDataWithSaving(currentTalentData);
         OnBuyingProcessFinishedCallback?.Invoke();
-
-        talentsWheelDataSO.TalentsLevelsList[(int)currentTalentData.talentIndex]++;
-        _talentBoughtInfoPanel.ShowPanelWithTalentData();
     }
 
     private TalentDataStruct GetTalentData(TalentItem talentItem)

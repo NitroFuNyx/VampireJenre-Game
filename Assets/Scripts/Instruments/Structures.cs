@@ -15,10 +15,12 @@ public struct TalentDataStruct
     public TalentsIndexes talentIndex;
     public PassiveCharacteristicsTypes passiveSkillType;
     public SkillUpgradesTypes skillUpgradeType;
+    public string talentDescribtion;
     public float upgradePercent;
     public Sprite talentSprite;
 }
 
+[Serializable]
 public struct TalentLevelStruct
 {
     public PassiveCharacteristicsTypes passiveSkillType;

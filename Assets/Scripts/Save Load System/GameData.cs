@@ -10,7 +10,7 @@ public class GameData
     public bool soundMuted;
     public bool canVibrate;
     public PlayerBasicCharacteristicsStruct playerCharacteristcsData;
-    public List<int> skillsLevelsList;
+    public List<TalentLevelStruct> skillsLevelsList;
 
     public GameData()
     {
@@ -21,6 +21,6 @@ public class GameData
         canVibrate = true;
 
         playerCharacteristcsData = new PlayerBasicCharacteristicsStruct();
-        skillsLevelsList = new List<int>();
+        skillsLevelsList = new List<TalentLevelStruct>();
     }
 }

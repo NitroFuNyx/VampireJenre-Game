@@ -15,6 +15,8 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
 
     private const float maxPercentAmount = 100f;
 
+    public PlayerBasicCharacteristicsStruct CurrentPlayerData { get => currentPlayerData; private set => currentPlayerData = value; }
+
     private void Awake()
     {
         currentPlayerData = playerCharacteristicsSO.PlayerBasicDataLists[0];
