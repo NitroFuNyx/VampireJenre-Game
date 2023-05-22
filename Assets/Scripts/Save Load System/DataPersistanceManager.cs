@@ -21,6 +21,11 @@ public class DataPersistanceManager : MonoBehaviour
 
         FileDataHandler.Write(gameData); // create json file and write default data
 
+        for(int i = 0; i < 9; i++)
+        {
+            gameData.skillsLevelsList.Add(0);
+        }
+
         SaveGame(); // save actual Unity data set in json file
     }
 

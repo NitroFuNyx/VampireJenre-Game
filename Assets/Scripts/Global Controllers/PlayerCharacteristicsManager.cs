@@ -15,14 +15,9 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
 
     private const float maxPercentAmount = 100f;
 
-    private List<float> rangeValuesFromSkillsList = new List<float>();
-    private List<float> damageValuesFromSkillsList = new List<float>();
-
     private void Awake()
     {
         currentPlayerData = playerCharacteristicsSO.PlayerBasicDataLists[0];
-        FillRangeValuesList();
-        FillDamageValuesList();
         _dataPersistanceManager.AddObjectToSaveSystemObjectsList(this);
     }
 
@@ -56,11 +51,6 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         }
         else if(talentData.passiveSkillType == PassiveCharacteristicsTypes.IncreseSkillsRadius)
         {
-            //for (int i = 0; i < rangeValuesFromSkillsList.Count; i++)
-            //{
-            //    UpgradePassiveCharacteristic_PercentOfValue(ref rangeValuesFromSkillsList[i], talentData.upgradePercent);
-            //}
-
             UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.playerForceWaveData.range, talentData.upgradePercent);
             UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.magicAuraSkillData.radius, talentData.upgradePercent);
             UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.pulseAuraSkillData.radius, talentData.upgradePercent);
@@ -69,11 +59,6 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         }
         else if (talentData.passiveSkillType == PassiveCharacteristicsTypes.IncreaseDamage)
         {
-            //for (int i = 0; i < damageValuesFromSkillsList.Count; i++)
-            //{
-            //    UpgradePassiveCharacteristic_PercentOfValue(ref damageValuesFromSkillsList[i], talentData.upgradePercent);
-            //}
-
             UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.playerForceWaveData.damage, talentData.upgradePercent);
             UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.singleShotSkillData.damage, talentData.upgradePercent);
             UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.magicAuraSkillData.damage, talentData.upgradePercent);
@@ -124,27 +109,4 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         currentValue += (currentValue * upgradePercent) / maxPercentAmount;
     }
     #endregion Upgrade Passive Characteristics Methods
-
-    private void FillRangeValuesList()
-    {
-        rangeValuesFromSkillsList.Add(currentPlayerData.playerSkillsData.playerForceWaveData.range);
-        rangeValuesFromSkillsList.Add(currentPlayerData.playerSkillsData.magicAuraSkillData.radius);
-        rangeValuesFromSkillsList.Add(currentPlayerData.playerSkillsData.pulseAuraSkillData.radius);
-        rangeValuesFromSkillsList.Add(currentPlayerData.playerSkillsData.fireballsSkillData.radius);
-        rangeValuesFromSkillsList.Add(currentPlayerData.playerSkillsData.weaponStrikeSkillData.size);
-    }
-
-    private void FillDamageValuesList()
-    {
-        rangeValuesFromSkillsList.Add(currentPlayerData.playerSkillsData.playerForceWaveData.damage);
-        rangeValuesFromSkillsList.Add(currentPlayerData.playerSkillsData.singleShotSkillData.damage);
-        rangeValuesFromSkillsList.Add(currentPlayerData.playerSkillsData.magicAuraSkillData.damage);
-        rangeValuesFromSkillsList.Add(currentPlayerData.playerSkillsData.pulseAuraSkillData.damage);
-        rangeValuesFromSkillsList.Add(currentPlayerData.playerSkillsData.meteorSkillData.damage);
-        rangeValuesFromSkillsList.Add(currentPlayerData.playerSkillsData.lightningBoltSkillData.damage);
-        rangeValuesFromSkillsList.Add(currentPlayerData.playerSkillsData.chainLightningSkillData.damage);
-        rangeValuesFromSkillsList.Add(currentPlayerData.playerSkillsData.fireballsSkillData.damage);
-        rangeValuesFromSkillsList.Add(currentPlayerData.playerSkillsData.allDirectionsShotsSkillData.damage);
-        rangeValuesFromSkillsList.Add(currentPlayerData.playerSkillsData.weaponStrikeSkillData.damage);
-    }
 }

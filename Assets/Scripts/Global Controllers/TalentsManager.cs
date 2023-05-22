@@ -11,7 +11,8 @@ public class TalentsManager : MonoBehaviour
     [Header("Talents Data")]
     [Space]
     [SerializeField] private TalentsWheelDataSO talentsWheelDataSO;
-    [SerializeField] private List<TalentLevelStruct> talentsLevelsList = new List<TalentLevelStruct>();
+    [SerializeField] private List<TalentLevelStruct> talentsLevelsList_PersistentInGame = new List<TalentLevelStruct>();
+    [SerializeField] private List<TalentLevelStruct> talentsLevelsList_TemporaryInMap = new List<TalentLevelStruct>();
 
     private ResourcesManager _resourcesManager;
     private PlayerCharacteristicsManager _playerCharacteristicsManager;
