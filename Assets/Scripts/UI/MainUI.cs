@@ -9,6 +9,7 @@ public class MainUI : MonoBehaviour
 
     private MainLoaderUI _mainLoaderUI;
     private MainScreenUI _mainScreenUI;
+    private MenuButtonsUI _menuButtonsUI;
 
     private GameProcessManager _gameProcessManager;
 
@@ -20,15 +21,22 @@ public class MainUI : MonoBehaviour
     private void Start()
     {
         SetStartSettings();
+        SubscribeOnEvents();
+    }
+
+    private void OnDestroy()
+    {
+        UnsubscribeFromEvents();
     }
 
     #region Zenject
     [Inject]
-    private void Construct(MainLoaderUI mainLoaderUI, MainScreenUI mainScreenUI, GameProcessManager gameProcessManager)
+    private void Construct(MainLoaderUI mainLoaderUI, MainScreenUI mainScreenUI, GameProcessManager gameProcessManager, MenuButtonsUI menuButtonsUI)
     {
         _mainLoaderUI = mainLoaderUI;
         _mainScreenUI = mainScreenUI;
         _gameProcessManager = gameProcessManager;
+        _menuButtonsUI = menuButtonsUI;
     }
     #endregion Zenject
 
@@ -44,11 +52,38 @@ public class MainUI : MonoBehaviour
         _gameProcessManager.StartGame();
     }
 
+    public void ShowRewardsUI()
+    {
+        ActivateMainCanvasPanel(UIPanels.RewardsUI);
+        panelsDictionary[UIPanels.MenuButtonsUI].ShowPanel();
+        _menuButtonsUI.ChangeScreenBlockingState(false);
+    }
+
+    public void ShowMenuButtonsUI()
+    {
+        panelsDictionary[UIPanels.MenuButtonsUI].ShowPanel();
+    }
+
+    public void HideMenuButtonsUI()
+    {
+        panelsDictionary[UIPanels.MenuButtonsUI].HidePanel();
+    }
+
+    private void SubscribeOnEvents()
+    {
+        _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
+    }
+
+    private void UnsubscribeFromEvents()
+    {
+        _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
+    }
+
     private void FillPanelsListAndDictionary()
     {
         for(int i = 0; i < transform.childCount; i++)
         {
-            if(transform.GetChild(i).TryGetComponent(out MainCanvasPanel mainCanvasPanel))
+            if(transform.GetChild(i).TryGetComponent(out MainCanvasPanel mainCanvasPanel) && transform.GetChild(i).gameObject.activeInHierarchy)
             {
                 panelsList.Add(mainCanvasPanel);
                 if(!panelsDictionary.ContainsValue(mainCanvasPanel))
@@ -58,7 +93,6 @@ public class MainUI : MonoBehaviour
             }
         }
     }
-
 
     private void SetStartSettings()
     {
@@ -73,15 +107,22 @@ public class MainUI : MonoBehaviour
             if (panelsList[i].PanelType == panel)
             {
                 panelsList[i].ShowPanel();
+                panelsList[i].PanelActivated_ExecuteReaction();
             }
             else
             {
                 panelsList[i].HidePanel();
+                panelsList[i].PanelDeactivated_ExecuteReaction();
             }
         }
     }
 
     private void MainLoaderAnimationFinished_ExecuteReaction()
+    {
+        MenuButtonPressed_ExecuteReaction(UIPanels.MainScreenPanel);
+    }
+
+    private void GameProcessManager_PlayerLost_ExecuteReaction()
     {
         MenuButtonPressed_ExecuteReaction(UIPanels.MainScreenPanel);
     }

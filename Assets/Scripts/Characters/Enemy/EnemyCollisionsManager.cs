@@ -15,7 +15,7 @@ public class EnemyCollisionsManager : MonoBehaviour
     [SerializeField] private float auraCooldown=1;//Delete
 
     #region Events Declaration
-    public event Action OnPlayerOutOfHp;
+    public event Action OnCharacterOutOfHp;
     public event Action OnDamageReceived;
 
     public event Action OnSpeedDebuffCollision;
@@ -123,7 +123,7 @@ public class EnemyCollisionsManager : MonoBehaviour
         if (currentHp <= 0)
         {
             canCheckCollisions = false;
-            OnPlayerOutOfHp?.Invoke();
+            OnCharacterOutOfHp?.Invoke();
         }
         else
         {

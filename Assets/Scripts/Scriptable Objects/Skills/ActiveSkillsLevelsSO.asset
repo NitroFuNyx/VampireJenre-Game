@@ -1,0 +1,152 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d51143f5827a0f4faf21919498bbb20, type: 3}
+  m_Name: ActiveSkillsLevelsSO
+  m_EditorClassIdentifier: 
+  forceWaveUpgradesDataList:
+  - damage: 2
+    range: 0
+    width: 0
+    cooldown: 1
+  - damage: 0
+    range: 1
+    width: 1
+    cooldown: 0
+  - damage: 3
+    range: 0
+    width: 1
+    cooldown: 0
+  - damage: 1
+    range: 2
+    width: 0
+    cooldown: 0
+  singleShotUpgradesDataList:
+  - damage: 0
+    projectilesAmount: 0
+    cooldown: 0
+  - damage: 0
+    projectilesAmount: 0
+    cooldown: 0
+  - damage: 0
+    projectilesAmount: 0
+    cooldown: 0
+  - damage: 0
+    projectilesAmount: 0
+    cooldown: 0
+  magicAuraUpgradesDataList:
+  - damage: 0
+    radius: 0
+    cooldown: 0
+  - damage: 0
+    radius: 0
+    cooldown: 0
+  - damage: 0
+    radius: 0
+    cooldown: 0
+  - damage: 0
+    radius: 0
+    cooldown: 0
+  pulseAuraUpgradesDataList:
+  - damage: 0
+    radius: 0
+    cooldown: 0
+  - damage: 0
+    radius: 0
+    cooldown: 0
+  - damage: 0
+    radius: 0
+    cooldown: 0
+  - damage: 0
+    radius: 0
+    cooldown: 0
+  meteorUpgradesDataList:
+  - damage: 0
+    postEffectDuration: 0
+    projectilesAmount: 0
+    cooldown: 0
+  - damage: 0
+    postEffectDuration: 0
+    projectilesAmount: 0
+    cooldown: 0
+  - damage: 0
+    postEffectDuration: 0
+    projectilesAmount: 0
+    cooldown: 0
+  - damage: 0
+    postEffectDuration: 0
+    projectilesAmount: 0
+    cooldown: 0
+  lightningBoltUpgradesDataList:
+  - damage: 0
+    projectilesAmount: 0
+    cooldown: 0
+  - damage: 0
+    projectilesAmount: 0
+    cooldown: 0
+  - damage: 0
+    projectilesAmount: 0
+    cooldown: 0
+  - damage: 0
+    projectilesAmount: 0
+    cooldown: 0
+  chainLightningUpgradesDataList:
+  - damage: 0
+    jumpsAmount: 0
+    cooldown: 0
+  - damage: 0
+    jumpsAmount: 0
+    cooldown: 0
+  - damage: 0
+    jumpsAmount: 0
+    cooldown: 0
+  - damage: 0
+    jumpsAmount: 0
+    cooldown: 0
+  fireBallssUpgradesDataList:
+  - damage: 0
+    radius: 0
+    projectilesAmount: 0
+  - damage: 0
+    radius: 0
+    projectilesAmount: 0
+  - damage: 0
+    radius: 0
+    projectilesAmount: 0
+  - damage: 0
+    radius: 0
+    projectilesAmount: 0
+  allDirectionsShotsUpgradesDataList:
+  - damage: 0
+    projectilesAmount: 0
+    cooldown: 0
+  - damage: 0
+    projectilesAmount: 0
+    cooldown: 0
+  - damage: 0
+    projectilesAmount: 0
+    cooldown: 0
+  - damage: 0
+    projectilesAmount: 0
+    cooldown: 0
+  weaponStrikeUpgradesDataList:
+  - damage: 0
+    size: 0
+    cooldown: 0
+  - damage: 0
+    size: 0
+    cooldown: 0
+  - damage: 0
+    size: 0
+    cooldown: 0
+  - damage: 0
+    size: 0
+    cooldown: 0

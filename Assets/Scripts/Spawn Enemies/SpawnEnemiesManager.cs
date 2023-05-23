@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class SpawnEnemiesManager : MonoBehaviour
 {
@@ -9,8 +10,31 @@ public class SpawnEnemiesManager : MonoBehaviour
     [SerializeField] private EnemySpawner spawner_OnMap;
     [SerializeField] private EnemySpawner spawner_AtGates;
 
+    private GameProcessManager _gameProcessManager;
+
+    private bool canSpawnEnemies = true;
+
+    private void Start()
+    {
+        SubscribeOnEvents();
+    }
+
+    private void OnDestroy()
+    {
+        UnsubscribeFromEvents();
+    }
+
+    #region Zenject
+    [Inject]
+    private void Construct(GameProcessManager gameProcessManager)
+    {
+        _gameProcessManager = gameProcessManager;
+    }
+    #endregion Zenject
+
     public void SpawnEnemies()
     {
+        canSpawnEnemies = true;
         StartCoroutine(SpawnEnemiesWavesCoroutine());
     }
 
@@ -34,17 +58,49 @@ public class SpawnEnemiesManager : MonoBehaviour
 
     public void SpawnEnemiesWave()
     {
-        spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, 30);
-        spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, 30);
-        spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, 30);
+        spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, 16);
+        spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, 16);
+        spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, 16);
+    }
+
+    private void SubscribeOnEvents()
+    {
+        _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
+    }
+
+    private void UnsubscribeFromEvents()
+    {
+        _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
+    }
+
+    private void StopEnemySpawn()
+    {
+        canSpawnEnemies = false;
+
+        StopAllCoroutines();
+
+        StartCoroutine(StopEnemySpawnCoroutine());
+    }
+
+    private void GameProcessManager_PlayerLost_ExecuteReaction()
+    {
+        StopEnemySpawn();
     }
 
     private IEnumerator SpawnEnemiesWavesCoroutine()
     {
-        while(true)
+        while(canSpawnEnemies)
         {
             SpawnEnemiesWave();
             yield return new WaitForSeconds(8f);
         }
-    }    
+    }
+
+    private IEnumerator StopEnemySpawnCoroutine()
+    {
+        yield return null;
+        spawner_BeyondMap.ReturnAllEnemiesToPool();
+        spawner_OnMap.ReturnAllEnemiesToPool();
+        spawner_AtGates.ReturnAllEnemiesToPool();
+    }
 }

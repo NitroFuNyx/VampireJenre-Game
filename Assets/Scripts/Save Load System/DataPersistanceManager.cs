@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class DataPersistanceManager : MonoBehaviour
 {
@@ -10,16 +11,28 @@ public class DataPersistanceManager : MonoBehaviour
 
     private GameData gameData;
 
+    private TalentsManager _talentsManager;
+
     private void Start()
     {
         StartCoroutine(LoadStartDataCoroutine());
     }
+
+    #region Zenject
+    [Inject]
+    private void Construct(TalentsManager talentsManager)
+    {
+        _talentsManager = talentsManager;
+    }
+    #endregion Zenject
 
     public void NewGame()
     {
         gameData = new GameData(); // make class with default data
 
         FileDataHandler.Write(gameData); // create json file and write default data
+
+        _talentsManager.InitializeTalentsLevelsData(gameData);
 
         SaveGame(); // save actual Unity data set in json file
     }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using Zenject;
 
 public class MuteButton : ButtonInteractionHandler
 {
@@ -52,6 +51,6 @@ public class MuteButton : ButtonInteractionHandler
     private void AudioMuteStateChanged_ExecuteReaction(bool audioMuted)
     {
         muted = audioMuted;
-        //ChangePanelSprite();
+        ChangePanelSprite();
     }
 }
