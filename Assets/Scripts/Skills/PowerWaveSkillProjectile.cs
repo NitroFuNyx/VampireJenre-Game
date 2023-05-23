@@ -2,22 +2,41 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class SingleShotSkillProjectile : SkillParameterBase, ISkillProjectile
+public class PowerWaveSkillProjectile : SkillParameterBase, ISkillProjectile
 {
     [SerializeField] private Rigidbody projectileRigidBody;
     [SerializeField] private LayerMask targetLayers;
-
+    
     [Header("Radius")] [SerializeField] private float radius;
     private Collider[] _enemyTargets;
     private int _enemyCounter = 0;
-    [Header("Parametres")] [SerializeField]
-    private int jumpsCount;
+    [Space]
+    [Header("Particles")] 
+    [SerializeField] private ParticleSystem slashPath;
+    [SerializeField] private ParticleSystem slashWind;
 
+    [Space] 
+    [Header("Parameters")] 
+    [Range(0, 5)]//If higher change duration of each particle
+    [SerializeField]private float duration;
+    private float timeCounter;
+
+    private const float TimeGap = 0.1f;
+    
     private Transform _thisTransform;
     private void Start()
     {
         SubscribeOnEvents();
         _thisTransform = transform;
+        ChangeParticleLifeTime();
+    }
+
+    private void Update()
+    {
+        timeCounter += Time.deltaTime;
+        if(duration+TimeGap<timeCounter)
+            poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
+        
     }
 
     private void OnDestroy()
@@ -25,6 +44,19 @@ public class SingleShotSkillProjectile : SkillParameterBase, ISkillProjectile
         UnsubscribeFromEvents();
     }
 
+    public void ChangeParticleLifeTime()
+    {
+        var path = slashPath.main;
+        path.startLifetime = duration;
+        var wind = slashWind.main;
+        wind.startLifetime = duration;
+        
+        
+    }
+    public void ChangeSlashScale(Vector3 scale)
+    {
+        transform.localScale = scale;
+    }
 
     public void Move()
     {
@@ -85,12 +117,7 @@ public class SingleShotSkillProjectile : SkillParameterBase, ISkillProjectile
     }
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if( other.gameObject.layer == Layers.EnemyZombie||other.gameObject.layer == Layers.EnemySkeleton||other.gameObject.layer == Layers.EnemyGhost)
-          poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
-
-    }
+   
 
 
     #region Pool Item Component Events Reactions
@@ -98,6 +125,7 @@ public class SingleShotSkillProjectile : SkillParameterBase, ISkillProjectile
     {
        projectileRigidBody.velocity = Vector3.zero;
        transform.rotation = Quaternion.identity;
+       timeCounter = 0;
     }
 
     private void PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction()

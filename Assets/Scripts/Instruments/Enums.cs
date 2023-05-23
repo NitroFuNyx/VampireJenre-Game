@@ -33,5 +33,6 @@ public enum PoolItemsTypes
     Meteor_Projectile,
     Lightning_Bolt_Skill,
     Fireball_Skill,
-    ChainLightning_Skill
+    ChainLightning_Skill,
+    PowerWave_Skill
 }

@@ -56,13 +56,13 @@ public class MissilesSkillProjectile : SkillParameterBase, ISkillProjectile
     }
     #endregion Pool Item Component Events Reactions
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.layer == Layers.ObstaclesOnMap )
-        {
-        poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
-
-    }
-    }
+    // private void OnCollisionEnter(Collision other)
+    // {
+    //     if (other.gameObject.layer == Layers.ObstaclesOnMap )
+    //     {
+    //         //poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
+    //
+    // }
+    // }
     
 }

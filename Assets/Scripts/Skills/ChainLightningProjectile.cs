@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 using Random = UnityEngine.Random;
 
 public class ChainLightningProjectile : SkillParameterBase, ISkillProjectile
@@ -13,11 +14,22 @@ public class ChainLightningProjectile : SkillParameterBase, ISkillProjectile
     [Header("Parametres")] [SerializeField]
     private int jumpsCount;
     private Transform _thisTransform;
-    private ParticleSystem a;
+    [SerializeField]private Transform playerTransform;
+    
+    [SerializeField]private PlayerController _playerController;
+
     private void Start()
     {
         SubscribeOnEvents();
-        a.scale = 5f;
+        _thisTransform = transform;
+
+    }
+
+    [Inject]
+    private void InjectDependencies(PlayerController playerController)
+    {
+        _playerController =playerController;
+        playerTransform = _playerController.transform;
     }
 
     private void OnDestroy()
@@ -118,7 +130,6 @@ public class ChainLightningProjectile : SkillParameterBase, ISkillProjectile
     {
         GetTargets();
         LockTarget();
-        _thisTransform.Translate(0, 0, _thisTransform.position.z + 1f);
         Move();
     }
     #endregion Pool Item Component Events Reactions

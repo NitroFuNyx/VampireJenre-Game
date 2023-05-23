@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8629512750512531122}
-  - component: {fileID: 8629512750512531124}
   - component: {fileID: 8629512750512531125}
   m_Layer: 0
   m_Name: Fireball Spawner
@@ -34,19 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8629512750512531124
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8629512750512531123}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 30.4, y: 71.1, z: 36}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8629512750512531125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +50,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 8629512751640538921}
   dynamicEnvironment: {fileID: 0}
   projectiles: []
+  rotationConstraint: {fileID: 0}
   rotationSpeed: 0
   radius: 2.25
   height: 0.98
