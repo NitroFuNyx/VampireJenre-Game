@@ -50,6 +50,16 @@ public enum PassiveCharacteristicsTypes
     IncreaseCritChance, IncreaseCritPower, IncreaseCoinsSurplus, IncreaseProjectilesAmount
 }
 
+public enum ActiveSkills
+{
+    ForceWave, SingleShot, MagicAura, PulseAura, Meteor, LightningBolt, ChainLightning, Fireballs, AllDirectionsShots, WeaponStrike
+}
+
+public enum PassiveSkills
+{
+    IncreaseRange, IncreaseDamage, IncreaseMovementSpeed, DecreaseIncomeDamage, IncreaseRegeneration, IncreaseCritChance, IncreaseCritPower, IncreaseProjectileAmount,  
+}
+
 public enum PlayersCharactersTypes
 {
     Knight, Druid, Wizzard

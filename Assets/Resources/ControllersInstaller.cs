@@ -21,6 +21,7 @@ public class ControllersInstaller : MonoInstaller
     [Space]
     [SerializeField] private PlayerExperienceManager playerExperienceManager;
     [SerializeField] private PlayerCharacteristicsManager playerCharacteristicsManager;
+    [SerializeField] private SkillsManager skillsManager;
 
     public override void InstallBindings()
     {
@@ -39,5 +40,6 @@ public class ControllersInstaller : MonoInstaller
 
         Container.Bind<PlayerExperienceManager>().FromInstance(playerExperienceManager).AsSingle().NonLazy();
         Container.Bind<PlayerCharacteristicsManager>().FromInstance(playerCharacteristicsManager).AsSingle().NonLazy();
+        Container.Bind<SkillsManager>().FromInstance(skillsManager).AsSingle().NonLazy();
     }
 }
