@@ -3,13 +3,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 using Zenject;
 
 public class FireballSkillSpawner : ProjectileSpawnerBase
 {
     [SerializeField] private List<PoolItem> projectiles;
-    
     private PoolItemsManager _poolmanager;
+
     
     [Range(-50, 50)] [SerializeField] private float rotationSpeed;
     [Range(0, 10)] [SerializeField] private float radius;
@@ -24,7 +25,7 @@ public class FireballSkillSpawner : ProjectileSpawnerBase
 
     private void Update()
     {
-        transform.rotation *= Quaternion.Euler(0,rotationSpeed*Time.deltaTime,0);
+        spawnPoint.rotation *= Quaternion.Euler(0,rotationSpeed*Time.deltaTime,0);
     }
 
     private void OnEnable()

@@ -66,6 +66,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startMoveSpeed: 0.2
   rotationSpeed: 10
+  movementDecreasePrecent: 20
 --- !u!114 &6642222442663905523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,6 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHp: 100
   currentHp: 100
+  auraCooldown: 1
 --- !u!114 &6642222442663905522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,7 +321,7 @@ Transform:
   m_Children:
   - {fileID: 8510668398900135105}
   m_Father: {fileID: 8504411523515567935}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8507527240988495709
 GameObject:
@@ -382,8 +384,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8503950648859591051}
   - {fileID: 8510204727235977383}
+  - {fileID: 8503950648859591051}
   m_Father: {fileID: 6642222442663905520}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -696,12 +698,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8507780411235908277}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8504411523515567935}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &8643185615942436733
 SkinnedMeshRenderer:

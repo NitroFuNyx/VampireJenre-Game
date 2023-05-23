@@ -13,6 +13,7 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private int skillLightningBoltrPoolSize = 25;
     [SerializeField] private int skillFireballPoolSize = 25;
     [SerializeField] private int skillSingleShotPoolSize = 50;
+    [SerializeField] private int skillPowerWavePoolSize = 50;
 
     [Header("Active Pools")]
     [Space]
@@ -28,6 +29,7 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private PoolItem skillFireballPrefab;
     [SerializeField] private PoolItem skillChainLightningPrefab;
     [SerializeField] private PoolItem skillSingleShotPrefab;
+    [SerializeField] private PoolItem skillPowerWaveShotPrefab;
 
     private Dictionary<PoolItemsTypes, List<PoolItem>> itemsListsDictionary = new Dictionary<PoolItemsTypes, List<PoolItem>>();
     private Dictionary<PoolItemsTypes, Transform> itemsHoldersDictionary = new Dictionary<PoolItemsTypes, Transform>();
@@ -45,6 +47,7 @@ public class PoolItemsManager : MonoBehaviour
         CreatePool(skillLightningBoltPrefab , "Skill Lightning Bolt ", skillLightningBoltrPoolSize);
         CreatePool(skillFireballPrefab , "Skill Fireball Bolt ", skillFireballPoolSize);
         CreatePool(skillChainLightningPrefab , "Skill Chain lightning ", skillChainLightningPoolSize);
+        CreatePool(skillPowerWaveShotPrefab , "Skill Power Wave ", skillPowerWavePoolSize);
     }
 
     public PoolItem SpawnItemFromPool(PoolItemsTypes poolItemType, Vector3 _spawnPos, Quaternion _rotation, Transform _parent)
