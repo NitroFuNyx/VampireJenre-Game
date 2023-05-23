@@ -16,6 +16,8 @@ public class SkillsManager : MonoBehaviour
 
     private GameProcessManager _gameProcessManager;
 
+    private int skillsOptionsPerLevel = 3;
+
     private void Awake()
     {
         FillFreeSkillsLists();
@@ -51,9 +53,9 @@ public class SkillsManager : MonoBehaviour
 
     private void ChooseFirstSkill()
     {
-        for(int i = 0; i < activeSkillsList_Free.Count; i++)
+        for(int i = 0; i < skillsOptionsPerLevel; i++)
         {
-
+            int randomSkillIndex = UnityEngine.Random.Range(0, activeSkillsList_Free.Count);
         }
     }
 
@@ -61,7 +63,6 @@ public class SkillsManager : MonoBehaviour
     {
         activeSkillsList_Free.Clear();
         passiveSkillsList_Free.Clear();
-        Debug.Log($"{System.Enum.GetValues(typeof(ActiveSkills)).Length}");
 
         for (int i = 0; i < System.Enum.GetValues(typeof(ActiveSkills)).Length; i++)
         {
@@ -78,6 +79,6 @@ public class SkillsManager : MonoBehaviour
 
     private void GameProcessManager_OnGameStarted_ExecuteReaction()
     {
-
+        ChooseFirstSkill();
     }
 }
