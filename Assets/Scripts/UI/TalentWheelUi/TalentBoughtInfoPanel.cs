@@ -13,7 +13,6 @@ public class TalentBoughtInfoPanel : PanelActivationManager
     [SerializeField] private TextMeshProUGUI charactersisticNameText;
     [SerializeField] private TextMeshProUGUI preveousLevelText;
     [SerializeField] private TextMeshProUGUI newLevelText;
-    [SerializeField] private TextMeshProUGUI preveousCharacteristicValueText;
     [SerializeField] private TextMeshProUGUI upgradeCharactersiticValueText;
 
     private float showInfoPanelDelay = 0.3f;
@@ -23,11 +22,14 @@ public class TalentBoughtInfoPanel : PanelActivationManager
         HidePanel();
     }
 
-    public void ShowPanelWithTalentData(TalentDataStruct talentMainData, int newLevel)
+    public void ShowPanelWithTalentData(TalentDataStruct talentMainData, int newLevel, float upgradePercent)
     {
+        talentImage.sprite = talentMainData.talentSprite;
+
         charactersisticNameText.text = $"{talentMainData.talentDescribtion}";
-        preveousLevelText.text = $"lvl + {newLevel - 1}";
+        preveousLevelText.text = $"lvl {newLevel - 1} -";
         newLevelText.text = $"lvl {newLevel}";
+        upgradeCharactersiticValueText.text = $"{upgradePercent}%";
 
         StartCoroutine(ShowInfoPanelCoroutine());
     }

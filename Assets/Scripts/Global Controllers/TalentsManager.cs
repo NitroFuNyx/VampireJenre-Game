@@ -106,7 +106,7 @@ public class TalentsManager : MonoBehaviour, IDataPersistance
                 newTalentLevelStruct.level = talentsLevelsList[i].level + 1;
                 talentsLevelsList[i] = newTalentLevelStruct;
                 Debug.Log($"Talent {talentsLevelsList[i].passiveSkillType} Preveous {talentsLevelsList[i].level - 1} New {talentsLevelsList[i].level}");
-                _talentBoughtInfoPanel.ShowPanelWithTalentData(currentTalentData, talentsLevelsList[i].level);
+                _talentBoughtInfoPanel.ShowPanelWithTalentData(currentTalentData, talentsLevelsList[i].level, currentTalentData.upgradePercent);
                 break;
             }
         }
