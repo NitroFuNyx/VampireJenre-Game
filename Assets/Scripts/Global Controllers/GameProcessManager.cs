@@ -7,7 +7,7 @@ public class GameProcessManager : MonoBehaviour
 {
     [Header("Player")]
     [Space]
-    [SerializeField] private GameObject skillObject;
+   // [SerializeField] private GameObject skillObject;
     [SerializeField] private PlayerComponentsManager player;
     [Header("Map Progreess Data")]
     [Space]
@@ -59,7 +59,7 @@ public class GameProcessManager : MonoBehaviour
 
     public void GameLost_ExecuteReaction()
     {
-        skillObject.SetActive(false);
+       // skillObject.SetActive(false);
         OnPlayerLost?.Invoke();
         ResetMapProgress();
     }
@@ -73,7 +73,7 @@ public class GameProcessManager : MonoBehaviour
     private IEnumerator StartGameCoroutine()
     {
         yield return new WaitForSeconds(2f);
-        skillObject.SetActive(true);
+       // skillObject.SetActive(true);
         _spawnEnemiesManager.SpawnEnemies();
     }
 }
