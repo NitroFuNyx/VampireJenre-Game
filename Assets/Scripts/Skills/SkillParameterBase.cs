@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -11,12 +9,9 @@ public abstract class SkillParameterBase : MonoBehaviour
     [SerializeField] protected List<Layers> obstacles;
 
     [SerializeField] private protected float speed;
-    [SerializeField] private protected int projectileCount;
 
-    [SerializeField] private protected Skills skillType;
     [SerializeField]protected Transform _dynamicEnvironment;
 
-    public int ProjectileCount => projectileCount;
 
     [Inject]
     private void InjectDependencies(Transform dynamicEnvironment)
@@ -47,15 +42,6 @@ public abstract class SkillParameterBase : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.layer == Layers.ObstaclesOnMap || other.gameObject.layer == Layers.EnemySkeleton || other.gameObject.layer == Layers.EnemyGhost || other.gameObject.layer == Layers.EnemyZombie)//
-        {
-            //Debug.Log($"collided with {obstacles}");
+  
 
-            CollideWithMapObstacle();
-        }
-    }
-
-    protected abstract void CollideWithMapObstacle();
 }

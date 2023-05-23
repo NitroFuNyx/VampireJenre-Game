@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 public class EnemyCollisionsManager : MonoBehaviour
 {
@@ -7,10 +8,10 @@ public class EnemyCollisionsManager : MonoBehaviour
     [Space]
     [SerializeField] private int startHp = 100;
     [SerializeField] private int currentHp = 100;
-
+    
     private Collider _collider;
-
     private bool canCheckCollisions = true;
+    [SerializeField] private float auraCooldown=1;//Delete
 
     #region Events Declaration
     public event Action OnCharacterOutOfHp;
@@ -39,7 +40,69 @@ public class EnemyCollisionsManager : MonoBehaviour
             {
                 DecreaseHp(startHp);
             }
+
+            
+            
         }    
+    }
+
+    public void ApplyExplosion()
+    {
+        DecreaseHp(startHp);
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (canCheckCollisions)
+        {
+            if (collision.gameObject.layer == Layers.SkillArea)
+            {
+
+                OnSpeedDebuffCollision?.Invoke();
+            }
+
+            if (collision.gameObject.layer == Layers.PlayerSkillProjectile)
+            {
+                DecreaseHp(startHp);
+            }
+
+            if (collision.gameObject.layer == Layers.FireballSkill)
+            {
+                DecreaseHp(startHp);
+            }
+
+            if (collision.gameObject.layer == Layers.ChainLightning)
+            {
+                DecreaseHp(startHp);
+            }
+
+            if (collision.gameObject.layer == Layers.NovaSkill)
+            {
+                DecreaseHp(startHp);
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.layer == Layers.AuraSkill)
+        {
+            auraCooldown += Time.fixedDeltaTime;
+            if (auraCooldown > 0.1f)
+            {
+                Debug.Log("Aura Damages");
+                auraCooldown = 0;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider collision)
+    {
+        if (collision.gameObject.layer == Layers.SkillArea)
+        {
+
+            OnSpeedReset?.Invoke();
+        }
     }
 
     public void ChangeColliderActivationState(bool enabled)
@@ -79,6 +142,7 @@ public class EnemyCollisionsManager : MonoBehaviour
         currentHp -= amount;
         if (currentHp <= 0)
         {
+            
             canCheckCollisions = false;
             OnCharacterOutOfHp?.Invoke();
         }

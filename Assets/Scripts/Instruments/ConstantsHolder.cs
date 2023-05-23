@@ -8,6 +8,15 @@ public class Layers
     public const int EnemyZombie = 11;
     public const int MapBoundBox = 12;
     public const int PlayerSkillProjectile = 13;
+    public const int GlobalSkill = 15;
+
+    public const int SkillArea = 16;
+    public const int GlobalSkillProjectile = 17;
+    public const int AuraSkill = 18;
+    public const int FireballSkill = 19;
+    public const int ChainLightning = 20;
+    public const int NovaSkill = 21;
+
 }
 
 public class PlayerAnimations
