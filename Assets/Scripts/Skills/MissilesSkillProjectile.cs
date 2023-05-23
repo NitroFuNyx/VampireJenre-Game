@@ -49,7 +49,12 @@ public class MissilesSkillProjectile : SkillParameterBase, ISkillProjectile
         projectileRigidBody.velocity = Vector3.zero;
 
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if( other.gameObject.layer == Layers.EnemyZombie||other.gameObject.layer == Layers.EnemySkeleton||other.gameObject.layer == Layers.EnemyGhost)
+            poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
 
+    }
     private void PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction()
     {
         Move();
