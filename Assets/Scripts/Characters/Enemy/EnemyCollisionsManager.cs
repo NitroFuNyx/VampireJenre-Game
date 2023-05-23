@@ -8,9 +8,8 @@ public class EnemyCollisionsManager : MonoBehaviour
     [Space]
     [SerializeField] private int startHp = 100;
     [SerializeField] private int currentHp = 100;
-
+    
     private Collider _collider;
-
     private bool canCheckCollisions = true;
     [SerializeField] private float auraCooldown=1;//Delete
 
@@ -51,29 +50,50 @@ public class EnemyCollisionsManager : MonoBehaviour
     {
         DecreaseHp(startHp);
     }
+
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.layer == Layers.SkillArea)
+        if (canCheckCollisions)
         {
+            if (collision.gameObject.layer == Layers.SkillArea)
+            {
 
-            OnSpeedDebuffCollision?.Invoke();
-        }
+                OnSpeedDebuffCollision?.Invoke();
+            }
 
-        if (collision.gameObject.layer == Layers.PlayerSkillProjectile)
-        {
-            DecreaseHp(startHp);
+            if (collision.gameObject.layer == Layers.PlayerSkillProjectile)
+            {
+                DecreaseHp(startHp);
+            }
+
+            if (collision.gameObject.layer == Layers.FireballSkill)
+            {
+                DecreaseHp(startHp);
+            }
+
+            if (collision.gameObject.layer == Layers.ChainLightning)
+            {
+                DecreaseHp(startHp);
+            }
+
+            if (collision.gameObject.layer == Layers.NovaSkill)
+            {
+                DecreaseHp(startHp);
+            }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        auraCooldown += Time.fixedDeltaTime;
-        if (auraCooldown > auraCooldown)
+        if (other.gameObject.layer == Layers.AuraSkill)
         {
-            Debug.Log("Aura Damages");
-            auraCooldown = 0;
+            auraCooldown += Time.fixedDeltaTime;
+            if (auraCooldown > 0.1f)
+            {
+                Debug.Log("Aura Damages");
+                auraCooldown = 0;
+            }
         }
-        
     }
 
     private void OnTriggerExit(Collider collision)
@@ -122,6 +142,7 @@ public class EnemyCollisionsManager : MonoBehaviour
         currentHp -= amount;
         if (currentHp <= 0)
         {
+            
             canCheckCollisions = false;
             OnCharacterOutOfHp?.Invoke();
         }

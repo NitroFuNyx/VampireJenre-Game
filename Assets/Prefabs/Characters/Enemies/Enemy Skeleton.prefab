@@ -66,6 +66,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startMoveSpeed: 0.1
   rotationSpeed: 10
+  movementDecreasePrecent: 20
 --- !u!114 &2612514640753569597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,6 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHp: 100
   currentHp: 100
+  auraCooldown: 1
 --- !u!114 &2612514640753569596
 MonoBehaviour:
   m_ObjectHideFlags: 0

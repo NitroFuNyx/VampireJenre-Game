@@ -81,9 +81,7 @@ public class LightningBoltSkill : SkillParameterBase , ISkillProjectile
         Gizmos.DrawWireSphere(transform.position,explosionColliderRadius);
     }
     
-    protected override void CollideWithMapObstacle()
-    {
-    }
+    
 
     public void Move()
     {
