@@ -90,6 +90,11 @@ public class GameLevelUI : MainCanvasPanel
         subpanelsDictionary[GameLevelPanels.LevelUpgradePanel].ShowPanel();
     }
 
+    public void HideUpgradePanel()
+    {
+        subpanelsDictionary[GameLevelPanels.LevelUpgradePanel].HidePanel();
+    }
+
     private void HideAllSubpanels()
     {
         for(int i = 0; i < subpanelsList.Count; i++)

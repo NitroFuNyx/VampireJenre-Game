@@ -17,6 +17,10 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI skillLevelText;
     [SerializeField] private TextMeshProUGUI skillNameText;
 
+    public SkillBasicTypes SkillType { get => skillType; set => skillType = value; }
+    public ActiveSkills ActiveSkill { get => activeSkill; set => activeSkill = value; }
+    public PassiveSkills PassiveSkill { get => passiveSkill; set => passiveSkill = value; }
+
     public void UpdateUI(UpgradeSkillData upgradeSkillData)
     {
         skillType = upgradeSkillData.SkillType;

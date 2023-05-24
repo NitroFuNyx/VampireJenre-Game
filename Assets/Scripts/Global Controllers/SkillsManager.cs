@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -21,6 +22,10 @@ public class SkillsManager : MonoBehaviour
     private GameLevelUI _gameLevelUI;
 
     private int skillsOptionsPerLevel = 3;
+
+    #region Events Declaration
+    public event Action<int, int> OnSkillToUpgradeDefined;
+    #endregion Events Declaration
 
     private void Awake()
     {
@@ -46,14 +51,24 @@ public class SkillsManager : MonoBehaviour
     }
     #endregion Zenject
 
+    public void DefineSkillToUpgrade(int skillTypeIndex, int skillSubCategoryIndex)
+    {
+        OnSkillToUpgradeDefined?.Invoke(skillTypeIndex, skillSubCategoryIndex);
+        _gameLevelUI.HideUpgradePanel();
+    }
+
     private void SubscribeOnEvents()
     {
         _gameProcessManager.OnGameStarted += GameProcessManager_OnGameStarted_ExecuteReaction;
+
+        OnSkillToUpgradeDefined += SkillToUpgradeDefined_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
     {
         _gameProcessManager.OnGameStarted -= GameProcessManager_OnGameStarted_ExecuteReaction;
+
+        OnSkillToUpgradeDefined -= SkillToUpgradeDefined_ExecuteReaction;
     }
 
     private void ChooseFirstSkill()
@@ -138,5 +153,10 @@ public class SkillsManager : MonoBehaviour
         }
 
         return skillData;
+    }
+
+    private void SkillToUpgradeDefined_ExecuteReaction(int skillTypeIndex, int skillSubCategoryIndex)
+    {
+
     }
 }
