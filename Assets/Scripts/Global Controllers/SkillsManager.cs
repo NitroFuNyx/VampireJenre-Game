@@ -20,6 +20,7 @@ public class SkillsManager : MonoBehaviour
 
     private GameProcessManager _gameProcessManager;
     private GameLevelUI _gameLevelUI;
+    private TakenSkillsDisplayPanel _takenSkillsDisplayPanel;
 
     private int skillsOptionsPerLevel = 3;
 
@@ -44,10 +45,11 @@ public class SkillsManager : MonoBehaviour
 
     #region Zenject
     [Inject]
-    private void Construct(GameProcessManager gameProcessManager, GameLevelUI gameLevelUI)
+    private void Construct(GameProcessManager gameProcessManager, GameLevelUI gameLevelUI, TakenSkillsDisplayPanel takenSkillsDisplayPanel)
     {
         _gameProcessManager = gameProcessManager;
         _gameLevelUI = gameLevelUI;
+        _takenSkillsDisplayPanel = takenSkillsDisplayPanel;
     }
     #endregion Zenject
 
@@ -55,20 +57,41 @@ public class SkillsManager : MonoBehaviour
     {
         OnSkillToUpgradeDefined?.Invoke(skillTypeIndex, skillSubCategoryIndex);
         _gameLevelUI.HideUpgradePanel();
+
+        Sprite skillSprite = null;
+
+        if((SkillBasicTypes)skillTypeIndex == SkillBasicTypes.Active)
+        {
+            ActiveSkills activeSkill = (ActiveSkills)skillSubCategoryIndex;
+            if(activeSkillsList_Free.Contains(activeSkill))
+            {
+                activeSkillsList_Taken.Add(activeSkill);
+            }
+
+            skillSprite = GetActiveSkillDisplayData(activeSkill).skillSprite;
+        }
+        else
+        {
+            PassiveSkills passiveSkill = (PassiveSkills)skillSubCategoryIndex;
+            if (passiveSkillsList_Free.Contains(passiveSkill))
+            {
+                passiveSkillsList_Taken.Add(passiveSkill);
+            }
+
+            skillSprite = GetPassiveSkillDisplayData(passiveSkill).skillSprite;
+        }
+
+        _takenSkillsDisplayPanel.SkillTaken_ExecuteReaction(skillTypeIndex, skillSprite);
     }
 
     private void SubscribeOnEvents()
     {
         _gameProcessManager.OnGameStarted += GameProcessManager_OnGameStarted_ExecuteReaction;
-
-        OnSkillToUpgradeDefined += SkillToUpgradeDefined_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
     {
         _gameProcessManager.OnGameStarted -= GameProcessManager_OnGameStarted_ExecuteReaction;
-
-        OnSkillToUpgradeDefined -= SkillToUpgradeDefined_ExecuteReaction;
     }
 
     private void ChooseFirstSkill()
@@ -95,6 +118,11 @@ public class SkillsManager : MonoBehaviour
         }
 
         _gameLevelUI.ShowUpgradePanel(upgradeSkillsDataList);
+        for(int i = 0; i < activeSkillsList_Taken.Count; i++)
+        {
+            activeSkillsList_Free.Add(activeSkillsList_Taken[i]);
+        }
+        activeSkillsList_Taken.Clear();
     }
 
     private void ResetSkillsLists()
@@ -153,10 +181,5 @@ public class SkillsManager : MonoBehaviour
         }
 
         return skillData;
-    }
-
-    private void SkillToUpgradeDefined_ExecuteReaction(int skillTypeIndex, int skillSubCategoryIndex)
-    {
-
     }
 }
