@@ -44,6 +44,11 @@ public enum TalentsIndexes
     Talent_0, Talent_1, Talent_2, Talent_3, Talent_4, Talent_5, Talent_6, Talent_7, Talent_8
 }
 
+public enum SkillBasicTypes
+{
+    Active, Passive
+}
+
 public enum PassiveCharacteristicsTypes
 {
     IncreseItemDropChance, IncreseSkillsRadius, IncreaseDamage, IncreaseMovementSpeed, DecreaseIncomeDamage, IncreaseRegeneration,

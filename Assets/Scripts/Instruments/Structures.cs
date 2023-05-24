@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -25,6 +26,24 @@ public struct TalentLevelStruct
 {
     public PassiveCharacteristicsTypes passiveSkillType;
     public int level;
+}
+
+[Serializable]
+public struct ActiveSkillsDisplayDataStruct
+{
+    public ActiveSkills skill;
+    public Sprite skillSprite;
+    public string skillName;
+    public List<string> skillDescribtionsList;
+}
+
+[Serializable]
+public struct PassiveSkillsDisplayDataStruct
+{
+    public PassiveSkills skill;
+    public Sprite skillSprite;
+    public string skillName;
+    public List<string> skillDescribtionsList;
 }
 
 [Serializable]
