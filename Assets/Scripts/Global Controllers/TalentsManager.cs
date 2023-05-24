@@ -19,6 +19,10 @@ public class TalentsManager : MonoBehaviour, IDataPersistance
     private TalentBoughtInfoPanel _talentBoughtInfoPanel;
     private DataPersistanceManager _dataPersistanceManager;
 
+    #region Events Declaration
+    public event Action OnTalentBuyingProcessCanceled;
+    #endregion Events Declaration
+
     private Action OnBuyingProcessFinishedCallback;
 
     private void Awake()
@@ -67,7 +71,7 @@ public class TalentsManager : MonoBehaviour, IDataPersistance
     }
     #endregion Save/Load Methods
 
-    public void BuyTalent(Action OnBuyingProcessLaunced, Action OnBuyingProcessFinished, Action OnBuyingProcessCanceled)
+    public void BuyTalent(Action OnBuyingProcessLaunced, Action OnBuyingProcessFinished)
     {
         if(_resourcesManager.CoinsAmount >= talentCostAmount)
         {
@@ -78,7 +82,7 @@ public class TalentsManager : MonoBehaviour, IDataPersistance
         }
         else
         {
-            OnBuyingProcessCanceled?.Invoke();
+            OnTalentBuyingProcessCanceled?.Invoke();
         }
     }
 
