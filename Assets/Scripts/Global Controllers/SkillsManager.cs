@@ -75,6 +75,8 @@ public class SkillsManager : MonoBehaviour
             ActiveSkillsDisplayDataStruct skillDisplayData = GetActiveSkillDisplayData(skill);
 
             upgradeSkillData.SkillNameString = $"{skillDisplayData.skillName}";
+            upgradeSkillData.SkillSprite = skillDisplayData.skillSprite;
+            upgradeSkillsDataList.Add(upgradeSkillData);
         }
 
         _gameLevelUI.ShowUpgradePanel(upgradeSkillsDataList);

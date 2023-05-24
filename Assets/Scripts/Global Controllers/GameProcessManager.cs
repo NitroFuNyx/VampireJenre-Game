@@ -15,6 +15,7 @@ public class GameProcessManager : MonoBehaviour
 
     private SpawnEnemiesManager _spawnEnemiesManager;
     private MainUI _mainUI;
+    private SystemTimeManager _systemTimeManager;
 
     private int mapProgressDelta = 1;
 
@@ -31,16 +32,18 @@ public class GameProcessManager : MonoBehaviour
 
     #region Zenject
     [Inject]
-    private void Construct(SpawnEnemiesManager spawnEnemiesManager, MainUI mainUI)
+    private void Construct(SpawnEnemiesManager spawnEnemiesManager, MainUI mainUI, SystemTimeManager systemTimeManager)
     {
         _spawnEnemiesManager = spawnEnemiesManager;
         _mainUI = mainUI;
+        _systemTimeManager = systemTimeManager;
     }
     #endregion Zenject
 
     public void StartGame()
     {
         OnGameStarted?.Invoke();
+        _systemTimeManager.PauseGame();
         //player.StartGame();
         //StartCoroutine(StartGameCoroutine());
     }

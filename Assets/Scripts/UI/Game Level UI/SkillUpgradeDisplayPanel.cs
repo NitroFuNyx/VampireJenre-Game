@@ -9,6 +9,8 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
     [SerializeField] private SkillBasicTypes skillType;
     [SerializeField] private ActiveSkills activeSkill;
     [SerializeField] private PassiveSkills passiveSkill;
+    [SerializeField] private Sprite skillSprite;
+    [SerializeField] private string skillName;
     [Header("Internal References")]
     [Space]
     [SerializeField] private Image skillImage;
@@ -29,5 +31,8 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         skillImage.sprite = upgradeSkillData.SkillSprite;
         skillLevelText.text = upgradeSkillData.SkillLevelString;
         skillNameText.text = upgradeSkillData.SkillNameString;
+
+        skillSprite = upgradeSkillData.SkillSprite; ;
+        skillName = upgradeSkillData.SkillNameString; ;
     }
 }
