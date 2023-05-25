@@ -47,6 +47,20 @@ public struct PassiveSkillsDisplayDataStruct
 }
 
 [Serializable]
+public struct ActiveSkillInGameDataStruct
+{
+    public ActiveSkills skillType;
+    public int skillLevel;
+}
+
+[Serializable]
+public struct PassiveSkillInGameDataStruct
+{
+    public PassiveSkills skillType;
+    public int skillLevel;
+}
+
+[Serializable]
 public struct PlayerBasicCharacteristicsStruct
 {
     public PlayersCharactersTypes playerCharacterType;

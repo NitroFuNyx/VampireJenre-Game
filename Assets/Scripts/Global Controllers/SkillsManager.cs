@@ -6,14 +6,14 @@ using Zenject;
 
 public class SkillsManager : MonoBehaviour
 {
-    [Header("Free Skills Data")]
+    [Header("General Skills Data")]
     [Space]
-    [SerializeField] private List<ActiveSkills> activeSkillsList_Free = new List<ActiveSkills>();
-    [SerializeField] private List<PassiveSkills> passiveSkillsList_Free = new List<PassiveSkills>();
+    [SerializeField] private List<ActiveSkills> allActiveSkillsList = new List<ActiveSkills>();
+    [SerializeField] private List<PassiveSkills> allPassiveSkillsList = new List<PassiveSkills>();
     [Header("Taken Skills Data")]
     [Space]
-    [SerializeField] private List<ActiveSkills> activeSkillsList_Taken = new List<ActiveSkills>();
-    [SerializeField] private List<PassiveSkills> passiveSkillsList_Taken = new List<PassiveSkills>();
+    [SerializeField] private List<ActiveSkillInGameDataStruct> activeSkillsTakenList = new List<ActiveSkillInGameDataStruct>();
+    [SerializeField] private List<PassiveSkillInGameDataStruct> passiveSkillsTakenList = new List<PassiveSkillInGameDataStruct>();
     [Header("Skills Display Data")]
     [Space]
     [SerializeField] private SkillsDisplayDataSO skillsDisplayDataSO;
@@ -21,6 +21,13 @@ public class SkillsManager : MonoBehaviour
     private GameProcessManager _gameProcessManager;
     private GameLevelUI _gameLevelUI;
     private TakenSkillsDisplayPanel _takenSkillsDisplayPanel;
+    private PlayerExperienceManager _playerExperienceManager;
+
+    private List<ActiveSkills> activeSkillsList_Free = new List<ActiveSkills>();
+    private List<PassiveSkills> passiveSkillsList_Free = new List<PassiveSkills>();
+
+    private List<ActiveSkills> activeSkillsList_Taken = new List<ActiveSkills>();
+    private List<PassiveSkills> passiveSkillsList_Taken = new List<PassiveSkills>();
 
     private int skillsOptionsPerLevel = 3;
 
@@ -45,11 +52,12 @@ public class SkillsManager : MonoBehaviour
 
     #region Zenject
     [Inject]
-    private void Construct(GameProcessManager gameProcessManager, GameLevelUI gameLevelUI, TakenSkillsDisplayPanel takenSkillsDisplayPanel)
+    private void Construct(GameProcessManager gameProcessManager, GameLevelUI gameLevelUI, TakenSkillsDisplayPanel takenSkillsDisplayPanel, PlayerExperienceManager playerExperienceManager)
     {
         _gameProcessManager = gameProcessManager;
         _gameLevelUI = gameLevelUI;
         _takenSkillsDisplayPanel = takenSkillsDisplayPanel;
+        _playerExperienceManager = playerExperienceManager;
     }
     #endregion Zenject
 
@@ -63,6 +71,10 @@ public class SkillsManager : MonoBehaviour
         if((SkillBasicTypes)skillTypeIndex == SkillBasicTypes.Active)
         {
             ActiveSkills activeSkill = (ActiveSkills)skillSubCategoryIndex;
+            ActiveSkillInGameDataStruct inGameSkillData = new ActiveSkillInGameDataStruct();
+            inGameSkillData.skillType = activeSkill;
+            inGameSkillData.skillLevel = 1;
+            activeSkillsTakenList.Add(inGameSkillData);
             if(activeSkillsList_Free.Contains(activeSkill))
             {
                 activeSkillsList_Taken.Add(activeSkill);
@@ -73,6 +85,10 @@ public class SkillsManager : MonoBehaviour
         else
         {
             PassiveSkills passiveSkill = (PassiveSkills)skillSubCategoryIndex;
+            PassiveSkillInGameDataStruct inGameSkillData = new PassiveSkillInGameDataStruct();
+            inGameSkillData.skillType = passiveSkill;
+            inGameSkillData.skillLevel = 1;
+            passiveSkillsTakenList.Add(inGameSkillData);
             if (passiveSkillsList_Free.Contains(passiveSkill))
             {
                 passiveSkillsList_Taken.Add(passiveSkill);
@@ -88,12 +104,16 @@ public class SkillsManager : MonoBehaviour
     {
         _gameProcessManager.OnGameStarted += GameProcessManager_OnGameStarted_ExecuteReaction;
         _gameProcessManager.OnPlayerLost += GameProcessManager_OnPlayerLost_ExecuteReaction;
+
+        _playerExperienceManager.OnPlayerGotNewLevel += PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
     {
         _gameProcessManager.OnGameStarted -= GameProcessManager_OnGameStarted_ExecuteReaction;
         _gameProcessManager.OnPlayerLost -= GameProcessManager_OnPlayerLost_ExecuteReaction;
+
+        _playerExperienceManager.OnPlayerGotNewLevel -= PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction;
     }
 
     private void ChooseFirstSkill()
@@ -127,7 +147,7 @@ public class SkillsManager : MonoBehaviour
         activeSkillsList_Taken.Clear();
     }
 
-    private void ChooseSkillToUpgrade()
+    private void ChooseRandomSkillToUpgrade()
     {
         List<UpgradeSkillData> upgradeSkillsDataList = new List<UpgradeSkillData>();
     }
@@ -153,6 +173,14 @@ public class SkillsManager : MonoBehaviour
         }
     }
 
+    private void FillAvailableForUpgradeSkillsLists()
+    {
+        for(int i = 0; i < allActiveSkillsList.Count; i++)
+        {
+
+        }
+    }
+
     private void GameProcessManager_OnGameStarted_ExecuteReaction()
     {
         ChooseFirstSkill();
@@ -161,6 +189,11 @@ public class SkillsManager : MonoBehaviour
     private void GameProcessManager_OnPlayerLost_ExecuteReaction()
     {
         _takenSkillsDisplayPanel.ResetSkillsData();
+    }
+
+    private void PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction()
+    {
+        ChooseRandomSkillToUpgrade();
     }
 
     private ActiveSkillsDisplayDataStruct GetActiveSkillDisplayData(ActiveSkills skill)

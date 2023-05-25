@@ -17,6 +17,7 @@ public class GameProcessManager : MonoBehaviour
     private MainUI _mainUI;
     private SystemTimeManager _systemTimeManager;
     private SkillsManager _skillsManager;
+    private PlayerExperienceManager _playerExperienceManager;
 
     private int mapProgressDelta = 1;
 
@@ -31,21 +32,26 @@ public class GameProcessManager : MonoBehaviour
         Input.multiTouchEnabled = false;
 
         _skillsManager.OnSkillToUpgradeDefined += SkillToUpgradeDefined_ExecuteReaction;
+
+        _playerExperienceManager.OnPlayerGotNewLevel += PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction;
     }
 
     private void OnDestroy()
     {
         _skillsManager.OnSkillToUpgradeDefined -= SkillToUpgradeDefined_ExecuteReaction;
+
+        _playerExperienceManager.OnPlayerGotNewLevel -= PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction;
     }
 
     #region Zenject
     [Inject]
-    private void Construct(SpawnEnemiesManager spawnEnemiesManager, MainUI mainUI, SystemTimeManager systemTimeManager, SkillsManager skillsManager)
+    private void Construct(SpawnEnemiesManager spawnEnemiesManager, MainUI mainUI, SystemTimeManager systemTimeManager, SkillsManager skillsManager, PlayerExperienceManager playerExperienceManager)
     {
         _spawnEnemiesManager = spawnEnemiesManager;
         _mainUI = mainUI;
         _systemTimeManager = systemTimeManager;
         _skillsManager = skillsManager;
+        _playerExperienceManager = playerExperienceManager;
     }
     #endregion Zenject
 
@@ -87,9 +93,20 @@ public class GameProcessManager : MonoBehaviour
         StartCoroutine(StartGameCoroutine());
     }
 
+    private void PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction()
+    {
+        StartCoroutine(PauseGameWithDelayCoroutine());
+    }
+
     private IEnumerator StartGameCoroutine()
     {
         yield return new WaitForSeconds(2f);
         _spawnEnemiesManager.SpawnEnemies();
+    }
+
+    private IEnumerator PauseGameWithDelayCoroutine()
+    {
+        yield return null;
+        _systemTimeManager.PauseGame();
     }
 }
