@@ -69,6 +69,12 @@ public class MainUI : MonoBehaviour
         panelsDictionary[UIPanels.MenuButtonsUI].HidePanel();
     }
 
+    public void ShowMainScreen()
+    {
+        ActivateMainCanvasPanel(UIPanels.MainScreenPanel);
+        ShowMenuButtonsUI();
+    }
+
     private void SubscribeOnEvents()
     {
         _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
@@ -124,6 +130,6 @@ public class MainUI : MonoBehaviour
 
     private void GameProcessManager_PlayerLost_ExecuteReaction()
     {
-        MenuButtonPressed_ExecuteReaction(UIPanels.MainScreenPanel);
+        //MenuButtonPressed_ExecuteReaction(UIPanels.MainScreenPanel);
     }
 }

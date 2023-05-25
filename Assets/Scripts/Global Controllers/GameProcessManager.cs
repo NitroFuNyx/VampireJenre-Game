@@ -83,6 +83,8 @@ public class GameProcessManager : MonoBehaviour
     private void SkillToUpgradeDefined_ExecuteReaction(int _, int __)
     {
         _systemTimeManager.ResumeGame();
+        player.StartGame();
+        StartCoroutine(StartGameCoroutine());
     }
 
     private IEnumerator StartGameCoroutine()

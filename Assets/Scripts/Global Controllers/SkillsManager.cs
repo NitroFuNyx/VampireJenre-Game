@@ -87,11 +87,13 @@ public class SkillsManager : MonoBehaviour
     private void SubscribeOnEvents()
     {
         _gameProcessManager.OnGameStarted += GameProcessManager_OnGameStarted_ExecuteReaction;
+        _gameProcessManager.OnPlayerLost += GameProcessManager_OnPlayerLost_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
     {
         _gameProcessManager.OnGameStarted -= GameProcessManager_OnGameStarted_ExecuteReaction;
+        _gameProcessManager.OnPlayerLost -= GameProcessManager_OnPlayerLost_ExecuteReaction;
     }
 
     private void ChooseFirstSkill()
@@ -154,6 +156,11 @@ public class SkillsManager : MonoBehaviour
     private void GameProcessManager_OnGameStarted_ExecuteReaction()
     {
         ChooseFirstSkill();
+    }
+
+    private void GameProcessManager_OnPlayerLost_ExecuteReaction()
+    {
+        _takenSkillsDisplayPanel.ResetSkillsData();
     }
 
     private ActiveSkillsDisplayDataStruct GetActiveSkillDisplayData(ActiveSkills skill)

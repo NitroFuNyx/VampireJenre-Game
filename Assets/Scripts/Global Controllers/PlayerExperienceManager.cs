@@ -13,6 +13,7 @@ public class PlayerExperienceManager : MonoBehaviour
 
     #region Events Declaration
     public event Action<float, float> OnPlayerXpAmountChanged;
+    //public event Action<>
     #endregion Events Declaration
 
     private void Start()

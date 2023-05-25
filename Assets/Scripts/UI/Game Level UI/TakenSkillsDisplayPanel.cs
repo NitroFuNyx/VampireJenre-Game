@@ -49,6 +49,15 @@ public class TakenSkillsDisplayPanel : MonoBehaviour
         image = skillImage;
     }
 
+    public void ResetSkillsData()
+    {
+        ChangeSkillImagesListAlpha(activeSkillsImagesList, 0f);
+        ChangeSkillImagesListAlpha(passiveSkillsImagesList, 0f);
+
+        activeSkillsTakenAmount = 0;
+        passiveSkillsTakenAmount = 0;
+    }
+
     private void ChangeSkillImagesListAlpha(List<Image> imagesList, float alpha)
     {
         for(int i = 0; i < imagesList.Count; i++)
