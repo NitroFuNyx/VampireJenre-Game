@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Zenject;
@@ -12,6 +13,10 @@ public class GameProcessManager : MonoBehaviour
     [Space]
     [SerializeField] private float currentMapProgress = 0;
     [SerializeField] private float upgradeProgressValue = 100;
+
+    [Header("Skills")]
+    [Space]
+    [SerializeField] private List<GameObject> skillsObjectsList = new List<GameObject>();
 
     private SpawnEnemiesManager _spawnEnemiesManager;
     private MainUI _mainUI;
@@ -77,6 +82,10 @@ public class GameProcessManager : MonoBehaviour
     public void GameLost_ExecuteReaction()
     {
         OnPlayerLost?.Invoke();
+        for(int i = 0; i < skillsObjectsList.Count; i++)
+        {
+            skillsObjectsList[i].SetActive(false);
+        }
         ResetMapProgress();
     }
 
@@ -86,16 +95,21 @@ public class GameProcessManager : MonoBehaviour
         OnMapProgressChanged?.Invoke(currentMapProgress, upgradeProgressValue);
     }
 
-    private void SkillToUpgradeDefined_ExecuteReaction(int _, int __)
+    private void SkillToUpgradeDefined_ExecuteReaction(int skillCategory, int skillIndex)
     {
         _systemTimeManager.ResumeGame();
         player.StartGame();
+        if(skillIndex == (int)ActiveSkills.Fireballs)
+        {
+            skillIndex = (int)ActiveSkills.Meteor;
+        }
+        skillsObjectsList[skillIndex].gameObject.SetActive(true);
         StartCoroutine(StartGameCoroutine());
     }
 
     private void PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction()
     {
-        StartCoroutine(PauseGameWithDelayCoroutine());
+        //StartCoroutine(PauseGameWithDelayCoroutine());
     }
 
     private IEnumerator StartGameCoroutine()

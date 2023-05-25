@@ -307,7 +307,7 @@ public class SkillsManager : MonoBehaviour
 
     private void PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction()
     {
-        ChooseRandomSkillToUpgrade();
+        //ChooseRandomSkillToUpgrade();
     }
 
     private ActiveSkillsDisplayDataStruct GetActiveSkillDisplayData(ActiveSkills skill)
