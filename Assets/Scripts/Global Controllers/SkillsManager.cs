@@ -23,12 +23,6 @@ public class SkillsManager : MonoBehaviour
     private TakenSkillsDisplayPanel _takenSkillsDisplayPanel;
     private PlayerExperienceManager _playerExperienceManager;
 
-    private List<ActiveSkills> activeSkillsList_Free = new List<ActiveSkills>();
-    private List<PassiveSkills> passiveSkillsList_Free = new List<PassiveSkills>();
-
-    private List<ActiveSkills> activeSkillsList_Taken = new List<ActiveSkills>();
-    private List<PassiveSkills> passiveSkillsList_Taken = new List<PassiveSkills>();
-
     private int skillsOptionsPerLevel = 3;
 
     #region Events Declaration
@@ -37,7 +31,7 @@ public class SkillsManager : MonoBehaviour
 
     private void Awake()
     {
-        ResetSkillsLists();
+        FillAvailableSkillsLists();
     }
 
     private void Start()
@@ -71,13 +65,30 @@ public class SkillsManager : MonoBehaviour
         if((SkillBasicTypes)skillTypeIndex == SkillBasicTypes.Active)
         {
             ActiveSkills activeSkill = (ActiveSkills)skillSubCategoryIndex;
-            ActiveSkillInGameDataStruct inGameSkillData = new ActiveSkillInGameDataStruct();
-            inGameSkillData.skillType = activeSkill;
-            inGameSkillData.skillLevel = 1;
-            activeSkillsTakenList.Add(inGameSkillData);
-            if(activeSkillsList_Free.Contains(activeSkill))
+
+            int skillInUseDataIndex = -1;
+
+            for (int i = 0; i < activeSkillsTakenList.Count; i++)
             {
-                activeSkillsList_Taken.Add(activeSkill);
+                if (activeSkillsTakenList[i].skillType == activeSkill)
+                {
+                    skillInUseDataIndex = i;
+                }
+            }
+
+            if(skillInUseDataIndex == -1) // there is no current skill in use
+            {
+                ActiveSkillInGameDataStruct inGameSkillData = new ActiveSkillInGameDataStruct();
+                inGameSkillData.skillType = activeSkill;
+                inGameSkillData.skillLevel = 1;
+                activeSkillsTakenList.Add(inGameSkillData);
+            }
+            else
+            {
+                ActiveSkillInGameDataStruct tempSkillData = new ActiveSkillInGameDataStruct();
+                tempSkillData.skillType = activeSkillsTakenList[skillInUseDataIndex].skillType;
+                tempSkillData.skillLevel = activeSkillsTakenList[skillInUseDataIndex].skillLevel + 1;
+                activeSkillsTakenList[skillInUseDataIndex] = tempSkillData;
             }
 
             skillSprite = GetActiveSkillDisplayData(activeSkill).skillSprite;
@@ -85,13 +96,30 @@ public class SkillsManager : MonoBehaviour
         else
         {
             PassiveSkills passiveSkill = (PassiveSkills)skillSubCategoryIndex;
-            PassiveSkillInGameDataStruct inGameSkillData = new PassiveSkillInGameDataStruct();
-            inGameSkillData.skillType = passiveSkill;
-            inGameSkillData.skillLevel = 1;
-            passiveSkillsTakenList.Add(inGameSkillData);
-            if (passiveSkillsList_Free.Contains(passiveSkill))
+
+            int skillInUseDataIndex = -1;
+
+            for (int i = 0; i < passiveSkillsTakenList.Count; i++)
             {
-                passiveSkillsList_Taken.Add(passiveSkill);
+                if (passiveSkillsTakenList[i].skillType == passiveSkill)
+                {
+                    skillInUseDataIndex = i;
+                }
+            }
+
+            if (skillInUseDataIndex == -1) // there is no current skill in use
+            {
+                PassiveSkillInGameDataStruct inGameSkillData = new PassiveSkillInGameDataStruct();
+                inGameSkillData.skillType = passiveSkill;
+                inGameSkillData.skillLevel = 1;
+                passiveSkillsTakenList.Add(inGameSkillData);
+            }
+            else
+            {
+                PassiveSkillInGameDataStruct tempSkillData = new PassiveSkillInGameDataStruct();
+                tempSkillData.skillType = passiveSkillsTakenList[skillInUseDataIndex].skillType;
+                tempSkillData.skillLevel = passiveSkillsTakenList[skillInUseDataIndex].skillLevel + 1;
+                passiveSkillsTakenList[skillInUseDataIndex] = tempSkillData;
             }
 
             skillSprite = GetPassiveSkillDisplayData(passiveSkill).skillSprite;
@@ -120,12 +148,20 @@ public class SkillsManager : MonoBehaviour
     {
         List<UpgradeSkillData> upgradeSkillsDataList = new List<UpgradeSkillData>();
 
+        List<ActiveSkills> activeSkillsAvailableList = new List<ActiveSkills>();
+        List<ActiveSkills> activeSkillsOprionsForUpgradeList = new List<ActiveSkills>();
+
+        for(int i = 0; i < allActiveSkillsList.Count; i++)
+        {
+            activeSkillsAvailableList.Add(allActiveSkillsList[i]);
+        }
+
         for(int i = 0; i < skillsOptionsPerLevel; i++)
         {
-            int randomSkillIndex = UnityEngine.Random.Range(0, activeSkillsList_Free.Count);
-            ActiveSkills skill = activeSkillsList_Free[randomSkillIndex];
-            activeSkillsList_Free.Remove(skill);
-            activeSkillsList_Taken.Add(skill);
+            int randomSkillIndex = UnityEngine.Random.Range(0, activeSkillsAvailableList.Count);
+            ActiveSkills skill = activeSkillsAvailableList[randomSkillIndex];
+            activeSkillsAvailableList.Remove(skill);
+            activeSkillsOprionsForUpgradeList.Add(skill);
 
             UpgradeSkillData upgradeSkillData = new UpgradeSkillData();
             upgradeSkillData.SkillType = SkillBasicTypes.Active;
@@ -140,11 +176,6 @@ public class SkillsManager : MonoBehaviour
         }
 
         _gameLevelUI.ShowUpgradePanel(upgradeSkillsDataList);
-        for(int i = 0; i < activeSkillsList_Taken.Count; i++)
-        {
-            activeSkillsList_Free.Add(activeSkillsList_Taken[i]);
-        }
-        activeSkillsList_Taken.Clear();
     }
 
     private void ChooseRandomSkillToUpgrade()
@@ -152,24 +183,21 @@ public class SkillsManager : MonoBehaviour
         List<UpgradeSkillData> upgradeSkillsDataList = new List<UpgradeSkillData>();
     }
 
-    private void ResetSkillsLists()
+    private void FillAvailableSkillsLists()
     {
-        activeSkillsList_Free.Clear();
-        passiveSkillsList_Free.Clear();
-
-        activeSkillsList_Taken.Clear();
-        passiveSkillsList_Taken.Clear();
+        allActiveSkillsList.Clear();
+        allPassiveSkillsList.Clear();
 
         for (int i = 0; i < System.Enum.GetValues(typeof(ActiveSkills)).Length; i++)
         {
             ActiveSkills activeSkill = (ActiveSkills)i;
-            activeSkillsList_Free.Add(activeSkill);
+            allActiveSkillsList.Add(activeSkill);
         }
 
         for (int i = 0; i < System.Enum.GetValues(typeof(PassiveSkills)).Length; i++)
         {
             PassiveSkills passiveSkill = (PassiveSkills)i;
-            passiveSkillsList_Free.Add(passiveSkill);
+            allPassiveSkillsList.Add(passiveSkill);
         }
     }
 
