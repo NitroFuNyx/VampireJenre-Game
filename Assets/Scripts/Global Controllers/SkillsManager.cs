@@ -23,7 +23,8 @@ public class SkillsManager : MonoBehaviour
     private TakenSkillsDisplayPanel _takenSkillsDisplayPanel;
     private PlayerExperienceManager _playerExperienceManager;
 
-    private int skillsOptionsPerLevel = 3;
+    private List<ActiveSkills> activeSkillsUpgradedToMax = new List<ActiveSkills>();
+    private List<PassiveSkills> passiveSkillsUpgradedToMax = new List<PassiveSkills>();
 
     #region Events Declaration
     public event Action<int, int> OnSkillToUpgradeDefined;
@@ -76,7 +77,7 @@ public class SkillsManager : MonoBehaviour
                 }
             }
 
-            if(skillInUseDataIndex == -1) // there is no current skill in use
+            if (skillInUseDataIndex == -1) // there is no current skill in use
             {
                 ActiveSkillInGameDataStruct inGameSkillData = new ActiveSkillInGameDataStruct();
                 inGameSkillData.skillType = activeSkill;
@@ -89,6 +90,11 @@ public class SkillsManager : MonoBehaviour
                 tempSkillData.skillType = activeSkillsTakenList[skillInUseDataIndex].skillType;
                 tempSkillData.skillLevel = activeSkillsTakenList[skillInUseDataIndex].skillLevel + 1;
                 activeSkillsTakenList[skillInUseDataIndex] = tempSkillData;
+
+                if (activeSkillsTakenList[skillInUseDataIndex].skillLevel == SkillsInGameValues.maxSkillLevel)
+                {
+                    activeSkillsUpgradedToMax.Add(activeSkillsTakenList[skillInUseDataIndex].skillType);
+                }
             }
 
             skillSprite = GetActiveSkillDisplayData(activeSkill).skillSprite;
@@ -120,6 +126,11 @@ public class SkillsManager : MonoBehaviour
                 tempSkillData.skillType = passiveSkillsTakenList[skillInUseDataIndex].skillType;
                 tempSkillData.skillLevel = passiveSkillsTakenList[skillInUseDataIndex].skillLevel + 1;
                 passiveSkillsTakenList[skillInUseDataIndex] = tempSkillData;
+
+                if (passiveSkillsTakenList[skillInUseDataIndex].skillLevel == SkillsInGameValues.maxSkillLevel)
+                {
+                    passiveSkillsUpgradedToMax.Add(passiveSkillsTakenList[skillInUseDataIndex].skillType);
+                }
             }
 
             skillSprite = GetPassiveSkillDisplayData(passiveSkill).skillSprite;
@@ -156,7 +167,7 @@ public class SkillsManager : MonoBehaviour
             activeSkillsAvailableList.Add(allActiveSkillsList[i]);
         }
 
-        for(int i = 0; i < skillsOptionsPerLevel; i++)
+        for(int i = 0; i < SkillsInGameValues.skillsOptionsForUpgradePerLevelAmount; i++)
         {
             int randomSkillIndex = UnityEngine.Random.Range(0, activeSkillsAvailableList.Count);
             ActiveSkills skill = activeSkillsAvailableList[randomSkillIndex];
@@ -181,6 +192,81 @@ public class SkillsManager : MonoBehaviour
     private void ChooseRandomSkillToUpgrade()
     {
         List<UpgradeSkillData> upgradeSkillsDataList = new List<UpgradeSkillData>();
+
+        List<ActiveSkills> activeSkillsAvailableList = new List<ActiveSkills>();
+        List<ActiveSkills> activeSkillsOprionsForUpgradeList = new List<ActiveSkills>();
+
+        List<PassiveSkills> passiveSkillsAvailableList = new List<PassiveSkills>();
+        List<PassiveSkills> passiveSkillsOprionsForUpgradeList = new List<PassiveSkills>();
+
+        activeSkillsAvailableList = GetCurrentlyAvailableForUpgradeActiveSkills();
+        passiveSkillsAvailableList = GetCurrentlyAvailableForUpgradePassiveSkills();
+
+        for(int i = 0; i < SkillsInGameValues.skillsOptionsForUpgradePerLevelAmount; i++)
+        {
+            int skillCategoryIndex = -1;
+
+            if (activeSkillsAvailableList.Count > 0 && passiveSkillsAvailableList.Count > 0)
+            {
+                skillCategoryIndex = UnityEngine.Random.Range(0, System.Enum.GetValues(typeof(SkillBasicTypes)).Length);
+            }
+            else if(activeSkillsAvailableList.Count > 0 && passiveSkillsAvailableList.Count == 0)
+            {
+                // all passive skills upgraded
+                skillCategoryIndex = (int)SkillBasicTypes.Active;
+            }
+            else if(activeSkillsAvailableList.Count == 0 && passiveSkillsAvailableList.Count > 0)
+            {
+                // all active skills upgraded
+                skillCategoryIndex = (int)SkillBasicTypes.Passive;
+            }
+            else
+            {
+                // all skills upgraded
+            }
+
+            int randomSkillIndex;
+            UpgradeSkillData upgradeSkillData = new UpgradeSkillData();
+
+            if (skillCategoryIndex == (int)SkillBasicTypes.Active)
+            {
+                randomSkillIndex = UnityEngine.Random.Range(0, activeSkillsAvailableList.Count);
+
+                ActiveSkills skill = activeSkillsAvailableList[randomSkillIndex];
+                activeSkillsAvailableList.Remove(skill);
+                activeSkillsOprionsForUpgradeList.Add(skill);
+
+                upgradeSkillData.SkillType = SkillBasicTypes.Active;
+                upgradeSkillData.ActiveSkill = skill;
+                upgradeSkillData.SkillLevelString = $"1";
+
+                for (int j = 0; j < activeSkillsTakenList.Count; j ++)
+                {
+                    if(activeSkillsTakenList[j].skillType == skill)
+                    {
+                        upgradeSkillData.SkillLevelString = $"{activeSkillsTakenList[j].skillLevel + 1}";
+                        break;
+                    }
+                }
+
+                ActiveSkillsDisplayDataStruct skillDisplayData = GetActiveSkillDisplayData(skill);
+
+                upgradeSkillData.SkillNameString = $"{skillDisplayData.skillName}";
+                upgradeSkillData.SkillSprite = skillDisplayData.skillSprite;
+            }
+            else if(skillCategoryIndex == (int)SkillBasicTypes.Passive)
+            {
+                randomSkillIndex = UnityEngine.Random.Range(0, passiveSkillsAvailableList.Count);
+
+                PassiveSkills skill = passiveSkillsAvailableList[randomSkillIndex];
+                passiveSkillsAvailableList.Remove(skill);
+                passiveSkillsOprionsForUpgradeList.Add(skill);
+
+
+            }
+
+            upgradeSkillsDataList.Add(upgradeSkillData);
+        }
     }
 
     private void FillAvailableSkillsLists()
@@ -254,5 +340,93 @@ public class SkillsManager : MonoBehaviour
         }
 
         return skillData;
+    }
+
+    private List<ActiveSkills> GetCurrentlyAvailableForUpgradeActiveSkills()
+    {
+        List<ActiveSkills> availableSkillsList = new List<ActiveSkills>();
+
+        for (int i = 0; i < allActiveSkillsList.Count; i++)
+        {
+            availableSkillsList.Add(allActiveSkillsList[i]);
+        }
+
+        for (int i = 0; i < activeSkillsTakenList.Count; i++)
+        {
+            if (activeSkillsTakenList[i].skillLevel == SkillsInGameValues.maxSkillLevel && availableSkillsList.Contains(activeSkillsTakenList[i].skillType))
+            {
+                availableSkillsList.Remove(activeSkillsTakenList[i].skillType);
+            }
+        }
+
+        if (activeSkillsTakenList.Count == SkillsInGameValues.maxSkillsInCategoryAmount)
+        {
+            List<ActiveSkills> skillsToRemoveFromAvailableList = new List<ActiveSkills>();
+            List<ActiveSkills> skillsTaken = new List<ActiveSkills>();
+
+            for (int i = 0; i < activeSkillsTakenList.Count; i++)
+            {
+                skillsTaken.Add(activeSkillsTakenList[i].skillType);
+            }
+
+            for (int i = 0; i < availableSkillsList.Count; i++)
+            {
+                if (!skillsTaken.Contains(availableSkillsList[i]))
+                {
+                    skillsToRemoveFromAvailableList.Add(availableSkillsList[i]);
+                }
+            }
+
+            for (int i = 0; i < skillsToRemoveFromAvailableList.Count; i++)
+            {
+                availableSkillsList.Remove(skillsToRemoveFromAvailableList[i]);
+            }
+        }
+
+        return availableSkillsList;
+    }
+
+    private List<PassiveSkills> GetCurrentlyAvailableForUpgradePassiveSkills()
+    {
+        List<PassiveSkills> availableSkillsList = new List<PassiveSkills>();
+
+        for (int i = 0; i < allPassiveSkillsList.Count; i++)
+        {
+            availableSkillsList.Add(allPassiveSkillsList[i]);
+        }
+
+        for (int i = 0; i < passiveSkillsTakenList.Count; i++)
+        {
+            if (passiveSkillsTakenList[i].skillLevel == SkillsInGameValues.maxSkillLevel && availableSkillsList.Contains(passiveSkillsTakenList[i].skillType))
+            {
+                availableSkillsList.Remove(passiveSkillsTakenList[i].skillType);
+            }
+        }
+
+        if (passiveSkillsTakenList.Count == SkillsInGameValues.maxSkillsInCategoryAmount)
+        {
+            List<PassiveSkills> skillsToRemoveFromAvailableList = new List<PassiveSkills>();
+            List<PassiveSkills> skillsTaken = new List<PassiveSkills>();
+
+            for (int i = 0; i < passiveSkillsTakenList.Count; i++)
+            {
+                skillsTaken.Add(passiveSkillsTakenList[i].skillType);
+            }
+
+            for (int i = 0; i < availableSkillsList.Count; i++)
+            {
+                if (!skillsTaken.Contains(availableSkillsList[i]))
+                {
+                    skillsToRemoveFromAvailableList.Add(availableSkillsList[i]);
+                }
+            }
+
+            for (int i = 0; i < skillsToRemoveFromAvailableList.Count; i++)
+            {
+                availableSkillsList.Remove(skillsToRemoveFromAvailableList[i]);
+            }
+        }
+
+        return availableSkillsList;
     }
 }

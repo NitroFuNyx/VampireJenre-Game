@@ -39,3 +39,10 @@ public class TalentSlotAmount
     public const int maxSlotAmount = 9;
 
 }
+
+public class SkillsInGameValues
+{
+    public const int maxSkillLevel = 10;
+    public const int maxSkillsInCategoryAmount = 4;
+    public const int skillsOptionsForUpgradePerLevelAmount = 3;
+}
