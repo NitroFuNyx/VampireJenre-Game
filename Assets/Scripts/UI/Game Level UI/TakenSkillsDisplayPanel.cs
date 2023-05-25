@@ -11,6 +11,7 @@ public class TakenSkillsDisplayPanel : MonoBehaviour
     [SerializeField] private List<Image> passiveSkillsImagesList = new List<Image>();
 
     private SkillsManager _skillsManager;
+    private Image image;
 
     private float changeAlphaDuration = 0.1f;
 
@@ -35,17 +36,17 @@ public class TakenSkillsDisplayPanel : MonoBehaviour
         if ((SkillBasicTypes)skillTypeIndex == SkillBasicTypes.Active)
         {
             skillImage = activeSkillsImagesList[activeSkillsTakenAmount];
-            skillImage.sprite = skillSprite;
-            skillImage.DOFade(1f, changeAlphaDuration);
             activeSkillsTakenAmount++;
         }
         else
         {
             skillImage = passiveSkillsImagesList[passiveSkillsTakenAmount];
-            skillImage.sprite = skillSprite;
-            skillImage.DOFade(1f, changeAlphaDuration);
             passiveSkillsTakenAmount++;
         }
+
+        skillImage.sprite = skillSprite;
+        skillImage.DOFade(1f, changeAlphaDuration);
+        image = skillImage;
     }
 
     private void ChangeSkillImagesListAlpha(List<Image> imagesList, float alpha)

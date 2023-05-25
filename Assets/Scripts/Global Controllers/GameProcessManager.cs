@@ -16,6 +16,7 @@ public class GameProcessManager : MonoBehaviour
     private SpawnEnemiesManager _spawnEnemiesManager;
     private MainUI _mainUI;
     private SystemTimeManager _systemTimeManager;
+    private SkillsManager _skillsManager;
 
     private int mapProgressDelta = 1;
 
@@ -28,15 +29,23 @@ public class GameProcessManager : MonoBehaviour
     private void Start()
     {
         Input.multiTouchEnabled = false;
+
+        _skillsManager.OnSkillToUpgradeDefined += SkillToUpgradeDefined_ExecuteReaction;
+    }
+
+    private void OnDestroy()
+    {
+        _skillsManager.OnSkillToUpgradeDefined -= SkillToUpgradeDefined_ExecuteReaction;
     }
 
     #region Zenject
     [Inject]
-    private void Construct(SpawnEnemiesManager spawnEnemiesManager, MainUI mainUI, SystemTimeManager systemTimeManager)
+    private void Construct(SpawnEnemiesManager spawnEnemiesManager, MainUI mainUI, SystemTimeManager systemTimeManager, SkillsManager skillsManager)
     {
         _spawnEnemiesManager = spawnEnemiesManager;
         _mainUI = mainUI;
         _systemTimeManager = systemTimeManager;
+        _skillsManager = skillsManager;
     }
     #endregion Zenject
 
@@ -69,6 +78,11 @@ public class GameProcessManager : MonoBehaviour
     {
         currentMapProgress = 0f;
         OnMapProgressChanged?.Invoke(currentMapProgress, upgradeProgressValue);
+    }
+
+    private void SkillToUpgradeDefined_ExecuteReaction(int _, int __)
+    {
+        _systemTimeManager.ResumeGame();
     }
 
     private IEnumerator StartGameCoroutine()

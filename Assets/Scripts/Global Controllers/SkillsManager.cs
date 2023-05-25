@@ -125,6 +125,11 @@ public class SkillsManager : MonoBehaviour
         activeSkillsList_Taken.Clear();
     }
 
+    private void ChooseSkillToUpgrade()
+    {
+        List<UpgradeSkillData> upgradeSkillsDataList = new List<UpgradeSkillData>();
+    }
+
     private void ResetSkillsLists()
     {
         activeSkillsList_Free.Clear();
