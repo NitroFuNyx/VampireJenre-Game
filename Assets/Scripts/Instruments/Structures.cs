@@ -173,3 +173,9 @@ public struct WeaponStrikeSkillDataStruct
     public float size;
     public float cooldown;
 }
+
+[Serializable]
+public struct PassiveSkillUpgradeDataStruct
+{
+    public float upgradeValue;
+}

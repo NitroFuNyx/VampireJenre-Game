@@ -100,6 +100,11 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         _dataPersistanceManager.SaveGame();
     }
 
+    public void UpgradePlayerSkill(int skillCategoryIndex, int skillIndex, int skillLevel)
+    {
+
+    }
+
     #region Upgrade Passive Characteristics Methods
     private void UpgradePassiveCharacteristic_AddPercent(ref float currentPercent, float percentSurplus)
     {

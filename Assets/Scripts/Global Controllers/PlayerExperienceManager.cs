@@ -40,9 +40,10 @@ public class PlayerExperienceManager : MonoBehaviour
 
         if(currentXp >= upgradeXpValue)
         {
-            float newLevelStartXp = currentXp - upgradeXpValue;
-            currentXp = newLevelStartXp;
-            upgradeXpValue = 100; // reset upgradeXpValue
+            //float newLevelStartXp = currentXp - upgradeXpValue;
+            //currentXp = newLevelStartXp;
+            currentXp = 0f;
+            upgradeXpValue = 1000; // reset upgradeXpValue
             OnPlayerGotNewLevel?.Invoke();
         }
 

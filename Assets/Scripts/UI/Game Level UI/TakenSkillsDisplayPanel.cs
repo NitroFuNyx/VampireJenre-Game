@@ -9,6 +9,10 @@ public class TakenSkillsDisplayPanel : MonoBehaviour
     [Space]
     [SerializeField] private List<Image> activeSkillsImagesList = new List<Image>();
     [SerializeField] private List<Image> passiveSkillsImagesList = new List<Image>();
+    [Header("Skills")]
+    [Space]
+    [SerializeField] private List<ActiveSkills> activeSkillsList = new List<ActiveSkills>();
+    [SerializeField] private List<PassiveSkills> passiveSkillsList = new List<PassiveSkills>();
 
     private SkillsManager _skillsManager;
     private Image image;
@@ -29,30 +33,47 @@ public class TakenSkillsDisplayPanel : MonoBehaviour
         
     }
 
-    public void SkillTaken_ExecuteReaction(int skillTypeIndex, Sprite skillSprite)
+    public void SkillTaken_ExecuteReaction(int skillCategoryIndex, int skillIndex, Sprite skillSprite)
     {
         Image skillImage;
 
-        if ((SkillBasicTypes)skillTypeIndex == SkillBasicTypes.Active)
+        if ((SkillBasicTypes)skillCategoryIndex == SkillBasicTypes.Active)
         {
-            skillImage = activeSkillsImagesList[activeSkillsTakenAmount];
-            activeSkillsTakenAmount++;
+            if(!activeSkillsList.Contains((ActiveSkills)skillIndex))
+            {
+                activeSkillsList.Add((ActiveSkills)skillIndex);
+                skillImage = activeSkillsImagesList[activeSkillsTakenAmount];
+                activeSkillsTakenAmount++;
+                skillImage.sprite = skillSprite;
+                skillImage.DOFade(1f, changeAlphaDuration);
+                image = skillImage;
+            }
+            else
+            {
+
+            }
         }
         else
         {
-            skillImage = passiveSkillsImagesList[passiveSkillsTakenAmount];
-            passiveSkillsTakenAmount++;
+            if (!passiveSkillsList.Contains((PassiveSkills)skillIndex))
+            {
+                passiveSkillsList.Add((PassiveSkills)skillIndex);
+                skillImage = passiveSkillsImagesList[passiveSkillsTakenAmount];
+                passiveSkillsTakenAmount++;
+                skillImage.sprite = skillSprite;
+                skillImage.DOFade(1f, changeAlphaDuration);
+                image = skillImage;
+            }       
         }
-
-        skillImage.sprite = skillSprite;
-        skillImage.DOFade(1f, changeAlphaDuration);
-        image = skillImage;
     }
 
     public void ResetSkillsData()
     {
         ChangeSkillImagesListAlpha(activeSkillsImagesList, 0f);
         ChangeSkillImagesListAlpha(passiveSkillsImagesList, 0f);
+
+        activeSkillsList.Clear();
+        passiveSkillsList.Clear();
 
         activeSkillsTakenAmount = 0;
         passiveSkillsTakenAmount = 0;

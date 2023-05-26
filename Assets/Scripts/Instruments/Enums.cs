@@ -14,11 +14,6 @@ public enum SettingsPanels
     MainSettings, LanguageSettings, InfoPanel, PrivacyPolicyPanel, StoryPanel
 }
 
-//public enum MainMenuPanels
-//{
-//    Shop, Talents, Map, CharacterSelection, Settings
-//}
-
 public enum GameLevelPanels
 {
     PausePanel, LevelUpgradePanel, VictoryPanel, LoosePanel

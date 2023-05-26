@@ -24,17 +24,17 @@ public class UpgradeSkillButton : ButtonInteractionHandler
 
     public override void ButtonActivated()
     {
-        int skillSubcategoryIndex;
+        int skillndex;
 
         if(skillUpgradeDisplayPanel.SkillType == SkillBasicTypes.Active)
         {
-            skillSubcategoryIndex = (int)skillUpgradeDisplayPanel.ActiveSkill;
+            skillndex = (int)skillUpgradeDisplayPanel.ActiveSkill;
         }
         else
         {
-            skillSubcategoryIndex = (int)skillUpgradeDisplayPanel.PassiveSkill;
+            skillndex = (int)skillUpgradeDisplayPanel.PassiveSkill;
         }
 
-        _skillsManager.DefineSkillToUpgrade((int)skillUpgradeDisplayPanel.SkillType, skillSubcategoryIndex);
+        _skillsManager.DefineSkillToUpgrade((int)skillUpgradeDisplayPanel.SkillType, skillndex);
     }
 }

@@ -109,7 +109,7 @@ public class GameProcessManager : MonoBehaviour
 
     private void PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction()
     {
-        //StartCoroutine(PauseGameWithDelayCoroutine());
+        StartCoroutine(PauseGameWithDelayCoroutine());
     }
 
     private IEnumerator StartGameCoroutine()
