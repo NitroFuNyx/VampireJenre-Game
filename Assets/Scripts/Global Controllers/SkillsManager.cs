@@ -139,6 +139,18 @@ public class SkillsManager : MonoBehaviour
             skillSprite = GetPassiveSkillDisplayData(passiveSkill).skillSprite;
         }
 
+        int upgradedSkillNewLevel;
+        if(skillCategoryIndex == (int)SkillBasicTypes.Active)
+        {
+            upgradedSkillNewLevel = activeSkillsTakenList[activeSkillsTakenList.Count - 1].skillLevel;
+            Debug.Log($"Skill {activeSkillsTakenList[activeSkillsTakenList.Count - 1].skillType} new level {activeSkillsTakenList[activeSkillsTakenList.Count - 1].skillLevel}");
+        }
+        else
+        {
+            upgradedSkillNewLevel = passiveSkillsTakenList[passiveSkillsTakenList.Count - 1].skillLevel;
+            Debug.Log($"Skill {passiveSkillsTakenList[passiveSkillsTakenList.Count - 1].skillType} new level {passiveSkillsTakenList[passiveSkillsTakenList.Count - 1].skillLevel}");
+        }
+        _playerCharacteristicsManager.UpgradePlayerSkill(skillCategoryIndex, skillIndex, upgradedSkillNewLevel);
         _takenSkillsDisplayPanel.SkillTaken_ExecuteReaction(skillCategoryIndex, skillIndex, skillSprite);
     }
 

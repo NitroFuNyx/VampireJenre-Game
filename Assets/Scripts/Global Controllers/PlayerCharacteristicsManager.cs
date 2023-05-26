@@ -10,6 +10,10 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     [Header("Current Data")]
     [Space]
     [SerializeField] private PlayerBasicCharacteristicsStruct currentPlayerData;
+    [Header("Skills Levels Data")]
+    [Space]
+    [SerializeField] private ActiveSkillsLevelsSO activesSkillsLevelsData;
+    [SerializeField] private PassiveSkillsLevelsSO passiveSkillsLevelsData;
 
     private DataPersistanceManager _dataPersistanceManager;
 
@@ -102,7 +106,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
 
     public void UpgradePlayerSkill(int skillCategoryIndex, int skillIndex, int skillLevel)
     {
-
+        
     }
 
     #region Upgrade Passive Characteristics Methods
