@@ -7,6 +7,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     [Header("Start Data")]
     [Space]
     [SerializeField] private PlayerCharacteristicsSO playerCharacteristicsSO;
+    [SerializeField] private PlayerBasicCharacteristicsStruct playerPersistentData;
     [Header("Current Data")]
     [Space]
     [SerializeField] private PlayerBasicCharacteristicsStruct currentPlayerData;
@@ -16,6 +17,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     [SerializeField] private PassiveSkillsLevelsSO passiveSkillsLevelsData;
 
     private DataPersistanceManager _dataPersistanceManager;
+    private GameProcessManager _gameProcessManager;
 
     private const float maxPercentAmount = 100f;
 
@@ -27,11 +29,24 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         _dataPersistanceManager.AddObjectToSaveSystemObjectsList(this);
     }
 
+    private void Start()
+    {
+        _gameProcessManager.OnGameStarted += GameProcessManager_GameStarted_ExecuteReaction;
+        _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
+    }
+
+    private void OnDestroy()
+    {
+        _gameProcessManager.OnGameStarted -= GameProcessManager_GameStarted_ExecuteReaction;
+        _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
+    }
+
     #region Zenject
     [Inject]
-    private void Construct(DataPersistanceManager dataPersistanceManager)
+    private void Construct(DataPersistanceManager dataPersistanceManager, GameProcessManager gameProcessManager)
     {
         _dataPersistanceManager = dataPersistanceManager;
+        _gameProcessManager = gameProcessManager;
     }
     #endregion Zenject
 
@@ -43,7 +58,10 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
 
     public void SaveData(GameData data)
     {
-        data.playerCharacteristcsData = currentPlayerData;
+        if (!_gameProcessManager.BattleStarted)
+        {
+            data.playerCharacteristcsData = currentPlayerData;
+        }
     }
     #endregion Save/Load Methods
 
@@ -109,6 +127,11 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         
     }
 
+    public void ResetPlayerCharacteristicAfterBattle()
+    {
+        currentPlayerData = playerPersistentData;
+    }    
+
     #region Upgrade Passive Characteristics Methods
     private void UpgradePassiveCharacteristic_AddPercent(ref float currentPercent, float percentSurplus)
     {
@@ -120,4 +143,14 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         currentValue += (currentValue * upgradePercent) / maxPercentAmount;
     }
     #endregion Upgrade Passive Characteristics Methods
+
+    private void GameProcessManager_GameStarted_ExecuteReaction()
+    {
+        playerPersistentData = currentPlayerData;
+    }
+
+    private void GameProcessManager_PlayerLost_ExecuteReaction()
+    {
+        ResetPlayerCharacteristicAfterBattle();
+    }
 }

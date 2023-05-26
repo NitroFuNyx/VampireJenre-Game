@@ -24,7 +24,11 @@ public class GameProcessManager : MonoBehaviour
     private SkillsManager _skillsManager;
     private PlayerExperienceManager _playerExperienceManager;
 
+    private bool battleStarted = false;
+
     private int mapProgressDelta = 1;
+
+    public bool BattleStarted { get => battleStarted; private set => battleStarted = value; }
 
     #region Events Declaration
     public event Action OnGameStarted;
@@ -62,6 +66,7 @@ public class GameProcessManager : MonoBehaviour
 
     public void StartGame()
     {
+        battleStarted = true;
         OnGameStarted?.Invoke();
         _systemTimeManager.PauseGame();
         //player.StartGame();
@@ -93,6 +98,7 @@ public class GameProcessManager : MonoBehaviour
     {
         currentMapProgress = 0f;
         OnMapProgressChanged?.Invoke(currentMapProgress, upgradeProgressValue);
+        battleStarted = false;
     }
 
     private void SkillToUpgradeDefined_ExecuteReaction(int skillCategory, int skillIndex)
