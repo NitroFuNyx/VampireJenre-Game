@@ -33,12 +33,11 @@ public class SlashSkill : MonoBehaviour
 
     private IEnumerator DisablingSlash()
     {
-        collider.convex = true;
-        collider.isTrigger = true;
+        collider.enabled = true;
         yield return new WaitForSeconds(timeToDisable);
-        collider.isTrigger = false;
+        collider.enabled = false;
 
-        collider.convex = false;
+
     }
 
     
