@@ -35,4 +35,5 @@ public class ActiveSkillsLevelsSO : ScriptableObject
     public List<ChainLightningSkillDataStruct> ChainLightningUpgradesDataList { get => chainLightningUpgradesDataList; }
     public List<FireballsSkillDataStruct> FireBallssUpgradesDataList { get => fireBallssUpgradesDataList; }
     public List<AllDirectionsShotsSkillDataStruct> AllDirectionsShotsUpgradesDataList { get => allDirectionsShotsUpgradesDataList; }
+    public List<WeaponStrikeSkillDataStruct> WeaponStrikeUpgradesDataList { get => weaponStrikeUpgradesDataList; }
 }
