@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -25,6 +26,38 @@ public struct TalentLevelStruct
 {
     public PassiveCharacteristicsTypes passiveSkillType;
     public int level;
+}
+
+[Serializable]
+public struct ActiveSkillsDisplayDataStruct
+{
+    public ActiveSkills skill;
+    public Sprite skillSprite;
+    public string skillName;
+    public List<string> skillDescribtionsList;
+}
+
+[Serializable]
+public struct PassiveSkillsDisplayDataStruct
+{
+    public PassiveSkills skill;
+    public Sprite skillSprite;
+    public string skillName;
+    public List<string> skillDescribtionsList;
+}
+
+[Serializable]
+public struct ActiveSkillInGameDataStruct
+{
+    public ActiveSkills skillType;
+    public int skillLevel;
+}
+
+[Serializable]
+public struct PassiveSkillInGameDataStruct
+{
+    public PassiveSkills skillType;
+    public int skillLevel;
 }
 
 [Serializable]
@@ -122,14 +155,14 @@ public struct FireballsSkillDataStruct
 {
     public float damage;
     public float radius;
-    public int projectilesAmount;
+    public float projectilesAmount;
 }
 
 [Serializable]
 public struct AllDirectionsShotsSkillDataStruct
 {
     public float damage;
-    public int projectilesAmount;
+    public float projectilesAmount;
     public float cooldown;
 }
 
@@ -139,4 +172,10 @@ public struct WeaponStrikeSkillDataStruct
     public float damage;
     public float size;
     public float cooldown;
+}
+
+[Serializable]
+public struct PassiveSkillUpgradeDataStruct
+{
+    public float upgradeValue;
 }

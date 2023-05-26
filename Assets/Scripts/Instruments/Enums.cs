@@ -14,11 +14,6 @@ public enum SettingsPanels
     MainSettings, LanguageSettings, InfoPanel, PrivacyPolicyPanel, StoryPanel
 }
 
-//public enum MainMenuPanels
-//{
-//    Shop, Talents, Map, CharacterSelection, Settings
-//}
-
 public enum GameLevelPanels
 {
     PausePanel, LevelUpgradePanel, VictoryPanel, LoosePanel
@@ -42,6 +37,11 @@ public enum ResourcesTypes
 public enum TalentsIndexes
 {
     Talent_0, Talent_1, Talent_2, Talent_3, Talent_4, Talent_5, Talent_6, Talent_7, Talent_8
+}
+
+public enum SkillBasicTypes
+{
+    Active, Passive
 }
 
 public enum PassiveCharacteristicsTypes

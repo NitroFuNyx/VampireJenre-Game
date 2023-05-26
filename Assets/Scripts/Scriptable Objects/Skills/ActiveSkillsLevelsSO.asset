@@ -49,7 +49,14 @@ MonoBehaviour:
     range: 2
     width: 0
     cooldown: 0
+  - damage: 1
+    range: 2
+    width: 0
+    cooldown: 0
   singleShotUpgradesDataList:
+  - damage: 0
+    projectilesAmount: 0
+    cooldown: 0
   - damage: 0
     projectilesAmount: 0
     cooldown: 0
@@ -105,6 +112,9 @@ MonoBehaviour:
   - damage: 0
     radius: 0
     cooldown: 0
+  - damage: 0
+    radius: 0
+    cooldown: 0
   pulseAuraUpgradesDataList:
   - damage: 0
     radius: 0
@@ -133,9 +143,16 @@ MonoBehaviour:
   - damage: 0
     radius: 0
     cooldown: 0
-  meteorUpgradesDataList:
   - damage: 0
-    postEffectDuration: 0
+    radius: 0
+    cooldown: 0
+  meteorUpgradesDataList:
+  - damage: 10
+    postEffectDuration: 10
+    projectilesAmount: 0
+    cooldown: 0
+  - damage: 10
+    postEffectDuration: 10
     projectilesAmount: 0
     cooldown: 0
   - damage: 0
@@ -198,6 +215,9 @@ MonoBehaviour:
   - damage: 0
     projectilesAmount: 0
     cooldown: 0
+  - damage: 0
+    projectilesAmount: 0
+    cooldown: 0
   chainLightningUpgradesDataList:
   - damage: 0
     jumpsAmount: 0
@@ -226,9 +246,15 @@ MonoBehaviour:
   - damage: 0
     jumpsAmount: 0
     cooldown: 0
-  fireBallssUpgradesDataList:
   - damage: 0
+    jumpsAmount: 0
+    cooldown: 0
+  fireBallssUpgradesDataList:
+  - damage: 5
     radius: 0
+    projectilesAmount: 1
+  - damage: 3
+    radius: 5
     projectilesAmount: 0
   - damage: 0
     radius: 0
@@ -258,12 +284,15 @@ MonoBehaviour:
   - damage: 0
     projectilesAmount: 0
     cooldown: 0
-  - damage: 0
-    projectilesAmount: 0
+  - damage: 5
+    projectilesAmount: 5
     cooldown: 0
-  - damage: 0
+  - damage: 1
+    projectilesAmount: 1
+    cooldown: 5
+  - damage: 5
     projectilesAmount: 0
-    cooldown: 0
+    cooldown: 1
   - damage: 0
     projectilesAmount: 0
     cooldown: 0
@@ -283,6 +312,9 @@ MonoBehaviour:
     projectilesAmount: 0
     cooldown: 0
   weaponStrikeUpgradesDataList:
+  - damage: 0
+    size: 0
+    cooldown: 0
   - damage: 0
     size: 0
     cooldown: 0

@@ -11,9 +11,13 @@ public class GameLevelUI : MainCanvasPanel
     [Header("Subpanels")]
     [Space]
     [SerializeField] private List<GameLevelSubPanel> subpanelsList = new List<GameLevelSubPanel>();
+    [Header("Skill Display Panels")]
+    [Space]
+    [SerializeField] private List<SkillUpgradeDisplayPanel> skillUpgradeDisplayPanelsList = new List<SkillUpgradeDisplayPanel>();
 
     private TimersManager _timersManager;
     private SystemTimeManager _systemTimeManager;
+    private GameProcessManager _gameProcessManager;
 
     private Dictionary<GameLevelPanels, GameLevelSubPanel> subpanelsDictionary = new Dictionary<GameLevelPanels, GameLevelSubPanel>();
 
@@ -31,21 +35,24 @@ public class GameLevelUI : MainCanvasPanel
 
     #region Zenject
     [Inject]
-    private void Construct(TimersManager timersManager, SystemTimeManager systemTimeManager)
+    private void Construct(TimersManager timersManager, SystemTimeManager systemTimeManager, GameProcessManager gameProcessManager)
     {
         _timersManager = timersManager;
         _systemTimeManager = systemTimeManager;
+        _gameProcessManager = gameProcessManager;
     }
     #endregion Zenject
 
     private void SubscribeOnEvents()
     {
         _timersManager.OnStopwatchValueChanged += TimersManager_OnStopwatchValueChanged_ExecuteReaction;
+        _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
     {
         _timersManager.OnStopwatchValueChanged -= TimersManager_OnStopwatchValueChanged_ExecuteReaction;
+        _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
     }
 
     private void FillSubpanelsDictionary()
@@ -77,6 +84,21 @@ public class GameLevelUI : MainCanvasPanel
         HideAllSubpanels();
     }
 
+    public void ShowUpgradePanel(List<UpgradeSkillData> skillsOptionsDataList)
+    {
+        for(int i = 0; i < skillsOptionsDataList.Count; i++)
+        {
+            skillUpgradeDisplayPanelsList[i].UpdateUI(skillsOptionsDataList[i]);
+        }
+
+        subpanelsDictionary[GameLevelPanels.LevelUpgradePanel].ShowPanel();
+    }
+
+    public void HideUpgradePanel()
+    {
+        subpanelsDictionary[GameLevelPanels.LevelUpgradePanel].HidePanel();
+    }
+
     private void HideAllSubpanels()
     {
         for(int i = 0; i < subpanelsList.Count; i++)
@@ -88,5 +110,10 @@ public class GameLevelUI : MainCanvasPanel
     private void TimersManager_OnStopwatchValueChanged_ExecuteReaction(string timeString)
     {
         stopwatchValueText.text = timeString;
+    }
+
+    private void GameProcessManager_PlayerLost_ExecuteReaction()
+    {
+        subpanelsDictionary[GameLevelPanels.LoosePanel].ShowPanel();
     }
 }
