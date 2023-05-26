@@ -155,14 +155,14 @@ public struct FireballsSkillDataStruct
 {
     public float damage;
     public float radius;
-    public int projectilesAmount;
+    public float projectilesAmount;
 }
 
 [Serializable]
 public struct AllDirectionsShotsSkillDataStruct
 {
     public float damage;
-    public int projectilesAmount;
+    public float projectilesAmount;
     public float cooldown;
 }
 

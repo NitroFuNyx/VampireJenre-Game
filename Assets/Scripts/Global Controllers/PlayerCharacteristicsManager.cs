@@ -167,6 +167,58 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
                 UpgradeActiveSkill_WeaponStrikeShots(skillLevel);
             }
         }
+        else
+        {
+            if (skillIndex == (int)PassiveSkills.IncreaseRange)
+            {
+                UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.playerForceWaveData.range, passiveSkillsLevelsData.IncreaseRangeUpgradesDataList[skillLevel - 1].upgradeValue);
+                UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.magicAuraSkillData.radius, passiveSkillsLevelsData.IncreaseRangeUpgradesDataList[skillLevel - 1].upgradeValue);
+                UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.pulseAuraSkillData.radius, passiveSkillsLevelsData.IncreaseRangeUpgradesDataList[skillLevel - 1].upgradeValue);
+                UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.fireballsSkillData.radius, passiveSkillsLevelsData.IncreaseRangeUpgradesDataList[skillLevel - 1].upgradeValue);
+                UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.weaponStrikeSkillData.size, passiveSkillsLevelsData.IncreaseRangeUpgradesDataList[skillLevel - 1].upgradeValue);
+            }
+            else if (skillIndex == (int)PassiveSkills.IncreaseDamage)
+            {
+                UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.playerForceWaveData.damage, passiveSkillsLevelsData.IncreaseRangeUpgradesDataList[skillLevel - 1].upgradeValue);
+                UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.singleShotSkillData.damage, passiveSkillsLevelsData.IncreaseRangeUpgradesDataList[skillLevel - 1].upgradeValue);
+                UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.magicAuraSkillData.damage, passiveSkillsLevelsData.IncreaseRangeUpgradesDataList[skillLevel - 1].upgradeValue);
+                UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.pulseAuraSkillData.damage, passiveSkillsLevelsData.IncreaseRangeUpgradesDataList[skillLevel - 1].upgradeValue);
+                UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.meteorSkillData.damage, passiveSkillsLevelsData.IncreaseRangeUpgradesDataList[skillLevel - 1].upgradeValue);
+                UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.lightningBoltSkillData.damage, passiveSkillsLevelsData.IncreaseRangeUpgradesDataList[skillLevel - 1].upgradeValue);
+                UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.chainLightningSkillData.damage, passiveSkillsLevelsData.IncreaseRangeUpgradesDataList[skillLevel - 1].upgradeValue);
+                UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.fireballsSkillData.damage, passiveSkillsLevelsData.IncreaseRangeUpgradesDataList[skillLevel - 1].upgradeValue);
+                UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.allDirectionsShotsSkillData.damage, passiveSkillsLevelsData.IncreaseRangeUpgradesDataList[skillLevel - 1].upgradeValue);
+                UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.weaponStrikeSkillData.damage, passiveSkillsLevelsData.IncreaseRangeUpgradesDataList[skillLevel - 1].upgradeValue);
+            }
+            else if (skillIndex == (int)PassiveSkills.IncreaseMovementSpeed)
+            {
+                UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.characterSpeed, passiveSkillsLevelsData.IncreaseMovementSpeedUpgradesDataList[skillLevel - 1].upgradeValue);
+            }
+            else if (skillIndex == (int)PassiveSkills.DecreaseIncomeDamage)
+            {
+                UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.characterDamageReductionPercent, passiveSkillsLevelsData.DecreaseIncomeDamageUpgradesDataList[skillLevel - 1].upgradeValue);
+            }
+            else if (skillIndex == (int)PassiveSkills.IncreaseRegeneration)
+            {
+                UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.characterRegenerationPercent, passiveSkillsLevelsData.IncreaseRegenerationUpgradesDataList[skillLevel - 1].upgradeValue);
+            }
+            else if (skillIndex == (int)PassiveSkills.IncreaseCritChance)
+            {
+                UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.characterCritChance, passiveSkillsLevelsData.IncreaseCritChanceUpgradesDataList[skillLevel - 1].upgradeValue);
+            }
+            else if (skillIndex == (int)PassiveSkills.IncreaseCritPower)
+            {
+                UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.characterCritPower, passiveSkillsLevelsData.IncreaseCritPowerUpgradesDataList[skillLevel - 1].upgradeValue);
+            }
+            else if (skillIndex == (int)PassiveSkills.IncreaseProjectileAmount)
+            {
+                UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.playerSkillsData.singleShotSkillData.projectilesAmount, passiveSkillsLevelsData.IncreaseProjectilesAmountUpgradesDataList[skillLevel - 1].upgradeValue);
+                UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.playerSkillsData.meteorSkillData.projectilesAmount, passiveSkillsLevelsData.IncreaseProjectilesAmountUpgradesDataList[skillLevel - 1].upgradeValue);
+                UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.playerSkillsData.lightningBoltSkillData.projectilesAmount, passiveSkillsLevelsData.IncreaseProjectilesAmountUpgradesDataList[skillLevel - 1].upgradeValue);
+                UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.playerSkillsData.fireballsSkillData.projectilesAmount, passiveSkillsLevelsData.IncreaseProjectilesAmountUpgradesDataList[skillLevel - 1].upgradeValue);
+                UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.playerSkillsData.allDirectionsShotsSkillData.projectilesAmount, passiveSkillsLevelsData.IncreaseProjectilesAmountUpgradesDataList[skillLevel - 1].upgradeValue);
+            }
+        }
     }
 
     public void ResetPlayerCharacteristicAfterBattle()
