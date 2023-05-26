@@ -1,85 +1,96 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
-using Random = UnityEngine.Random;
 
 public class ChainLightningProjectile : SkillParameterBase, ISkillProjectile
 {
     [SerializeField] private Rigidbody projectileRigidBody;
-    [SerializeField] private LayerMask targetLayers;
 
     [Header("Radius")] [SerializeField] private float radius;
-    private Collider[] _enemyTargets;
+    private List<Collider> enemyList;
     private int _enemyCounter = 0;
+
     [Header("Parametres")] [SerializeField]
     private int jumpsCount;
+
     private Transform _thisTransform;
-    [SerializeField]private Transform playerTransform;
-    
-    [SerializeField]private PlayerController _playerController;
+
+    private bool isShot;
+    private Collider target;
+    private TargetsHolder _targetsHolder;
+
+   
+
 
     private void Start()
     {
         SubscribeOnEvents();
         _thisTransform = transform;
-
     }
 
-    [Inject]
-    private void InjectDependencies(PlayerController playerController)
-    {
-        _playerController =playerController;
-        playerTransform = _playerController.transform;
-    }
+   
 
     private void OnDestroy()
     {
         UnsubscribeFromEvents();
     }
+    public TargetsHolder TargetHolder
+    {
+        set => _targetsHolder = value;
+    }
+
+    public int JumpsCount
+    {
+        get => jumpsCount;
+        set => jumpsCount = value;
+    }
+
+    private void FixedUpdate()
+    {
+        if (isShot)
+        {
+           
+            if(_targetsHolder.GetTarget()==null)
+            {
+                poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
+            }
+
+            else if (target == null)
+            {
+                target = _targetsHolder.GetTarget();
+
+            }
+            else if (target.enabled == false || target.gameObject.layer==Layers.DeadEnemy)
+            {
+                target = _targetsHolder.GetTarget();
+            }
+            else
+            {
+                projectileRigidBody.MovePosition(_thisTransform.position +
+                                                 (target.transform.position - _thisTransform.position).normalized *
+                                                 speed *
+                                                 Time.fixedDeltaTime);
+            }
+            
+        }
+    }
 
     public void Move()
     {
-        projectileRigidBody.AddForce(_thisTransform.forward * speed, ForceMode.Acceleration);
+        //projectileRigidBody.AddForce(_thisTransform.forward * speed, ForceMode.Acceleration);
     }
 
-    private void GetTargets()
-    {
-        _enemyTargets = Physics.OverlapSphere(_thisTransform.position, radius, targetLayers);
-        _enemyCounter = 0;
 
-    }
-
-    private void IncreaseCounter()
-    {
-        if (_enemyTargets.Length < _enemyCounter)
-            _enemyCounter++;
-        else
-            _enemyCounter = 0;
-    }
-    private void LockTarget()
-    {
-        if (_enemyTargets.Length !=0)
-        {
-            _thisTransform.forward = _enemyTargets[_enemyCounter].transform.position - _thisTransform.position;
-        }
-        else
-        {
-            _thisTransform.rotation = Quaternion.Euler(0, Random.Range(0, 361), 0);
-
-        }
-
-        IncreaseCounter();
-    }
     #region Event subsctiption
 
     private void SubscribeOnEvents()
     {
-        if(poolItemComponent != null)
+        if (poolItemComponent != null)
         {
             poolItemComponent.OnItemResetRequired += PoolItemComponent_ResetRequired_ExecuteReaction;
             poolItemComponent.OnObjectAwakeStateSet += PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction;
         }
     }
+
     private void UnsubscribeFromEvents()
     {
         if (poolItemComponent != null)
@@ -90,12 +101,9 @@ public class ChainLightningProjectile : SkillParameterBase, ISkillProjectile
     }
 
     #endregion
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(_thisTransform.position, radius);
-    }
 
-   
+    
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -104,34 +112,46 @@ public class ChainLightningProjectile : SkillParameterBase, ISkillProjectile
             if (other.gameObject.layer == Layers.EnemyZombie || other.gameObject.layer == Layers.EnemySkeleton ||
                 other.gameObject.layer == Layers.EnemyGhost)
             {
-                jumpsCount--;
-                LockTarget();
-                projectileRigidBody.velocity = Vector3.zero;
-                Move();
-            }
+                JumpsCount = jumpsCount - 1;
+                _targetsHolder.RemoveTarget(other);
 
-            IncreaseCounter();
+                target = _targetsHolder.GetTarget();
+            }
         }
+
         if (jumpsCount <= 0)
         {
             poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
-   
         }
     }
 
     #region Pool Item Component Events Reactions
+
     private void PoolItemComponent_ResetRequired_ExecuteReaction()
     {
-       projectileRigidBody.velocity = Vector3.zero;
-       _thisTransform.rotation = Quaternion.identity;
+        projectileRigidBody.velocity = Vector3.zero;
+        _thisTransform.rotation = Quaternion.identity;
+        isShot = false;
     }
 
     private void PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction()
     {
-        GetTargets();
-        LockTarget();
-        Move();
+        if (_targetsHolder == null || _targetsHolder.GetTarget() == null
+        )
+        {
+            poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
+        }
+
+        else
+        {
+            isShot = true;
+            target = _targetsHolder.GetTarget();
+
+        }
+        
+
+        // Move();
     }
+
     #endregion Pool Item Component Events Reactions
-    
 }

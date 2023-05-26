@@ -16,6 +16,7 @@ public class Layers
     public const int FireballSkill = 19;
     public const int ChainLightning = 20;
     public const int NovaSkill = 21;
+    public const int DeadEnemy = 22;
 
 }
 

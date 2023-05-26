@@ -1,15 +1,11 @@
-
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations;
 using Zenject;
 
 public class FireballSkillSpawner : ProjectileSpawnerBase
 {
     [SerializeField] private List<PoolItem> projectiles;
-    private PoolItemsManager _poolmanager;
 
     
     [Range(-50, 50)] [SerializeField] private float rotationSpeed;
@@ -17,9 +13,13 @@ public class FireballSkillSpawner : ProjectileSpawnerBase
     [Range(0, 10)] [SerializeField] private float height;
     [Range(0, 10)] [SerializeField] private int projectileCount;
     
+    private PoolItemsManager _poolmanager;
+    private PlayerCharacteristicsManager _playerCharacteristicsManager;
+
     [Inject]
-    private void InjectDependencies(PoolItemsManager poolmanager)
+    private void InjectDependencies(PoolItemsManager poolmanager,PlayerCharacteristicsManager playerCharacteristicsManager)
     {
+        _playerCharacteristicsManager = playerCharacteristicsManager;
         _poolmanager = poolmanager;
     }
 
@@ -32,9 +32,17 @@ public class FireballSkillSpawner : ProjectileSpawnerBase
     {
         StartCoroutine(SpawningProjectile());
     }
+    protected override IEnumerator SpawningProjectile()
+    {
+        while (true)
+        {
+            StartCoroutine(SettingUpProjectile());
+
+            yield return new WaitForSecondsRealtime(0.1f);        }
+    }
     protected override IEnumerator SettingUpProjectile()
     {
-        if (projectileCount-1 < projectiles.Count) yield break;
+        if (_playerCharacteristicsManager.CurrentPlayerData.playerSkillsData.fireballsSkillData.projectilesAmount-1 < projectiles.Count) yield break;
         PoolItem lightning = _poolmanager.SpawnItemFromPool(PoolItemsTypes.Fireball_Skill, transform.position,Quaternion.identity, spawnPoint);
         if (lightning != null) 
         {
@@ -52,7 +60,7 @@ public class FireballSkillSpawner : ProjectileSpawnerBase
             float circlePosition = (float)i / (float)projectiles.Count;
             float x = Mathf.Sin( circlePosition * Mathf.PI * 2.0f ) * radius;
             float z = Mathf.Cos( circlePosition * Mathf.PI * 2.0f ) * radius;
-            projectiles[i].transform.position = new Vector3(x, height, z);
+            projectiles[i].transform.position =transform.position + new Vector3(x, height, z);
         }
         
     }

@@ -5,15 +5,16 @@ using Random = UnityEngine.Random;
 public class SingleShotSkillProjectile : SkillParameterBase, ISkillProjectile
 {
     [SerializeField] private Rigidbody projectileRigidBody;
-    [SerializeField] private LayerMask targetLayers;
 
     [Header("Radius")] [SerializeField] private float radius;
     private Collider[] _enemyTargets;
     private int _enemyCounter = 0;
     [Header("Parametres")] [SerializeField]
-    private int jumpsCount;
 
     private Transform _thisTransform;
+    private TargetsHolder _targetsHolder;
+    private Collider target;
+
     private void Start()
     {
         SubscribeOnEvents();
@@ -28,37 +29,15 @@ public class SingleShotSkillProjectile : SkillParameterBase, ISkillProjectile
 
     public void Move()
     {
+        if(target!=null)
+            _thisTransform.LookAt(target.transform.position,Vector3.up);
         projectileRigidBody.AddForce(_thisTransform.forward * speed,ForceMode.Acceleration);
     }
-
-    private void GetTargets()
+    public TargetsHolder TargetHolder
     {
-        _enemyTargets = Physics.OverlapSphere(_thisTransform.position, radius, targetLayers);
-        _enemyCounter = 0;
-
+        set => _targetsHolder = value;
     }
-
-    private void IncreaseCounter()
-    {
-        if (_enemyTargets.Length < _enemyCounter)
-            _enemyCounter++;
-        else
-            _enemyCounter = 0;
-    }
-    private void LockTarget()
-    {
-        if (_enemyTargets.Length !=0)
-        {
-            _thisTransform.forward = _enemyTargets[_enemyCounter].transform.position - _thisTransform.position;
-        }
-        else
-        {
-            _thisTransform.rotation = Quaternion.Euler(0, Random.Range(0, 361), 0);
-
-        }
-
-        IncreaseCounter();
-    }
+    
     #region Event subsctiption
 
     private void SubscribeOnEvents()
@@ -102,8 +81,16 @@ public class SingleShotSkillProjectile : SkillParameterBase, ISkillProjectile
 
     private void PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction()
     {
-        GetTargets();
-        LockTarget();
+        if (_targetsHolder == null)
+        
+        {
+            poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
+        }
+
+        else
+        {
+            target = _targetsHolder.GetTarget();
+        }
         Move();
     }
     #endregion Pool Item Component Events Reactions

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 
 public class EnemyCollisionsManager : MonoBehaviour
 {
@@ -11,8 +12,9 @@ public class EnemyCollisionsManager : MonoBehaviour
     
     private Collider _collider;
     private bool canCheckCollisions = true;
+    private int startLayer;
     [SerializeField] private float auraCooldown=1;//Delete
-
+    
     #region Events Declaration
     public event Action OnCharacterOutOfHp;
     public event Action OnDamageReceived;
@@ -23,6 +25,7 @@ public class EnemyCollisionsManager : MonoBehaviour
 
     private void Awake()
     {
+        startLayer = gameObject.layer;
         CashComponents();
         ChangeColliderActivationState(false);
     }
@@ -46,6 +49,10 @@ public class EnemyCollisionsManager : MonoBehaviour
         }    
     }
 
+    public void SetStandardLayer()
+    {
+        gameObject.layer = startLayer;
+    }
     public void ApplyExplosion()
     {
         DecreaseHp(startHp);
@@ -90,7 +97,8 @@ public class EnemyCollisionsManager : MonoBehaviour
             auraCooldown += Time.fixedDeltaTime;
             if (auraCooldown > 0.1f)
             {
-                Debug.Log("Aura Damages");
+                DecreaseHp(startHp);
+
                 auraCooldown = 0;
             }
         }
@@ -144,6 +152,7 @@ public class EnemyCollisionsManager : MonoBehaviour
         {
             
             canCheckCollisions = false;
+            gameObject.layer = Layers.DeadEnemy;
             OnCharacterOutOfHp?.Invoke();
         }
         else

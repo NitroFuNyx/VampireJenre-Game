@@ -69,6 +69,7 @@ public class EnemyComponentsManager : EnemyBehaviour
         // reset enemy
         animationsManager.SetAnimation_Idle();
         collisionsManager.ResetComponent();
+        collisionsManager.SetStandardLayer();
     }
 
     private void PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction()

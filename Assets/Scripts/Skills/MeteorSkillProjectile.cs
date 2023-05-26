@@ -16,6 +16,13 @@ public class MeteorSkillProjectile : SkillParameterBase , ISkillProjectile
 
     [Header("References")] 
     [SerializeField] private ExplosionCollision explosionCollision;
+
+    public float PuddleLifeTime
+    {
+        get => puddleLifeTime;
+        set => puddleLifeTime = value;
+    }
+
     public void Move()
     {
         projectileRigidBody.AddForce(transform.forward * speed,ForceMode.Impulse);

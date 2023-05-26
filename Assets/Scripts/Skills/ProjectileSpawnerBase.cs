@@ -23,8 +23,7 @@ public abstract class ProjectileSpawnerBase : MonoBehaviour
 
     protected virtual IEnumerator SettingUpProjectile()
     {
-        transform.rotation = Quaternion.Euler(0, Random.Range(0, 361),0); //TODO: MAKE TARGET LOCK
-        Instantiate(skill, spawnPoint.position, transform.rotation,dynamicEnvironment);
+       
         yield return null;
     }
 
