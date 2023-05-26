@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyComponentsManager : EnemyBehaviour
@@ -11,6 +13,7 @@ public class EnemyComponentsManager : EnemyBehaviour
 
     private void Start()
     {
+       
         SubscribeOnEvents();
     }
 
@@ -43,6 +46,7 @@ public class EnemyComponentsManager : EnemyBehaviour
         collisionsManager.OnDamageReceived += CollisionManager_DamageReceived_ExecuteReaction;
         collisionsManager.OnSpeedDebuffCollision += CollisionManager_SpeedDebuffCollision_ExecuteReaction;
         collisionsManager.OnSpeedReset += CollisionManager_SpeedReset_ExecuteReaction;
+        collisionsManager.OnSkillCollision += CollisionManager_SkillCollision_ExecuteReaction;
 
         animationsManager.OnDieAnimationFinished += AnimationManager_DieAnimationFinished_ExecuteReaction;
     }
@@ -59,7 +63,9 @@ public class EnemyComponentsManager : EnemyBehaviour
         collisionsManager.OnDamageReceived -= CollisionManager_DamageReceived_ExecuteReaction;
         collisionsManager.OnSpeedDebuffCollision -= CollisionManager_SpeedDebuffCollision_ExecuteReaction;
         collisionsManager.OnSpeedReset -= CollisionManager_SpeedReset_ExecuteReaction;
+        collisionsManager.OnSkillCollision -= CollisionManager_SkillCollision_ExecuteReaction;
 
+        
         animationsManager.OnDieAnimationFinished -= AnimationManager_DieAnimationFinished_ExecuteReaction;
     }
 
@@ -105,6 +111,48 @@ public class EnemyComponentsManager : EnemyBehaviour
     {
         movementManager.ResetMovementSpeed();
     }
+
+    private float CollisionManager_SkillCollision_ExecuteReaction(ActiveSkills skill)
+    {
+        float value;
+        if (skill == ActiveSkills.ForceWave)
+            value = poolItemComponent.CharacteristicsManager.CurrentPlayerData.playerSkillsData.playerForceWaveData
+                .damage;
+        else if (skill == ActiveSkills.SingleShot)
+            value = poolItemComponent.CharacteristicsManager.CurrentPlayerData.playerSkillsData.singleShotSkillData
+                .damage;
+        else if (skill == ActiveSkills.MagicAura)
+            value = poolItemComponent.CharacteristicsManager.CurrentPlayerData.playerSkillsData.magicAuraSkillData
+                .damage;
+        else if (skill == ActiveSkills.PulseAura)
+            value = poolItemComponent.CharacteristicsManager.CurrentPlayerData.playerSkillsData.pulseAuraSkillData
+                .damage;
+        else if (skill == ActiveSkills.Meteor)
+            value = poolItemComponent.CharacteristicsManager.CurrentPlayerData.playerSkillsData.meteorSkillData
+                .damage;
+        else if (skill == ActiveSkills.LightningBolt)
+            value = poolItemComponent.CharacteristicsManager.CurrentPlayerData.playerSkillsData.lightningBoltSkillData
+                .damage;
+        else if (skill == ActiveSkills.ChainLightning)
+            value = poolItemComponent.CharacteristicsManager.CurrentPlayerData.playerSkillsData.chainLightningSkillData
+                .damage;
+        else if (skill == ActiveSkills.Fireballs)
+            value = poolItemComponent.CharacteristicsManager.CurrentPlayerData.playerSkillsData.fireballsSkillData
+                .damage;
+        else if (skill == ActiveSkills.AllDirectionsShots)
+            value = poolItemComponent.CharacteristicsManager.CurrentPlayerData.playerSkillsData.allDirectionsShotsSkillData
+                .damage;
+        else if (skill == ActiveSkills.WeaponStrike)
+            value = poolItemComponent.CharacteristicsManager.CurrentPlayerData.playerSkillsData.weaponStrikeSkillData
+                .damage;
+        else
+        {
+            Debug.LogWarning($"Unknown type got caught during damage processing {skill}");
+            value = 0;
+        }
+        Debug.Log($"Skill: {skill} damages: {value}");
+        return value;
+    }
     #endregion Collision Manager Events Reaction
 
     #region Animation Manager Events Reaction
@@ -112,5 +160,6 @@ public class EnemyComponentsManager : EnemyBehaviour
     {
         poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
     }
+    
     #endregion Animation Manager Events Reaction
 }

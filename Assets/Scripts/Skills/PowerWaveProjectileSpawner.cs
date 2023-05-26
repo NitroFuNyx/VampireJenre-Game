@@ -47,6 +47,7 @@ public class PowerWaveProjectileSpawner : ProjectileSpawnerBase
             
             if (missile != null)
             {
+
                 if (missile.TryGetComponent(out PowerWaveSkillProjectile projectile))
                 {
                     projectile.TargetHolder = targetsHolder;

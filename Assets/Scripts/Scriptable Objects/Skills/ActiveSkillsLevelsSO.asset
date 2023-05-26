@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: ActiveSkillsLevelsSO
   m_EditorClassIdentifier: 
   forceWaveUpgradesDataList:
-  - damage: 5
+  - damage: 25
     range: 5
     width: 5
-    cooldown: 1.5
-  - damage: 0
+    cooldown: 1
+  - damage: 50
     range: 1
     width: 1
-    cooldown: 0
-  - damage: 3
-    range: 0
+    cooldown: 0.7
+  - damage: 75
+    range: 1
     width: 1
-    cooldown: 0
+    cooldown: 0.5
   - damage: 1
     range: 2
     width: 0
@@ -312,12 +312,12 @@ MonoBehaviour:
     projectilesAmount: 0
     cooldown: 0
   weaponStrikeUpgradesDataList:
-  - damage: 0
+  - damage: 5
     size: 0
-    cooldown: 0
-  - damage: 0
+    cooldown: 1
+  - damage: 10
     size: 0
-    cooldown: 0
+    cooldown: 0.5
   - damage: 0
     size: 0
     cooldown: 0
