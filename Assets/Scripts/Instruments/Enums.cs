@@ -69,3 +69,8 @@ public enum SkillUpgradesTypes
 {
     PercentSurplus, PercentOfValue
 }
+
+public enum PickableItemsCategories
+{
+    TreasureChest, SkillScroll, CoinsMagnet
+}

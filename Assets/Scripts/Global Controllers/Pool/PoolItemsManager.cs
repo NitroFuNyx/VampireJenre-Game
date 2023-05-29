@@ -15,6 +15,7 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private int skillFireballPoolSize = 25;
     [SerializeField] private int skillSingleShotPoolSize = 50;
     [SerializeField] private int skillPowerWavePoolSize = 50;
+    [SerializeField] private int pickableItemsPoolSize = 20;
 
     [Header("Active Pools")]
     [Space]
@@ -24,6 +25,7 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private PoolItem enemySkeletonPrefab;
     [SerializeField] private PoolItem enemyGhostPrefab;
     [SerializeField] private PoolItem enemyZombiePrefab;
+    [Space]
     [SerializeField] private PoolItem skillMissilePrefab;
     [SerializeField] private PoolItem skillMeteorPrefab;
     [SerializeField] private PoolItem skillLightningBoltPrefab;
@@ -31,6 +33,8 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private PoolItem skillChainLightningPrefab;
     [SerializeField] private PoolItem skillSingleShotPrefab;
     [SerializeField] private PoolItem skillPowerWaveShotPrefab;
+    [Space]
+    [SerializeField] private PoolItem treasureChestPrefab;
 
     private Dictionary<PoolItemsTypes, List<PoolItem>> itemsListsDictionary = new Dictionary<PoolItemsTypes, List<PoolItem>>();
     private Dictionary<PoolItemsTypes, Transform> itemsHoldersDictionary = new Dictionary<PoolItemsTypes, Transform>();
@@ -58,6 +62,7 @@ public class PoolItemsManager : MonoBehaviour
         CreatePool(enemySkeletonPrefab, "Enemy Skeleton", enemiesPoolSize);
         CreatePool(enemyGhostPrefab, "Enemy Ghost", enemiesPoolSize);
         CreatePool(enemyZombiePrefab, "Enemy Zombie", enemiesPoolSize);
+
         CreatePool(skillSingleShotPrefab , "Skill Single Shot", skillSingleShotPoolSize);
         CreatePool(skillMissilePrefab, "Skill Missile ", skillMissilePoolSize);
         CreatePool(skillMeteorPrefab , "Skill Meteor ", skillMeteorPoolSize);
@@ -65,6 +70,8 @@ public class PoolItemsManager : MonoBehaviour
         CreatePool(skillFireballPrefab , "Skill Fireball Bolt ", skillFireballPoolSize);
         CreatePool(skillChainLightningPrefab , "Skill Chain lightning ", skillChainLightningPoolSize);
         CreatePool(skillPowerWaveShotPrefab , "Skill Power Wave ", skillPowerWavePoolSize);
+
+        CreatePool(treasureChestPrefab, "Treasure Chest", pickableItemsPoolSize);
     }
 
     public PoolItem SpawnItemFromPool(PoolItemsTypes poolItemType, Vector3 _spawnPos, Quaternion _rotation, Transform _parent)
@@ -132,7 +139,6 @@ public class PoolItemsManager : MonoBehaviour
             PoolItem poolItem = Instantiate(poolItemPrefab, Vector3.zero, Quaternion.identity, poolItemsParent.transform);
             poolItem.transform.localPosition = Vector3.zero;
             poolItem.CashComponents(this, _resourcesManager, _gameProcessManager, _playerExperienceManager,playerCharacteristicsManager);
-            //poolItem.gameObject.SetActive(false);
             itemsList.Add(poolItem);
             poolItem.name = $"{itemName} {i}";
         }
