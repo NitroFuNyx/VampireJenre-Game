@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public abstract class PickableItem : MonoBehaviour
 {
@@ -7,12 +8,24 @@ public abstract class PickableItem : MonoBehaviour
     [SerializeField] protected ParticleSystem pickingUpVfx;
 
     protected PoolItem poolItemComponent;
+    private Vector3 vfxStartPos;
 
     protected bool itemPickedUp = false;
 
     private void Awake()
     {
         CashComponents();
+        vfxStartPos = transform.localPosition;
+    }
+
+    private void Start()
+    {
+        SubscribeOnEvents();
+    }
+
+    private void OnEnable()
+    {
+        ResetVfx();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -20,13 +33,42 @@ public abstract class PickableItem : MonoBehaviour
         if (other.gameObject.layer == Layers.Player && !itemPickedUp)
         {
             itemPickedUp = true;
+            pickingUpVfx.transform.SetParent(null) ;
             pickingUpVfx.Play();
             PlayerCollision_ExecuteReaction();
         }
     }
 
+    private void OnDestroy()
+    {
+        UnsubscribeFromEvents();
+    }
+
+    private void SubscribeOnEvents()
+    {
+        if (poolItemComponent != null)
+        {
+            poolItemComponent.OnItemResetRequired += PoolItemComponent_ResetRequired_ExecuteReaction;
+        }
+    }
+
+    private void UnsubscribeFromEvents()
+    {
+        if (poolItemComponent != null)
+        {
+            poolItemComponent.OnItemResetRequired -= PoolItemComponent_ResetRequired_ExecuteReaction;
+        }
+    }
+
     protected abstract void PlayerCollision_ExecuteReaction();
-    protected abstract void ResetItem();
+
+    protected abstract void PoolItemComponent_ResetRequired_ExecuteReaction();
+
+    protected void ResetVfx()
+    {
+        pickingUpVfx.transform.SetParent(transform);
+        pickingUpVfx.transform.localPosition = vfxStartPos;
+    }
 
     private void CashComponents()
     {

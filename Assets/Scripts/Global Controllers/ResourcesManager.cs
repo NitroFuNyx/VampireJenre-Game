@@ -58,6 +58,7 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     {
         coinsAmount += deltaAmount;
         OnCoinsAmountChanged?.Invoke(coinsAmount);
+        Debug.Log($"Coins {deltaAmount}");
     }
 
     public void DecreaseCoinsAmount(int deltaAmount)
@@ -76,6 +77,7 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     {
         gemsAmount += deltaAmount;
         OnGemsAmountChanged?.Invoke(gemsAmount);
+        Debug.Log($"Gems {deltaAmount}");
     }
 
     public void DecreaseGemsAmount(int deltaAmount)
@@ -127,15 +129,8 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         }
         else
         {
-            int coinsGrantingIndex;
-
-            coinsGrantingIndex = UnityEngine.Random.Range(0, 5);
-
-            if (coinsGrantingIndex == 0)
-            {
-                int coinsAmount = UnityEngine.Random.Range(CoinsSurplusForKillingEnemy_Min, CoinsSurplusForKillingEnemy_Max);
-                IncreaseCoinsAmount(coinsAmount);
-            }
+            int coinsAmount = UnityEngine.Random.Range(CoinsSurplusForKillingEnemy_Min, CoinsSurplusForKillingEnemy_Max);
+            IncreaseCoinsAmount(coinsAmount);
         }
     }
 }

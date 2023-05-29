@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyComponentsManager : EnemyBehaviour
@@ -13,7 +12,6 @@ public class EnemyComponentsManager : EnemyBehaviour
 
     private void Start()
     {
-       
         SubscribeOnEvents();
     }
 
