@@ -69,8 +69,6 @@ public class GameProcessManager : MonoBehaviour
         battleStarted = true;
         OnGameStarted?.Invoke();
         _systemTimeManager.PauseGame();
-        //player.StartGame();
-        //StartCoroutine(StartGameCoroutine());
     }
 
     public void IncreaseCurrentProgressValue()
@@ -110,7 +108,7 @@ public class GameProcessManager : MonoBehaviour
             skillIndex = (int)ActiveSkills.Meteor;
         }
         skillsObjectsList[skillIndex].gameObject.SetActive(true);
-        StartCoroutine(StartGameCoroutine());
+        //StartCoroutine(StartGameCoroutine());
     }
 
     private void PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction()

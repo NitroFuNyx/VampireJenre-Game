@@ -20,6 +20,7 @@ public class Layers
     public const int MissilesSkill = 23;
     public const int LightningBolt = 24;
     public const int ForceWave = 25;
+    public const int Player = 26;
 
 }
 

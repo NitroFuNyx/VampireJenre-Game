@@ -114,4 +114,28 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
             }
         }
     }
+
+    public void AddResourceForPickingUpTreasureChest()
+    {
+        int gemGrantingIndex;
+
+        gemGrantingIndex = UnityEngine.Random.Range(0, 10);
+
+        if (gemGrantingIndex == 0)
+        {
+            IncreaseGemsAmount(GemSurplusForKillingEnemy);
+        }
+        else
+        {
+            int coinsGrantingIndex;
+
+            coinsGrantingIndex = UnityEngine.Random.Range(0, 5);
+
+            if (coinsGrantingIndex == 0)
+            {
+                int coinsAmount = UnityEngine.Random.Range(CoinsSurplusForKillingEnemy_Min, CoinsSurplusForKillingEnemy_Max);
+                IncreaseCoinsAmount(coinsAmount);
+            }
+        }
+    }
 }
