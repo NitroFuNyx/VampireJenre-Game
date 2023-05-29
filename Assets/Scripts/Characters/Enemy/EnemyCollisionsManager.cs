@@ -1,7 +1,5 @@
 using UnityEngine;
 using System;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 
 public class EnemyCollisionsManager : MonoBehaviour
 {
@@ -167,6 +165,4 @@ public class EnemyCollisionsManager : MonoBehaviour
             OnDamageReceived?.Invoke();
         }
     }
-
-    
 }
