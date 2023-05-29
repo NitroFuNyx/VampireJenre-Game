@@ -7,8 +7,8 @@ public class EnemyCollisionsManager : MonoBehaviour
 {
     [Header("Hp Data")]
     [Space]
-    [SerializeField] private int startHp = 100;
-    [SerializeField] private int currentHp = 100;
+    [SerializeField] private float startHp = 100f;
+    [SerializeField] private float currentHp = 100f;
     
     private Collider _collider;
     private bool canCheckCollisions = true;
@@ -21,6 +21,8 @@ public class EnemyCollisionsManager : MonoBehaviour
 
     public event Action OnSpeedDebuffCollision;
     public event Action OnSpeedReset;
+
+    public event Func<ActiveSkills,float> OnSkillCollision; 
     #endregion Events Declaration
 
     private void Awake()
@@ -35,19 +37,6 @@ public class EnemyCollisionsManager : MonoBehaviour
         SetStartSettings();
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(canCheckCollisions)
-        {
-            if (collision.gameObject.layer == Layers.PlayerSkillProjectile)
-            {
-                DecreaseHp(startHp);
-            }
-
-            
-            
-        }    
-    }
 
     public void SetStandardLayer()
     {
@@ -62,31 +51,49 @@ public class EnemyCollisionsManager : MonoBehaviour
     {
         if (canCheckCollisions)
         {
-            if (collision.gameObject.layer == Layers.SkillArea)
+            if (collision.gameObject.layer == Layers.MeteorPuddle)
             {
 
                 OnSpeedDebuffCollision?.Invoke();
             }
 
-            if (collision.gameObject.layer == Layers.PlayerSkillProjectile)
+            if (collision.gameObject.layer == Layers.SingleShotSkill)
             {
-                DecreaseHp(startHp);
+                DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.SingleShot));
             }
-
             if (collision.gameObject.layer == Layers.FireballSkill)
             {
-                DecreaseHp(startHp);
+                DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.Fireballs));
             }
-
             if (collision.gameObject.layer == Layers.ChainLightning)
             {
-                DecreaseHp(startHp);
+                DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.ChainLightning));
             }
-
-            if (collision.gameObject.layer == Layers.NovaSkill)
+            if (collision.gameObject.layer == Layers.PulseAuraSkill)
             {
-                DecreaseHp(startHp);
+                DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.PulseAura));
             }
+            if (collision.gameObject.layer == Layers.MeteorSkill)
+            {
+                DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.Meteor));
+            }
+            if (collision.gameObject.layer == Layers.WeaponStrikeSkill)
+            {
+                DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.WeaponStrike));
+            }
+            if (collision.gameObject.layer == Layers.MissilesSkill)
+            {
+                DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.AllDirectionsShots));
+            }
+            if (collision.gameObject.layer == Layers.LightningBolt)
+            {
+                DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.LightningBolt));
+            }
+            if (collision.gameObject.layer == Layers.ForceWave)
+            {
+                DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.ForceWave));
+            }
+            
         }
     }
 
@@ -97,7 +104,7 @@ public class EnemyCollisionsManager : MonoBehaviour
             auraCooldown += Time.fixedDeltaTime;
             if (auraCooldown > 0.1f)
             {
-                DecreaseHp(startHp);
+                DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.MagicAura));
 
                 auraCooldown = 0;
             }
@@ -106,7 +113,7 @@ public class EnemyCollisionsManager : MonoBehaviour
 
     private void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.layer == Layers.SkillArea)
+        if (collision.gameObject.layer == Layers.MeteorPuddle)
         {
 
             OnSpeedReset?.Invoke();
@@ -145,7 +152,7 @@ public class EnemyCollisionsManager : MonoBehaviour
         currentHp = startHp;
     }
 
-    private void DecreaseHp(int amount)
+    private void DecreaseHp(float amount)
     {
         currentHp -= amount;
         if (currentHp <= 0)
@@ -160,4 +167,6 @@ public class EnemyCollisionsManager : MonoBehaviour
             OnDamageReceived?.Invoke();
         }
     }
+
+    
 }

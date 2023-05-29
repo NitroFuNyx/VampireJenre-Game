@@ -12,6 +12,7 @@ public class PoolItem : MonoBehaviour
     private ResourcesManager _resourcesManager;
     private GameProcessManager _gameProcessManager;
     private PlayerExperienceManager _playerExperienceManager;
+    private PlayerCharacteristicsManager playerCharacteristicsManager;
 
     public PoolItemsTypes PoolItemType { get => poolItemType;}
     public PoolItemsManager PoolItemsManager { get => _poolItemsManager; private set => _poolItemsManager = value; }
@@ -19,6 +20,8 @@ public class PoolItem : MonoBehaviour
     public ResourcesManager ResourcesManager { get => _resourcesManager; private set => _resourcesManager = value; }
     public GameProcessManager GameProcessManager { get => _gameProcessManager; private set => _gameProcessManager = value; }
     public PlayerExperienceManager PlayerExperienceManager { get => _playerExperienceManager; private set => _playerExperienceManager = value; }
+
+    public PlayerCharacteristicsManager CharacteristicsManager => playerCharacteristicsManager;
 
     #region Events Declaration
     public event Action OnItemResetRequired;
@@ -35,10 +38,11 @@ public class PoolItem : MonoBehaviour
         OnObjectAwakeStateSet?.Invoke();
     }
 
-    public void CashComponents(PoolItemsManager poolItemsManager, ResourcesManager resourcesManager, GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager)
+    public void CashComponents(PoolItemsManager poolItemsManager, ResourcesManager resourcesManager, GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager,PlayerCharacteristicsManager playerCharacteristicsManager)
     {
+        this.playerCharacteristicsManager = playerCharacteristicsManager;
         _poolItemsManager = poolItemsManager;
-
+        
         _resourcesManager = resourcesManager;
         _gameProcessManager = gameProcessManager;
         _playerExperienceManager = playerExperienceManager;
