@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 4108025531271837406}
   - component: {fileID: 8383016082676907238}
   - component: {fileID: 7413751664692785759}
+  - component: {fileID: 5635575210266123382}
   m_Layer: 27
   m_Name: Coins Magnet
   m_TagString: Untagged
@@ -175,6 +176,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolItemType: 13
+--- !u!114 &5635575210266123382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4549197501269002151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5196d29d2af091f45bdc4b8e5924ac11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationValue: 100
 --- !u!1001 &2721876552142356264
 PrefabInstance:
   m_ObjectHideFlags: 0
