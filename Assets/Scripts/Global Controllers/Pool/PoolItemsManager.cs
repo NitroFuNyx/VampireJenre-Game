@@ -37,6 +37,11 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private PoolItem treasureChestPrefab;
     [SerializeField] private PoolItem skillScrollPrefab;
     [SerializeField] private PoolItem coinsMagnetPrefab;
+    [Space]
+    [SerializeField] private PoolItem crystalGreenPrefab;
+    [SerializeField] private PoolItem crystalOrangePrefab;
+    [SerializeField] private PoolItem crystalPurplePrefab;
+    [SerializeField] private PoolItem coinPrefab;
 
     private Dictionary<PoolItemsTypes, List<PoolItem>> itemsListsDictionary = new Dictionary<PoolItemsTypes, List<PoolItem>>();
     private Dictionary<PoolItemsTypes, Transform> itemsHoldersDictionary = new Dictionary<PoolItemsTypes, Transform>();
@@ -79,6 +84,11 @@ public class PoolItemsManager : MonoBehaviour
         CreatePool(treasureChestPrefab, "Treasure Chest", pickableItemsPoolSize);
         CreatePool(skillScrollPrefab, "Skill Scroll", pickableItemsPoolSize);
         CreatePool(coinsMagnetPrefab, "Coins Magnet", pickableItemsPoolSize);
+
+        CreatePool(crystalGreenPrefab, "Green Crystal", pickableItemsPoolSize);
+        CreatePool(crystalOrangePrefab, "Orange Crystal", pickableItemsPoolSize);
+        CreatePool(crystalPurplePrefab, "Purple Crystal", pickableItemsPoolSize);
+        CreatePool(coinPrefab, "Coin", pickableItemsPoolSize);
     }
 
     public PoolItem SpawnItemFromPool(PoolItemsTypes poolItemType, Vector3 _spawnPos, Quaternion _rotation, Transform _parent)

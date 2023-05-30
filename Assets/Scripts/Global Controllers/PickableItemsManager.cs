@@ -11,8 +11,13 @@ public class PickableItemsManager : MonoBehaviour
     [Header("Spawn Items Main Data")]
     [Space] 
     [SerializeField] private int itemsSpawnAmount = 3;
+    [Header("Holders")]
+    [Space]
+    [SerializeField] private Transform gemsHolder;
+    [SerializeField] private Transform coinsHolder;
 
     private PoolItemsManager _poolItemsManager;
+    private ResourcesManager _resourcesManager;
 
     #region Events Declaration
     public event System.Action OnSkillScrollCollected;
@@ -20,9 +25,10 @@ public class PickableItemsManager : MonoBehaviour
 
     #region Zenject
     [Inject]
-    private void Construct(PoolItemsManager poolItemsManager)
+    private void Construct(PoolItemsManager poolItemsManager, ResourcesManager resourcesManager)
     {
         _poolItemsManager = poolItemsManager;
+        _resourcesManager = resourcesManager;
     }
     #endregion Zenject
 
@@ -45,6 +51,47 @@ public class PickableItemsManager : MonoBehaviour
     public void CollectSkillScroll()
     {
         OnSkillScrollCollected?.Invoke();
+    }
+
+    public void SpawnResourceForKillingEnemy(Vector3 spawnPos)
+    {
+        ResourceBonusItemStruct resourceData = new ResourceBonusItemStruct();
+        resourceData = _resourcesManager.GetResourceItemForKillingEnemyData();
+
+        if(resourceData.canBeCollected)
+        {
+            if(resourceData.resourceType == ResourcesTypes.Gems)
+            {
+                int gemIndex = UnityEngine.Random.Range(0, 3);
+                PoolItemsTypes gemType;
+                if(gemIndex == 0)
+                {
+                    gemType = PoolItemsTypes.Gem_Green;
+                }
+                else if(gemIndex == 1)
+                {
+                    gemType = PoolItemsTypes.Gem_Orange;
+                }
+                else
+                {
+                    gemType = PoolItemsTypes.Gem_Purple;
+                }
+
+                PoolItem gem = _poolItemsManager.SpawnItemFromPool(gemType, spawnPos, Quaternion.identity, gemsHolder);
+                if(gem.TryGetComponent(out PickableResource resource))
+                {
+                    resource.SetResourceData(resourceData);
+                }
+            }
+            else
+            {
+                PoolItem coin = _poolItemsManager.SpawnItemFromPool(PoolItemsTypes.Coin, spawnPos, Quaternion.identity, coinsHolder);
+                if (coin.TryGetComponent(out PickableResource resource))
+                {
+                    resource.SetResourceData(resourceData);
+                }
+            }
+        }
     }
 
     private PoolItemsTypes GetPoolItemTypeToSpawn()

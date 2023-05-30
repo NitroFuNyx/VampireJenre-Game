@@ -91,7 +91,7 @@ public class EnemyComponentsManager : EnemyBehaviour
         animationsManager.SetAnimation_Die();
 
         poolItemComponent.PlayerExperienceManager.IncreaseXpValue(5);
-        poolItemComponent.ResourcesManager.AddResourceForKillingEnemy();
+        poolItemComponent.PickableItemsManager.SpawnResourceForKillingEnemy(transform.position);
         poolItemComponent.GameProcessManager.IncreaseCurrentProgressValue();
     }
 

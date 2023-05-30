@@ -93,15 +93,20 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     }
     #endregion Basic Resources Methods
 
-    public void AddResourceForKillingEnemy()
+    public ResourceBonusItemStruct GetResourceItemForKillingEnemyData()
     {
+        ResourceBonusItemStruct data = new ResourceBonusItemStruct();
+        data.canBeCollected = false;
+
         int gemGrantingIndex;
 
         gemGrantingIndex = UnityEngine.Random.Range(0, 10);
 
-        if(gemGrantingIndex == 0)
+        if (gemGrantingIndex == 0)
         {
-            IncreaseGemsAmount(GemSurplusForKillingEnemy);
+            data.resourceType = ResourcesTypes.Gems;
+            data.ResourceAmount = GemSurplusForKillingEnemy;
+            data.canBeCollected = true;
         }
         else
         {
@@ -109,11 +114,27 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
 
             coinsGrantingIndex = UnityEngine.Random.Range(0, 5);
 
-            if(coinsGrantingIndex == 0)
+            if (coinsGrantingIndex == 0)
             {
-                int coinsAmount = UnityEngine.Random.Range(CoinsSurplusForKillingEnemy_Min, CoinsSurplusForKillingEnemy_Max);
-                IncreaseCoinsAmount(coinsAmount);
+                int coins = UnityEngine.Random.Range(CoinsSurplusForKillingEnemy_Min, CoinsSurplusForKillingEnemy_Max);
+                data.resourceType = ResourcesTypes.Coins;
+                data.ResourceAmount = coins;
+                data.canBeCollected = true;
             }
+        }
+
+        return data;
+    }
+
+    public void AddResourceForKillingEnemy(ResourceBonusItemStruct data)
+    {
+        if(data.resourceType == (ResourcesTypes)ResourcesTypes.Gems)
+        {
+            IncreaseGemsAmount(data.ResourceAmount);
+        }
+        else
+        {
+            IncreaseCoinsAmount(data.ResourceAmount);
         }
     }
 
