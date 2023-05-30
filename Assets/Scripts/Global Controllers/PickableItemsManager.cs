@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -32,7 +31,7 @@ public class PickableItemsManager : MonoBehaviour
             {
                 Transform spawnPos = availableSpawnPositionsList[0];
 
-                PoolItem item = _poolItemsManager.SpawnItemFromPool(PoolItemsTypes.TreasureChest, spawnPos.position, Quaternion.identity, spawnPos);
+                PoolItem item = _poolItemsManager.SpawnItemFromPool(GetPoolItemTypeToSpawn(), spawnPos.position, Quaternion.identity, spawnPos);
                 takenSpawnPositionsList.Add(spawnPos);
                 availableSpawnPositionsList.Remove(spawnPos);
             }

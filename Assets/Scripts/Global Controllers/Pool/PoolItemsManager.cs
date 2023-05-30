@@ -35,6 +35,8 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private PoolItem skillPowerWaveShotPrefab;
     [Space]
     [SerializeField] private PoolItem treasureChestPrefab;
+    [SerializeField] private PoolItem skillScrollPrefab;
+    [SerializeField] private PoolItem coinsMagnetPrefab;
 
     private Dictionary<PoolItemsTypes, List<PoolItem>> itemsListsDictionary = new Dictionary<PoolItemsTypes, List<PoolItem>>();
     private Dictionary<PoolItemsTypes, Transform> itemsHoldersDictionary = new Dictionary<PoolItemsTypes, Transform>();
@@ -72,6 +74,8 @@ public class PoolItemsManager : MonoBehaviour
         CreatePool(skillPowerWaveShotPrefab , "Skill Power Wave ", skillPowerWavePoolSize);
 
         CreatePool(treasureChestPrefab, "Treasure Chest", pickableItemsPoolSize);
+        CreatePool(skillScrollPrefab, "Skill Scroll", pickableItemsPoolSize);
+        CreatePool(coinsMagnetPrefab, "Coins Magnet", pickableItemsPoolSize);
     }
 
     public PoolItem SpawnItemFromPool(PoolItemsTypes poolItemType, Vector3 _spawnPos, Quaternion _rotation, Transform _parent)
