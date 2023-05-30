@@ -23,6 +23,7 @@ public class SkillsManager : MonoBehaviour
     private TakenSkillsDisplayPanel _takenSkillsDisplayPanel;
     private PlayerExperienceManager _playerExperienceManager;
     private PlayerCharacteristicsManager _playerCharacteristicsManager;
+    private PickableItemsManager _pickableItemsManager;
 
     private List<ActiveSkills> activeSkillsUpgradedToMax = new List<ActiveSkills>();
     private List<PassiveSkills> passiveSkillsUpgradedToMax = new List<PassiveSkills>();
@@ -49,13 +50,14 @@ public class SkillsManager : MonoBehaviour
     #region Zenject
     [Inject]
     private void Construct(GameProcessManager gameProcessManager, GameLevelUI gameLevelUI, TakenSkillsDisplayPanel takenSkillsDisplayPanel, 
-                           PlayerExperienceManager playerExperienceManager, PlayerCharacteristicsManager playerCharacteristicsManager)
+                           PlayerExperienceManager playerExperienceManager, PlayerCharacteristicsManager playerCharacteristicsManager, PickableItemsManager pickableItemsManager)
     {
         _gameProcessManager = gameProcessManager;
         _gameLevelUI = gameLevelUI;
         _takenSkillsDisplayPanel = takenSkillsDisplayPanel;
         _playerExperienceManager = playerExperienceManager;
         _playerCharacteristicsManager = playerCharacteristicsManager;
+        _pickableItemsManager = pickableItemsManager;
     }
     #endregion Zenject
 
@@ -63,6 +65,8 @@ public class SkillsManager : MonoBehaviour
     {
         OnSkillToUpgradeDefined?.Invoke(skillCategoryIndex, skillIndex);
         _gameLevelUI.HideUpgradePanel();
+        _gameLevelUI.HideSkillScrollInfoPanel();
+        Debug.Log($"{(SkillBasicTypes)skillCategoryIndex} {skillIndex}");
 
         Sprite skillSprite = null;
 
@@ -154,17 +158,14 @@ public class SkillsManager : MonoBehaviour
         _takenSkillsDisplayPanel.SkillTaken_ExecuteReaction(skillCategoryIndex, skillIndex, skillSprite);
     }
 
-    public void ChooseRandomSkillForScroll()
-    {
-
-    }
-
     private void SubscribeOnEvents()
     {
         _gameProcessManager.OnGameStarted += GameProcessManager_OnGameStarted_ExecuteReaction;
         _gameProcessManager.OnPlayerLost += GameProcessManager_OnPlayerLost_ExecuteReaction;
 
         _playerExperienceManager.OnPlayerGotNewLevel += PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction;
+
+        _pickableItemsManager.OnSkillScrollCollected += PickableItemsManager_SkillScrollCollected_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
@@ -173,6 +174,8 @@ public class SkillsManager : MonoBehaviour
         _gameProcessManager.OnPlayerLost -= GameProcessManager_OnPlayerLost_ExecuteReaction;
 
         _playerExperienceManager.OnPlayerGotNewLevel -= PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction;
+
+        _pickableItemsManager.OnSkillScrollCollected -= PickableItemsManager_SkillScrollCollected_ExecuteReaction;
     }
 
     private void ChooseFirstSkill()
@@ -207,11 +210,6 @@ public class SkillsManager : MonoBehaviour
         }
 
         _gameLevelUI.ShowUpgradePanel(upgradeSkillsDataList);
-    }
-
-    private void ChooseRandomSkillToUpgrade()
-    {
-        _gameLevelUI.ShowUpgradePanel(GetRandomSkillsToUpgradeList(SkillsInGameValues.skillsOptionsForUpgradePerLevelAmount));
     }
 
     public List<UpgradeSkillData> GetRandomSkillsToUpgradeList(int optionsAmount)
@@ -342,7 +340,12 @@ public class SkillsManager : MonoBehaviour
 
     private void PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction()
     {
-        ChooseRandomSkillToUpgrade();
+        _gameLevelUI.ShowUpgradePanel(GetRandomSkillsToUpgradeList(SkillsInGameValues.skillsOptionsForUpgradePerLevelAmount));
+    }
+
+    private void PickableItemsManager_SkillScrollCollected_ExecuteReaction()
+    {
+        _gameLevelUI.ShowSkillScrollInfoPanel(GetRandomSkillsToUpgradeList(1));
     }
 
     private ActiveSkillsDisplayDataStruct GetActiveSkillDisplayData(ActiveSkills skill)

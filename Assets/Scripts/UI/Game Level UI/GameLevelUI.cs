@@ -14,6 +14,7 @@ public class GameLevelUI : MainCanvasPanel
     [Header("Skill Display Panels")]
     [Space]
     [SerializeField] private List<SkillUpgradeDisplayPanel> skillUpgradeDisplayPanelsList = new List<SkillUpgradeDisplayPanel>();
+    [SerializeField] private SkillUpgradeDisplayPanel scrollSkillDisplayPanel;
 
     private TimersManager _timersManager;
     private SystemTimeManager _systemTimeManager;
@@ -94,9 +95,21 @@ public class GameLevelUI : MainCanvasPanel
         subpanelsDictionary[GameLevelPanels.LevelUpgradePanel].ShowPanel();
     }
 
+    public void ShowSkillScrollInfoPanel(List<UpgradeSkillData> skillsOptionsDataList)
+    {
+        scrollSkillDisplayPanel.UpdateUI(skillsOptionsDataList[0]);
+
+        subpanelsDictionary[GameLevelPanels.SkillScrollInfoPanel].ShowPanel();
+    }
+
     public void HideUpgradePanel()
     {
         subpanelsDictionary[GameLevelPanels.LevelUpgradePanel].HidePanel();
+    }
+
+    public void HideSkillScrollInfoPanel()
+    {
+        subpanelsDictionary[GameLevelPanels.SkillScrollInfoPanel].HidePanel();
     }
 
     private void HideAllSubpanels()

@@ -111,7 +111,7 @@ public class GameProcessManager : MonoBehaviour
     {
         _systemTimeManager.ResumeGame();
         skillsObjectsList[skillIndex].gameObject.SetActive(true);
-        StartCoroutine(StartGameCoroutine());
+        //StartCoroutine(StartGameCoroutine());
     }
 
     private void PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction()
@@ -121,7 +121,7 @@ public class GameProcessManager : MonoBehaviour
 
     private void PickableItemsManager_SkillScrollCollected_ExecuteReaction()
     {
-        _systemTimeManager.PauseGame();
+        StartCoroutine(PauseGameWithDelayCoroutine());
     }
 
     private IEnumerator StartGameCoroutine()
