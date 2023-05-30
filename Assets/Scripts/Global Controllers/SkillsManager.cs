@@ -211,6 +211,11 @@ public class SkillsManager : MonoBehaviour
 
     private void ChooseRandomSkillToUpgrade()
     {
+        _gameLevelUI.ShowUpgradePanel(GetRandomSkillsToUpgradeList(SkillsInGameValues.skillsOptionsForUpgradePerLevelAmount));
+    }
+
+    public List<UpgradeSkillData> GetRandomSkillsToUpgradeList(int optionsAmount)
+    {
         List<UpgradeSkillData> upgradeSkillsDataList = new List<UpgradeSkillData>();
 
         List<ActiveSkills> activeSkillsAvailableList = new List<ActiveSkills>();
@@ -222,7 +227,7 @@ public class SkillsManager : MonoBehaviour
         activeSkillsAvailableList = GetCurrentlyAvailableForUpgradeActiveSkills();
         passiveSkillsAvailableList = GetCurrentlyAvailableForUpgradePassiveSkills();
 
-        for(int i = 0; i < SkillsInGameValues.skillsOptionsForUpgradePerLevelAmount; i++)
+        for (int i = 0; i < optionsAmount; i++)
         {
             int skillCategoryIndex = -1;
 
@@ -230,12 +235,12 @@ public class SkillsManager : MonoBehaviour
             {
                 skillCategoryIndex = UnityEngine.Random.Range(0, System.Enum.GetValues(typeof(SkillBasicTypes)).Length);
             }
-            else if(activeSkillsAvailableList.Count > 0 && passiveSkillsAvailableList.Count == 0)
+            else if (activeSkillsAvailableList.Count > 0 && passiveSkillsAvailableList.Count == 0)
             {
                 // all passive skills upgraded
                 skillCategoryIndex = (int)SkillBasicTypes.Active;
             }
-            else if(activeSkillsAvailableList.Count == 0 && passiveSkillsAvailableList.Count > 0)
+            else if (activeSkillsAvailableList.Count == 0 && passiveSkillsAvailableList.Count > 0)
             {
                 // all active skills upgraded
                 skillCategoryIndex = (int)SkillBasicTypes.Passive;
@@ -260,9 +265,9 @@ public class SkillsManager : MonoBehaviour
                 upgradeSkillData.ActiveSkill = skill;
                 upgradeSkillData.SkillLevelString = $"1";
 
-                for (int j = 0; j < activeSkillsTakenList.Count; j ++)
+                for (int j = 0; j < activeSkillsTakenList.Count; j++)
                 {
-                    if(activeSkillsTakenList[j].skillType == skill)
+                    if (activeSkillsTakenList[j].skillType == skill)
                     {
                         upgradeSkillData.SkillLevelString = $"{activeSkillsTakenList[j].skillLevel + 1}";
                         break;
@@ -274,7 +279,7 @@ public class SkillsManager : MonoBehaviour
                 upgradeSkillData.SkillNameString = $"{skillDisplayData.skillName}";
                 upgradeSkillData.SkillSprite = skillDisplayData.skillSprite;
             }
-            else if(skillCategoryIndex == (int)SkillBasicTypes.Passive)
+            else if (skillCategoryIndex == (int)SkillBasicTypes.Passive)
             {
                 randomSkillIndex = UnityEngine.Random.Range(0, passiveSkillsAvailableList.Count);
 
@@ -304,7 +309,7 @@ public class SkillsManager : MonoBehaviour
             upgradeSkillsDataList.Add(upgradeSkillData);
         }
 
-        _gameLevelUI.ShowUpgradePanel(upgradeSkillsDataList);
+        return upgradeSkillsDataList;
     }
 
     private void FillAvailableSkillsLists()
