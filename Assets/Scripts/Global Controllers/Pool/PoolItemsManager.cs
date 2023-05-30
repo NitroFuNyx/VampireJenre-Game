@@ -47,15 +47,18 @@ public class PoolItemsManager : MonoBehaviour
     private GameProcessManager _gameProcessManager;
     private PlayerExperienceManager _playerExperienceManager;
     private PlayerCharacteristicsManager playerCharacteristicsManager;
+    private PickableItemsManager _pickableItemsManager;
 
     #region Zenject
     [Inject]
-    private void Construct(ResourcesManager resourcesManager, GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager,PlayerCharacteristicsManager playerCharacteristicsManager)
+    private void Construct(ResourcesManager resourcesManager, GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager,
+                           PlayerCharacteristicsManager playerCharacteristicsManager, PickableItemsManager pickableItemsManager)
     {
         this.playerCharacteristicsManager = playerCharacteristicsManager;
         _resourcesManager = resourcesManager;
         _gameProcessManager = gameProcessManager;
         _playerExperienceManager = playerExperienceManager;
+        _pickableItemsManager = pickableItemsManager;
     }
     #endregion Zenject
 
@@ -142,7 +145,7 @@ public class PoolItemsManager : MonoBehaviour
         {
             PoolItem poolItem = Instantiate(poolItemPrefab, Vector3.zero, Quaternion.identity, poolItemsParent.transform);
             poolItem.transform.localPosition = Vector3.zero;
-            poolItem.CashComponents(this, _resourcesManager, _gameProcessManager, _playerExperienceManager,playerCharacteristicsManager);
+            poolItem.CashComponents(this, _resourcesManager, _gameProcessManager, _playerExperienceManager,playerCharacteristicsManager, _pickableItemsManager);
             itemsList.Add(poolItem);
             poolItem.name = $"{itemName} {i}";
         }

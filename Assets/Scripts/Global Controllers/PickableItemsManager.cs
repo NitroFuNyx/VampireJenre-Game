@@ -14,6 +14,10 @@ public class PickableItemsManager : MonoBehaviour
 
     private PoolItemsManager _poolItemsManager;
 
+    #region Events Declaration
+    public event System.Action OnSkillScrollCollected;
+    #endregion Events Declaration
+
     #region Zenject
     [Inject]
     private void Construct(PoolItemsManager poolItemsManager)
@@ -36,6 +40,11 @@ public class PickableItemsManager : MonoBehaviour
                 availableSpawnPositionsList.Remove(spawnPos);
             }
         }
+    }
+
+    public void CollectSkillScroll()
+    {
+        OnSkillScrollCollected?.Invoke();
     }
 
     private PoolItemsTypes GetPoolItemTypeToSpawn()

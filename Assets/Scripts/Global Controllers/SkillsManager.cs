@@ -154,6 +154,11 @@ public class SkillsManager : MonoBehaviour
         _takenSkillsDisplayPanel.SkillTaken_ExecuteReaction(skillCategoryIndex, skillIndex, skillSprite);
     }
 
+    public void ChooseRandomSkillForScroll()
+    {
+
+    }
+
     private void SubscribeOnEvents()
     {
         _gameProcessManager.OnGameStarted += GameProcessManager_OnGameStarted_ExecuteReaction;

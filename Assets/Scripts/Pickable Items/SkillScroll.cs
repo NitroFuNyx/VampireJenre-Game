@@ -3,7 +3,7 @@ public class SkillScroll : PickableItem
 {
     protected override void PlayerCollision_ExecuteReaction()
     {
-        //poolItemComponent.ResourcesManager.AddResourceForPickingUpTreasureChest();
+        poolItemComponent.PickableItemsManager.CollectSkillScroll();
         poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
     }
 
