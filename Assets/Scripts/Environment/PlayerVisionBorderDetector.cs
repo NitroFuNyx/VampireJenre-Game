@@ -20,7 +20,6 @@ public class PlayerVisionBorderDetector : MonoBehaviour
     {
         if(other.gameObject.layer == Layers.PlayerVisionBorder)
         {
-            Debug.Log($"Trigger Enter {gameObject}");
             OnObjectBecomeVisibleForPlayer?.Invoke();
         }
     }
@@ -29,7 +28,6 @@ public class PlayerVisionBorderDetector : MonoBehaviour
     {
         if (other.gameObject.layer == Layers.PlayerVisionBorder)
         {
-            Debug.Log($"Trigger Exit {gameObject}");
             OnObjectStoppedBeingVisibleForPlayer?.Invoke();
         }
     }
