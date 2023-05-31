@@ -4,6 +4,7 @@ using System;
 public class PlayerVisionBorderDetector : MonoBehaviour
 {
     public event Action OnObjectBecomeVisibleForPlayer;
+    public event Action OnObjectStoppedBeingVisibleForPlayer;
 
     private BoxCollider boxCollider;
 
@@ -13,6 +14,16 @@ public class PlayerVisionBorderDetector : MonoBehaviour
     {
         boxCollider = GetComponent<BoxCollider>();
         player = FindObjectOfType<PlayerVisionBorder>().BoxCollider;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //if(other.gameObject.layer == )
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        
     }
 
     public void ObjectBecomeVisibleForPlayer()
