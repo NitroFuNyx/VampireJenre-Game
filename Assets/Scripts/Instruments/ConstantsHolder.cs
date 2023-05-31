@@ -23,7 +23,7 @@ public class Layers
     public const int MeteorExplosion = 26;
     public const int BossProjectile = 27;
     public const int Player = 28;
-    public const int PlayerVisionBorder = 29;
+    public const int PlayerVisionBorder = 30;
 
 }
 

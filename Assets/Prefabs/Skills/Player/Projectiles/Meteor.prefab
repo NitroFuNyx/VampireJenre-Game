@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 598260997054047926}
-  - component: {fileID: 7119962795363896007}
   - component: {fileID: 1983959695833583116}
   - component: {fileID: -4541520850326645886}
   - component: {fileID: -4800505191692886853}
+  - component: {fileID: 7873298350096272198}
   m_Layer: 17
   m_Name: Meteor
   m_TagString: Untagged
@@ -39,28 +39,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7119962795363896007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 598260997054047925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e6813410bf343d4d9f4807a4d1af577, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 7.24
-  _dynamicEnvironment: {fileID: 598260997054047926}
-  projectileRigidBody: {fileID: 1983959695833583116}
-  projectileVFX: {fileID: 598260997653687047}
-  explosionVFX: {fileID: 760505513668103456}
-  puddle: {fileID: 5721517071489327596}
-  explosionColliderRadius: 1.88
-  puddleLifeTime: 1.97
-  explosionCollision: {fileID: 7083049105756616670}
-  sphereCollider: {fileID: 306174638925808390}
 --- !u!54 &1983959695833583116
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -103,6 +81,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolItemType: 6
+--- !u!114 &7873298350096272198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598260997054047925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e10199a5fd49051438b138a80c24e0ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  _dynamicEnvironment: {fileID: 0}
+  projectileRigidBody: {fileID: 1983959695833583116}
+  projectileVFX: {fileID: 598260997653687047}
+  explosionVFX: {fileID: 760505513668103456}
+  puddle: {fileID: 5721517071489327596}
+  explosionColliderRadius: 1.92
+  puddleLifeTime: 1.81
+  explosionCollision: {fileID: 0}
+  sphereCollider: {fileID: 306174638925808390}
 --- !u!1 &8535651271381608450
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,18 +611,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
---- !u!114 &7083049105756616670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597573992172478554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2410f64136a906479a9631176207220, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!198 &760505513668103456 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 198343691326473072, guid: 241480e4d682d6f4b9d35136d8208e8d,

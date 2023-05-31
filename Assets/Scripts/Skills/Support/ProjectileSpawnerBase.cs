@@ -5,7 +5,6 @@ using Random = UnityEngine.Random;
 
 public abstract class ProjectileSpawnerBase : MonoBehaviour
 {
-    [SerializeField] protected SkillParameterBase skill;
     [Range(0, 25)] [SerializeField] protected float skillCooldown;
 
     [SerializeField] protected Transform spawnPoint;

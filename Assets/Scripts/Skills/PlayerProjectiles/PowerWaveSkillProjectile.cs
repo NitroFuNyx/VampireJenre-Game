@@ -1,11 +1,8 @@
-using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class PowerWaveSkillProjectile : SkillParameterBase, ISkillProjectile
 {
     [SerializeField] private Rigidbody projectileRigidBody;
-    [SerializeField] private LayerMask targetLayers;
     
     [Header("Radius")] [SerializeField] private float radius;
     private Collider[] _enemyTargets;

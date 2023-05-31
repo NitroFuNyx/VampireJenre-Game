@@ -14664,12 +14664,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6062415962934523408}
-  - component: {fileID: 4541636524175371360}
   - component: {fileID: 6520245464236628466}
   - component: {fileID: 28882795754930956}
   - component: {fileID: -2394316650987077392}
   - component: {fileID: 6265514557760827028}
   - component: {fileID: 6266283829374684304}
+  - component: {fileID: 6790819501999920142}
   m_Layer: 25
   m_Name: PowerWave
   m_TagString: Untagged
@@ -14699,28 +14699,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4541636524175371360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6068166821869466806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0589f013e0a5a30498109d2318b4fdbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 300
-  _dynamicEnvironment: {fileID: 0}
-  projectileRigidBody: {fileID: -2394316650987077392}
-  targetLayers:
-    serializedVersion: 2
-    m_Bits: 3584
-  radius: 22
-  slashPath: {fileID: 6265383341810051632}
-  slashWind: {fileID: 6265218446722920770}
-  duration: 3.01
 --- !u!114 &6520245464236628466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19621,6 +19599,28 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &6790819501999920142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6068166821869466806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a75fce20c7dbf104ca9cc969b24ac441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 15
+  _dynamicEnvironment: {fileID: 0}
+  projectileRigidBody: {fileID: -2394316650987077392}
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 3584
+  radius: 86.34
+  slashPath: {fileID: 6265383341810051632}
+  slashWind: {fileID: 6265218446722920770}
+  duration: 0
 --- !u!1 &6068330209618308302
 GameObject:
   m_ObjectHideFlags: 0

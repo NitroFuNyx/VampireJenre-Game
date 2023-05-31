@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4606609248038984674}
   - component: {fileID: 595087720765428807}
   - component: {fileID: 3433671909961326733}
-  m_Layer: 27
+  m_Layer: 29
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 7371538641157447071}
   - component: {fileID: 7371538641157447064}
   - component: {fileID: -5103407872878246051}
-  m_Layer: 27
+  m_Layer: 29
   m_Name: Skill Scroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc14d910fa2555f4f9ec666ef0cec20b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolItemType: 12
+  poolItemType: 14
 --- !u!114 &-5103407872878246051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,6 +199,14 @@ PrefabInstance:
     - target: {fileID: 115174, guid: 3c2fb72925d7f3c4a8c2b92cc3a81390, type: 3}
       propertyPath: m_Name
       value: Pickable Item Destruction
+      objectReference: {fileID: 0}
+    - target: {fileID: 115174, guid: 3c2fb72925d7f3c4a8c2b92cc3a81390, type: 3}
+      propertyPath: m_Layer
+      value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 124240, guid: 3c2fb72925d7f3c4a8c2b92cc3a81390, type: 3}
+      propertyPath: m_Layer
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 439662, guid: 3c2fb72925d7f3c4a8c2b92cc3a81390, type: 3}
       propertyPath: m_RootOrder
