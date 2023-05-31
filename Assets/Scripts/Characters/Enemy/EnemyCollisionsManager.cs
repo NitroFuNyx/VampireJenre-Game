@@ -13,7 +13,10 @@ public class EnemyCollisionsManager : MonoBehaviour
     private Collider _collider;
     private bool canCheckCollisions = true;
     private int startLayer;
-    [SerializeField] private float auraCooldown=1;//Delete
+    
+    
+    private float auraCooldown;
+    private float auraCooldownTimer;
     
     #region Events Declaration
     public event Action OnCharacterOutOfHp;
@@ -23,6 +26,7 @@ public class EnemyCollisionsManager : MonoBehaviour
     public event Action OnSpeedReset;
 
     public event Func<ActiveSkills,float> OnSkillCollision; 
+    public event Func<ActiveSkills,float> OnSkillCooldown; 
     #endregion Events Declaration
 
     private void Awake()
@@ -73,8 +77,9 @@ public class EnemyCollisionsManager : MonoBehaviour
             {
                 DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.PulseAura));
             }
-            if (collision.gameObject.layer == Layers.MeteorSkill)
+            if (collision.gameObject.layer == Layers.MeteorExplosion)
             {
+                Debug.Log("METEOR");
                 DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.Meteor));
             }
             if (collision.gameObject.layer == Layers.WeaponStrikeSkill)
@@ -87,11 +92,16 @@ public class EnemyCollisionsManager : MonoBehaviour
             }
             if (collision.gameObject.layer == Layers.LightningBolt)
             {
+                Debug.Log("BOLT");
                 DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.LightningBolt));
             }
             if (collision.gameObject.layer == Layers.ForceWave)
             {
                 DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.ForceWave));
+            }
+            if (collision.gameObject.layer == Layers.AuraSkill)
+            {
+               auraCooldown= OnSkillCooldown.Invoke(ActiveSkills.MagicAura);
             }
             
         }
@@ -101,8 +111,8 @@ public class EnemyCollisionsManager : MonoBehaviour
     {
         if (other.gameObject.layer == Layers.AuraSkill)
         {
-            auraCooldown += Time.fixedDeltaTime;
-            if (auraCooldown > 0.1f)
+            auraCooldownTimer += Time.fixedDeltaTime;
+            if (auraCooldownTimer > auraCooldown)
             {
                 DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.MagicAura));
 

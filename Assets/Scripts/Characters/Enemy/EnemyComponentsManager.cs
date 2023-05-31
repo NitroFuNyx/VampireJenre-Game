@@ -64,6 +64,7 @@ public class EnemyComponentsManager : EnemyBehaviour
         collisionsManager.OnSpeedDebuffCollision -= CollisionManager_SpeedDebuffCollision_ExecuteReaction;
         collisionsManager.OnSpeedReset -= CollisionManager_SpeedReset_ExecuteReaction;
         collisionsManager.OnSkillCollision -= CollisionManager_SkillCollision_ExecuteReaction;
+        collisionsManager.OnSkillCooldown -= CollisionManager_SkillCooldown_ExecuteReaction;
 
         
         animationsManager.OnDieAnimationFinished -= AnimationManager_DieAnimationFinished_ExecuteReaction;
@@ -148,6 +149,20 @@ public class EnemyComponentsManager : EnemyBehaviour
         else
         {
             Debug.LogWarning($"Unknown type got caught during damage processing {skill}");
+            value = 0;
+        }
+        Debug.Log($"Skill: {skill} damages: {value}");
+        return value;
+    }
+    private float CollisionManager_SkillCooldown_ExecuteReaction(ActiveSkills skill)
+    {
+        float value;
+        if (skill == ActiveSkills.MagicAura)
+            value = poolItemComponent.CharacteristicsManager.CurrentPlayerData.playerSkillsData.magicAuraSkillData
+                .cooldown;
+        else
+        {
+            Debug.LogWarning($"Unknown type got caught during coodown processing {skill}");
             value = 0;
         }
         Debug.Log($"Skill: {skill} damages: {value}");

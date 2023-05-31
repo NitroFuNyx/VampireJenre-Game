@@ -15,6 +15,8 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private int skillFireballPoolSize = 25;
     [SerializeField] private int skillSingleShotPoolSize = 50;
     [SerializeField] private int skillPowerWavePoolSize = 50;
+    [SerializeField] private int bossSkillDarkMissilePoolSize = 15;
+    [SerializeField] private int bossZombiePoolSize = 1;
 
     [Header("Active Pools")]
     [Space]
@@ -31,6 +33,8 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private PoolItem skillChainLightningPrefab;
     [SerializeField] private PoolItem skillSingleShotPrefab;
     [SerializeField] private PoolItem skillPowerWaveShotPrefab;
+    [SerializeField] private PoolItem bossSkillDarkMissilePrefab;
+    [SerializeField] private PoolItem bossZombiePrefab;
 
     private Dictionary<PoolItemsTypes, List<PoolItem>> itemsListsDictionary = new Dictionary<PoolItemsTypes, List<PoolItem>>();
     private Dictionary<PoolItemsTypes, Transform> itemsHoldersDictionary = new Dictionary<PoolItemsTypes, Transform>();
@@ -41,11 +45,13 @@ public class PoolItemsManager : MonoBehaviour
     private GameProcessManager _gameProcessManager;
     private PlayerExperienceManager _playerExperienceManager;
     private PlayerCharacteristicsManager playerCharacteristicsManager;
+    private Transform dynamicEnvironment;
 
     #region Zenject
     [Inject]
-    private void Construct(ResourcesManager resourcesManager, GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager,PlayerCharacteristicsManager playerCharacteristicsManager)
+    private void Construct(ResourcesManager resourcesManager, GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager,PlayerCharacteristicsManager playerCharacteristicsManager,Transform dynamicEnvironment)
     {
+        this.dynamicEnvironment = dynamicEnvironment;
         this.playerCharacteristicsManager = playerCharacteristicsManager;
         _resourcesManager = resourcesManager;
         _gameProcessManager = gameProcessManager;
@@ -65,6 +71,8 @@ public class PoolItemsManager : MonoBehaviour
         CreatePool(skillFireballPrefab , "Skill Fireball Bolt ", skillFireballPoolSize);
         CreatePool(skillChainLightningPrefab , "Skill Chain lightning ", skillChainLightningPoolSize);
         CreatePool(skillPowerWaveShotPrefab , "Skill Power Wave ", skillPowerWavePoolSize);
+        CreatePool(bossSkillDarkMissilePrefab , "Boss Skill Dark Missile", bossSkillDarkMissilePoolSize);
+        CreatePool(bossZombiePrefab , "Boss Zombie", bossZombiePoolSize);
     }
 
     public PoolItem SpawnItemFromPool(PoolItemsTypes poolItemType, Vector3 _spawnPos, Quaternion _rotation, Transform _parent)
@@ -131,7 +139,7 @@ public class PoolItemsManager : MonoBehaviour
         {
             PoolItem poolItem = Instantiate(poolItemPrefab, Vector3.zero, Quaternion.identity, poolItemsParent.transform);
             poolItem.transform.localPosition = Vector3.zero;
-            poolItem.CashComponents(this, _resourcesManager, _gameProcessManager, _playerExperienceManager,playerCharacteristicsManager);
+            poolItem.CashComponents(this, _resourcesManager, _gameProcessManager, _playerExperienceManager,playerCharacteristicsManager,dynamicEnvironment);
             //poolItem.gameObject.SetActive(false);
             itemsList.Add(poolItem);
             poolItem.name = $"{itemName} {i}";
