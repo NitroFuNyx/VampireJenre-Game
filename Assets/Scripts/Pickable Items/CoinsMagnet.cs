@@ -3,7 +3,7 @@ public class CoinsMagnet : PickableItem
 {
     protected override void PlayerCollision_ExecuteReaction()
     {
-        //poolItemComponent.ResourcesManager.AddResourceForPickingUpTreasureChest();
+        poolItemComponent.PickableItemsManager.CollectAllPickableResources();
         poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
     }
 

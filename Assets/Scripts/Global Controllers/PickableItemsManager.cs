@@ -15,9 +15,13 @@ public class PickableItemsManager : MonoBehaviour
     [Space]
     [SerializeField] private Transform gemsHolder;
     [SerializeField] private Transform coinsHolder;
+    [Header("Resources On Map")]
+    [Space]
+    [SerializeField] private List<PickableResource> resourcesOnMapList = new List<PickableResource>();
 
     private PoolItemsManager _poolItemsManager;
     private ResourcesManager _resourcesManager;
+    private PlayerCollisionsManager _player;
 
     #region Events Declaration
     public event System.Action OnSkillScrollCollected;
@@ -25,10 +29,11 @@ public class PickableItemsManager : MonoBehaviour
 
     #region Zenject
     [Inject]
-    private void Construct(PoolItemsManager poolItemsManager, ResourcesManager resourcesManager)
+    private void Construct(PoolItemsManager poolItemsManager, ResourcesManager resourcesManager, PlayerCollisionsManager playerCollisionsManager)
     {
         _poolItemsManager = poolItemsManager;
         _resourcesManager = resourcesManager;
+        _player = playerCollisionsManager;
     }
     #endregion Zenject
 
@@ -81,6 +86,7 @@ public class PickableItemsManager : MonoBehaviour
                 if(gem.TryGetComponent(out PickableResource resource))
                 {
                     resource.SetResourceData(resourceData);
+                    resourcesOnMapList.Add(resource);
                 }
             }
             else
@@ -89,9 +95,20 @@ public class PickableItemsManager : MonoBehaviour
                 if (coin.TryGetComponent(out PickableResource resource))
                 {
                     resource.SetResourceData(resourceData);
+                    resourcesOnMapList.Add(resource);
                 }
             }
         }
+    }
+
+    public void CollectAllPickableResources()
+    {
+        for(int i = 0; i < resourcesOnMapList.Count; i++)
+        {
+            resourcesOnMapList[i].MoveToPlayer(_player.transform);
+        }
+
+        resourcesOnMapList.Clear();
     }
 
     private PoolItemsTypes GetPoolItemTypeToSpawn()
