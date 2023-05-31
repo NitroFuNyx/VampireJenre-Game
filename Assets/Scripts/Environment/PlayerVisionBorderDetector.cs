@@ -18,18 +18,26 @@ public class PlayerVisionBorderDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if(other.gameObject.layer == )
+        if(other.gameObject.layer == Layers.PlayerVisionBorder)
+        {
+            Debug.Log($"Trigger Enter {gameObject}");
+            OnObjectBecomeVisibleForPlayer?.Invoke();
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        
+        if (other.gameObject.layer == Layers.PlayerVisionBorder)
+        {
+            Debug.Log($"Trigger Exit {gameObject}");
+            OnObjectStoppedBeingVisibleForPlayer?.Invoke();
+        }
     }
 
-    public void ObjectBecomeVisibleForPlayer()
-    {
-        OnObjectBecomeVisibleForPlayer?.Invoke();
-    }
+    //public void ObjectBecomeVisibleForPlayer()
+    //{
+    //    OnObjectBecomeVisibleForPlayer?.Invoke();
+    //}
 
     public bool CheckIfVisibleForPlayer()
     {
