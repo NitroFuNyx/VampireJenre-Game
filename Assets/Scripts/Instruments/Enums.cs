@@ -16,12 +16,16 @@ public enum SettingsPanels
 
 public enum GameLevelPanels
 {
-    PausePanel, LevelUpgradePanel, VictoryPanel, LoosePanel
+    PausePanel, LevelUpgradePanel, VictoryPanel, LoosePanel, SkillScrollInfoPanel
 }
 
 public enum PoolItemsTypes
 {
-    Enemy_Skeleton,Enemy_Ghost,Enemy_Zombie,XP, Singleshot_Projectile, Missile_Projectile, Meteor_Projectile, Lightning_Bolt_Skill, Fireball_Skill, ChainLightning_Skill, PowerWave_Skill,Boss_DarkMissile,Zombie_Boss
+    Enemy_Skeleton,Enemy_Ghost,Enemy_Zombie,XP,
+    Singleshot_Projectile, Missile_Projectile,
+    Meteor_Projectile, Lightning_Bolt_Skill,
+    Fireball_Skill, ChainLightning_Skill, PowerWave_Skill,
+    Boss_DarkMissile,Zombie_Boss,TreasureChest, SkillScroll, CoinsMagnet, Gem_Green, Gem_Orange, Gem_Purple, Coin
 }
 
 public enum RewardIndexes
@@ -68,4 +72,9 @@ public enum PlayersCharactersTypes
 public enum SkillUpgradesTypes
 {
     PercentSurplus, PercentOfValue
+}
+
+public enum PickableItemsCategories
+{
+    TreasureChest, SkillScroll, CoinsMagnet
 }

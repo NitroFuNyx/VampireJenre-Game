@@ -23,6 +23,7 @@ public class GameProcessManager : MonoBehaviour
     private SystemTimeManager _systemTimeManager;
     private SkillsManager _skillsManager;
     private PlayerExperienceManager _playerExperienceManager;
+    private PickableItemsManager _pickableItemsManager;
 
     private bool battleStarted = false;
 
@@ -43,6 +44,8 @@ public class GameProcessManager : MonoBehaviour
         _skillsManager.OnSkillToUpgradeDefined += SkillToUpgradeDefined_ExecuteReaction;
 
         _playerExperienceManager.OnPlayerGotNewLevel += PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction;
+
+        _pickableItemsManager.OnSkillScrollCollected += PickableItemsManager_SkillScrollCollected_ExecuteReaction;
     }
 
     private void OnDestroy()
@@ -50,17 +53,21 @@ public class GameProcessManager : MonoBehaviour
         _skillsManager.OnSkillToUpgradeDefined -= SkillToUpgradeDefined_ExecuteReaction;
 
         _playerExperienceManager.OnPlayerGotNewLevel -= PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction;
+
+        _pickableItemsManager.OnSkillScrollCollected -= PickableItemsManager_SkillScrollCollected_ExecuteReaction;
     }
 
     #region Zenject
     [Inject]
-    private void Construct(SpawnEnemiesManager spawnEnemiesManager, MainUI mainUI, SystemTimeManager systemTimeManager, SkillsManager skillsManager, PlayerExperienceManager playerExperienceManager)
+    private void Construct(SpawnEnemiesManager spawnEnemiesManager, MainUI mainUI, SystemTimeManager systemTimeManager, SkillsManager skillsManager,
+                           PlayerExperienceManager playerExperienceManager, PickableItemsManager pickableItemsManager)
     {
         _spawnEnemiesManager = spawnEnemiesManager;
         _mainUI = mainUI;
         _systemTimeManager = systemTimeManager;
         _skillsManager = skillsManager;
         _playerExperienceManager = playerExperienceManager;
+        _pickableItemsManager = pickableItemsManager;
     }
     #endregion Zenject
 
@@ -68,9 +75,8 @@ public class GameProcessManager : MonoBehaviour
     {
         battleStarted = true;
         OnGameStarted?.Invoke();
+        player.StartGame();
         _systemTimeManager.PauseGame();
-        //player.StartGame();
-        //StartCoroutine(StartGameCoroutine());
     }
 
     public void IncreaseCurrentProgressValue()
@@ -104,16 +110,16 @@ public class GameProcessManager : MonoBehaviour
     private void SkillToUpgradeDefined_ExecuteReaction(int skillCategory, int skillIndex)
     {
         _systemTimeManager.ResumeGame();
-        player.StartGame();
-        if(skillIndex == (int)ActiveSkills.Fireballs)
-        {
-            skillIndex = (int)ActiveSkills.Meteor;
-        }
         skillsObjectsList[skillIndex].gameObject.SetActive(true);
-        StartCoroutine(StartGameCoroutine());
+        //StartCoroutine(StartGameCoroutine());
     }
 
     private void PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction()
+    {
+        StartCoroutine(PauseGameWithDelayCoroutine());
+    }
+
+    private void PickableItemsManager_SkillScrollCollected_ExecuteReaction()
     {
         StartCoroutine(PauseGameWithDelayCoroutine());
     }

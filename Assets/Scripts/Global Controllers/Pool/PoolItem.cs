@@ -15,6 +15,8 @@ public class PoolItem : MonoBehaviour
     private PlayerCharacteristicsManager playerCharacteristicsManager;
     private Transform dynamicEnvironment;
 
+    private PickableItemsManager _pickableItemsManager;
+
     public PoolItemsTypes PoolItemType { get => poolItemType;}
     public PoolItemsManager PoolItemsManager { get => _poolItemsManager; private set => _poolItemsManager = value; }
 
@@ -25,6 +27,8 @@ public class PoolItem : MonoBehaviour
     public PlayerCharacteristicsManager CharacteristicsManager => playerCharacteristicsManager;
 
     public Transform DynamicEnvironment => dynamicEnvironment;
+
+    public PickableItemsManager PickableItemsManager { get => _pickableItemsManager; private set => _pickableItemsManager = value; }
 
     #region Events Declaration
     public event Action OnItemResetRequired;
@@ -41,14 +45,15 @@ public class PoolItem : MonoBehaviour
         OnObjectAwakeStateSet?.Invoke();
     }
 
-    public void CashComponents(PoolItemsManager poolItemsManager, ResourcesManager resourcesManager, GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager,PlayerCharacteristicsManager playerCharacteristicsManager,Transform dynamicEnvironment)
+    public void CashComponents(PoolItemsManager poolItemsManager, ResourcesManager resourcesManager, GameProcessManager gameProcessManager,
+                               PlayerExperienceManager playerExperienceManager,PlayerCharacteristicsManager playerCharacteristicsManager, PickableItemsManager pickableItemsManager,Transform dynamicEnvironment)
     {
         this.dynamicEnvironment = dynamicEnvironment;
         this.playerCharacteristicsManager = playerCharacteristicsManager;
         _poolItemsManager = poolItemsManager;
-        
         _resourcesManager = resourcesManager;
         _gameProcessManager = gameProcessManager;
         _playerExperienceManager = playerExperienceManager;
+        _pickableItemsManager = pickableItemsManager;
     }
 }

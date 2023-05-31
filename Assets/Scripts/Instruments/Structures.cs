@@ -11,6 +11,14 @@ public struct RewardDataStruct
 }
 
 [Serializable]
+public struct ResourceBonusItemStruct
+{
+    public ResourcesTypes resourceType;
+    public int ResourceAmount;
+    public bool canBeCollected;
+}
+
+[Serializable]
 public struct TalentDataStruct
 {
     public TalentsIndexes talentIndex;

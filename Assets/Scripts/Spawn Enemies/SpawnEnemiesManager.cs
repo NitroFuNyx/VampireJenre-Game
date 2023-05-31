@@ -79,6 +79,7 @@ public class SpawnEnemiesManager : MonoBehaviour
         _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
     }
 
+    [ContextMenu("Stop")]
     private void StopEnemySpawn()
     {
         canSpawnEnemies = false;

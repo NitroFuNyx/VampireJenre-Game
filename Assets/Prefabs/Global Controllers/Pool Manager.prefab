@@ -46,7 +46,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesPoolSize: 100
   skillMissilePoolSize: 75
+  skillChainLightningPoolSize: 75
   skillMeteorPoolSize: 25
+  skillLightningBoltrPoolSize: 25
+  skillFireballPoolSize: 25
+  skillSingleShotPoolSize: 50
+  skillPowerWavePoolSize: 50
+  pickableItemsPoolSize: 20
   enemySkeletonPrefab: {fileID: 2612514640753569596, guid: 1abe631e5672251489ef5e4f9922ba47,
     type: 3}
   enemyGhostPrefab: {fileID: 6642222442663905522, guid: 0aa0acfac8b4b1e448b32e984fdb7a75,
@@ -56,4 +62,20 @@ MonoBehaviour:
   skillMissilePrefab: {fileID: 5496555590015770241, guid: d87b5b0ce384005489acaa13f71bf88e,
     type: 3}
   skillMeteorPrefab: {fileID: -4800505191692886853, guid: 184437de2fe17a44ca9f52e16fe316d3,
+    type: 3}
+  skillLightningBoltPrefab: {fileID: 6372296608798973408, guid: 749002591e343694c9e242a1c0601b58,
+    type: 3}
+  skillFireballPrefab: {fileID: -8642990177432872467, guid: e904ba58975b05740ab2ee62a9508884,
+    type: 3}
+  skillChainLightningPrefab: {fileID: 3268993077093522470, guid: f4af0ee30e4ddec498932fc59081e9d6,
+    type: 3}
+  skillSingleShotPrefab: {fileID: 3773820907223533018, guid: e2565b4c2b17e494ab41b024aa0a4024,
+    type: 3}
+  skillPowerWaveShotPrefab: {fileID: 6520245464236628466, guid: 1e67d75b1bbf9a14cbb9f2d63162b18b,
+    type: 3}
+  treasureChestPrefab: {fileID: 8956038253145351302, guid: de7e7c7dad155e64b856599b5b575c2d,
+    type: 3}
+  skillScrollPrefab: {fileID: 7371538641157447064, guid: e00cf59afe10c3d4fbcdafbd979bfde9,
+    type: 3}
+  coinsMagnetPrefab: {fileID: 7413751664692785759, guid: 3fc3dee1371e49d499804c45ba069e59,
     type: 3}

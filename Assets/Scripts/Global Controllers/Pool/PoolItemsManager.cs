@@ -17,6 +17,8 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private int skillPowerWavePoolSize = 50;
     [SerializeField] private int bossSkillDarkMissilePoolSize = 15;
     [SerializeField] private int bossZombiePoolSize = 1;
+    [SerializeField] private int pickableItemsPoolSize = 20;
+
 
     [Header("Active Pools")]
     [Space]
@@ -26,6 +28,7 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private PoolItem enemySkeletonPrefab;
     [SerializeField] private PoolItem enemyGhostPrefab;
     [SerializeField] private PoolItem enemyZombiePrefab;
+    [Space]
     [SerializeField] private PoolItem skillMissilePrefab;
     [SerializeField] private PoolItem skillMeteorPrefab;
     [SerializeField] private PoolItem skillLightningBoltPrefab;
@@ -35,6 +38,15 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private PoolItem skillPowerWaveShotPrefab;
     [SerializeField] private PoolItem bossSkillDarkMissilePrefab;
     [SerializeField] private PoolItem bossZombiePrefab;
+    [Space]
+    [SerializeField] private PoolItem treasureChestPrefab;
+    [SerializeField] private PoolItem skillScrollPrefab;
+    [SerializeField] private PoolItem coinsMagnetPrefab;
+    [Space]
+    [SerializeField] private PoolItem crystalGreenPrefab;
+    [SerializeField] private PoolItem crystalOrangePrefab;
+    [SerializeField] private PoolItem crystalPurplePrefab;
+    [SerializeField] private PoolItem coinPrefab;
 
     private Dictionary<PoolItemsTypes, List<PoolItem>> itemsListsDictionary = new Dictionary<PoolItemsTypes, List<PoolItem>>();
     private Dictionary<PoolItemsTypes, Transform> itemsHoldersDictionary = new Dictionary<PoolItemsTypes, Transform>();
@@ -45,17 +57,20 @@ public class PoolItemsManager : MonoBehaviour
     private GameProcessManager _gameProcessManager;
     private PlayerExperienceManager _playerExperienceManager;
     private PlayerCharacteristicsManager playerCharacteristicsManager;
+    private PickableItemsManager _pickableItemsManager;
     private Transform dynamicEnvironment;
 
     #region Zenject
     [Inject]
-    private void Construct(ResourcesManager resourcesManager, GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager,PlayerCharacteristicsManager playerCharacteristicsManager,Transform dynamicEnvironment)
+    private void Construct(ResourcesManager resourcesManager, GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager,
+                           PlayerCharacteristicsManager playerCharacteristicsManager, PickableItemsManager pickableItemsManager,Transform dynamicEnvironment)
     {
         this.dynamicEnvironment = dynamicEnvironment;
         this.playerCharacteristicsManager = playerCharacteristicsManager;
         _resourcesManager = resourcesManager;
         _gameProcessManager = gameProcessManager;
         _playerExperienceManager = playerExperienceManager;
+        _pickableItemsManager = pickableItemsManager;
     }
     #endregion Zenject
 
@@ -64,6 +79,7 @@ public class PoolItemsManager : MonoBehaviour
         CreatePool(enemySkeletonPrefab, "Enemy Skeleton", enemiesPoolSize);
         CreatePool(enemyGhostPrefab, "Enemy Ghost", enemiesPoolSize);
         CreatePool(enemyZombiePrefab, "Enemy Zombie", enemiesPoolSize);
+
         CreatePool(skillSingleShotPrefab , "Skill Single Shot", skillSingleShotPoolSize);
         CreatePool(skillMissilePrefab, "Skill Missile ", skillMissilePoolSize);
         CreatePool(skillMeteorPrefab , "Skill Meteor ", skillMeteorPoolSize);
@@ -73,6 +89,15 @@ public class PoolItemsManager : MonoBehaviour
         CreatePool(skillPowerWaveShotPrefab , "Skill Power Wave ", skillPowerWavePoolSize);
         CreatePool(bossSkillDarkMissilePrefab , "Boss Skill Dark Missile", bossSkillDarkMissilePoolSize);
         CreatePool(bossZombiePrefab , "Boss Zombie", bossZombiePoolSize);
+
+        CreatePool(treasureChestPrefab, "Treasure Chest", pickableItemsPoolSize);
+        CreatePool(skillScrollPrefab, "Skill Scroll", pickableItemsPoolSize);
+        CreatePool(coinsMagnetPrefab, "Coins Magnet", pickableItemsPoolSize);
+
+        CreatePool(crystalGreenPrefab, "Green Crystal", pickableItemsPoolSize);
+        CreatePool(crystalOrangePrefab, "Orange Crystal", pickableItemsPoolSize);
+        CreatePool(crystalPurplePrefab, "Purple Crystal", pickableItemsPoolSize);
+        CreatePool(coinPrefab, "Coin", pickableItemsPoolSize);
     }
 
     public PoolItem SpawnItemFromPool(PoolItemsTypes poolItemType, Vector3 _spawnPos, Quaternion _rotation, Transform _parent)
@@ -139,8 +164,7 @@ public class PoolItemsManager : MonoBehaviour
         {
             PoolItem poolItem = Instantiate(poolItemPrefab, Vector3.zero, Quaternion.identity, poolItemsParent.transform);
             poolItem.transform.localPosition = Vector3.zero;
-            poolItem.CashComponents(this, _resourcesManager, _gameProcessManager, _playerExperienceManager,playerCharacteristicsManager,dynamicEnvironment);
-            //poolItem.gameObject.SetActive(false);
+            poolItem.CashComponents(this, _resourcesManager, _gameProcessManager, _playerExperienceManager,playerCharacteristicsManager, _pickableItemsManager,dynamicEnvironment);
             itemsList.Add(poolItem);
             poolItem.name = $"{itemName} {i}";
         }

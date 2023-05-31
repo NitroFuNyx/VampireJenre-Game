@@ -8,6 +8,12 @@ public class MapPillarLightHandler : MonoBehaviour
     [SerializeField] private List<Light> lightComponentsList = new List<Light>();
     [Space]
     [SerializeField] private bool activateLight = true;
+    [Header("VFX")]
+    [Space]
+    [SerializeField] private List<ParticleSystem> vfxList = new List<ParticleSystem>();
+    [Header("Player Vision Detector")]
+    [Space]
+    [SerializeField] private PlayerVisionBorderDetector visionBorderDetector;
 
     private void OnValidate()
     {
@@ -17,6 +23,13 @@ public class MapPillarLightHandler : MonoBehaviour
     private void Start()
     {
         ChangeLightState(activateLight);
+
+        visionBorderDetector.OnObjectBecomeVisibleForPlayer += PlayerVisionBorderDetector_ObjectBecomeVisibleForPlayer_ExecuteReaction;
+    }
+
+    private void OnDestroy()
+    {
+        visionBorderDetector.OnObjectBecomeVisibleForPlayer -= PlayerVisionBorderDetector_ObjectBecomeVisibleForPlayer_ExecuteReaction;
     }
 
     private void ChangeLightState(bool isActive)
@@ -25,5 +38,15 @@ public class MapPillarLightHandler : MonoBehaviour
         {
             lightComponentsList[i].enabled = isActive;
         }
+    }
+
+    private void PlayerVisionBorderDetector_ObjectBecomeVisibleForPlayer_ExecuteReaction()
+    {
+
+    }
+
+    private void PlayerVisionBorderDetector_ObjectStoppedBeingVisibleForPlayer_ExecuteReaction()
+    {
+
     }
 }
