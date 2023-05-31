@@ -7,12 +7,14 @@ public class PlayerVisionBorder : MonoBehaviour
     private Transform player;
 
     private BoxCollider boxCollider;
+    private Rigidbody rb;
 
     public BoxCollider BoxCollider { get => boxCollider; }
 
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Start()
@@ -20,9 +22,9 @@ public class PlayerVisionBorder : MonoBehaviour
         player = _playerCollisionsManager.transform;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        transform.position = player.position;
+        rb.MovePosition(player.position);
     }
 
     #region Zenject
