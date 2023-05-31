@@ -15,7 +15,10 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private int skillFireballPoolSize = 25;
     [SerializeField] private int skillSingleShotPoolSize = 50;
     [SerializeField] private int skillPowerWavePoolSize = 50;
+    [SerializeField] private int bossSkillDarkMissilePoolSize = 15;
+    [SerializeField] private int bossZombiePoolSize = 1;
     [SerializeField] private int pickableItemsPoolSize = 20;
+
 
     [Header("Active Pools")]
     [Space]
@@ -33,6 +36,8 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private PoolItem skillChainLightningPrefab;
     [SerializeField] private PoolItem skillSingleShotPrefab;
     [SerializeField] private PoolItem skillPowerWaveShotPrefab;
+    [SerializeField] private PoolItem bossSkillDarkMissilePrefab;
+    [SerializeField] private PoolItem bossZombiePrefab;
     [Space]
     [SerializeField] private PoolItem treasureChestPrefab;
     [SerializeField] private PoolItem skillScrollPrefab;
@@ -53,12 +58,14 @@ public class PoolItemsManager : MonoBehaviour
     private PlayerExperienceManager _playerExperienceManager;
     private PlayerCharacteristicsManager playerCharacteristicsManager;
     private PickableItemsManager _pickableItemsManager;
+    private Transform dynamicEnvironment;
 
     #region Zenject
     [Inject]
     private void Construct(ResourcesManager resourcesManager, GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager,
-                           PlayerCharacteristicsManager playerCharacteristicsManager, PickableItemsManager pickableItemsManager)
+                           PlayerCharacteristicsManager playerCharacteristicsManager, PickableItemsManager pickableItemsManager,Transform dynamicEnvironment)
     {
+        this.dynamicEnvironment = dynamicEnvironment;
         this.playerCharacteristicsManager = playerCharacteristicsManager;
         _resourcesManager = resourcesManager;
         _gameProcessManager = gameProcessManager;
@@ -80,6 +87,8 @@ public class PoolItemsManager : MonoBehaviour
         CreatePool(skillFireballPrefab , "Skill Fireball Bolt ", skillFireballPoolSize);
         CreatePool(skillChainLightningPrefab , "Skill Chain lightning ", skillChainLightningPoolSize);
         CreatePool(skillPowerWaveShotPrefab , "Skill Power Wave ", skillPowerWavePoolSize);
+        CreatePool(bossSkillDarkMissilePrefab , "Boss Skill Dark Missile", bossSkillDarkMissilePoolSize);
+        CreatePool(bossZombiePrefab , "Boss Zombie", bossZombiePoolSize);
 
         CreatePool(treasureChestPrefab, "Treasure Chest", pickableItemsPoolSize);
         CreatePool(skillScrollPrefab, "Skill Scroll", pickableItemsPoolSize);
@@ -155,7 +164,7 @@ public class PoolItemsManager : MonoBehaviour
         {
             PoolItem poolItem = Instantiate(poolItemPrefab, Vector3.zero, Quaternion.identity, poolItemsParent.transform);
             poolItem.transform.localPosition = Vector3.zero;
-            poolItem.CashComponents(this, _resourcesManager, _gameProcessManager, _playerExperienceManager,playerCharacteristicsManager, _pickableItemsManager);
+            poolItem.CashComponents(this, _resourcesManager, _gameProcessManager, _playerExperienceManager,playerCharacteristicsManager, _pickableItemsManager,dynamicEnvironment);
             itemsList.Add(poolItem);
             poolItem.name = $"{itemName} {i}";
         }

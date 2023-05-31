@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6695780162446741748}
   - component: {fileID: 7729279778157616977}
   - component: {fileID: 5523414564909165467}
-  m_Layer: 27
+  m_Layer: 29
   m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 8956038253145351303}
   - component: {fileID: 8956038253145351302}
   - component: {fileID: -1330292488391959239}
-  m_Layer: 27
+  m_Layer: 29
   m_Name: Treasure Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc14d910fa2555f4f9ec666ef0cec20b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolItemType: 11
+  poolItemType: 13
 --- !u!114 &-1330292488391959239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,6 +199,14 @@ PrefabInstance:
     - target: {fileID: 115174, guid: 3c2fb72925d7f3c4a8c2b92cc3a81390, type: 3}
       propertyPath: m_Name
       value: Pickable Item Destruction
+      objectReference: {fileID: 0}
+    - target: {fileID: 115174, guid: 3c2fb72925d7f3c4a8c2b92cc3a81390, type: 3}
+      propertyPath: m_Layer
+      value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 124240, guid: 3c2fb72925d7f3c4a8c2b92cc3a81390, type: 3}
+      propertyPath: m_Layer
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 439662, guid: 3c2fb72925d7f3c4a8c2b92cc3a81390, type: 3}
       propertyPath: m_RootOrder

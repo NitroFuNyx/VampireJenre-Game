@@ -21,8 +21,9 @@ public enum GameLevelPanels
 
 public enum PoolItemsTypes
 {
-    Enemy_Skeleton,Enemy_Ghost, Enemy_Zombie,XP, Singleshot_Projectile, Missile_Projectile, Meteor_Projectile, Lightning_Bolt_Skill, Fireball_Skill, ChainLightning_Skill,
-    PowerWave_Skill, TreasureChest, SkillScroll, CoinsMagnet, Gem_Green, Gem_Orange, Gem_Purple, Coin
+    Enemy_Skeleton,Enemy_Ghost,Enemy_Zombie,XP, Singleshot_Projectile, Missile_Projectile, Meteor_Projectile, Lightning_Bolt_Skill,
+    Fireball_Skill, ChainLightning_Skill, PowerWave_Skill,
+    Boss_Dark_Missile,Zombie_Boss,TreasureChest, SkillScroll, CoinsMagnet, Gem_Green, Gem_Orange, Gem_Purple, Coin
 }
 
 public enum RewardIndexes

@@ -11,7 +11,7 @@ public class Layers
     public const int WeaponStrikeSkill = 15;
 
     public const int MeteorPuddle = 16;
-    public const int MeteorSkill = 17;
+    public const int MeteorSkill = 26;
     public const int AuraSkill = 18;
     public const int FireballSkill = 19;
     public const int ChainLightning = 20;
@@ -20,8 +20,10 @@ public class Layers
     public const int MissilesSkill = 23;
     public const int LightningBolt = 24;
     public const int ForceWave = 25;
-    public const int Player = 26;
-    public const int PlayerVisionBorder = 28;
+    public const int MeteorExplosion = 26;
+    public const int BossProjectile = 27;
+    public const int Player = 28;
+    public const int PlayerVisionBorder = 30;
 
 }
 

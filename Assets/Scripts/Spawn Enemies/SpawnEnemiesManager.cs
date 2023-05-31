@@ -55,6 +55,12 @@ public class SpawnEnemiesManager : MonoBehaviour
     {
         spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, 100);
     }
+    
+    [ContextMenu("Spawn Boss")]
+    public void SpawnBossAtCenter()
+    {
+        spawner_AtGates.SpawnBoss(PoolItemsTypes.Zombie_Boss);
+    }
 
     public void SpawnEnemiesWave()
     {

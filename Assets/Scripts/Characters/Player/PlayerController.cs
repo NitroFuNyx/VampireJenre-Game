@@ -14,6 +14,10 @@ public class PlayerController : MonoBehaviour
 
     private bool canMove = true;
 
+    [SerializeField] private Transform playerTargetPosition;
+
+    public Transform PlayerTargetPosition => playerTargetPosition;
+
     //TODO: CHECK GAME STATE
     private void Update()
     {
