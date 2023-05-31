@@ -6,8 +6,8 @@ public class PickableItemsManager : MonoBehaviour
 {
     [Header("Spawn Positions")]
     [Space]
-    [SerializeField] private List<Transform> availableSpawnPositionsList = new List<Transform>();
-    [SerializeField] private List<Transform> takenSpawnPositionsList = new List<Transform>();
+    [SerializeField] private List<PlayerVisionBorderDetector> availableSpawnPositionsList = new List<PlayerVisionBorderDetector>();
+    [SerializeField] private List<PlayerVisionBorderDetector> takenSpawnPositionsList = new List<PlayerVisionBorderDetector>();
     [Header("Spawn Items Main Data")]
     [Space] 
     [SerializeField] private int itemsSpawnAmount = 3;
@@ -42,11 +42,13 @@ public class PickableItemsManager : MonoBehaviour
     {
         for(int i = 0; i < itemsSpawnAmount; i++)
         {
-            if(availableSpawnPositionsList.Count > 0)
-            {
-                Transform spawnPos = availableSpawnPositionsList[0];
+            List<PlayerVisionBorderDetector> spawnPosList = GetAvailablePositionsListForItemToSpawn();
 
-                PoolItem item = _poolItemsManager.SpawnItemFromPool(GetPoolItemTypeToSpawn(), spawnPos.position, Quaternion.identity, spawnPos);
+            if (spawnPosList.Count > 0)
+            {
+                PlayerVisionBorderDetector spawnPos = spawnPosList[0];
+
+                PoolItem item = _poolItemsManager.SpawnItemFromPool(GetPoolItemTypeToSpawn(), spawnPos.transform.position, Quaternion.identity, spawnPos.transform);
                 takenSpawnPositionsList.Add(spawnPos);
                 availableSpawnPositionsList.Remove(spawnPos);
             }
@@ -133,18 +135,21 @@ public class PickableItemsManager : MonoBehaviour
         return itemToSpawn;
     }
 
-    //private Vector3 GetPositionForItemToSpawn()
-    //{
-    //    Vector3 spawnPos = Vector3.zero;
+    private List<PlayerVisionBorderDetector> GetAvailablePositionsListForItemToSpawn()
+    {
+        List<PlayerVisionBorderDetector> spawnPosList = new List<PlayerVisionBorderDetector>();
 
-    //    if(availableSpawnPositionsList.Count > 0)
-    //    {
-    //        for (int i = 0; i < availableSpawnPositionsList.Count; i++)
-    //        {
-               
-    //        }
-    //    }
+        if (availableSpawnPositionsList.Count > 0)
+        {
+            for (int i = 0; i < availableSpawnPositionsList.Count; i++)
+            {
+                if(!availableSpawnPositionsList[i].CheckIfVisibleForPlayer())
+                {
+                    spawnPosList.Add(availableSpawnPositionsList[i]);
+                }
+            }
+        }
 
-    //    return spawnPos;
-    //}
+        return spawnPosList;
+    }
 }
