@@ -6,6 +6,7 @@ public abstract class PickableItem : MonoBehaviour
     [Header("Vfx")]
     [Space]
     [SerializeField] protected ParticleSystem pickingUpVfx;
+    [SerializeField] protected ParticleSystem idleVfx;
 
     protected PoolItem poolItemComponent;
     private Vector3 vfxStartPos;
@@ -26,6 +27,11 @@ public abstract class PickableItem : MonoBehaviour
     private void OnEnable()
     {
         ResetVfx();
+
+        if(idleVfx)
+        {
+            idleVfx.Play();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
