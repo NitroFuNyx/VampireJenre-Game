@@ -92,9 +92,14 @@ public class GameProcessManager : MonoBehaviour
             _spawnEnemiesManager.SpawnBossAtCenter();
             
 
-           // OnPlayerWon?.Invoke();
-            //ResetMapData();
+           
         }
+    }
+
+    public void GameWin()
+    {
+        OnPlayerWon?.Invoke();
+        ResetMapData();
     }
 
     public void GameLost_ExecuteReaction()

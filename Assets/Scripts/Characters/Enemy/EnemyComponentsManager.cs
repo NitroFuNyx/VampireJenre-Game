@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyComponentsManager : EnemyBehaviour
@@ -6,6 +5,9 @@ public class EnemyComponentsManager : EnemyBehaviour
     [Header("Components")]
     [Space]
     [SerializeField] private EnemyAnimationsManager animationsManager;
+    [Header("Enemy Type")]
+    [Space]
+    [SerializeField] private bool boss = false;
 
     private EnemyMovementManager movementManager;
     private EnemyCollisionsManager collisionsManager;
@@ -91,9 +93,16 @@ public class EnemyComponentsManager : EnemyBehaviour
         movementManager.StopMoving();
         animationsManager.SetAnimation_Die();
 
-        poolItemComponent.PlayerExperienceManager.IncreaseXpValue(5);
-        poolItemComponent.PickableItemsManager.SpawnResourceForKillingEnemy(transform.position);
-        poolItemComponent.GameProcessManager.IncreaseCurrentProgressValue();
+        if(!boss)
+        {
+            poolItemComponent.PlayerExperienceManager.IncreaseXpValue(5);
+            poolItemComponent.PickableItemsManager.SpawnResourceForKillingEnemy(transform.position);
+            poolItemComponent.GameProcessManager.IncreaseCurrentProgressValue();
+        }
+        else
+        {
+            poolItemComponent.GameProcessManager.GameWin();
+        }
     }
 
     private void CollisionManager_DamageReceived_ExecuteReaction()
