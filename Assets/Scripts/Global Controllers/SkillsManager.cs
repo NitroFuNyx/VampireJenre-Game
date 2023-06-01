@@ -17,6 +17,7 @@ public class SkillsManager : MonoBehaviour
     [Header("Skills Display Data")]
     [Space]
     [SerializeField] private SkillsDisplayDataSO skillsDisplayDataSO;
+    [SerializeField] private SkilllsDescribtionTextsTranslationSO skillsDescribtionTextsTranslationSO;
 
     private GameProcessManager _gameProcessManager;
     private GameLevelUI _gameLevelUI;
