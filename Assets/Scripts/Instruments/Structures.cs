@@ -107,6 +107,8 @@ public struct PlayerForceWaveSkillDataStruct
     public float range;
     public float width;
     public float cooldown;
+    public float projectilesAmount;
+
 }
 
 [Serializable]

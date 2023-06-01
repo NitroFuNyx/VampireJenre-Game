@@ -19611,16 +19611,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75fce20c7dbf104ca9cc969b24ac441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 200
   _dynamicEnvironment: {fileID: 0}
   projectileRigidBody: {fileID: -2394316650987077392}
-  targetLayers:
-    serializedVersion: 2
-    m_Bits: 3584
   radius: 86.34
   slashPath: {fileID: 6265383341810051632}
   slashWind: {fileID: 6265218446722920770}
-  duration: 0
+  duration: 5
 --- !u!1 &6068330209618308302
 GameObject:
   m_ObjectHideFlags: 0
