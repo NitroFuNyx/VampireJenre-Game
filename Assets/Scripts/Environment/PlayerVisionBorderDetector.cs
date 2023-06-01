@@ -10,7 +10,7 @@ public class PlayerVisionBorderDetector : MonoBehaviour
 
     private Collider player;
 
-    private void Awake()
+    private void Start()
     {
         boxCollider = GetComponent<BoxCollider>();
         player = FindObjectOfType<PlayerVisionBorder>().BoxCollider;

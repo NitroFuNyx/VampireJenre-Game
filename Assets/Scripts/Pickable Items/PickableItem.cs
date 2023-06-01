@@ -34,6 +34,7 @@ public abstract class PickableItem : MonoBehaviour
         {
             itemPickedUp = true;
             pickingUpVfx.transform.SetParent(null) ;
+            pickingUpVfx.transform.position = transform.position;
             pickingUpVfx.Play();
             PlayerCollision_ExecuteReaction();
         }
