@@ -33,7 +33,7 @@ public class PowerWaveProjectileSpawner : ProjectileSpawnerBase
         {
             StartCoroutine(SettingUpProjectile());
 
-            yield return new WaitForSecondsRealtime(_playerCharacteristicsManager.CurrentPlayerData.playerSkillsData.playerForceWaveData.cooldown);
+            yield return new WaitForSeconds(_playerCharacteristicsManager.CurrentPlayerData.playerSkillsData.playerForceWaveData.cooldown);
         }
     }
     protected override IEnumerator SettingUpProjectile()
@@ -56,7 +56,7 @@ public class PowerWaveProjectileSpawner : ProjectileSpawnerBase
                 
             }
             projectileSpawnerCounter++;
-            yield return new WaitForSecondsRealtime(skillCooldownBetweenShots);
+            yield return new WaitForSeconds(skillCooldownBetweenShots);
         }
 
     }

@@ -40,7 +40,7 @@ public class MeteorProjectileSpawner : ProjectileSpawnerBase
         {
             StartCoroutine(SettingUpProjectile());
 
-            yield return new WaitForSecondsRealtime(_playerCharacteristicsManager.CurrentPlayerData.playerSkillsData
+            yield return new WaitForSeconds(_playerCharacteristicsManager.CurrentPlayerData.playerSkillsData
                 .meteorSkillData.cooldown);        }
     }
     protected override IEnumerator SettingUpProjectile()
@@ -64,7 +64,7 @@ public class MeteorProjectileSpawner : ProjectileSpawnerBase
                 meteor.SetObjectAwakeState();
             }
 
-            yield return new WaitForSecondsRealtime(skillCooldownBetweenShots);
+            yield return new WaitForSeconds(skillCooldownBetweenShots);
         }
        
     }

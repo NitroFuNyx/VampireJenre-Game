@@ -51,7 +51,7 @@ public class EnemySkillsManager : MonoBehaviour
         int projectileSpawnerCounter = 0;
         while (projectileSpawnerCounter < 3)
         {
-            projectileSpawnPoint.position = new Vector3(projectileSpawnPoint.position.x, player.transform.position.y,
+            projectileSpawnPoint.position = new Vector3(projectileSpawnPoint.position.x, player.PlayerTargetPosition.position.y,
                 projectileSpawnPoint.position.z);
             PoolItem missile = poolItem.PoolItemsManager.SpawnItemFromPool(PoolItemsTypes.Boss_Dark_Missile,
                 projectileSpawnPoint.position, Quaternion.identity, DynamicEnvironment);

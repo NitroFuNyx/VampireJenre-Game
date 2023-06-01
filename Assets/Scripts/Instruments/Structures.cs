@@ -164,6 +164,8 @@ public struct FireballsSkillDataStruct
     public float damage;
     public float radius;
     public float projectilesAmount;
+    public float cooldown;
+
 }
 
 [Serializable]

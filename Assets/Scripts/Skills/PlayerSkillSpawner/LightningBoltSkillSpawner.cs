@@ -40,7 +40,7 @@ public class LightningBoltSkillSpawner : ProjectileSpawnerBase
         {
             StartCoroutine(SettingUpProjectile());
 
-            yield return new WaitForSecondsRealtime(_playerCharacteristicsManager.CurrentPlayerData.playerSkillsData
+            yield return new WaitForSeconds(_playerCharacteristicsManager.CurrentPlayerData.playerSkillsData
                 .lightningBoltSkillData.cooldown);
             
         }
@@ -60,7 +60,7 @@ public class LightningBoltSkillSpawner : ProjectileSpawnerBase
                 lightning.SetObjectAwakeState();
             }
 
-            yield return new WaitForSecondsRealtime(skillCooldownBetweenShots);
+            yield return new WaitForSeconds(skillCooldownBetweenShots);
         }
 
         

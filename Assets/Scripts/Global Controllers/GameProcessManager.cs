@@ -86,7 +86,7 @@ public class GameProcessManager : MonoBehaviour
 
         if(currentMapProgress >= upgradeProgressValue)
         {
-            // spawn boss
+            _spawnEnemiesManager.SpawnBossAtCenter();
         }
     }
 

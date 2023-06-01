@@ -18,22 +18,13 @@ public class MagicNovaSkill : MonoBehaviour
         _playerCharacteristicsManager = playerCharacteristicsManager;
     }
 
-    private void Start()
-    {
-        if (_playerCharacteristicsManager != null)
-            transform.localScale =
-                new Vector3(_playerCharacteristicsManager.CurrentPlayerData.playerSkillsData.pulseAuraSkillData.radius,
-                    0, _playerCharacteristicsManager.CurrentPlayerData.playerSkillsData.pulseAuraSkillData.radius);
-        else
-        {
-            Debug.Log("Zenject couldn't load");
-        }
-    }
+   
+        
 
     public void Update()
     {
         _cooldownTimer += Time.deltaTime;
-        if (_cooldownTimer < _playerCharacteristicsManager.CurrentPlayerData.playerSkillsData.pulseAuraSkillData.cooldown)
+        if (_cooldownTimer > _playerCharacteristicsManager.CurrentPlayerData.playerSkillsData.pulseAuraSkillData.cooldown)
         {
             StartCoroutine(ExplodingSphere());
             _cooldownTimer = 0;

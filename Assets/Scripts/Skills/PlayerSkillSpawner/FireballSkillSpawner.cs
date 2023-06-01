@@ -38,7 +38,7 @@ public class FireballSkillSpawner : ProjectileSpawnerBase
         {
             StartCoroutine(SettingUpProjectile());
 
-            yield return new WaitForSecondsRealtime(0.1f);        }
+            yield return new WaitForSeconds(0.1f);        }
     }
     protected override IEnumerator SettingUpProjectile()
     {

@@ -30,8 +30,7 @@ public class PlayerCollisionsManager : MonoBehaviour
         {
             DecreaseHp(damage);
         }
-        if(collision.gameObject.layer == 29||collision.gameObject.layer == 30||collision.gameObject.layer == 31)
-            Debug.Log($"Collided with {collision.gameObject.layer} GO: {collision.gameObject}",gameObject);
+       
     }
 
     public void ResetComponent()
@@ -42,6 +41,12 @@ public class PlayerCollisionsManager : MonoBehaviour
     private void SetStartSettings()
     {
         currentHp = startHp;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == Layers.BossProjectile)
+            DecreaseHp(20);
     }
 
     private void DecreaseHp(float amount)

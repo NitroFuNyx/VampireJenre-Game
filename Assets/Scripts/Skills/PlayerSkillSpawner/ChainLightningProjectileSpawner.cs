@@ -30,7 +30,7 @@ public class ChainLightningProjectileSpawner : ProjectileSpawnerBase
         {
             StartCoroutine(SettingUpProjectile());
 
-            yield return new WaitForSecondsRealtime(_playerCharacteristicsManager.CurrentPlayerData.playerSkillsData
+            yield return new WaitForSeconds(_playerCharacteristicsManager.CurrentPlayerData.playerSkillsData
                 .chainLightningSkillData.cooldown);        }
     }
     protected override IEnumerator SettingUpProjectile()
@@ -53,9 +53,8 @@ public class ChainLightningProjectileSpawner : ProjectileSpawnerBase
             }
 
             projectileSpawnerCounter++;
-            yield return new WaitForSecondsRealtime(skillCooldownBetweenShots);
+            yield return new WaitForSeconds(skillCooldownBetweenShots);
         }
 
-        yield return new WaitForSecondsRealtime(skillCooldown);
     }
 }

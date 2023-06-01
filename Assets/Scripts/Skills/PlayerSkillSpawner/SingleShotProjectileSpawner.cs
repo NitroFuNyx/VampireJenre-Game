@@ -37,7 +37,7 @@ public class SingleShotProjectileSpawner : ProjectileSpawnerBase
         {
             StartCoroutine(SettingUpProjectile());
 
-            yield return new WaitForSecondsRealtime(_playerCharacteristicsManager.CurrentPlayerData.playerSkillsData.singleShotSkillData.cooldown);
+            yield return new WaitForSeconds(_playerCharacteristicsManager.CurrentPlayerData.playerSkillsData.singleShotSkillData.cooldown);
         }
     }
     protected override IEnumerator SettingUpProjectile()
@@ -58,7 +58,7 @@ public class SingleShotProjectileSpawner : ProjectileSpawnerBase
                 missile.SetObjectAwakeState();
             }
             projectileSpawnerCounter++;
-            yield return new WaitForSecondsRealtime(skillCooldownBetweenShots);
+            yield return new WaitForSeconds(skillCooldownBetweenShots);
         }
 
        
