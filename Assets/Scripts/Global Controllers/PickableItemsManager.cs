@@ -105,7 +105,7 @@ public class PickableItemsManager : MonoBehaviour
 
                 PoolItem gem = _poolItemsManager.SpawnItemFromPool(gemType, spawnPos, Quaternion.identity, gemsHolder);
                 allPickableItemsOnMap.Add(gem);
-                if (gem.TryGetComponent(out PickableResource resource))
+                if (gem != null && gem.TryGetComponent(out PickableResource resource))
                 {
                     resource.SetResourceData(resourceData);
                     resourcesOnMapList.Add(resource);
@@ -115,7 +115,7 @@ public class PickableItemsManager : MonoBehaviour
             {
                 PoolItem coin = _poolItemsManager.SpawnItemFromPool(PoolItemsTypes.Coin, spawnPos, Quaternion.identity, coinsHolder);
                 allPickableItemsOnMap.Add(coin);
-                if (coin.TryGetComponent(out PickableResource resource))
+                if (coin != null && coin.TryGetComponent(out PickableResource resource))
                 {
                     resource.SetResourceData(resourceData);
                     resourcesOnMapList.Add(resource);

@@ -55,31 +55,37 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnEnemy(PoolItemsTypes enemyType)
     {
         Transform spawnPoint = GetRandomSpawnPoint();
-        PoolItem poolItem = _poolItemsManager.SpawnItemFromPool(enemyType, spawnPoint.position, spawnPoint.rotation, spawnedObjectsHolder);
-        if(poolItem != null)
+        if(spawnPoint != null)
         {
-            poolItem.SetObjectAwakeState();
-        }
-        else
-        {
-            Debug.LogWarning($"There is no {enemyType} models left in the pool to spawn at {gameObject}", gameObject);
+            PoolItem poolItem = _poolItemsManager.SpawnItemFromPool(enemyType, spawnPoint.position, spawnPoint.rotation, spawnedObjectsHolder);
+            if (poolItem != null)
+            {
+                poolItem.SetObjectAwakeState();
+            }
+            else
+            {
+                Debug.LogWarning($"There is no {enemyType} models left in the pool to spawn at {gameObject}", gameObject);
+            }
         }
     }
     public void SpawnBoss(PoolItemsTypes enemyType)
     {
         Transform spawnPoint = GetRandomSpawnPoint();
-        PoolItem poolItem = _poolItemsManager.SpawnItemFromPool(enemyType, Vector3.zero, spawnPoint.rotation, spawnedObjectsHolder);
-        if(poolItem != null)
+        if(spawnPoint != null)
         {
-            if (poolItem.TryGetComponent(out EnemySkillsManager skillsManager))
+            PoolItem poolItem = _poolItemsManager.SpawnItemFromPool(enemyType, Vector3.zero, spawnPoint.rotation, spawnedObjectsHolder);
+            if (poolItem != null)
             {
-                skillsManager.DynamicEnvironment = poolItem.DynamicEnvironment;
+                if (poolItem.TryGetComponent(out EnemySkillsManager skillsManager))
+                {
+                    skillsManager.DynamicEnvironment = poolItem.DynamicEnvironment;
+                }
+                poolItem.SetObjectAwakeState();
             }
-            poolItem.SetObjectAwakeState();
-        }
-        else
-        {
-            Debug.LogWarning($"There is no {enemyType} models left in the pool to spawn at {gameObject}", gameObject);
+            else
+            {
+                Debug.LogWarning($"There is no {enemyType} models left in the pool to spawn at {gameObject}", gameObject);
+            }
         }
     }
 
@@ -103,14 +109,18 @@ public class EnemySpawner : MonoBehaviour
 
     private Transform GetRandomSpawnPoint()
     {
-        Transform spawnPoint = spawnPositionsList[0];
+        //Transform spawnPoint = spawnPositionsList[0];
+        Transform spawnPoint = null;
+        
+        if(spawnPositionsList.Count > 0)
+        {
+            int randomPointIndex = Random.Range(0, spawnPositionsList.Count);
 
-        int randomPointIndex = Random.Range(0, spawnPositionsList.Count);
+            spawnPoint = spawnPositionsList[randomPointIndex];
 
-        spawnPoint = spawnPositionsList[randomPointIndex];
-
-        takenSpawnPositionsList.Add(spawnPoint);
-        spawnPositionsList.Remove(spawnPoint);
+            takenSpawnPositionsList.Add(spawnPoint);
+            spawnPositionsList.Remove(spawnPoint);
+        }
 
         return spawnPoint;
     }
