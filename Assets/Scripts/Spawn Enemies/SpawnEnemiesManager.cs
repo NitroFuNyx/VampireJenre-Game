@@ -72,11 +72,13 @@ public class SpawnEnemiesManager : MonoBehaviour
     private void SubscribeOnEvents()
     {
         _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
+        _gameProcessManager.OnPlayerWon += GameProcessManager_PlayerWon_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
     {
         _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
+        _gameProcessManager.OnPlayerWon -= GameProcessManager_PlayerWon_ExecuteReaction;
     }
 
     [ContextMenu("Stop")]
@@ -90,6 +92,11 @@ public class SpawnEnemiesManager : MonoBehaviour
     }
 
     private void GameProcessManager_PlayerLost_ExecuteReaction()
+    {
+        StopEnemySpawn();
+    }
+
+    private void GameProcessManager_PlayerWon_ExecuteReaction()
     {
         StopEnemySpawn();
     }

@@ -24,6 +24,7 @@ public class GameProcessManager : MonoBehaviour
     private SkillsManager _skillsManager;
     private PlayerExperienceManager _playerExperienceManager;
     private PickableItemsManager _pickableItemsManager;
+    private GameLevelUI _gameLevelUI;
 
     private bool battleStarted = false;
 
@@ -34,6 +35,7 @@ public class GameProcessManager : MonoBehaviour
     #region Events Declaration
     public event Action OnGameStarted;
     public event Action OnPlayerLost;
+    public event Action OnPlayerWon;
     public event Action<float, float> OnMapProgressChanged;
     #endregion Events Declaration
 
@@ -60,7 +62,7 @@ public class GameProcessManager : MonoBehaviour
     #region Zenject
     [Inject]
     private void Construct(SpawnEnemiesManager spawnEnemiesManager, MainUI mainUI, SystemTimeManager systemTimeManager, SkillsManager skillsManager,
-                           PlayerExperienceManager playerExperienceManager, PickableItemsManager pickableItemsManager)
+                           PlayerExperienceManager playerExperienceManager, PickableItemsManager pickableItemsManager, GameLevelUI gameLevelUI)
     {
         _spawnEnemiesManager = spawnEnemiesManager;
         _mainUI = mainUI;
@@ -68,6 +70,7 @@ public class GameProcessManager : MonoBehaviour
         _skillsManager = skillsManager;
         _playerExperienceManager = playerExperienceManager;
         _pickableItemsManager = pickableItemsManager;
+        _gameLevelUI = gameLevelUI;
     }
     #endregion Zenject
 
@@ -87,17 +90,16 @@ public class GameProcessManager : MonoBehaviour
         if(currentMapProgress >= upgradeProgressValue)
         {
             // spawn boss
+
+            OnPlayerWon?.Invoke();
+            ResetMapData();
         }
     }
 
     public void GameLost_ExecuteReaction()
     {
         OnPlayerLost?.Invoke();
-        for(int i = 0; i < skillsObjectsList.Count; i++)
-        {
-            skillsObjectsList[i].SetActive(false);
-        }
-        ResetMapProgress();
+        ResetMapData();
     }
 
     private void ResetMapProgress()
@@ -122,6 +124,16 @@ public class GameProcessManager : MonoBehaviour
     private void PickableItemsManager_SkillScrollCollected_ExecuteReaction()
     {
         StartCoroutine(PauseGameWithDelayCoroutine());
+    }
+
+    private void ResetMapData()
+    {
+        for (int i = 0; i < skillsObjectsList.Count; i++)
+        {
+            skillsObjectsList[i].SetActive(false);
+        }
+        ResetMapProgress();
+        _systemTimeManager.ResumeGame();
     }
 
     private IEnumerator StartGameCoroutine()

@@ -33,12 +33,14 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     {
         _gameProcessManager.OnGameStarted += GameProcessManager_GameStarted_ExecuteReaction;
         _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
+        _gameProcessManager.OnPlayerWon += GameProcessManager_PlayerWon_ExecuteReaction;
     }
 
     private void OnDestroy()
     {
         _gameProcessManager.OnGameStarted -= GameProcessManager_GameStarted_ExecuteReaction;
         _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
+        _gameProcessManager.OnPlayerWon -= GameProcessManager_PlayerWon_ExecuteReaction;
     }
 
     #region Zenject
@@ -248,6 +250,10 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         ResetPlayerCharacteristicAfterBattle();
     }
 
+    private void GameProcessManager_PlayerWon_ExecuteReaction()
+    {
+        ResetPlayerCharacteristicAfterBattle();
+    }
     #region Active Skills Upgrade Methods
 
     private void UpgradeActiveSkill_ForceWave(int skillLevel)

@@ -53,11 +53,13 @@ public class PlayerExperienceManager : MonoBehaviour
     private void SubscribeOnEvents()
     {
         _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
+        _gameProcessManager.OnPlayerWon += GameProcessManager_PlayerWon_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
     {
         _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
+        _gameProcessManager.OnPlayerWon -= GameProcessManager_PlayerWon_ExecuteReaction;
     }
 
     private void ResetPlayerProgress()
@@ -67,6 +69,11 @@ public class PlayerExperienceManager : MonoBehaviour
     }
 
     private void GameProcessManager_PlayerLost_ExecuteReaction()
+    {
+        ResetPlayerProgress();
+    }
+
+    private void GameProcessManager_PlayerWon_ExecuteReaction()
     {
         ResetPlayerProgress();
     }
