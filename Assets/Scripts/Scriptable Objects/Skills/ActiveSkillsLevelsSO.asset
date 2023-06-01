@@ -147,10 +147,10 @@ MonoBehaviour:
     radius: 0
     cooldown: 0
   meteorUpgradesDataList:
-  - damage: 10
+  - damage: 100
     postEffectDuration: 10
-    projectilesAmount: 0
-    cooldown: 0
+    projectilesAmount: 5
+    cooldown: 5
   - damage: 10
     postEffectDuration: 10
     projectilesAmount: 0
@@ -188,9 +188,9 @@ MonoBehaviour:
     projectilesAmount: 0
     cooldown: 0
   lightningBoltUpgradesDataList:
-  - damage: 0
-    projectilesAmount: 0
-    cooldown: 0
+  - damage: 100
+    projectilesAmount: 5
+    cooldown: 1
   - damage: 0
     projectilesAmount: 0
     cooldown: 0

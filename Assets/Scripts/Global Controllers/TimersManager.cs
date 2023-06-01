@@ -104,12 +104,14 @@ public class TimersManager : MonoBehaviour
     {
         _gameProcessManager.OnGameStarted += GameProcessManager_GameStarted_ExecuteReaction;
         _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
+        _gameProcessManager.OnPlayerWon += GameProcessManager_PlayerWon_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
     {
         _gameProcessManager.OnGameStarted -= GameProcessManager_GameStarted_ExecuteReaction;
         _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
+        _gameProcessManager.OnPlayerWon -= GameProcessManager_PlayerWon_ExecuteReaction;
     }
 
     private void StopStopwatch()
@@ -123,6 +125,11 @@ public class TimersManager : MonoBehaviour
     }
 
     private void GameProcessManager_PlayerLost_ExecuteReaction()
+    {
+        StopStopwatch();
+    }
+
+    private void GameProcessManager_PlayerWon_ExecuteReaction()
     {
         StopStopwatch();
     }

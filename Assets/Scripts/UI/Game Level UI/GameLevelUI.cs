@@ -48,12 +48,14 @@ public class GameLevelUI : MainCanvasPanel
     {
         _timersManager.OnStopwatchValueChanged += TimersManager_OnStopwatchValueChanged_ExecuteReaction;
         _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
+        _gameProcessManager.OnPlayerWon += GameProcessManager_PlayerWon_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
     {
         _timersManager.OnStopwatchValueChanged -= TimersManager_OnStopwatchValueChanged_ExecuteReaction;
         _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
+        _gameProcessManager.OnPlayerWon -= GameProcessManager_PlayerWon_ExecuteReaction;
     }
 
     private void FillSubpanelsDictionary()
@@ -127,6 +129,13 @@ public class GameLevelUI : MainCanvasPanel
 
     private void GameProcessManager_PlayerLost_ExecuteReaction()
     {
+        HideAllSubpanels();
         subpanelsDictionary[GameLevelPanels.LoosePanel].ShowPanel();
+    }
+
+    private void GameProcessManager_PlayerWon_ExecuteReaction()
+    {
+        HideAllSubpanels();
+        subpanelsDictionary[GameLevelPanels.VictoryPanel].ShowPanel();
     }
 }

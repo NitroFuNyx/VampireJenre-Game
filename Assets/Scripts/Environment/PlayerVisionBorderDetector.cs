@@ -10,7 +10,7 @@ public class PlayerVisionBorderDetector : MonoBehaviour
 
     private Collider player;
 
-    private void Awake()
+    private void Start()
     {
         boxCollider = GetComponent<BoxCollider>();
         player = FindObjectOfType<PlayerVisionBorder>().BoxCollider;
@@ -20,7 +20,6 @@ public class PlayerVisionBorderDetector : MonoBehaviour
     {
         if(other.gameObject.layer == Layers.PlayerVisionBorder)
         {
-            Debug.Log($"Trigger Enter {gameObject}");
             OnObjectBecomeVisibleForPlayer?.Invoke();
         }
     }
@@ -29,7 +28,6 @@ public class PlayerVisionBorderDetector : MonoBehaviour
     {
         if (other.gameObject.layer == Layers.PlayerVisionBorder)
         {
-            Debug.Log($"Trigger Exit {gameObject}");
             OnObjectStoppedBeingVisibleForPlayer?.Invoke();
         }
     }

@@ -189,3 +189,17 @@ public struct PassiveSkillUpgradeDataStruct
 {
     public float upgradeValue;
 }
+
+[Serializable]
+public struct ActiveSkillsTranslationDataStruct
+{
+    public ActiveSkills skill;
+    public List<PlayerCharacteristicsForTranslation> skillDescribtionTexts; 
+}
+
+[Serializable]
+public struct PassiveSkillsTranslationDataStruct
+{
+    public PassiveSkills skill;
+    public List<PlayerCharacteristicsForTranslation> skillDescribtionTexts_English;
+}

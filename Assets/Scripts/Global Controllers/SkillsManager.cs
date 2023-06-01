@@ -17,6 +17,7 @@ public class SkillsManager : MonoBehaviour
     [Header("Skills Display Data")]
     [Space]
     [SerializeField] private SkillsDisplayDataSO skillsDisplayDataSO;
+    [SerializeField] private SkilllsDescribtionTextsTranslationSO skillsDescribtionTextsTranslationSO;
 
     private GameProcessManager _gameProcessManager;
     private GameLevelUI _gameLevelUI;
@@ -162,6 +163,7 @@ public class SkillsManager : MonoBehaviour
     {
         _gameProcessManager.OnGameStarted += GameProcessManager_OnGameStarted_ExecuteReaction;
         _gameProcessManager.OnPlayerLost += GameProcessManager_OnPlayerLost_ExecuteReaction;
+        _gameProcessManager.OnPlayerWon += GameProcessManager_OnPlayerWon_ExecuteReaction;
 
         _playerExperienceManager.OnPlayerGotNewLevel += PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction;
 
@@ -172,6 +174,7 @@ public class SkillsManager : MonoBehaviour
     {
         _gameProcessManager.OnGameStarted -= GameProcessManager_OnGameStarted_ExecuteReaction;
         _gameProcessManager.OnPlayerLost -= GameProcessManager_OnPlayerLost_ExecuteReaction;
+        _gameProcessManager.OnPlayerWon -= GameProcessManager_OnPlayerWon_ExecuteReaction;
 
         _playerExperienceManager.OnPlayerGotNewLevel -= PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction;
 
@@ -334,6 +337,11 @@ public class SkillsManager : MonoBehaviour
     }
 
     private void GameProcessManager_OnPlayerLost_ExecuteReaction()
+    {
+        _takenSkillsDisplayPanel.ResetSkillsData();
+    }
+
+    private void GameProcessManager_OnPlayerWon_ExecuteReaction()
     {
         _takenSkillsDisplayPanel.ResetSkillsData();
     }
