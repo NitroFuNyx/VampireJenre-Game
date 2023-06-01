@@ -17,23 +17,41 @@ public class PickableItemsManager : MonoBehaviour
     [SerializeField] private Transform coinsHolder;
     [Header("Resources On Map")]
     [Space]
+    [SerializeField] private List<PoolItem> allPickableItemsOnMap = new List<PoolItem>();
     [SerializeField] private List<PickableResource> resourcesOnMapList = new List<PickableResource>();
 
     private PoolItemsManager _poolItemsManager;
     private ResourcesManager _resourcesManager;
     private PlayerCollisionsManager _player;
+    private GameProcessManager _gameProcessManager;
 
     #region Events Declaration
     public event System.Action OnSkillScrollCollected;
     #endregion Events Declaration
 
+    private void Start()
+    {
+        _gameProcessManager.OnGameStarted += GameProcessManager_GameStarted_ExecuteReaction;
+        _gameProcessManager.OnPlayerLost += ResetItems;
+        _gameProcessManager.OnPlayerWon += ResetItems;
+    }
+
+    private void OnDestroy()
+    {
+        _gameProcessManager.OnGameStarted -= GameProcessManager_GameStarted_ExecuteReaction;
+        _gameProcessManager.OnPlayerLost -= ResetItems;
+        _gameProcessManager.OnPlayerWon -= ResetItems;
+    }
+
     #region Zenject
     [Inject]
-    private void Construct(PoolItemsManager poolItemsManager, ResourcesManager resourcesManager, PlayerCollisionsManager playerCollisionsManager)
+    private void Construct(PoolItemsManager poolItemsManager, ResourcesManager resourcesManager, PlayerCollisionsManager playerCollisionsManager,
+                           GameProcessManager gameProcessManager)
     {
         _poolItemsManager = poolItemsManager;
         _resourcesManager = resourcesManager;
         _player = playerCollisionsManager;
+        _gameProcessManager = gameProcessManager;
     }
     #endregion Zenject
 
@@ -51,6 +69,7 @@ public class PickableItemsManager : MonoBehaviour
                 PoolItem item = _poolItemsManager.SpawnItemFromPool(GetPoolItemTypeToSpawn(), spawnPos.transform.position, Quaternion.identity, spawnPos.transform);
                 takenSpawnPositionsList.Add(spawnPos);
                 availableSpawnPositionsList.Remove(spawnPos);
+                allPickableItemsOnMap.Add(item);
             }
         }
     }
@@ -85,7 +104,8 @@ public class PickableItemsManager : MonoBehaviour
                 }
 
                 PoolItem gem = _poolItemsManager.SpawnItemFromPool(gemType, spawnPos, Quaternion.identity, gemsHolder);
-                if(gem.TryGetComponent(out PickableResource resource))
+                allPickableItemsOnMap.Add(gem);
+                if (gem.TryGetComponent(out PickableResource resource))
                 {
                     resource.SetResourceData(resourceData);
                     resourcesOnMapList.Add(resource);
@@ -94,6 +114,7 @@ public class PickableItemsManager : MonoBehaviour
             else
             {
                 PoolItem coin = _poolItemsManager.SpawnItemFromPool(PoolItemsTypes.Coin, spawnPos, Quaternion.identity, coinsHolder);
+                allPickableItemsOnMap.Add(coin);
                 if (coin.TryGetComponent(out PickableResource resource))
                 {
                     resource.SetResourceData(resourceData);
@@ -151,5 +172,27 @@ public class PickableItemsManager : MonoBehaviour
         }
 
         return spawnPosList;
+    }
+
+    private void ResetItems()
+    {
+        for(int i = 0; i < allPickableItemsOnMap.Count; i++)
+        {
+            allPickableItemsOnMap[i].PoolItemsManager.ReturnItemToPool(allPickableItemsOnMap[i]);
+        }
+
+        allPickableItemsOnMap.Clear();
+
+        for(int i = 0; i < takenSpawnPositionsList.Count; i++)
+        {
+            availableSpawnPositionsList.Add(takenSpawnPositionsList[i]);
+        }
+
+        takenSpawnPositionsList.Clear();
+    }
+
+    private void GameProcessManager_GameStarted_ExecuteReaction()
+    {
+        SpawnItems();
     }
 }
