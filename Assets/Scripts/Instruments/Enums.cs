@@ -76,3 +76,9 @@ public enum PickableItemsCategories
 {
     TreasureChest, SkillScroll, CoinsMagnet
 }
+
+public enum PlayerCharacteristicsForTranslation
+{
+    Damage, Range, Width, Cooldown, ProjectilesAmount, PostEffectDuration, JumpsAmount, Size, MovementSpeed, IncomeDamage, Regeneration, CritChance,
+    CritPower
+}
