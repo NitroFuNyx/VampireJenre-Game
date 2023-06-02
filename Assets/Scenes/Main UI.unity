@@ -236,6 +236,12 @@ PrefabInstance:
       objectReference: {fileID: 1865405405}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98945e6aecbfc4d4b8026df54bb457b4, type: 3}
+--- !u!4 &43814172 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2283930152582918348, guid: 98945e6aecbfc4d4b8026df54bb457b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 43814171}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &67104107 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6200038748406271148, guid: 68e01212d0702f54aae0e8f5f5538d0e,
@@ -2648,7 +2654,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnPoint
       value: 
-      objectReference: {fileID: 1821367993}
+      objectReference: {fileID: 43814172}
     - target: {fileID: 8629512750512531125, guid: 9cdad5037cf87fb418e4223b6953f81b,
         type: 3}
       propertyPath: dynamicEnvironment
@@ -3566,14 +3572,9 @@ MonoBehaviour:
   spawnPoint: {fileID: 1307652137}
   dynamicEnvironment: {fileID: 1842102949}
   skillCooldownBetweenShots: 0.218
+  CD: 0
   maxProjectileSpawnerCount: 1
   targetsHolder: {fileID: 1089520205}
---- !u!4 &1821367993 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8629512751640538921, guid: 9cdad5037cf87fb418e4223b6953f81b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1311438592}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1826187728 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8629512750512531122, guid: 9cdad5037cf87fb418e4223b6953f81b,
@@ -19947,7 +19948,7 @@ PrefabInstance:
     - target: {fileID: 1643615658217278995, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 207.2767
+      value: 283.30887
       objectReference: {fileID: 0}
     - target: {fileID: 1643615658217278995, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
@@ -19982,7 +19983,7 @@ PrefabInstance:
     - target: {fileID: 2356250549093977375, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 207.2767
+      value: 283.30887
       objectReference: {fileID: 0}
     - target: {fileID: 2356250549093977375, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
@@ -20047,7 +20048,7 @@ PrefabInstance:
     - target: {fileID: 3365618134673111086, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 207.2767
+      value: 283.30887
       objectReference: {fileID: 0}
     - target: {fileID: 3365618134673111086, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
@@ -20272,7 +20273,7 @@ PrefabInstance:
     - target: {fileID: 5018339162812492940, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 267.66714
+      value: 286.8184
       objectReference: {fileID: 0}
     - target: {fileID: 5018339162812492940, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
@@ -20427,7 +20428,7 @@ PrefabInstance:
     - target: {fileID: 8672601916240592175, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 207.2767
+      value: 283.30887
       objectReference: {fileID: 0}
     - target: {fileID: 8672601916240592175, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
