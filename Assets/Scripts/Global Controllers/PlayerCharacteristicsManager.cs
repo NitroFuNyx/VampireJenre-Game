@@ -263,6 +263,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         tempSkillDataForUpgrade.range = currentPlayerData.playerSkillsData.playerForceWaveData.range + activesSkillsLevelsData.ForceWaveUpgradesDataList[skillLevel - 1].range;
         tempSkillDataForUpgrade.width = currentPlayerData.playerSkillsData.playerForceWaveData.width + activesSkillsLevelsData.ForceWaveUpgradesDataList[skillLevel - 1].width;
         tempSkillDataForUpgrade.cooldown = currentPlayerData.playerSkillsData.playerForceWaveData.cooldown + activesSkillsLevelsData.ForceWaveUpgradesDataList[skillLevel - 1].cooldown;
+        tempSkillDataForUpgrade.projectilesAmount = currentPlayerData.playerSkillsData.playerForceWaveData.projectilesAmount + activesSkillsLevelsData.ForceWaveUpgradesDataList[skillLevel - 1].projectilesAmount;
 
         currentPlayerData.playerSkillsData.playerForceWaveData = tempSkillDataForUpgrade;
     }
