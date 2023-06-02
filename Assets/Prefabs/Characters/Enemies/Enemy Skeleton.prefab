@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationsManager: {fileID: 4178861040698909552}
+  boss: 0
 --- !u!114 &2612514640753569538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf0367378905c34e99b25718cc096c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMoveSpeed: 0.1
+  startMoveSpeed: 0.15
   rotationSpeed: 10
   movementDecreasePrecent: 20
 --- !u!114 &2612514640753569597
@@ -79,9 +80,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c792fb7785d90e4bad8c49c7fd83615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHp: 100
+  startHp: 20
   currentHp: 100
-  auraCooldown: 1
 --- !u!114 &2612514640753569596
 MonoBehaviour:
   m_ObjectHideFlags: 0

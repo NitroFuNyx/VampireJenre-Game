@@ -176,8 +176,11 @@ public class PickableItemsManager : MonoBehaviour
 
     private void ResetItems()
     {
+        Debug.Log($"All Pickable Items {allPickableItemsOnMap.Count}");
+
         for(int i = 0; i < allPickableItemsOnMap.Count; i++)
         {
+            if(allPickableItemsOnMap[i].gameObject.activeInHierarchy)
             allPickableItemsOnMap[i].PoolItemsManager.ReturnItemToPool(allPickableItemsOnMap[i]);
         }
 

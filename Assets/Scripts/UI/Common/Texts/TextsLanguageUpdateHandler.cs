@@ -4,7 +4,7 @@ using Zenject;
 
 public abstract class TextsLanguageUpdateHandler : MonoBehaviour
 {
-    private LanguageManager _languageManager;
+    protected LanguageManager _languageManager;
 
     private void Start()
     {
