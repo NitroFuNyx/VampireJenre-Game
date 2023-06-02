@@ -27,6 +27,7 @@ public abstract class PickableItem : MonoBehaviour
     private void OnEnable()
     {
         ResetVfx();
+        itemPickedUp = false;
 
         if(idleVfx)
         {
