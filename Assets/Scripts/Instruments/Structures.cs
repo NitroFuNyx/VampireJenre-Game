@@ -205,3 +205,11 @@ public struct PassiveSkillsTranslationDataStruct
     public PassiveSkills skill;
     public List<PlayerCharacteristicsForTranslation> skillDescribtionTexts_English;
 }
+
+[Serializable]
+public struct EnemyDataStruct
+{
+    public float hp;
+    public float damage;
+    public float speed;
+}

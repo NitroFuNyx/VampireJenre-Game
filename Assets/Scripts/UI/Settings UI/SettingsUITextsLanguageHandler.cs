@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using Localization;
 using TMPro;
-using Zenject;
 
 public class SettingsUITextsLanguageHandler : TextsLanguageUpdateHandler
 {
@@ -17,16 +16,6 @@ public class SettingsUITextsLanguageHandler : TextsLanguageUpdateHandler
     [Header("Privacy Policy Texts")]
     [Space]
     [SerializeField] private List<PrivacyPolicyText> ppTextsList = new List<PrivacyPolicyText>();
-
-    private LanguageManager _languageManager;
-
-    #region Zenject
-    [Inject]
-    private void Construct(LanguageManager languageManager)
-    {
-        _languageManager = languageManager;
-    }
-    #endregion Zenject
 
     public override void OnLanguageChange_ExecuteReaction(LanguageTextsHolder languageHolder)
     {
