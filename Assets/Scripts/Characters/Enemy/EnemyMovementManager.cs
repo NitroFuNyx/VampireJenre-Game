@@ -13,6 +13,8 @@ public class EnemyMovementManager : MonoBehaviour
 
     private Rigidbody rb;
 
+    private EnemiesCharacteristicsManager _enemiesCharacteristicsManager;
+
     private float currentMoveSpeed;
 
     private bool canMove = false;
@@ -58,6 +60,17 @@ public class EnemyMovementManager : MonoBehaviour
 
     public void ResetMovementSpeed()
     {
+        currentMoveSpeed = startMoveSpeed;
+    }
+
+    public void CashExternalComponents(EnemiesCharacteristicsManager enemiesCharacteristicsManager)
+    {
+        _enemiesCharacteristicsManager = enemiesCharacteristicsManager;
+    }
+
+    public void UpdateCharacteristics()
+    {
+        startMoveSpeed = _enemiesCharacteristicsManager.CurrentEnemiesData.hp;
         currentMoveSpeed = startMoveSpeed;
     }
 

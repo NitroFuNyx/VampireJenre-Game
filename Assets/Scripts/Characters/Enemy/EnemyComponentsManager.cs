@@ -15,6 +15,9 @@ public class EnemyComponentsManager : EnemyBehaviour
     private void Start()
     {
         SubscribeOnEvents();
+
+        movementManager.CashExternalComponents(poolItemComponent._EnemiesCharacteristicsManager);
+        collisionsManager.CashExternalComponents(poolItemComponent._EnemiesCharacteristicsManager);
     }
 
     private void OnDestroy()
@@ -40,9 +43,11 @@ public class EnemyComponentsManager : EnemyBehaviour
         {
             poolItemComponent.OnItemResetRequired += PoolItemComponent_ResetRequired_ExecuteReaction;
             poolItemComponent.OnObjectAwakeStateSet += PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction;
+
+            poolItemComponent._EnemiesCharacteristicsManager.OnEnemyCharacteristicsUpgraded += EnemyCharacteristicsUpgraded_ExecuteReaction;
         }
 
-        collisionsManager.OnCharacterOutOfHp += CollisionManager_PlayerOutOfHp_ExecuteReaction;
+        collisionsManager.OnCharacterOutOfHp += CollisionManager_CharacterOutOfHp_ExecuteReaction;
         collisionsManager.OnDamageReceived += CollisionManager_DamageReceived_ExecuteReaction;
         collisionsManager.OnSpeedDebuffCollision += CollisionManager_SpeedDebuffCollision_ExecuteReaction;
         collisionsManager.OnSpeedReset += CollisionManager_SpeedReset_ExecuteReaction;
@@ -57,9 +62,11 @@ public class EnemyComponentsManager : EnemyBehaviour
         {
             poolItemComponent.OnItemResetRequired -= PoolItemComponent_ResetRequired_ExecuteReaction;
             poolItemComponent.OnObjectAwakeStateSet -= PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction;
+
+            poolItemComponent._EnemiesCharacteristicsManager.OnEnemyCharacteristicsUpgraded -= EnemyCharacteristicsUpgraded_ExecuteReaction;
         }
 
-        collisionsManager.OnCharacterOutOfHp -= CollisionManager_PlayerOutOfHp_ExecuteReaction;
+        collisionsManager.OnCharacterOutOfHp -= CollisionManager_CharacterOutOfHp_ExecuteReaction;
         collisionsManager.OnDamageReceived -= CollisionManager_DamageReceived_ExecuteReaction;
         collisionsManager.OnSpeedDebuffCollision -= CollisionManager_SpeedDebuffCollision_ExecuteReaction;
         collisionsManager.OnSpeedReset -= CollisionManager_SpeedReset_ExecuteReaction;
@@ -89,7 +96,7 @@ public class EnemyComponentsManager : EnemyBehaviour
     #endregion Pool Item Component Events Reactions
 
     #region Collision Manager Events Reaction
-    private void CollisionManager_PlayerOutOfHp_ExecuteReaction()
+    private void CollisionManager_CharacterOutOfHp_ExecuteReaction()
     {
         movementManager.StopMoving();
         animationsManager.SetAnimation_Die();
@@ -184,6 +191,14 @@ public class EnemyComponentsManager : EnemyBehaviour
     {
         poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
     }
-    
+
     #endregion Animation Manager Events Reaction
+
+    #region Enemies Characteristics Manager Events Reaction
+    private void EnemyCharacteristicsUpgraded_ExecuteReaction()
+    {
+        collisionsManager.UpdateCharacteristics();
+        movementManager.UpdateCharacteristics();
+    }
+    #endregion Enemis Characteristics Manager Events Reaction
 }
