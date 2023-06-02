@@ -58,6 +58,7 @@ public class EnemySpawner : MonoBehaviour
         if(spawnPoint != null)
         {
             PoolItem poolItem = _poolItemsManager.SpawnItemFromPool(enemyType, spawnPoint.position, spawnPoint.rotation, spawnedObjectsHolder);
+            
             if (poolItem != null)
             {
                 poolItem.SetObjectAwakeState();
@@ -92,7 +93,7 @@ public class EnemySpawner : MonoBehaviour
     public void ReturnAllEnemiesToPool()
     {
         List<PoolItem> poolItemsList = new List<PoolItem>();
-
+        
         for(int i = 0; i < spawnedObjectsHolder.childCount; i++)
         {
             if(spawnedObjectsHolder.GetChild(i).TryGetComponent(out PoolItem poolItem))

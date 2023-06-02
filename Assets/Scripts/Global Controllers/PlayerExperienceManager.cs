@@ -7,9 +7,13 @@ public class PlayerExperienceManager : MonoBehaviour
     [Header("Experience Data")]
     [Space]
     [SerializeField] private float currentXp = 0;
-    [SerializeField] private float upgradeXpValue = 100;
+    [SerializeField] private float upgradeXpValue = 5;
 
     private GameProcessManager _gameProcessManager;
+
+    private int currentLevel = 1;
+
+    public int CurrentLevel { get => currentLevel; private set => currentLevel = value; }
 
     #region Events Declaration
     public event Action<float, float> OnPlayerXpAmountChanged;
@@ -43,7 +47,8 @@ public class PlayerExperienceManager : MonoBehaviour
             //float newLevelStartXp = currentXp - upgradeXpValue;
             //currentXp = newLevelStartXp;
             currentXp = 0f;
-            upgradeXpValue = 1000; // reset upgradeXpValue
+            upgradeXpValue = 10; // reset upgradeXpValue
+            currentLevel++;
             OnPlayerGotNewLevel?.Invoke();
         }
 
@@ -65,6 +70,7 @@ public class PlayerExperienceManager : MonoBehaviour
     private void ResetPlayerProgress()
     {
         currentXp = 0f;
+        currentLevel = 1;
         OnPlayerXpAmountChanged?.Invoke(currentXp, upgradeXpValue);
     }
 

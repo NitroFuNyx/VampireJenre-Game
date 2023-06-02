@@ -84,6 +84,7 @@ public class EnemyComponentsManager : EnemyBehaviour
         collisionsManager.ChangeColliderActivationState(true);
         movementManager.MoveToPlayer();
         animationsManager.SetAnimation_Moving();
+        poolItemComponent.SpawnEnemiesManager.AddEnemyToOnMapList(this);
     }
     #endregion Pool Item Component Events Reactions
 
@@ -92,10 +93,11 @@ public class EnemyComponentsManager : EnemyBehaviour
     {
         movementManager.StopMoving();
         animationsManager.SetAnimation_Die();
+        poolItemComponent.SpawnEnemiesManager.RemoveEnemyFronOnMapList(this);
 
-        if(!boss)
+        if (!boss)
         {
-            poolItemComponent.PlayerExperienceManager.IncreaseXpValue(5);
+            poolItemComponent.PlayerExperienceManager.IncreaseXpValue(0.25f);
             poolItemComponent.PickableItemsManager.SpawnResourceForKillingEnemy(transform.position);
             poolItemComponent.GameProcessManager.IncreaseCurrentProgressValue();
         }
