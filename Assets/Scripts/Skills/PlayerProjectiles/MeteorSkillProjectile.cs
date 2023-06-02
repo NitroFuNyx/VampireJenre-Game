@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,8 @@ public class MeteorSkillProjectile : SkillParameterBase , ISkillProjectile
     [Header("References")] 
     [SerializeField] private ExplosionCollision explosionCollision;
     [SerializeField] private Collider sphereCollider;
+
+    public event Action<PoolItem> OnItemReturnToPool;
 
     public float PuddleLifeTime
     {
@@ -58,7 +61,7 @@ public class MeteorSkillProjectile : SkillParameterBase , ISkillProjectile
         
         }
     }
-
+    
     #region Event subsctiption
 
     private void SubscribeOnEvents()
@@ -93,7 +96,7 @@ public class MeteorSkillProjectile : SkillParameterBase , ISkillProjectile
         puddle.transform.SetParent(transform);
         puddle.transform.localPosition = Vector3.zero;
         poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
-
+        OnItemReturnToPool?.Invoke(poolItemComponent);
 
     }
     #region Pool Item Component Events Reactions

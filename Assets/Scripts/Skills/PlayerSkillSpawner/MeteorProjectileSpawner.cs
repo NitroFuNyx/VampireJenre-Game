@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -8,7 +9,6 @@ using Random = UnityEngine.Random;
 public class MeteorProjectileSpawner : ProjectileSpawnerBase
 {
     [Range(0, 1)] [SerializeField] protected float skillCooldownBetweenShots;
-
     [Header("Gizmo")] [SerializeField] private bool drawSpawnZone;
     [Range(0.1f, 100)] [SerializeField] private float spawnZoneWidth;
     [Range(0.1f, 100)] [SerializeField] private float spawnZoneLenght;
@@ -17,6 +17,9 @@ public class MeteorProjectileSpawner : ProjectileSpawnerBase
     private PoolItemsManager _poolmanager;
     private PlayerCharacteristicsManager _playerCharacteristicsManager;
 
+    [SerializeField] private List<PoolItem> projectiles;
+
+    
     [Inject]
     private void InjectDependencies(PoolItemsManager poolmanager,PlayerCharacteristicsManager playerCharacteristicsManager)
     {
@@ -45,9 +48,8 @@ public class MeteorProjectileSpawner : ProjectileSpawnerBase
     }
     protected override IEnumerator SettingUpProjectile()
     {
-        int projectileSpawnerCounter = 0;
-        while (projectileSpawnerCounter < _playerCharacteristicsManager.CurrentPlayerData.playerSkillsData
-            .meteorSkillData.projectilesAmount)
+        //int projectileSpawnerCounter = 0;
+        while (projectiles.Count < _playerCharacteristicsManager.CurrentPlayerData.playerSkillsData.meteorSkillData.projectilesAmount)
         {
             Vector3 spawnPoint = new Vector3(GetSpawnPosition(), spawnZone.transform.position.y + spawnZone.size.y,
                 GetSpawnPosition());
@@ -55,9 +57,12 @@ public class MeteorProjectileSpawner : ProjectileSpawnerBase
                 Quaternion.identity, dynamicEnvironment);
             if (meteor != null)
             {
+                projectiles.Add(meteor);
+
                 //meteor.CashComponents(dynamicEnvironment);
                 if (meteor.TryGetComponent(out MeteorSkillProjectile projectile))
                 {
+                    projectile.OnItemReturnToPool += RemoveProjectileFromList;
                     projectile.PuddleLifeTime = _playerCharacteristicsManager.CurrentPlayerData.playerSkillsData
                         .meteorSkillData.postEffectDuration;
                 }
@@ -69,6 +74,10 @@ public class MeteorProjectileSpawner : ProjectileSpawnerBase
        
     }
 
+    public void RemoveProjectileFromList(PoolItem item)
+    {
+        projectiles.Remove(item);
+    }
     private void OnDrawGizmosSelected()
     {
         if(drawSpawnZone)

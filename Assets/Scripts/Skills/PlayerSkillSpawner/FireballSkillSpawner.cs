@@ -8,10 +8,10 @@ public class FireballSkillSpawner : ProjectileSpawnerBase
     [SerializeField] private List<PoolItem> projectiles;
 
     
-    [Range(-50, 50)] [SerializeField] private float rotationSpeed;
+    [Range(-50, 75)] [SerializeField] private float rotationSpeed;
     [Range(0, 10)] [SerializeField] private float radius;
     [Range(0, 10)] [SerializeField] private float height;
-    [Range(0, 10)] [SerializeField] private int projectileCount;
+    //[Range(0, 10)] [SerializeField] private int projectileCount;
     
     private PoolItemsManager _poolmanager;
     private PlayerCharacteristicsManager _playerCharacteristicsManager;
@@ -43,9 +43,11 @@ public class FireballSkillSpawner : ProjectileSpawnerBase
     protected override IEnumerator SettingUpProjectile()
     {
         if (_playerCharacteristicsManager.CurrentPlayerData.playerSkillsData.fireballsSkillData.projectilesAmount-1 < projectiles.Count) yield break;
+        Debug.Log(_playerCharacteristicsManager.CurrentPlayerData.playerSkillsData.fireballsSkillData.projectilesAmount);
         PoolItem lightning = _poolmanager.SpawnItemFromPool(PoolItemsTypes.Fireball_Skill, transform.position,Quaternion.identity, spawnPoint);
         if (lightning != null) 
         {
+            
             projectiles.Add(lightning);
             ReformatCircle();
             lightning.SetObjectAwakeState();

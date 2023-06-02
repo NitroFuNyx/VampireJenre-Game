@@ -1,5 +1,6 @@
 
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +15,9 @@ public class PowerWaveProjectileSpawner : ProjectileSpawnerBase
     private Transform thisTransform;
     private PoolItemsManager _poolmanager;
     private PlayerCharacteristicsManager _playerCharacteristicsManager;
+
+    
+    [SerializeField] private List<PoolItem> projectiles;
 
     [Inject]
     private void InjectDependencies(PoolItemsManager poolmanager,PlayerCharacteristicsManager playerCharacteristicsManager)
@@ -40,8 +44,8 @@ public class PowerWaveProjectileSpawner : ProjectileSpawnerBase
     }
     protected override IEnumerator SettingUpProjectile()
     {
-        int projectileSpawnerCounter = 0;
-        while (projectileSpawnerCounter < _playerCharacteristicsManager.CurrentPlayerData.playerSkillsData.playerForceWaveData.projectilesAmount)
+        //int projectileSpawnerCounter = 0;
+        while (projectiles.Count < _playerCharacteristicsManager.CurrentPlayerData.playerSkillsData.playerForceWaveData.projectilesAmount)
         {
             thisTransform.rotation = Quaternion.Euler(0, Random.Range(0, 361), 0);
             PoolItem missile = _poolmanager.SpawnItemFromPool(PoolItemsTypes.PowerWave_Skill,
@@ -49,17 +53,24 @@ public class PowerWaveProjectileSpawner : ProjectileSpawnerBase
             
             if (missile != null)
             {
+                projectiles.Add(missile);
 
                 if (missile.TryGetComponent(out PowerWaveSkillProjectile projectile))
                 {
+                    projectile.OnItemReturnToPool += RemoveProjectileFromList;
+
                     projectile.TargetHolder = targetsHolder;
                 }
                 missile.SetObjectAwakeState();
                 
             }
-            projectileSpawnerCounter++;
+            //projectileSpawnerCounter++;
             yield return new WaitForSeconds(skillCooldownBetweenShots);
         }
 
+    }
+    public void RemoveProjectileFromList(PoolItem item)
+    {
+        projectiles.Remove(item);
     }
 }

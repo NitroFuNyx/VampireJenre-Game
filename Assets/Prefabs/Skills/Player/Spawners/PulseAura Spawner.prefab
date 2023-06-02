@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3305491114065765642}
   - component: {fileID: 3305491114065765645}
-  - component: {fileID: 9144787518953692120}
+  - component: {fileID: 825633822}
   m_Layer: 21
   m_Name: PulseAura Spawner
   m_TagString: Untagged
@@ -47,7 +47,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2.49
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9144787518953692120
+--- !u!114 &825633822
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,12 +56,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 9144787518953692123}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56e76c806775a48418a34f67c8d27045, type: 3}
+  m_Script: {fileID: 11500000, guid: e3ca6984a4848bf4084d389e2034e5cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  novaVFX: {fileID: 2717032041903323164}
+  particle: {fileID: 0}
+  novaVFX: {fileID: 0}
   collider: {fileID: 3305491114065765645}
-  explosionTime: 0.07
+  explosionTime: 0.31
 --- !u!1001 &2717032041889572248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84,6 +85,10 @@ PrefabInstance:
     - target: {fileID: 168694, guid: 9e4fad450282ac64daeb20efbc2b9dfb, type: 3}
       propertyPath: m_Layer
       value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 168694, guid: 9e4fad450282ac64daeb20efbc2b9dfb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 412392, guid: 9e4fad450282ac64daeb20efbc2b9dfb, type: 3}
       propertyPath: m_RootOrder
@@ -164,12 +169,6 @@ PrefabInstance:
 --- !u!4 &2717032041889197936 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 412392, guid: 9e4fad450282ac64daeb20efbc2b9dfb,
-    type: 3}
-  m_PrefabInstance: {fileID: 2717032041889572248}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &2717032041903323164 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 19848580, guid: 9e4fad450282ac64daeb20efbc2b9dfb,
     type: 3}
   m_PrefabInstance: {fileID: 2717032041889572248}
   m_PrefabAsset: {fileID: 0}

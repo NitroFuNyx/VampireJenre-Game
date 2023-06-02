@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5281446465671146030}
-  - component: {fileID: 5281446465671146025}
+  - component: {fileID: 2136522242}
   m_Layer: 0
   m_Name: ProjectileSpawner
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5281446465671146025
+--- !u!114 &2136522242
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,14 +42,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5281446465671146031}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04ebd9903b72569489445c2e501dfb8b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5430508519d1ebc4ebb1f7b794bd3d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skill: {fileID: 4221755577825226177, guid: e2565b4c2b17e494ab41b024aa0a4024, type: 3}
-  skillCooldown: 0.7
+  skillCooldown: 2.71
   spawnPoint: {fileID: 5281446466994333344}
   dynamicEnvironment: {fileID: 0}
-  skillCooldownBetweenShots: 0.047
+  skillCooldownBetweenShots: 0.239
   maxProjectileSpawnerCount: 1
   targetsHolder: {fileID: 0}
   projectiles: []

@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
 public class MagicNovaSkill : MonoBehaviour
 {
+    [SerializeField] private GameObject particle;
     [SerializeField] private ParticleSystem novaVFX;
     [SerializeField] private SphereCollider collider;
     private float _cooldownTimer;
@@ -18,8 +20,11 @@ public class MagicNovaSkill : MonoBehaviour
         _playerCharacteristicsManager = playerCharacteristicsManager;
     }
 
-   
-        
+
+    private void Start()
+    {
+        particle.SetActive(true);
+    }
 
     public void Update()
     {

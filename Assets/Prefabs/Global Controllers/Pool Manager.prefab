@@ -52,6 +52,8 @@ MonoBehaviour:
   skillFireballPoolSize: 25
   skillSingleShotPoolSize: 50
   skillPowerWavePoolSize: 50
+  bossSkillDarkMissilePoolSize: 15
+  bossZombiePoolSize: 1
   pickableItemsPoolSize: 20
   enemySkeletonPrefab: {fileID: 2612514640753569596, guid: 1abe631e5672251489ef5e4f9922ba47,
     type: 3}
@@ -73,9 +75,21 @@ MonoBehaviour:
     type: 3}
   skillPowerWaveShotPrefab: {fileID: 6520245464236628466, guid: 1e67d75b1bbf9a14cbb9f2d63162b18b,
     type: 3}
+  bossSkillDarkMissilePrefab: {fileID: 1614564912820849079, guid: 98d02e29329906e45a290cb649db8f61,
+    type: 3}
+  bossZombiePrefab: {fileID: 3367301630267509500, guid: 38865b10883b8864784161c3b369b45e,
+    type: 3}
   treasureChestPrefab: {fileID: 8956038253145351302, guid: de7e7c7dad155e64b856599b5b575c2d,
     type: 3}
   skillScrollPrefab: {fileID: 7371538641157447064, guid: e00cf59afe10c3d4fbcdafbd979bfde9,
     type: 3}
   coinsMagnetPrefab: {fileID: 7413751664692785759, guid: 3fc3dee1371e49d499804c45ba069e59,
+    type: 3}
+  crystalGreenPrefab: {fileID: -7156694170991197479, guid: ce223e14a9d41da4db9a7879f17108f7,
+    type: 3}
+  crystalOrangePrefab: {fileID: 8679030269713587935, guid: eb9ce367b743dec45bb983fdafcd329e,
+    type: 3}
+  crystalPurplePrefab: {fileID: 19078975775350853, guid: 55294fc0882d1b3428138ad8340b99e4,
+    type: 3}
+  coinPrefab: {fileID: -2172580126700914254, guid: 08c9a7d8c9646d640b26186b49386aca,
     type: 3}

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PowerWaveSkillProjectile : SkillParameterBase, ISkillProjectile
@@ -24,6 +25,9 @@ public class PowerWaveSkillProjectile : SkillParameterBase, ISkillProjectile
     private Transform _thisTransform;
     private Collider target;
 
+    public event Action<PoolItem> OnItemReturnToPool;
+
+    
     private void Start()
     {
         SubscribeOnEvents();
@@ -35,7 +39,10 @@ public class PowerWaveSkillProjectile : SkillParameterBase, ISkillProjectile
     {
         timeCounter += Time.deltaTime;
         if(duration+TimeGap<timeCounter)
+        {
             poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
+            OnItemReturnToPool?.Invoke(poolItemComponent);
+        }
         
     }
 
