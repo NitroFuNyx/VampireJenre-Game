@@ -60,6 +60,7 @@ public class LightningBoltSkillSpawner : ProjectileSpawnerBase
                 lightning.SetObjectAwakeState();
             }
 
+            projectileSpawnerCounter++;
             yield return new WaitForSeconds(skillCooldownBetweenShots);
         }
 
