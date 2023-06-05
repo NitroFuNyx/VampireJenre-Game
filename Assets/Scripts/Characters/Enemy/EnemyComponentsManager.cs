@@ -167,8 +167,10 @@ public class EnemyComponentsManager : EnemyBehaviour
             Debug.LogWarning($"Unknown type got caught during damage processing {skill}");
             value = 0;
         }
-        Debug.Log($"Skill: {skill} damages: {value}");
-        return value;
+        Debug.Log($"Skill: {skill} damages: {value + GetAdditionalDamageAmountFromPlayerPassiveSkill(value)}\n" +
+                  $"Base Skill Damage {value}, From Passive Skill Damage {GetAdditionalDamageAmountFromPlayerPassiveSkill(value)}");
+                    
+        return value + GetAdditionalDamageAmountFromPlayerPassiveSkill(value);
     }
     private float CollisionManager_SkillCooldown_ExecuteReaction(ActiveSkills skill)
     {
@@ -201,4 +203,11 @@ public class EnemyComponentsManager : EnemyBehaviour
         movementManager.UpdateCharacteristics();
     }
     #endregion Enemis Characteristics Manager Events Reaction
+
+    private float GetAdditionalDamageAmountFromPlayerPassiveSkill(float skillDamage)
+    {
+        float damageAmount = (poolItemComponent.CharacteristicsManager.CurrentPlayerData.characterDamageIncreasePercent * skillDamage) / 
+                              CommonValues.maxPercentAmount;
+        return damageAmount;
+    }
 }
