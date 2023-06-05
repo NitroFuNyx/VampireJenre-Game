@@ -107,7 +107,7 @@ public class EnemyCollisionsManager : MonoBehaviour
             }
             if (collision.gameObject.layer == Layers.AuraSkill)
             {
-               auraCooldown= OnSkillCooldown.Invoke(ActiveSkills.MagicAura);
+               auraCooldown = OnSkillCooldown.Invoke(ActiveSkills.MagicAura);
             }
             
         }

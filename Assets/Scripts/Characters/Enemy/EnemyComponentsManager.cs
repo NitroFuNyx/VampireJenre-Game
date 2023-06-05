@@ -167,10 +167,14 @@ public class EnemyComponentsManager : EnemyBehaviour
             Debug.LogWarning($"Unknown type got caught during damage processing {skill}");
             value = 0;
         }
-        Debug.Log($"Skill: {skill} damages: {value + GetAdditionalDamageAmountFromPlayerPassiveSkill(value)}\n" +
-                  $"Base Skill Damage {value}, From Passive Skill Damage {GetAdditionalDamageAmountFromPlayerPassiveSkill(value)}");
+
+        float passiveSkillDamage = GetAdditionalDamageAmountFromPlayerPassiveSkill(value);
+        float critDamage = GetCritDamage(value);
+
+        Debug.Log($"Skill: {skill} damages: {value + passiveSkillDamage + critDamage}\n" +
+                  $"Base Skill Damage {value}, From Passive Skill Damage {passiveSkillDamage} Crit Damage {critDamage}");
                     
-        return value + GetAdditionalDamageAmountFromPlayerPassiveSkill(value);
+        return value + GetAdditionalDamageAmountFromPlayerPassiveSkill(value) + GetCritDamage(value);
     }
     private float CollisionManager_SkillCooldown_ExecuteReaction(ActiveSkills skill)
     {
@@ -209,5 +213,19 @@ public class EnemyComponentsManager : EnemyBehaviour
         float damageAmount = (poolItemComponent.CharacteristicsManager.CurrentPlayerData.characterDamageIncreasePercent * skillDamage) / 
                               CommonValues.maxPercentAmount;
         return damageAmount;
+    }
+
+    private float GetCritDamage(float skillDamage)
+    {
+        float critDamage = 0f;
+
+        float critIndex = Random.Range(0, CommonValues.maxPercentAmount);
+
+        if(critIndex < poolItemComponent.CharacteristicsManager.CurrentPlayerData.characterCritChance)
+        {
+            critDamage = skillDamage * poolItemComponent.CharacteristicsManager.CurrentPlayerData.characterCritPower;
+        }
+
+        return critDamage;
     }
 }
