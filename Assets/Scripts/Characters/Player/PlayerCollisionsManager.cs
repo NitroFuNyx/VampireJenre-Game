@@ -17,8 +17,6 @@ public class PlayerCollisionsManager : MonoBehaviour
 
     private bool canCheckCollisions = true;
 
-    private float maxPercentAmount = 100f;
-
     #region Events Declaration
     public event Action OnPlayerOutOfHp;
     public event Action OnDamageReceived;
@@ -102,7 +100,7 @@ public class PlayerCollisionsManager : MonoBehaviour
 
     private float GetReducedDamageAmount(float damage)
     {
-        float reducedDamage = damage - (damage * _playerCharacteristicsManager.CurrentPlayerData.characterDamageReductionPercent) / maxPercentAmount;
+        float reducedDamage = damage - (damage * _playerCharacteristicsManager.CurrentPlayerData.characterDamageReductionPercent) / CommonValues.maxPercentAmount;
 
         return reducedDamage;
     }
@@ -110,7 +108,7 @@ public class PlayerCollisionsManager : MonoBehaviour
     private float GetHpAmountToRestore()
     {
         float regenerationAmount = (_playerCharacteristicsManager.CurrentPlayerData.characterRegenerationPercent *
-                                    _playerCharacteristicsManager.CurrentPlayerData.characterHp) / maxPercentAmount;
+                                    _playerCharacteristicsManager.CurrentPlayerData.characterHp) / CommonValues.maxPercentAmount;
         return regenerationAmount;
     }
 

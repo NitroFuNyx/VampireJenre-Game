@@ -18,8 +18,6 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     private DataPersistanceManager _dataPersistanceManager;
     private GameProcessManager _gameProcessManager;
 
-    private const float maxPercentAmount = 100f;
-
     public PlayerBasicCharacteristicsStruct CurrentPlayerData { get => currentPlayerData; private set => currentPlayerData = value; }
 
     private void Awake()
@@ -235,7 +233,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
 
     private void UpgradePassiveCharacteristic_PercentOfValue(ref float currentValue, float upgradePercent)
     {
-        currentValue += (currentValue * upgradePercent) / maxPercentAmount;
+        currentValue += (currentValue * upgradePercent) / CommonValues.maxPercentAmount;
     }
     #endregion Upgrade Passive Characteristics Methods
 

@@ -54,3 +54,8 @@ public class SkillsInGameValues
     public const int maxSkillsInCategoryAmount = 4;
     public const int skillsOptionsForUpgradePerLevelAmount = 3;
 }
+
+public class CommonValues
+{
+    public const float maxPercentAmount = 100f;
+}

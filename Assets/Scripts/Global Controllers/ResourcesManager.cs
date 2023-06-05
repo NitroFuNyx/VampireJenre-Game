@@ -8,8 +8,13 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     [Space]
     [SerializeField] private int coinsAmount;
     [SerializeField] private int gemsAmount;
+    [Header("Percents Data")]
+    [Space]
+    [SerializeField] private float gemDropDefaultPercentChance = 10f;
+    [SerializeField] private float coinDropDefaultPercentChance = 20f;
 
     private DataPersistanceManager _dataPersistanceManager;
+    private PlayerCharacteristicsManager _playerCharacteristicsManager;
 
     private const int GemSurplusForKillingEnemy = 1;
 
@@ -30,9 +35,10 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
 
     #region Zenject
     [Inject]
-    private void Construct(DataPersistanceManager dataPersistanceManager)
+    private void Construct(DataPersistanceManager dataPersistanceManager, PlayerCharacteristicsManager playerCharacteristicsManager)
     {
         _dataPersistanceManager = dataPersistanceManager;
+        _playerCharacteristicsManager = playerCharacteristicsManager;
     }
     #endregion Zenject
 
@@ -98,11 +104,11 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         ResourceBonusItemStruct data = new ResourceBonusItemStruct();
         data.canBeCollected = false;
 
-        int gemGrantingIndex;
+        float gemGrantingIndex;
 
-        gemGrantingIndex = UnityEngine.Random.Range(0, 10);
+        gemGrantingIndex = UnityEngine.Random.Range(0, CommonValues.maxPercentAmount);
 
-        if (gemGrantingIndex == 0)
+        if (gemGrantingIndex < gemDropDefaultPercentChance + _playerCharacteristicsManager.CurrentPlayerData.characterItemDropChancePercent)
         {
             data.resourceType = ResourcesTypes.Gems;
             data.ResourceAmount = GemSurplusForKillingEnemy;
@@ -110,11 +116,11 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         }
         else
         {
-            int coinsGrantingIndex;
+            float coinsGrantingIndex;
 
-            coinsGrantingIndex = UnityEngine.Random.Range(0, 5);
+            coinsGrantingIndex = UnityEngine.Random.Range(0, CommonValues.maxPercentAmount);
 
-            if (coinsGrantingIndex == 0)
+            if (coinsGrantingIndex < coinDropDefaultPercentChance + _playerCharacteristicsManager.CurrentPlayerData.characterItemDropChancePercent)
             {
                 int coins = UnityEngine.Random.Range(CoinsSurplusForKillingEnemy_Min, CoinsSurplusForKillingEnemy_Max);
                 data.resourceType = ResourcesTypes.Coins;
@@ -140,11 +146,11 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
 
     public void AddResourceForPickingUpTreasureChest()
     {
-        int gemGrantingIndex;
+        float gemGrantingIndex;
 
-        gemGrantingIndex = UnityEngine.Random.Range(0, 10);
+        gemGrantingIndex = UnityEngine.Random.Range(0, CommonValues.maxPercentAmount);
 
-        if (gemGrantingIndex == 0)
+        if (gemGrantingIndex < gemDropDefaultPercentChance)
         {
             IncreaseGemsAmount(GemSurplusForKillingEnemy);
         }
