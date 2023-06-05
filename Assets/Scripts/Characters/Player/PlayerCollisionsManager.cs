@@ -13,6 +13,8 @@ public class PlayerCollisionsManager : MonoBehaviour
 
     private bool canCheckCollisions = true;
 
+    private float maxPercentAmount = 100f;
+
     private float damage = 10f;
 
     #region Events Declaration
@@ -61,7 +63,7 @@ public class PlayerCollisionsManager : MonoBehaviour
 
     private void DecreaseHp(float amount)
     {
-        currentHp -= amount;
+        currentHp -= GetReducedDamageAmount(amount);
         if (currentHp <= 0)
         {
             canCheckCollisions = false;
@@ -73,5 +75,12 @@ public class PlayerCollisionsManager : MonoBehaviour
         }
 
         OnHpAmountChanged?.Invoke(currentHp, _playerCharacteristicsManager.CurrentPlayerData.characterHp);
+    }
+
+    private float GetReducedDamageAmount(float damage)
+    {
+        float reducedDamage = damage - (damage * _playerCharacteristicsManager.CurrentPlayerData.characterDamageReductionPercent) / maxPercentAmount;
+
+        return reducedDamage;
     }
 }
