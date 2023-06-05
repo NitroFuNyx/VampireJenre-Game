@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2917621584033526146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6673082098572677647}
+  m_Layer: 29
+  m_Name: Vfx Play Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6673082098572677647
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2917621584033526146}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.334, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4549197501269002152}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4085689918123640435
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,6 +150,7 @@ Transform:
   - {fileID: 3744912388954512585}
   - {fileID: 2721876552142703174}
   - {fileID: 4755476749588795608}
+  - {fileID: 6673082098572677647}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -165,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickingUpVfx: {fileID: 2721876552156861376}
   idleVfx: {fileID: 4850368711925731114}
+  vfxPlayPos: {fileID: 6673082098572677647}
 --- !u!114 &7413751664692785759
 MonoBehaviour:
   m_ObjectHideFlags: 0

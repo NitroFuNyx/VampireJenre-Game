@@ -7,16 +7,17 @@ public abstract class PickableItem : MonoBehaviour
     [Space]
     [SerializeField] protected ParticleSystem pickingUpVfx;
     [SerializeField] protected ParticleSystem idleVfx;
+    [Header("Positions")]
+    [Space]
+    [SerializeField] private Transform vfxPlayPos;
 
     protected PoolItem poolItemComponent;
-    private Vector3 vfxStartPos;
 
     protected bool itemPickedUp = false;
 
     private void Awake()
     {
         CashComponents();
-        vfxStartPos = transform.localPosition;
     }
 
     private void Start()
@@ -41,7 +42,7 @@ public abstract class PickableItem : MonoBehaviour
         {
             itemPickedUp = true;
             pickingUpVfx.transform.SetParent(null) ;
-            pickingUpVfx.transform.position = transform.position;
+            pickingUpVfx.transform.position = vfxPlayPos.position;
             pickingUpVfx.Play();
             PlayerCollision_ExecuteReaction();
         }
@@ -75,7 +76,7 @@ public abstract class PickableItem : MonoBehaviour
     protected void ResetVfx()
     {
         pickingUpVfx.transform.SetParent(transform);
-        pickingUpVfx.transform.localPosition = vfxStartPos;
+        pickingUpVfx.transform.localPosition = vfxPlayPos.localPosition;
     }
 
     private void CashComponents()
