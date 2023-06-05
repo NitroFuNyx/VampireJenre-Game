@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 using Zenject;
 
 public class PlayerCollisionsManager : MonoBehaviour
@@ -7,6 +8,9 @@ public class PlayerCollisionsManager : MonoBehaviour
     [Header("Hp Data")]
     [Space]
     [SerializeField] private float currentHp = 100f;
+    [Header("Delays")]
+    [Space]
+    [SerializeField] private float regenerationDelay = 5f;
 
     private PlayerCharacteristicsManager _playerCharacteristicsManager;
     private EnemiesCharacteristicsManager _enemiesCharacteristicsManager;
@@ -34,6 +38,12 @@ public class PlayerCollisionsManager : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == Layers.BossProjectile)
+            DecreaseHp(20);
+    }
+
     #region Zenject
     [Inject]
     private void Construct(PlayerCharacteristicsManager playerCharacteristicsManager, EnemiesCharacteristicsManager enemiesCharacteristicsManager)
@@ -48,15 +58,19 @@ public class PlayerCollisionsManager : MonoBehaviour
         SetStartSettings();
     }
 
+    public void StartRegeneration()
+    {
+        StartCoroutine(RegenerateHpCoroutine());
+    }
+
+    public void StopRegeneration()
+    {
+        StopAllCoroutines();
+    }
+
     private void SetStartSettings()
     {
         currentHp = _playerCharacteristicsManager.CurrentPlayerData.characterHp;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.layer == Layers.BossProjectile)
-            DecreaseHp(20);
     }
 
     private void DecreaseHp(float amount)
@@ -75,10 +89,38 @@ public class PlayerCollisionsManager : MonoBehaviour
         OnHpAmountChanged?.Invoke(currentHp, _playerCharacteristicsManager.CurrentPlayerData.characterHp);
     }
 
+    private void IncreaseHp(float amount)
+    {
+        currentHp += amount;
+        if (currentHp > _playerCharacteristicsManager.CurrentPlayerData.characterHp)
+        {
+            currentHp = _playerCharacteristicsManager.CurrentPlayerData.characterHp;
+        }
+
+        OnHpAmountChanged?.Invoke(currentHp, _playerCharacteristicsManager.CurrentPlayerData.characterHp);
+    }
+
     private float GetReducedDamageAmount(float damage)
     {
         float reducedDamage = damage - (damage * _playerCharacteristicsManager.CurrentPlayerData.characterDamageReductionPercent) / maxPercentAmount;
 
         return reducedDamage;
+    }
+
+    private float GetHpAmountToRestore()
+    {
+        float regenerationAmount = (_playerCharacteristicsManager.CurrentPlayerData.characterRegenerationPercent *
+                                    _playerCharacteristicsManager.CurrentPlayerData.characterHp) / maxPercentAmount;
+        return regenerationAmount;
+    }
+
+    private IEnumerator RegenerateHpCoroutine()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(regenerationDelay);
+            IncreaseHp(GetHpAmountToRestore());
+            Debug.Log($"Restore {GetHpAmountToRestore()} hp");
+        }
     }
 }
