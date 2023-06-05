@@ -15,17 +15,24 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
 
     private DataPersistanceManager _dataPersistanceManager;
     private PlayerCharacteristicsManager _playerCharacteristicsManager;
+    private GameProcessManager _gameProcessManager;
 
     private const int GemSurplusForKillingEnemy = 1;
 
     private const int CoinsSurplusForKillingEnemy_Min = 1;
     private const int CoinsSurplusForKillingEnemy_Max = 6;
 
+    private int currentLevelCoinsAmount = 0;
+    private int currentLevelGemsAmount = 0;
+
     public int CoinsAmount { get => coinsAmount; private set => coinsAmount = value; }
 
     #region Events Declaration
     public event Action<int> OnCoinsAmountChanged;
     public event Action<int> OnGemsAmountChanged;
+
+    public event Action<int> OnCurrentLevelCoinsAmountChanged;
+    public event Action<int> OnCurrentLevelGemsAmountChanged;
     #endregion Events Declaration
 
     private void Awake()
@@ -33,12 +40,24 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         _dataPersistanceManager.AddObjectToSaveSystemObjectsList(this);
     }
 
+    private void Start()
+    {
+        _gameProcessManager.OnGameStarted += GameProcessManager_GameStarted_ExecuteReaction;
+    }
+
+    private void OnDestroy()
+    {
+        _gameProcessManager.OnGameStarted -= GameProcessManager_GameStarted_ExecuteReaction;
+    }
+
     #region Zenject
     [Inject]
-    private void Construct(DataPersistanceManager dataPersistanceManager, PlayerCharacteristicsManager playerCharacteristicsManager)
+    private void Construct(DataPersistanceManager dataPersistanceManager, PlayerCharacteristicsManager playerCharacteristicsManager, 
+                           GameProcessManager gameProcessManager)
     {
         _dataPersistanceManager = dataPersistanceManager;
         _playerCharacteristicsManager = playerCharacteristicsManager;
+        _gameProcessManager = gameProcessManager;
     }
     #endregion Zenject
 
@@ -67,6 +86,12 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         Debug.Log($"Coins {deltaAmount}");
     }
 
+    public void IncreaseCurrentLevelCoinsAmount(int deltaAmount)
+    {
+        currentLevelCoinsAmount += deltaAmount;
+        OnCurrentLevelCoinsAmountChanged?.Invoke(currentLevelCoinsAmount);
+    }
+
     public void DecreaseCoinsAmount(int deltaAmount)
     {
         coinsAmount -= deltaAmount;
@@ -84,6 +109,12 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         gemsAmount += deltaAmount;
         OnGemsAmountChanged?.Invoke(gemsAmount);
         Debug.Log($"Gems {deltaAmount}");
+    }
+
+    public void IncreaseCurrentLevelGemsAmount(int deltaAmount)
+    {
+        currentLevelGemsAmount += deltaAmount;
+        OnCurrentLevelGemsAmountChanged?.Invoke(currentLevelGemsAmount);
     }
 
     public void DecreaseGemsAmount(int deltaAmount)
@@ -136,11 +167,11 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     {
         if(data.resourceType == (ResourcesTypes)ResourcesTypes.Gems)
         {
-            IncreaseGemsAmount(data.ResourceAmount);
+            IncreaseCurrentLevelGemsAmount(data.ResourceAmount);
         }
         else
         {
-            IncreaseCoinsAmount(data.ResourceAmount);
+            IncreaseCurrentLevelCoinsAmount(data.ResourceAmount);
         }
     }
 
@@ -152,12 +183,30 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
 
         if (gemGrantingIndex < gemDropDefaultPercentChance)
         {
-            IncreaseGemsAmount(GemSurplusForKillingEnemy);
+            IncreaseCurrentLevelGemsAmount(GemSurplusForKillingEnemy);
         }
         else
         {
             int coinsAmount = UnityEngine.Random.Range(CoinsSurplusForKillingEnemy_Min, CoinsSurplusForKillingEnemy_Max);
-            IncreaseCoinsAmount(coinsAmount);
+            IncreaseCurrentLevelCoinsAmount(coinsAmount);
         }
+    }
+
+    private void GameProcessManager_GameStarted_ExecuteReaction()
+    {
+        currentLevelCoinsAmount = 0;
+        currentLevelGemsAmount = 0;
+
+        OnCurrentLevelCoinsAmountChanged?.Invoke(currentLevelCoinsAmount);
+        OnCurrentLevelGemsAmountChanged?.Invoke(currentLevelGemsAmount);
+    }
+
+    private void AddCurrentLevelResourcesToGeneralAmount()
+    {
+        coinsAmount += currentLevelCoinsAmount;
+        OnCoinsAmountChanged?.Invoke(coinsAmount);
+
+        gemsAmount += currentLevelGemsAmount;
+        OnGemsAmountChanged?.Invoke(gemsAmount);
     }
 }

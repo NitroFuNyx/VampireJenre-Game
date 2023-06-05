@@ -7,6 +7,9 @@ public abstract class ResourceDisplayPanel : MonoBehaviour
     [Header("Resource Texts")]
     [Space]
     [SerializeField] protected TextMeshProUGUI resourceAmountText;
+    [Header("Resourse Save Type")]
+    [Space]
+    [SerializeField] protected ResourcesSaveTypes resourceSaveType;
 
     protected ResourcesManager _resourcesManager;
 

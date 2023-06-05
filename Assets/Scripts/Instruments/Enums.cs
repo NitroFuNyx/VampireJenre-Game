@@ -82,3 +82,8 @@ public enum PlayerCharacteristicsForTranslation
     Damage, Range, Width, Cooldown, ProjectilesAmount, PostEffectDuration, JumpsAmount, Size, MovementSpeed, IncomeDamage, Regeneration, CritChance,
     CritPower
 }
+
+public enum ResourcesSaveTypes
+{
+    GeneralAmount, CurrentLevelAmount
+}
