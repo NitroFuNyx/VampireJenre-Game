@@ -6,16 +6,14 @@ public class PlayerCollisionsManager : MonoBehaviour
 {
     [Header("Hp Data")]
     [Space]
-    //[SerializeField] private float startHp = 100f;
     [SerializeField] private float currentHp = 100f;
 
     private PlayerCharacteristicsManager _playerCharacteristicsManager;
+    private EnemiesCharacteristicsManager _enemiesCharacteristicsManager;
 
     private bool canCheckCollisions = true;
 
     private float maxPercentAmount = 100f;
-
-    private float damage = 10f;
 
     #region Events Declaration
     public event Action OnPlayerOutOfHp;
@@ -32,15 +30,16 @@ public class PlayerCollisionsManager : MonoBehaviour
     {
         if(collision.gameObject.layer == Layers.EnemySkeleton || collision.gameObject.layer == Layers.EnemyGhost || collision.gameObject.layer == Layers.EnemyZombie)
         {
-            DecreaseHp(damage);
+            DecreaseHp(_enemiesCharacteristicsManager.CurrentEnemiesData.damage);
         }
     }
 
     #region Zenject
     [Inject]
-    private void Construct(PlayerCharacteristicsManager playerCharacteristicsManager)
+    private void Construct(PlayerCharacteristicsManager playerCharacteristicsManager, EnemiesCharacteristicsManager enemiesCharacteristicsManager)
     {
         _playerCharacteristicsManager = playerCharacteristicsManager;
+        _enemiesCharacteristicsManager = enemiesCharacteristicsManager;
     }
     #endregion Zenject
 
@@ -51,7 +50,6 @@ public class PlayerCollisionsManager : MonoBehaviour
 
     private void SetStartSettings()
     {
-        //startHp = _playerCharacteristicsManager.CurrentPlayerData.characterHp;
         currentHp = _playerCharacteristicsManager.CurrentPlayerData.characterHp;
     }
 
