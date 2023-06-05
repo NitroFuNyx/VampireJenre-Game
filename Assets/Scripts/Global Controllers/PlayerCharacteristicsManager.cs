@@ -216,6 +216,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
                 UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.playerSkillsData.lightningBoltSkillData.projectilesAmount, passiveSkillsLevelsData.IncreaseProjectilesAmountUpgradesDataList[skillLevel - 1].upgradeValue);
                 UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.playerSkillsData.fireballsSkillData.projectilesAmount, passiveSkillsLevelsData.IncreaseProjectilesAmountUpgradesDataList[skillLevel - 1].upgradeValue);
                 UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.playerSkillsData.allDirectionsShotsSkillData.projectilesAmount, passiveSkillsLevelsData.IncreaseProjectilesAmountUpgradesDataList[skillLevel - 1].upgradeValue);
+                UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.playerSkillsData.playerForceWaveData.projectilesAmount, passiveSkillsLevelsData.IncreaseProjectilesAmountUpgradesDataList[skillLevel - 1].upgradeValue);
             }
         }
     }
@@ -251,6 +252,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     {
         ResetPlayerCharacteristicAfterBattle();
     }
+
     #region Active Skills Upgrade Methods
 
     private void UpgradeActiveSkill_ForceWave(int skillLevel)

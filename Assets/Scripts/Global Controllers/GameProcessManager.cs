@@ -115,7 +115,10 @@ public class GameProcessManager : MonoBehaviour
     private void SkillToUpgradeDefined_ExecuteReaction(int skillCategory, int skillIndex)
     {
         _systemTimeManager.ResumeGame();
-        skillsObjectsList[skillIndex].gameObject.SetActive(true);
+        if((SkillBasicTypes)skillCategory == SkillBasicTypes.Active)
+        {
+            skillsObjectsList[skillIndex].gameObject.SetActive(true);
+        }
         StartCoroutine(StartGameCoroutine());
     }
 
