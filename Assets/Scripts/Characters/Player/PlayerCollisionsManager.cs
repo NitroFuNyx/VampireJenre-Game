@@ -1,12 +1,15 @@
 using UnityEngine;
 using System;
+using Zenject;
 
 public class PlayerCollisionsManager : MonoBehaviour
 {
     [Header("Hp Data")]
     [Space]
-    [SerializeField] private float startHp = 100f;
+    //[SerializeField] private float startHp = 100f;
     [SerializeField] private float currentHp = 100f;
+
+    private PlayerCharacteristicsManager _playerCharacteristicsManager;
 
     private bool canCheckCollisions = true;
 
@@ -29,17 +32,25 @@ public class PlayerCollisionsManager : MonoBehaviour
         {
             DecreaseHp(damage);
         }
-       
     }
+
+    #region Zenject
+    [Inject]
+    private void Construct(PlayerCharacteristicsManager playerCharacteristicsManager)
+    {
+        _playerCharacteristicsManager = playerCharacteristicsManager;
+    }
+    #endregion Zenject
 
     public void ResetComponent()
     {
-        currentHp = startHp;
+        SetStartSettings();
     }
 
     private void SetStartSettings()
     {
-        currentHp = startHp;
+        //startHp = _playerCharacteristicsManager.CurrentPlayerData.characterHp;
+        currentHp = _playerCharacteristicsManager.CurrentPlayerData.characterHp;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,6 +72,6 @@ public class PlayerCollisionsManager : MonoBehaviour
             OnDamageReceived?.Invoke();
         }
 
-        OnHpAmountChanged?.Invoke(currentHp, startHp);
+        OnHpAmountChanged?.Invoke(currentHp, _playerCharacteristicsManager.CurrentPlayerData.characterHp);
     }
 }

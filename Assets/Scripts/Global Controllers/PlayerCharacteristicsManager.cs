@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 using Zenject;
 
 public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
