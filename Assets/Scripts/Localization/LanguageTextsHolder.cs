@@ -15,6 +15,7 @@ namespace Localization
         public SettingsUIData settingsUITexts;
         public RewardsUIData rewardsUITexts;
         public GameLevelUIData gameLevelUITexts;
+        public SkillsCharacteristicsData skillCharacteristicsTexts;
     }
 
     [Serializable]
@@ -73,5 +74,23 @@ namespace Localization
     public class DefeatPanelData
     {
         public string getUpButtonText;
+    }
+
+    [Serializable]
+    public class SkillsCharacteristicsData
+    {
+        public string damageText;
+        public string rangeText;
+        public string widthText;
+        public string cooldownText;
+        public string projectilesAmountText;
+        public string postEffectDurationText;
+        public string jumpsAmountText;
+        public string sizeText;
+        public string movementSpeedText;
+        public string incomeDamageText;
+        public string regenerationText;
+        public string critChanceText;
+        public string critPowerText;
     }
 }
