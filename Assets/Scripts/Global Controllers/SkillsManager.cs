@@ -204,6 +204,7 @@ public class SkillsManager : MonoBehaviour
             upgradeSkillData.SkillType = SkillBasicTypes.Active;
             upgradeSkillData.ActiveSkill = skill;
             upgradeSkillData.SkillLevelString = $"1";
+            upgradeSkillData.SkillLevel = 0;
 
             ActiveSkillsDisplayDataStruct skillDisplayData = GetActiveSkillDisplayData(skill);
 
@@ -265,12 +266,14 @@ public class SkillsManager : MonoBehaviour
                 upgradeSkillData.SkillType = SkillBasicTypes.Active;
                 upgradeSkillData.ActiveSkill = skill;
                 upgradeSkillData.SkillLevelString = $"1";
+                upgradeSkillData.SkillLevel = 0;
 
                 for (int j = 0; j < activeSkillsTakenList.Count; j++)
                 {
                     if (activeSkillsTakenList[j].skillType == skill)
                     {
                         upgradeSkillData.SkillLevelString = $"{activeSkillsTakenList[j].skillLevel + 1}";
+                        upgradeSkillData.SkillLevel = activeSkillsTakenList[j].skillLevel;
                         break;
                     }
                 }
@@ -291,12 +294,14 @@ public class SkillsManager : MonoBehaviour
                 upgradeSkillData.SkillType = SkillBasicTypes.Passive;
                 upgradeSkillData.PassiveSkill = skill;
                 upgradeSkillData.SkillLevelString = $"1";
+                upgradeSkillData.SkillLevel = 0;
 
                 for (int j = 0; j < passiveSkillsTakenList.Count; j++)
                 {
                     if (passiveSkillsTakenList[j].skillType == skill)
                     {
                         upgradeSkillData.SkillLevelString = $"{passiveSkillsTakenList[j].skillLevel + 1}";
+                        upgradeSkillData.SkillLevel = passiveSkillsTakenList[j].skillLevel;
                         break;
                     }
                 }

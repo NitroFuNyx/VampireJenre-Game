@@ -7,6 +7,7 @@ public class UpgradeSkillData
     [SerializeField] private SkillBasicTypes skillType;
     [SerializeField] private ActiveSkills activeSkill;
     [SerializeField] private PassiveSkills passiveSkill;
+    [SerializeField] private int skillLevel;
     [Header("Sprites")]
     [Space]
     [SerializeField] private Sprite skillSprite;
@@ -21,4 +22,5 @@ public class UpgradeSkillData
     public Sprite SkillSprite { get => skillSprite; set => skillSprite = value; }
     public string SkillLevelString { get => skillLevelString; set => skillLevelString = value; }
     public string SkillNameString { get => skillNameString; set => skillNameString = value; }
+    public int SkillLevel { get => skillLevel; set => skillLevel = value; }
 }

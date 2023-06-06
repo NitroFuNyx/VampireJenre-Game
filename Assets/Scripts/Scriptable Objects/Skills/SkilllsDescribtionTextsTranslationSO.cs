@@ -26,4 +26,24 @@ public class SkilllsDescribtionTextsTranslationSO : ScriptableObject
     [SerializeField] private PassiveSkillsTranslationDataStruct increaseCritChanceTranslationData;
     [SerializeField] private PassiveSkillsTranslationDataStruct increaseCritPowerTranslationData;
     [SerializeField] private PassiveSkillsTranslationDataStruct increaseProjectileAmountTranslationData;
+
+    public List<ActiveSkillsTranslationDataStruct> ForceWaveTranslationData { get => forceWaveTranslationData; }
+    public List<ActiveSkillsTranslationDataStruct> SingleShotTranslationData { get => singleShotTranslationData; }
+    public List<ActiveSkillsTranslationDataStruct> MagicAuraTranslationData { get => magicAuraTranslationData; }
+    public List<ActiveSkillsTranslationDataStruct> PulseAuraTranslationData { get => pulseAuraTranslationData; }
+    public List<ActiveSkillsTranslationDataStruct> MeteorTranslationData { get => meteorTranslationData; }
+    public List<ActiveSkillsTranslationDataStruct> LightningBoltTranslationData { get => lightningBoltTranslationData; }
+    public List<ActiveSkillsTranslationDataStruct> ChainLightningTranslationData { get => chainLightningTranslationData; }
+    public List<ActiveSkillsTranslationDataStruct> FireballsTranslationData { get => fireballsTranslationData; }
+    public List<ActiveSkillsTranslationDataStruct> AllDiractionsTranslationData { get => allDiractionsTranslationData; }
+    public List<ActiveSkillsTranslationDataStruct> WeaponStrikeTranslationData { get => weaponStrikeTranslationData; }
+    
+    public PassiveSkillsTranslationDataStruct IncreaseRangeTranslationData { get => increaseRangeTranslationData; }
+    public PassiveSkillsTranslationDataStruct IncreaseDamageTranslationData { get => increaseDamageTranslationData; }
+    public PassiveSkillsTranslationDataStruct IncreaseMovementSpeedTranslationData { get => increaseMovementSpeedTranslationData; }
+    public PassiveSkillsTranslationDataStruct DecreaseIncomeDamageTranslationData { get => decreaseIncomeDamageTranslationData; }
+    public PassiveSkillsTranslationDataStruct IncreaseRegenerationTranslationData { get => increaseRegenerationTranslationData; }
+    public PassiveSkillsTranslationDataStruct IncreaseCritChanceTranslationData { get => increaseCritChanceTranslationData; }
+    public PassiveSkillsTranslationDataStruct IncreaseCritPowerTranslationData { get => increaseCritPowerTranslationData; }
+    public PassiveSkillsTranslationDataStruct IncreaseProjectileAmountTranslationData { get => increaseProjectileAmountTranslationData; }
 }

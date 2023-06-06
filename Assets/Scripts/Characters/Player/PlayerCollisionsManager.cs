@@ -16,6 +16,9 @@ public class PlayerCollisionsManager : MonoBehaviour
     private EnemiesCharacteristicsManager _enemiesCharacteristicsManager;
 
     private bool canCheckCollisions = true;
+    private bool isTakingDamage = false;
+
+    private float resetTakingDamageStateDelay = 0.1f;
 
     #region Events Declaration
     public event Action OnPlayerOutOfHp;
@@ -74,6 +77,7 @@ public class PlayerCollisionsManager : MonoBehaviour
     private void DecreaseHp(float amount)
     {
         currentHp -= GetReducedDamageAmount(amount);
+        isTakingDamage = true;
         if (currentHp <= 0)
         {
             canCheckCollisions = false;
@@ -85,6 +89,7 @@ public class PlayerCollisionsManager : MonoBehaviour
         }
 
         OnHpAmountChanged?.Invoke(currentHp, _playerCharacteristicsManager.CurrentPlayerData.characterHp);
+        StartCoroutine(ResetTakingDamageStateCoroutine());
     }
 
     private void IncreaseHp(float amount)
@@ -117,8 +122,17 @@ public class PlayerCollisionsManager : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(regenerationDelay);
-            IncreaseHp(GetHpAmountToRestore());
-            Debug.Log($"Restore {GetHpAmountToRestore()} hp");
+            if(!isTakingDamage)
+            {
+                IncreaseHp(GetHpAmountToRestore());
+                Debug.Log($"Restore {GetHpAmountToRestore()} hp");
+            }
         }
+    }
+
+    private IEnumerator ResetTakingDamageStateCoroutine()
+    {
+        yield return new WaitForSeconds(resetTakingDamageStateDelay);
+        isTakingDamage = false;
     }
 }
