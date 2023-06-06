@@ -26,6 +26,8 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     private int currentLevelGemsAmount = 0;
 
     public int CoinsAmount { get => coinsAmount; private set => coinsAmount = value; }
+    public int CurrentLevelCoinsAmount { get => currentLevelCoinsAmount; private set => currentLevelCoinsAmount = value; }
+    public int CurrentLevelGemsAmount { get => currentLevelGemsAmount; private set => currentLevelGemsAmount = value; }
 
     #region Events Declaration
     public event Action<int> OnCoinsAmountChanged;

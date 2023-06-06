@@ -20,6 +20,9 @@ public class GameLevelUI : MainCanvasPanel
     private SystemTimeManager _systemTimeManager;
     private GameProcessManager _gameProcessManager;
 
+    private VictoryPanel victoryPanel;
+    private LoosePanel loosePanel;
+
     private Dictionary<GameLevelPanels, GameLevelSubPanel> subpanelsDictionary = new Dictionary<GameLevelPanels, GameLevelSubPanel>();
 
     private void Start()
@@ -27,6 +30,7 @@ public class GameLevelUI : MainCanvasPanel
         SubscribeOnEvents();
         FillSubpanelsDictionary();
         HideAllSubpanels();
+        CashComponents();
     }
 
     private void OnDestroy()
@@ -56,6 +60,12 @@ public class GameLevelUI : MainCanvasPanel
         _timersManager.OnStopwatchValueChanged -= TimersManager_OnStopwatchValueChanged_ExecuteReaction;
         _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
         _gameProcessManager.OnPlayerWon -= GameProcessManager_PlayerWon_ExecuteReaction;
+    }
+
+    private void CashComponents()
+    {
+        victoryPanel = subpanelsDictionary[GameLevelPanels.VictoryPanel].GetComponent<VictoryPanel>();
+        loosePanel = subpanelsDictionary[GameLevelPanels.LoosePanel].GetComponent<LoosePanel>();
     }
 
     private void FillSubpanelsDictionary()
@@ -130,12 +140,14 @@ public class GameLevelUI : MainCanvasPanel
     private void GameProcessManager_PlayerLost_ExecuteReaction()
     {
         HideAllSubpanels();
+        loosePanel.UpdatePlayerResults();
         subpanelsDictionary[GameLevelPanels.LoosePanel].ShowPanel();
     }
 
     private void GameProcessManager_PlayerWon_ExecuteReaction()
     {
         HideAllSubpanels();
+        victoryPanel.UpdatePlayerResults();
         subpanelsDictionary[GameLevelPanels.VictoryPanel].ShowPanel();
     }
 }
