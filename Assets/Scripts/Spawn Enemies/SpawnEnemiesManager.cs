@@ -25,6 +25,10 @@ public class SpawnEnemiesManager : MonoBehaviour
 
     private bool canSpawnEnemies = true;
 
+    private int killedEnemies = 0;
+
+    public int KilledEnemies { get => killedEnemies; private set => killedEnemies = value; }
+
     private void Start()
     {
         SubscribeOnEvents();
@@ -92,6 +96,7 @@ public class SpawnEnemiesManager : MonoBehaviour
     public void RemoveEnemyFronOnMapList(EnemyComponentsManager enemy)
     {
         enemiesOnMapList.Remove(enemy);
+        killedEnemies++;
     }
 
     private void SubscribeOnEvents()
@@ -116,6 +121,9 @@ public class SpawnEnemiesManager : MonoBehaviour
         canSpawnEnemies = false;
 
         StopAllCoroutines();
+
+        enemiesOnMapList.Clear();
+        killedEnemies = 0;
 
         StartCoroutine(StopEnemySpawnCoroutine());
     }
