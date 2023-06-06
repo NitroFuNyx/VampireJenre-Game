@@ -12,7 +12,6 @@ public class UIInstaller : MonoInstaller
     [SerializeField] private SettingsUI settingsUI;
     [SerializeField] private RewardWheelSpinner rewardWheelSpinner;
     [SerializeField] private GameLevelUI gameLevelUI;
-    [SerializeField] private TakenSkillsDisplayPanel takenSkillsDisplayPanel;
     [Header("Talent UI")]
     [Space]
     [SerializeField] private TalentWheel talentWheel;
@@ -27,7 +26,6 @@ public class UIInstaller : MonoInstaller
         Container.Bind<SettingsUI>().FromInstance(settingsUI).AsSingle().NonLazy();
         Container.Bind<RewardWheelSpinner>().FromInstance(rewardWheelSpinner).AsSingle().NonLazy();
         Container.Bind<GameLevelUI>().FromInstance(gameLevelUI).AsSingle().NonLazy();
-        Container.Bind<TakenSkillsDisplayPanel>().FromInstance(takenSkillsDisplayPanel).AsSingle().NonLazy();
 
         Container.Bind<TalentWheel>().FromInstance(talentWheel).AsSingle().NonLazy();
         Container.Bind<TalentBoughtInfoPanel>().FromInstance(talentBoughtInfoPanel).AsSingle().NonLazy();

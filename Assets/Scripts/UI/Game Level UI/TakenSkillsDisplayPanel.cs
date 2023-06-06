@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Zenject;
 
 public class TakenSkillsDisplayPanel : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class TakenSkillsDisplayPanel : MonoBehaviour
     [SerializeField] private List<PassiveSkills> passiveSkillsList = new List<PassiveSkills>();
 
     private SkillsManager _skillsManager;
+    private GameProcessManager _gameProcessManager;
     private Image image;
 
     private float changeAlphaDuration = 0.1f;
@@ -26,14 +28,27 @@ public class TakenSkillsDisplayPanel : MonoBehaviour
     {
         ChangeSkillImagesListAlpha(activeSkillsImagesList, 0f);
         ChangeSkillImagesListAlpha(passiveSkillsImagesList, 0f);
+
+        _skillsManager.OnUpgradedSkillVisualDataDefined += SkillsManager_UpgradedSkillVisualDataDefined_ExecuteReaction;
+        _gameProcessManager.OnLevelDataReset += ResetSkillsData;
     }
 
     private void OnDestroy()
     {
-        
+        _skillsManager.OnUpgradedSkillVisualDataDefined -= SkillsManager_UpgradedSkillVisualDataDefined_ExecuteReaction;
+        _gameProcessManager.OnLevelDataReset -= ResetSkillsData;
     }
 
-    public void SkillTaken_ExecuteReaction(int skillCategoryIndex, int skillIndex, Sprite skillSprite)
+    #region Zenject
+    [Inject]
+    private void Construct(SkillsManager skillsManager, GameProcessManager gameProcessManager)
+    {
+        _skillsManager = skillsManager;
+        _gameProcessManager = gameProcessManager;
+    }
+    #endregion Zenject
+
+    private void SkillsManager_UpgradedSkillVisualDataDefined_ExecuteReaction(int skillCategoryIndex, int skillIndex, Sprite skillSprite)
     {
         Image skillImage;
 
@@ -67,7 +82,7 @@ public class TakenSkillsDisplayPanel : MonoBehaviour
         }
     }
 
-    public void ResetSkillsData()
+    private void ResetSkillsData()
     {
         ChangeSkillImagesListAlpha(activeSkillsImagesList, 0f);
         ChangeSkillImagesListAlpha(passiveSkillsImagesList, 0f);
