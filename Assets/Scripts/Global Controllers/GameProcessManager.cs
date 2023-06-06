@@ -36,6 +36,7 @@ public class GameProcessManager : MonoBehaviour
     public event Action OnGameStarted;
     public event Action OnPlayerLost;
     public event Action OnPlayerWon;
+    public event Action OnLevelDataReset;
     public event Action<float, float> OnMapProgressChanged;
     #endregion Events Declaration
 
@@ -97,6 +98,11 @@ public class GameProcessManager : MonoBehaviour
     {
         OnPlayerWon?.Invoke();
         ResetMapData();
+    }
+
+    public void ResetLevelDataWithSaving()
+    {
+        OnLevelDataReset?.Invoke();
     }
 
     public void GameLost_ExecuteReaction()

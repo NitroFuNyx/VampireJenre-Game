@@ -45,11 +45,13 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     private void Start()
     {
         _gameProcessManager.OnGameStarted += GameProcessManager_GameStarted_ExecuteReaction;
+        _gameProcessManager.OnLevelDataReset += GameProcessManager_LevelDataReset_ExecuteReaction;
     }
 
     private void OnDestroy()
     {
         _gameProcessManager.OnGameStarted -= GameProcessManager_GameStarted_ExecuteReaction;
+        _gameProcessManager.OnLevelDataReset -= GameProcessManager_LevelDataReset_ExecuteReaction;
     }
 
     #region Zenject
@@ -194,6 +196,15 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         }
     }
 
+    private void AddCurrentLevelResourcesToGeneralAmount()
+    {
+        coinsAmount += currentLevelCoinsAmount;
+        OnCoinsAmountChanged?.Invoke(coinsAmount);
+
+        gemsAmount += currentLevelGemsAmount;
+        OnGemsAmountChanged?.Invoke(gemsAmount);
+    }
+
     private void GameProcessManager_GameStarted_ExecuteReaction()
     {
         currentLevelCoinsAmount = 0;
@@ -203,12 +214,9 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         OnCurrentLevelGemsAmountChanged?.Invoke(currentLevelGemsAmount);
     }
 
-    private void AddCurrentLevelResourcesToGeneralAmount()
+    private void GameProcessManager_LevelDataReset_ExecuteReaction()
     {
-        coinsAmount += currentLevelCoinsAmount;
-        OnCoinsAmountChanged?.Invoke(coinsAmount);
-
-        gemsAmount += currentLevelGemsAmount;
-        OnGemsAmountChanged?.Invoke(gemsAmount);
+        AddCurrentLevelResourcesToGeneralAmount();
+        _dataPersistanceManager.SaveGame();
     }
 }
