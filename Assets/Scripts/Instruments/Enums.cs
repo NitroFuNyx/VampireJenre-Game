@@ -6,7 +6,8 @@ public enum Languages
 
 public enum UIPanels
 {
-    MainLoaderPanel, MainScreenPanel, GameLevelUI , TalentWheelUI, ShopUI, CharacterSelectionUI, SettingsUI, MenuButtonsUI, RewardsUI, RoadmapUI
+    MainLoaderPanel, MainScreenPanel, GameLevelUI , TalentWheelUI, ShopUI, CharacterSelectionUI, SettingsUI, MenuButtonsUI, RewardsUI, RoadmapUI,
+    SkillsInfoUI
 }
 
 public enum SettingsPanels
