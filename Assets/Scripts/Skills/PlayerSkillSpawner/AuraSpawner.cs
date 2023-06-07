@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,6 +40,11 @@ public class AuraSpawner : MonoBehaviour
             StartCoroutine(ExplodingSphere());
             _cooldownTimer = 0;
         }
+    }
+
+    private void OnDisable()
+    {
+        particle.SetActive(false);
     }
 
     private IEnumerator ExplodingSphere()
