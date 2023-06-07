@@ -24,7 +24,6 @@ public class EnemyCollisionsManager : MonoBehaviour
     public event Action OnSpeedReset;
 
     public event Func<ActiveSkills,float> OnSkillCollision; 
-    public event Func<ActiveSkills,float> OnSkillCooldown; 
     #endregion Events Declaration
 
     private void Awake()
@@ -99,25 +98,14 @@ public class EnemyCollisionsManager : MonoBehaviour
             }
             if (collision.gameObject.layer == Layers.AuraSkill)
             {
-               auraCooldown= OnSkillCooldown.Invoke(ActiveSkills.MagicAura);
+                DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.MagicAura));
+
             }
             
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.layer == Layers.AuraSkill)
-        {
-            auraCooldownTimer += Time.fixedDeltaTime;
-            if (auraCooldownTimer > auraCooldown)
-            {
-                DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.MagicAura));
-
-                auraCooldown = 0;
-            }
-        }
-    }
+    
 
     private void OnTriggerExit(Collider collision)
     {

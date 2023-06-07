@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public Transform PlayerTargetPosition => playerTargetPosition;
 
     //TODO: CHECK GAME STATE
-    private void Update()
+    private void FixedUpdate()
     {
         if(canMove)
         {
