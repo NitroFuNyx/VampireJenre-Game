@@ -15,12 +15,12 @@ public class MainScreenUI : MainCanvasPanel
     {
         ChangeProgressImages(_chaptersProgressManager.FinishedChaptersCounter);
 
-        _chaptersProgressManager.OnChaptersProhressUpdated += ChaptersProgressManager_OnChaptersProgressUpdated_ExecuteReaction;
+        _chaptersProgressManager.OnChaptersProgressUpdated += ChaptersProgressManager_OnChaptersProgressUpdated_ExecuteReaction;
     }
 
     private void OnDestroy()
     {
-        _chaptersProgressManager.OnChaptersProhressUpdated -= ChaptersProgressManager_OnChaptersProgressUpdated_ExecuteReaction;
+        _chaptersProgressManager.OnChaptersProgressUpdated -= ChaptersProgressManager_OnChaptersProgressUpdated_ExecuteReaction;
     }
 
     #region Zenject

@@ -21,36 +21,32 @@ public class EnemiesCharacteristicsManager : MonoBehaviour
 
     private PlayerExperienceManager _playerExperienceManager;
     private ChaptersProgressManager _chaptersProgressManager;
+    private GameProcessManager _gameProcessManager;
 
     public EnemyDataStruct CurrentEnemiesData { get => currentEnemiesData; }
 
     public event Action OnEnemyCharacteristicsUpgraded;
 
-    private void Awake()
-    {
-        currentEnemiesData = enemyStartDataSO.EnemyStartData;
-    }
-
     private void Start()
     {
         _playerExperienceManager.OnPlayerGotNewLevel += PlayerExperienceManager_OnPlayerGotNewLevel_ExecuteReaction;
-
-        _chaptersProgressManager.OnChaptersProhressUpdated += ChaptersProgressManager_OnChaptersProgressUpdated_ExecuteReaction;
+        _gameProcessManager.OnGameStarted += GameProcessManager_OnGameStarted_ExecuteReaction;
     }
 
     private void OnDestroy()
     {
         _playerExperienceManager.OnPlayerGotNewLevel -= PlayerExperienceManager_OnPlayerGotNewLevel_ExecuteReaction;
-
-        _chaptersProgressManager.OnChaptersProhressUpdated -= ChaptersProgressManager_OnChaptersProgressUpdated_ExecuteReaction;
+        _gameProcessManager.OnGameStarted -= GameProcessManager_OnGameStarted_ExecuteReaction;
     }
 
     #region Zenject
     [Inject]
-    private void Construct(PlayerExperienceManager playerExperienceManager, ChaptersProgressManager chaptersProgressManager)
+    private void Construct(PlayerExperienceManager playerExperienceManager, ChaptersProgressManager chaptersProgressManager,
+                           GameProcessManager gameProcessManager)
     {
         _playerExperienceManager = playerExperienceManager;
         _chaptersProgressManager = chaptersProgressManager;
+        _gameProcessManager = gameProcessManager;
     }
     #endregion Zenject
 
@@ -66,7 +62,7 @@ public class EnemiesCharacteristicsManager : MonoBehaviour
         OnEnemyCharacteristicsUpgraded?.Invoke();
     }
 
-    private void ChaptersProgressManager_OnChaptersProgressUpdated_ExecuteReaction(int _)
+    private void UpgradeEnemiesDataInNewChapter()
     {
         EnemyDataStruct newEnemyData = currentEnemiesData;
 
@@ -79,9 +75,23 @@ public class EnemiesCharacteristicsManager : MonoBehaviour
         OnEnemyCharacteristicsUpgraded?.Invoke();
     }
 
+    private void GameProcessManager_OnGameStarted_ExecuteReaction()
+    {
+        currentEnemiesData = enemyStartDataSO.EnemyStartData;
+
+        if(_chaptersProgressManager.FinishedChaptersCounter > 0)
+        {
+            UpgradeEnemiesDataInNewChapter();
+        }
+        else
+        {
+            OnEnemyCharacteristicsUpgraded?.Invoke();
+        }
+    }
+
     private float GetPercentValueOfCharacteristic(float characteristicValue)
     {
-        float percentValue = (characteristicValue * allCharacteristicsUpgradePercent) / CommonValues.maxPercentAmount;
+        float percentValue = (characteristicValue * (allCharacteristicsUpgradePercent * _chaptersProgressManager.FinishedChaptersCounter)) / CommonValues.maxPercentAmount;
 
         return percentValue;
     }

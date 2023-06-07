@@ -12,7 +12,7 @@ public class ChaptersProgressManager : MonoBehaviour, IDataPersistance
     public int FinishedChaptersCounter { get => finishedChaptersCounter; }
 
     #region Events Declaration
-    public event Action<int> OnChaptersProhressUpdated;
+    public event Action<int> OnChaptersProgressUpdated;
     #endregion Events Declaration
 
     private void Awake()
@@ -59,7 +59,7 @@ public class ChaptersProgressManager : MonoBehaviour, IDataPersistance
             finishedChaptersCounter = 2;
         }
 
-        OnChaptersProhressUpdated?.Invoke(finishedChaptersCounter);
+        OnChaptersProgressUpdated?.Invoke(finishedChaptersCounter);
 
         _dataPersistanceManager.SaveGame();
     }
