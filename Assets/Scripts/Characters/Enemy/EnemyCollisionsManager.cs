@@ -102,7 +102,6 @@ public class EnemyCollisionsManager : MonoBehaviour
             if (collision.gameObject.layer == Layers.AuraSkill)
             {
                 DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.MagicAura));
-
             }
             
         }
