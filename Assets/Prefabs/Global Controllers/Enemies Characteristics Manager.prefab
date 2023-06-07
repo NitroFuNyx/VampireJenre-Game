@@ -44,3 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4117e0337533854988180d208de921a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentEnemiesData:
+    hp: 0
+    damage: 0
+    speed: 0
+  enemyStartDataSO: {fileID: 11400000, guid: 982723a2d97fc3c4492e5dba12f2c3f4, type: 2}
+  hpUpgradeValue: 2
+  damageUpgradeValue: 2
+  baseSpeedUpgradeValue: 0.05
+  allCharacteristicsUpgradePercent: 5

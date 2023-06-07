@@ -1,11 +1,13 @@
 using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyMovementManager : MonoBehaviour
 {
     [Header("Move Data")]
     [Space]
-    [SerializeField] private float startMoveSpeed = 10f;
+    [SerializeField] private float currentMoveSpeed;
+    [SerializeField] private float enemyTypeSpeedBonusPercent;
     [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] private int movementDecreasePrecent = 20;
 
@@ -15,15 +17,13 @@ public class EnemyMovementManager : MonoBehaviour
 
     private EnemiesCharacteristicsManager _enemiesCharacteristicsManager;
 
-    private float currentMoveSpeed;
-
     private bool canMove = false;
+
+    private float setStartCharacteristicsDelay = 1f;
 
     private void Awake()
     {
         CashComponents();
-
-        currentMoveSpeed = startMoveSpeed;
     }
 
     private void FixedUpdate()
@@ -60,18 +60,19 @@ public class EnemyMovementManager : MonoBehaviour
 
     public void ResetMovementSpeed()
     {
-        currentMoveSpeed = startMoveSpeed;
+        currentMoveSpeed = _enemiesCharacteristicsManager.CurrentEnemiesData.speed + GetSpeedBonusValue();
     }
 
     public void CashExternalComponents(EnemiesCharacteristicsManager enemiesCharacteristicsManager)
     {
         _enemiesCharacteristicsManager = enemiesCharacteristicsManager;
+
+        UpdateCharacteristics();
     }
 
     public void UpdateCharacteristics()
     {
-        startMoveSpeed = _enemiesCharacteristicsManager.CurrentEnemiesData.hp;
-        currentMoveSpeed = startMoveSpeed;
+        currentMoveSpeed = _enemiesCharacteristicsManager.CurrentEnemiesData.speed + GetSpeedBonusValue();
     }
 
     private void CashComponents()
@@ -86,5 +87,12 @@ public class EnemyMovementManager : MonoBehaviour
         {
             Debug.LogWarning($"There is no Rigidbody component attached to {gameObject}", gameObject);
         }
+    }
+
+    private float GetSpeedBonusValue()
+    {
+        float percentValue = (_enemiesCharacteristicsManager.CurrentEnemiesData.speed * enemyTypeSpeedBonusPercent) / CommonValues.maxPercentAmount;
+
+        return percentValue;
     }
 }

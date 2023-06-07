@@ -13,7 +13,9 @@ public class EnemyCollisionsManager : MonoBehaviour
     private Collider _collider;
     private bool canCheckCollisions = true;
     private int startLayer;
-    
+
+    private float setStartCharacteristicsDelay = 1f;
+
     #region Events Declaration
     public event Action OnCharacterOutOfHp;
     public event Action OnDamageReceived;
