@@ -3,11 +3,25 @@ public class CoinsDisplayPanel : ResourceDisplayPanel
 {
     protected override void SubscribeOnEvents()
     {
-        _resourcesManager.OnCoinsAmountChanged += ResourcesManager_ResourceAmountChanged_ExecuteReaction;
+        if(resourceSaveType == ResourcesSaveTypes.GeneralAmount)
+        {
+            _resourcesManager.OnCoinsAmountChanged += ResourcesManager_ResourceAmountChanged_ExecuteReaction;
+        }
+        else if(resourceSaveType == ResourcesSaveTypes.CurrentLevelAmount)
+        {
+            _resourcesManager.OnCurrentLevelCoinsAmountChanged += ResourcesManager_ResourceAmountChanged_ExecuteReaction;
+        }
     }
 
     protected override void UnsubscribeFromEvents()
     {
-        _resourcesManager.OnCoinsAmountChanged -= ResourcesManager_ResourceAmountChanged_ExecuteReaction;
+        if (resourceSaveType == ResourcesSaveTypes.GeneralAmount)
+        {
+            _resourcesManager.OnCoinsAmountChanged -= ResourcesManager_ResourceAmountChanged_ExecuteReaction;
+        }
+        else if (resourceSaveType == ResourcesSaveTypes.CurrentLevelAmount)
+        {
+            _resourcesManager.OnCurrentLevelCoinsAmountChanged -= ResourcesManager_ResourceAmountChanged_ExecuteReaction;
+        }
     }
 }

@@ -7,14 +7,12 @@ public class EnemyCollisionsManager : MonoBehaviour
     [Space]
     [SerializeField] private float startHp = 100f;
     [SerializeField] private float currentHp = 100f;
-    
+
+    private EnemiesCharacteristicsManager _enemiesCharacteristicsManager;
+
     private Collider _collider;
     private bool canCheckCollisions = true;
     private int startLayer;
-    
-    
-    private float auraCooldown;
-    private float auraCooldownTimer;
     
     #region Events Declaration
     public event Action OnCharacterOutOfHp;
@@ -33,12 +31,6 @@ public class EnemyCollisionsManager : MonoBehaviour
         ChangeColliderActivationState(false);
     }
 
-    private void Start()
-    {
-        SetStartSettings();
-    }
-
-
     public void SetStandardLayer()
     {
         gameObject.layer = startLayer;
@@ -46,6 +38,19 @@ public class EnemyCollisionsManager : MonoBehaviour
     public void ApplyExplosion()
     {
         DecreaseHp(startHp);
+    }
+
+    public void CashExternalComponents(EnemiesCharacteristicsManager enemiesCharacteristicsManager)
+    {
+        _enemiesCharacteristicsManager = enemiesCharacteristicsManager;
+
+        startHp = enemiesCharacteristicsManager.CurrentEnemiesData.hp;
+        currentHp = startHp;
+    }
+
+    public void UpdateCharacteristics()
+    {
+        startHp = _enemiesCharacteristicsManager.CurrentEnemiesData.hp;
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -76,7 +81,6 @@ public class EnemyCollisionsManager : MonoBehaviour
             }
             if (collision.gameObject.layer == Layers.MeteorExplosion)
             {
-                Debug.Log("METEOR");
                 DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.Meteor));
             }
             if (collision.gameObject.layer == Layers.WeaponStrikeSkill)
@@ -89,7 +93,6 @@ public class EnemyCollisionsManager : MonoBehaviour
             }
             if (collision.gameObject.layer == Layers.LightningBolt)
             {
-                Debug.Log("BOLT");
                 DecreaseHp(OnSkillCollision.Invoke(ActiveSkills.LightningBolt));
             }
             if (collision.gameObject.layer == Layers.ForceWave)
@@ -104,14 +107,10 @@ public class EnemyCollisionsManager : MonoBehaviour
             
         }
     }
-
-    
-
     private void OnTriggerExit(Collider collision)
     {
         if (collision.gameObject.layer == Layers.MeteorPuddle)
         {
-
             OnSpeedReset?.Invoke();
         }
     }
@@ -143,17 +142,11 @@ public class EnemyCollisionsManager : MonoBehaviour
         }
     }
 
-    private void SetStartSettings()
-    {
-        currentHp = startHp;
-    }
-
     private void DecreaseHp(float amount)
     {
         currentHp -= amount;
         if (currentHp <= 0)
         {
-            
             canCheckCollisions = false;
             gameObject.layer = Layers.DeadEnemy;
             OnCharacterOutOfHp?.Invoke();

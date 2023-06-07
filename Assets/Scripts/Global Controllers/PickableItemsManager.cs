@@ -180,7 +180,7 @@ public class PickableItemsManager : MonoBehaviour
 
         for(int i = 0; i < allPickableItemsOnMap.Count; i++)
         {
-            if(allPickableItemsOnMap[i].gameObject.activeInHierarchy)
+            if(allPickableItemsOnMap[i] != null && allPickableItemsOnMap[i].gameObject.activeInHierarchy)
             allPickableItemsOnMap[i].PoolItemsManager.ReturnItemToPool(allPickableItemsOnMap[i]);
         }
 

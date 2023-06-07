@@ -15,12 +15,12 @@ MonoBehaviour:
   playerBasicDataLists:
   - playerCharacterType: 0
     characterHp: 100
-    characterSpeed: 10
-    characterDamageIncreasePercent: 0
+    characterSpeed: 4.5
+    characterDamageIncreasePercent: 10
     characterDamageReductionPercent: 0
-    characterCritChance: 0
-    characterCritPower: 0
-    characterRegenerationPercent: 0
+    characterCritChance: 30
+    characterCritPower: 2
+    characterRegenerationPercent: 10
     characterItemDropChancePercent: 0
     characterCoinsSurplusPercent: 0
     playerSkillsData:

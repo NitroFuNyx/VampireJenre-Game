@@ -1,16 +1,18 @@
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-
-    [Header("Parametres")]
-    [Range(0.1f, 10)] [SerializeField] private float speed;
+    //[Header("Parametres")]
+    //[Range(0.1f, 10)] [SerializeField] private float speed;
     [Space]
     [Header("References")]
     [SerializeField] private FloatingJoystick joystick;
     [SerializeField] private Rigidbody playerRigidBody;
     [SerializeField] private Animator playerAnimator;
+
+    private PlayerCharacteristicsManager _playerCharacteristicsManager;
 
     private bool canMove = true;
 
@@ -23,7 +25,8 @@ public class PlayerController : MonoBehaviour
     {
         if(canMove)
         {
-            playerRigidBody.velocity = new Vector3(joystick.Horizontal * speed, playerRigidBody.velocity.y, joystick.Vertical * speed);
+            playerRigidBody.velocity = new Vector3(joystick.Horizontal * _playerCharacteristicsManager.CurrentPlayerData.characterSpeed, 
+                                      playerRigidBody.velocity.y, joystick.Vertical * _playerCharacteristicsManager.CurrentPlayerData.characterSpeed);
 
             if (joystick.Vertical != 0 || joystick.Horizontal != 0)
             {
@@ -37,9 +40,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    #region Zenject
+    [Inject]
+    private void Construct(PlayerCharacteristicsManager playerCharacteristicsManager)
+    {
+        _playerCharacteristicsManager = playerCharacteristicsManager;
+    }
+    #endregion Zenject
+
     public void ChaneCanMoveState(bool canMove)
     {
         this.canMove = canMove;
+    }
+
+    public void CashExternalComponents()
+    {
+
     }
 
     public void ResetComponent()

@@ -38,18 +38,23 @@ public class PlayerComponentsManager : MonoBehaviour
     {
         movementManager.ChaneCanMoveState(true);
         collisionsManager.ResetComponent();
+        collisionsManager.StartRegeneration();
     }
 
     private void SubscribeOnEvents()
     {
         collisionsManager.OnPlayerOutOfHp += CollisionManager_PlayerOutOfHp_ExecuteReaction;
         collisionsManager.OnDamageReceived += CollisionManager_DamageReceived_ExecuteReaction;
+
+        _gameProcessManager.OnPlayerWon += GameProcessManager_PlayerWon_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
     {
         collisionsManager.OnPlayerOutOfHp -= CollisionManager_PlayerOutOfHp_ExecuteReaction;
         collisionsManager.OnDamageReceived -= CollisionManager_DamageReceived_ExecuteReaction;
+
+        _gameProcessManager.OnPlayerWon -= GameProcessManager_PlayerWon_ExecuteReaction;
     }
 
     private void CollisionManager_PlayerOutOfHp_ExecuteReaction()
@@ -58,10 +63,19 @@ public class PlayerComponentsManager : MonoBehaviour
         movementManager.ChaneCanMoveState(false);
         movementManager.ResetComponent();
         collisionsManager.ResetComponent();
+        collisionsManager.StopRegeneration();
     }
 
     private void CollisionManager_DamageReceived_ExecuteReaction()
     {
         _hapticManager.Vibrate();
+    }
+
+    private void GameProcessManager_PlayerWon_ExecuteReaction()
+    {
+        movementManager.ChaneCanMoveState(false);
+        movementManager.ResetComponent();
+        collisionsManager.ResetComponent();
+        collisionsManager.StopRegeneration();
     }
 }

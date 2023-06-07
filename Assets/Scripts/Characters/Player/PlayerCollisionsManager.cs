@@ -1,16 +1,24 @@
 using UnityEngine;
 using System;
+using System.Collections;
+using Zenject;
 
 public class PlayerCollisionsManager : MonoBehaviour
 {
     [Header("Hp Data")]
     [Space]
-    [SerializeField] private float startHp = 100f;
     [SerializeField] private float currentHp = 100f;
+    [Header("Delays")]
+    [Space]
+    [SerializeField] private float regenerationDelay = 5f;
+
+    private PlayerCharacteristicsManager _playerCharacteristicsManager;
+    private EnemiesCharacteristicsManager _enemiesCharacteristicsManager;
 
     private bool canCheckCollisions = true;
+    private bool isTakingDamage = false;
 
-    private float damage = 10f;
+    private float resetTakingDamageStateDelay = 0.1f;
 
     #region Events Declaration
     public event Action OnPlayerOutOfHp;
@@ -27,30 +35,49 @@ public class PlayerCollisionsManager : MonoBehaviour
     {
         if(collision.gameObject.layer == Layers.EnemySkeleton || collision.gameObject.layer == Layers.EnemyGhost || collision.gameObject.layer == Layers.EnemyZombie)
         {
-            DecreaseHp(damage);
+            DecreaseHp(_enemiesCharacteristicsManager.CurrentEnemiesData.damage);
         }
-       
-    }
-
-    public void ResetComponent()
-    {
-        currentHp = startHp;
-    }
-
-    private void SetStartSettings()
-    {
-        currentHp = startHp;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == Layers.BossProjectile)
+        if (other.gameObject.layer == Layers.BossProjectile)
             DecreaseHp(20);
+    }
+
+    #region Zenject
+    [Inject]
+    private void Construct(PlayerCharacteristicsManager playerCharacteristicsManager, EnemiesCharacteristicsManager enemiesCharacteristicsManager)
+    {
+        _playerCharacteristicsManager = playerCharacteristicsManager;
+        _enemiesCharacteristicsManager = enemiesCharacteristicsManager;
+    }
+    #endregion Zenject
+
+    public void ResetComponent()
+    {
+        SetStartSettings();
+    }
+
+    public void StartRegeneration()
+    {
+        StartCoroutine(RegenerateHpCoroutine());
+    }
+
+    public void StopRegeneration()
+    {
+        StopAllCoroutines();
+    }
+
+    private void SetStartSettings()
+    {
+        currentHp = _playerCharacteristicsManager.CurrentPlayerData.characterHp;
     }
 
     private void DecreaseHp(float amount)
     {
-        currentHp -= amount;
+        currentHp -= GetReducedDamageAmount(amount);
+        isTakingDamage = true;
         if (currentHp <= 0)
         {
             canCheckCollisions = false;
@@ -61,6 +88,51 @@ public class PlayerCollisionsManager : MonoBehaviour
             OnDamageReceived?.Invoke();
         }
 
-        OnHpAmountChanged?.Invoke(currentHp, startHp);
+        OnHpAmountChanged?.Invoke(currentHp, _playerCharacteristicsManager.CurrentPlayerData.characterHp);
+        StartCoroutine(ResetTakingDamageStateCoroutine());
+    }
+
+    private void IncreaseHp(float amount)
+    {
+        currentHp += amount;
+        if (currentHp > _playerCharacteristicsManager.CurrentPlayerData.characterHp)
+        {
+            currentHp = _playerCharacteristicsManager.CurrentPlayerData.characterHp;
+        }
+
+        OnHpAmountChanged?.Invoke(currentHp, _playerCharacteristicsManager.CurrentPlayerData.characterHp);
+    }
+
+    private float GetReducedDamageAmount(float damage)
+    {
+        float reducedDamage = damage - (damage * _playerCharacteristicsManager.CurrentPlayerData.characterDamageReductionPercent) / CommonValues.maxPercentAmount;
+
+        return reducedDamage;
+    }
+
+    private float GetHpAmountToRestore()
+    {
+        float regenerationAmount = (_playerCharacteristicsManager.CurrentPlayerData.characterRegenerationPercent *
+                                    _playerCharacteristicsManager.CurrentPlayerData.characterHp) / CommonValues.maxPercentAmount;
+        return regenerationAmount;
+    }
+
+    private IEnumerator RegenerateHpCoroutine()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(regenerationDelay);
+            if(!isTakingDamage)
+            {
+                IncreaseHp(GetHpAmountToRestore());
+                Debug.Log($"Restore {GetHpAmountToRestore()} hp");
+            }
+        }
+    }
+
+    private IEnumerator ResetTakingDamageStateCoroutine()
+    {
+        yield return new WaitForSeconds(resetTakingDamageStateDelay);
+        isTakingDamage = false;
     }
 }

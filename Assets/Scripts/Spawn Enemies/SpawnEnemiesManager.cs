@@ -25,6 +25,10 @@ public class SpawnEnemiesManager : MonoBehaviour
 
     private bool canSpawnEnemies = true;
 
+    private int defeatedEnemiesCounter = 0;
+
+    public int DefeatedEnemiesCounter { get => defeatedEnemiesCounter; private set => defeatedEnemiesCounter = value; }
+
     private void Start()
     {
         SubscribeOnEvents();
@@ -49,24 +53,6 @@ public class SpawnEnemiesManager : MonoBehaviour
         canSpawnEnemies = true;
         StartCoroutine(SpawnEnemiesWavesCoroutine());
     }
-
-    //[ContextMenu("Spawn Beyond Map")]
-    //public void SpawnEnemiesBeyondMap()
-    //{
-    //    spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, 40);
-    //}
-
-    //[ContextMenu("Spawn On Map")]
-    //public void SpawnEnemiesOnMap()
-    //{
-    //    spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, 1);
-    //}
-
-    //[ContextMenu("Spawn At Gates")]
-    //public void SpawnEnemiesAtGates()
-    //{
-    //    spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, 100);
-    //}
     
     [ContextMenu("Spawn Boss")]
     public void SpawnBossAtCenter()
@@ -92,6 +78,7 @@ public class SpawnEnemiesManager : MonoBehaviour
     public void RemoveEnemyFronOnMapList(EnemyComponentsManager enemy)
     {
         enemiesOnMapList.Remove(enemy);
+        defeatedEnemiesCounter++;
     }
 
     private void SubscribeOnEvents()
@@ -116,6 +103,9 @@ public class SpawnEnemiesManager : MonoBehaviour
         canSpawnEnemies = false;
 
         StopAllCoroutines();
+
+        enemiesOnMapList.Clear();
+        defeatedEnemiesCounter = 0;
 
         StartCoroutine(StopEnemySpawnCoroutine());
     }

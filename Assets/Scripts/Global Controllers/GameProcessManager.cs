@@ -36,6 +36,7 @@ public class GameProcessManager : MonoBehaviour
     public event Action OnGameStarted;
     public event Action OnPlayerLost;
     public event Action OnPlayerWon;
+    public event Action OnLevelDataReset;
     public event Action<float, float> OnMapProgressChanged;
     #endregion Events Declaration
 
@@ -99,6 +100,11 @@ public class GameProcessManager : MonoBehaviour
         ResetMapData();
     }
 
+    public void ResetLevelDataWithSaving()
+    {
+        OnLevelDataReset?.Invoke();
+    }
+
     public void GameLost_ExecuteReaction()
     {
         OnPlayerLost?.Invoke();
@@ -115,7 +121,10 @@ public class GameProcessManager : MonoBehaviour
     private void SkillToUpgradeDefined_ExecuteReaction(int skillCategory, int skillIndex)
     {
         _systemTimeManager.ResumeGame();
-        skillsObjectsList[skillIndex].gameObject.SetActive(true);
+        if((SkillBasicTypes)skillCategory == SkillBasicTypes.Active)
+        {
+            skillsObjectsList[skillIndex].gameObject.SetActive(true);
+        }
         StartCoroutine(StartGameCoroutine());
     }
 

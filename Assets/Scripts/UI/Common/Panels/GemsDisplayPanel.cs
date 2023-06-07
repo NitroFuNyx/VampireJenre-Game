@@ -3,11 +3,25 @@ public class GemsDisplayPanel : ResourceDisplayPanel
 {
     protected override void SubscribeOnEvents()
     {
-        _resourcesManager.OnGemsAmountChanged += ResourcesManager_ResourceAmountChanged_ExecuteReaction;
+        if (resourceSaveType == ResourcesSaveTypes.GeneralAmount)
+        {
+            _resourcesManager.OnGemsAmountChanged += ResourcesManager_ResourceAmountChanged_ExecuteReaction;
+        }
+        else if (resourceSaveType == ResourcesSaveTypes.CurrentLevelAmount)
+        {
+            _resourcesManager.OnCurrentLevelGemsAmountChanged += ResourcesManager_ResourceAmountChanged_ExecuteReaction;
+        }
     }
 
     protected override void UnsubscribeFromEvents()
     {
-        _resourcesManager.OnGemsAmountChanged -= ResourcesManager_ResourceAmountChanged_ExecuteReaction;
+        if (resourceSaveType == ResourcesSaveTypes.GeneralAmount)
+        {
+            _resourcesManager.OnGemsAmountChanged -= ResourcesManager_ResourceAmountChanged_ExecuteReaction;
+        }
+        else if (resourceSaveType == ResourcesSaveTypes.CurrentLevelAmount)
+        {
+            _resourcesManager.OnCurrentLevelGemsAmountChanged -= ResourcesManager_ResourceAmountChanged_ExecuteReaction;
+        }
     }
 }

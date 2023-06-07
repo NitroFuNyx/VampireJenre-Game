@@ -15,6 +15,9 @@ public class EnemyComponentsManager : EnemyBehaviour
     private void Start()
     {
         SubscribeOnEvents();
+
+        movementManager.CashExternalComponents(poolItemComponent._EnemiesCharacteristicsManager);
+        collisionsManager.CashExternalComponents(poolItemComponent._EnemiesCharacteristicsManager);
     }
 
     private void OnDestroy()
@@ -40,9 +43,11 @@ public class EnemyComponentsManager : EnemyBehaviour
         {
             poolItemComponent.OnItemResetRequired += PoolItemComponent_ResetRequired_ExecuteReaction;
             poolItemComponent.OnObjectAwakeStateSet += PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction;
+
+            poolItemComponent._EnemiesCharacteristicsManager.OnEnemyCharacteristicsUpgraded += EnemyCharacteristicsUpgraded_ExecuteReaction;
         }
 
-        collisionsManager.OnCharacterOutOfHp += CollisionManager_PlayerOutOfHp_ExecuteReaction;
+        collisionsManager.OnCharacterOutOfHp += CollisionManager_CharacterOutOfHp_ExecuteReaction;
         collisionsManager.OnDamageReceived += CollisionManager_DamageReceived_ExecuteReaction;
         collisionsManager.OnSpeedDebuffCollision += CollisionManager_SpeedDebuffCollision_ExecuteReaction;
         collisionsManager.OnSpeedReset += CollisionManager_SpeedReset_ExecuteReaction;
@@ -59,9 +64,11 @@ public class EnemyComponentsManager : EnemyBehaviour
         {
             poolItemComponent.OnItemResetRequired -= PoolItemComponent_ResetRequired_ExecuteReaction;
             poolItemComponent.OnObjectAwakeStateSet -= PoolItemComponent_ObjectAwakeStateSet_ExecuteReaction;
+
+            poolItemComponent._EnemiesCharacteristicsManager.OnEnemyCharacteristicsUpgraded -= EnemyCharacteristicsUpgraded_ExecuteReaction;
         }
 
-        collisionsManager.OnCharacterOutOfHp -= CollisionManager_PlayerOutOfHp_ExecuteReaction;
+        collisionsManager.OnCharacterOutOfHp -= CollisionManager_CharacterOutOfHp_ExecuteReaction;
         collisionsManager.OnDamageReceived -= CollisionManager_DamageReceived_ExecuteReaction;
         collisionsManager.OnSpeedDebuffCollision -= CollisionManager_SpeedDebuffCollision_ExecuteReaction;
         collisionsManager.OnSpeedReset -= CollisionManager_SpeedReset_ExecuteReaction;
@@ -90,7 +97,7 @@ public class EnemyComponentsManager : EnemyBehaviour
     #endregion Pool Item Component Events Reactions
 
     #region Collision Manager Events Reaction
-    private void CollisionManager_PlayerOutOfHp_ExecuteReaction()
+    private void CollisionManager_CharacterOutOfHp_ExecuteReaction()
     {
         movementManager.StopMoving();
         animationsManager.SetAnimation_Die();
@@ -161,8 +168,14 @@ public class EnemyComponentsManager : EnemyBehaviour
             Debug.LogWarning($"Unknown type got caught during damage processing {skill}");
             value = 0;
         }
-        Debug.Log($"Skill: {skill} damages: {value}");
-        return value;
+
+        float passiveSkillDamage = GetAdditionalDamageAmountFromPlayerPassiveSkill(value);
+        float critDamage = GetCritDamage(value);
+
+        Debug.Log($"Skill: {skill} damages: {value + passiveSkillDamage + critDamage}\n" +
+                  $"Base Skill Damage {value}, From Passive Skill Damage {passiveSkillDamage} Crit Damage {critDamage}");
+                    
+        return value + GetAdditionalDamageAmountFromPlayerPassiveSkill(value) + GetCritDamage(value);
     }
    
     #endregion Collision Manager Events Reaction
@@ -172,6 +185,35 @@ public class EnemyComponentsManager : EnemyBehaviour
     {
         poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
     }
-    
+
     #endregion Animation Manager Events Reaction
+
+    #region Enemies Characteristics Manager Events Reaction
+    private void EnemyCharacteristicsUpgraded_ExecuteReaction()
+    {
+        collisionsManager.UpdateCharacteristics();
+        movementManager.UpdateCharacteristics();
+    }
+    #endregion Enemis Characteristics Manager Events Reaction
+
+    private float GetAdditionalDamageAmountFromPlayerPassiveSkill(float skillDamage)
+    {
+        float damageAmount = (poolItemComponent.CharacteristicsManager.CurrentPlayerData.characterDamageIncreasePercent * skillDamage) / 
+                              CommonValues.maxPercentAmount;
+        return damageAmount;
+    }
+
+    private float GetCritDamage(float skillDamage)
+    {
+        float critDamage = 0f;
+
+        float critIndex = Random.Range(0, CommonValues.maxPercentAmount);
+
+        if(critIndex < poolItemComponent.CharacteristicsManager.CurrentPlayerData.characterCritChance)
+        {
+            critDamage = skillDamage * poolItemComponent.CharacteristicsManager.CurrentPlayerData.characterCritPower;
+        }
+
+        return critDamage;
+    }
 }

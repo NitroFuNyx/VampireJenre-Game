@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 using Zenject;
 
 public class EnemiesCharacteristicsManager : MonoBehaviour
@@ -14,6 +13,10 @@ public class EnemiesCharacteristicsManager : MonoBehaviour
 
     private PlayerExperienceManager _playerExperienceManager;
 
+    public EnemyDataStruct CurrentEnemiesData { get => currentEnemiesData; }
+
+    public event Action OnEnemyCharacteristicsUpgraded;
+
     private void Awake()
     {
         currentEnemiesData = enemyStartDataSO.EnemyStartData;
@@ -26,4 +29,16 @@ public class EnemiesCharacteristicsManager : MonoBehaviour
         _playerExperienceManager = playerExperienceManager;
     }
     #endregion Zenject
+
+    private void PlayerExperienceManager_OnPlayerGotNewLevel_ExecuteReaction()
+    {
+        EnemyDataStruct newEnemyData = currentEnemiesData;
+        newEnemyData.hp += 2f;
+        newEnemyData.damage += 2f;
+        newEnemyData.speed += 0.05f;
+
+        currentEnemiesData = newEnemyData;
+
+        OnEnemyCharacteristicsUpgraded?.Invoke();
+    }
 }

@@ -8,19 +8,33 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     [Space]
     [SerializeField] private int coinsAmount;
     [SerializeField] private int gemsAmount;
+    [Header("Percents Data")]
+    [Space]
+    [SerializeField] private float gemDropDefaultPercentChance = 10f;
+    [SerializeField] private float coinDropDefaultPercentChance = 20f;
 
     private DataPersistanceManager _dataPersistanceManager;
+    private PlayerCharacteristicsManager _playerCharacteristicsManager;
+    private GameProcessManager _gameProcessManager;
 
     private const int GemSurplusForKillingEnemy = 1;
 
     private const int CoinsSurplusForKillingEnemy_Min = 1;
     private const int CoinsSurplusForKillingEnemy_Max = 6;
 
+    private int currentLevelCoinsAmount = 0;
+    private int currentLevelGemsAmount = 0;
+
     public int CoinsAmount { get => coinsAmount; private set => coinsAmount = value; }
+    public int CurrentLevelCoinsAmount { get => currentLevelCoinsAmount; private set => currentLevelCoinsAmount = value; }
+    public int CurrentLevelGemsAmount { get => currentLevelGemsAmount; private set => currentLevelGemsAmount = value; }
 
     #region Events Declaration
     public event Action<int> OnCoinsAmountChanged;
     public event Action<int> OnGemsAmountChanged;
+
+    public event Action<int> OnCurrentLevelCoinsAmountChanged;
+    public event Action<int> OnCurrentLevelGemsAmountChanged;
     #endregion Events Declaration
 
     private void Awake()
@@ -28,11 +42,26 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         _dataPersistanceManager.AddObjectToSaveSystemObjectsList(this);
     }
 
+    private void Start()
+    {
+        _gameProcessManager.OnGameStarted += GameProcessManager_GameStarted_ExecuteReaction;
+        _gameProcessManager.OnLevelDataReset += GameProcessManager_LevelDataReset_ExecuteReaction;
+    }
+
+    private void OnDestroy()
+    {
+        _gameProcessManager.OnGameStarted -= GameProcessManager_GameStarted_ExecuteReaction;
+        _gameProcessManager.OnLevelDataReset -= GameProcessManager_LevelDataReset_ExecuteReaction;
+    }
+
     #region Zenject
     [Inject]
-    private void Construct(DataPersistanceManager dataPersistanceManager)
+    private void Construct(DataPersistanceManager dataPersistanceManager, PlayerCharacteristicsManager playerCharacteristicsManager, 
+                           GameProcessManager gameProcessManager)
     {
         _dataPersistanceManager = dataPersistanceManager;
+        _playerCharacteristicsManager = playerCharacteristicsManager;
+        _gameProcessManager = gameProcessManager;
     }
     #endregion Zenject
 
@@ -61,6 +90,12 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         Debug.Log($"Coins {deltaAmount}");
     }
 
+    public void IncreaseCurrentLevelCoinsAmount(int deltaAmount)
+    {
+        currentLevelCoinsAmount += deltaAmount;
+        OnCurrentLevelCoinsAmountChanged?.Invoke(currentLevelCoinsAmount);
+    }
+
     public void DecreaseCoinsAmount(int deltaAmount)
     {
         coinsAmount -= deltaAmount;
@@ -78,6 +113,12 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         gemsAmount += deltaAmount;
         OnGemsAmountChanged?.Invoke(gemsAmount);
         Debug.Log($"Gems {deltaAmount}");
+    }
+
+    public void IncreaseCurrentLevelGemsAmount(int deltaAmount)
+    {
+        currentLevelGemsAmount += deltaAmount;
+        OnCurrentLevelGemsAmountChanged?.Invoke(currentLevelGemsAmount);
     }
 
     public void DecreaseGemsAmount(int deltaAmount)
@@ -98,11 +139,11 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         ResourceBonusItemStruct data = new ResourceBonusItemStruct();
         data.canBeCollected = false;
 
-        int gemGrantingIndex;
+        float gemGrantingIndex;
 
-        gemGrantingIndex = UnityEngine.Random.Range(0, 10);
+        gemGrantingIndex = UnityEngine.Random.Range(0, CommonValues.maxPercentAmount);
 
-        if (gemGrantingIndex == 0)
+        if (gemGrantingIndex < gemDropDefaultPercentChance + _playerCharacteristicsManager.CurrentPlayerData.characterItemDropChancePercent)
         {
             data.resourceType = ResourcesTypes.Gems;
             data.ResourceAmount = GemSurplusForKillingEnemy;
@@ -110,11 +151,11 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         }
         else
         {
-            int coinsGrantingIndex;
+            float coinsGrantingIndex;
 
-            coinsGrantingIndex = UnityEngine.Random.Range(0, 5);
+            coinsGrantingIndex = UnityEngine.Random.Range(0, CommonValues.maxPercentAmount);
 
-            if (coinsGrantingIndex == 0)
+            if (coinsGrantingIndex < coinDropDefaultPercentChance + _playerCharacteristicsManager.CurrentPlayerData.characterItemDropChancePercent)
             {
                 int coins = UnityEngine.Random.Range(CoinsSurplusForKillingEnemy_Min, CoinsSurplusForKillingEnemy_Max);
                 data.resourceType = ResourcesTypes.Coins;
@@ -130,28 +171,52 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     {
         if(data.resourceType == (ResourcesTypes)ResourcesTypes.Gems)
         {
-            IncreaseGemsAmount(data.ResourceAmount);
+            IncreaseCurrentLevelGemsAmount(data.ResourceAmount);
         }
         else
         {
-            IncreaseCoinsAmount(data.ResourceAmount);
+            IncreaseCurrentLevelCoinsAmount(data.ResourceAmount);
         }
     }
 
     public void AddResourceForPickingUpTreasureChest()
     {
-        int gemGrantingIndex;
+        float gemGrantingIndex;
 
-        gemGrantingIndex = UnityEngine.Random.Range(0, 10);
+        gemGrantingIndex = UnityEngine.Random.Range(0, CommonValues.maxPercentAmount);
 
-        if (gemGrantingIndex == 0)
+        if (gemGrantingIndex < gemDropDefaultPercentChance)
         {
-            IncreaseGemsAmount(GemSurplusForKillingEnemy);
+            IncreaseCurrentLevelGemsAmount(GemSurplusForKillingEnemy);
         }
         else
         {
             int coinsAmount = UnityEngine.Random.Range(CoinsSurplusForKillingEnemy_Min, CoinsSurplusForKillingEnemy_Max);
-            IncreaseCoinsAmount(coinsAmount);
+            IncreaseCurrentLevelCoinsAmount(coinsAmount);
         }
+    }
+
+    private void AddCurrentLevelResourcesToGeneralAmount()
+    {
+        coinsAmount += currentLevelCoinsAmount;
+        OnCoinsAmountChanged?.Invoke(coinsAmount);
+
+        gemsAmount += currentLevelGemsAmount;
+        OnGemsAmountChanged?.Invoke(gemsAmount);
+    }
+
+    private void GameProcessManager_GameStarted_ExecuteReaction()
+    {
+        currentLevelCoinsAmount = 0;
+        currentLevelGemsAmount = 0;
+
+        OnCurrentLevelCoinsAmountChanged?.Invoke(currentLevelCoinsAmount);
+        OnCurrentLevelGemsAmountChanged?.Invoke(currentLevelGemsAmount);
+    }
+
+    private void GameProcessManager_LevelDataReset_ExecuteReaction()
+    {
+        AddCurrentLevelResourcesToGeneralAmount();
+        _dataPersistanceManager.SaveGame();
     }
 }

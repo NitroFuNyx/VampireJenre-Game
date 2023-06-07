@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -21,7 +20,6 @@ public class SkillsManager : MonoBehaviour
 
     private GameProcessManager _gameProcessManager;
     private GameLevelUI _gameLevelUI;
-    private TakenSkillsDisplayPanel _takenSkillsDisplayPanel;
     private PlayerExperienceManager _playerExperienceManager;
     private PlayerCharacteristicsManager _playerCharacteristicsManager;
     private PickableItemsManager _pickableItemsManager;
@@ -31,6 +29,7 @@ public class SkillsManager : MonoBehaviour
 
     #region Events Declaration
     public event Action<int, int> OnSkillToUpgradeDefined;
+    public event Action<int, int, Sprite> OnUpgradedSkillVisualDataDefined;
     #endregion Events Declaration
 
     private void Awake()
@@ -50,12 +49,11 @@ public class SkillsManager : MonoBehaviour
 
     #region Zenject
     [Inject]
-    private void Construct(GameProcessManager gameProcessManager, GameLevelUI gameLevelUI, TakenSkillsDisplayPanel takenSkillsDisplayPanel, 
-                           PlayerExperienceManager playerExperienceManager, PlayerCharacteristicsManager playerCharacteristicsManager, PickableItemsManager pickableItemsManager)
+    private void Construct(GameProcessManager gameProcessManager, GameLevelUI gameLevelUI, PlayerExperienceManager playerExperienceManager, 
+                           PlayerCharacteristicsManager playerCharacteristicsManager, PickableItemsManager pickableItemsManager)
     {
         _gameProcessManager = gameProcessManager;
         _gameLevelUI = gameLevelUI;
-        _takenSkillsDisplayPanel = takenSkillsDisplayPanel;
         _playerExperienceManager = playerExperienceManager;
         _playerCharacteristicsManager = playerCharacteristicsManager;
         _pickableItemsManager = pickableItemsManager;
@@ -156,7 +154,7 @@ public class SkillsManager : MonoBehaviour
             Debug.Log($"Skill {passiveSkillsTakenList[passiveSkillsTakenList.Count - 1].skillType} new level {passiveSkillsTakenList[passiveSkillsTakenList.Count - 1].skillLevel}");
         }
         _playerCharacteristicsManager.UpgradePlayerSkill(skillCategoryIndex, skillIndex, upgradedSkillNewLevel);
-        _takenSkillsDisplayPanel.SkillTaken_ExecuteReaction(skillCategoryIndex, skillIndex, skillSprite);
+        OnUpgradedSkillVisualDataDefined?.Invoke(skillCategoryIndex, skillIndex, skillSprite);
     }
 
     private void SubscribeOnEvents()
@@ -204,6 +202,7 @@ public class SkillsManager : MonoBehaviour
             upgradeSkillData.SkillType = SkillBasicTypes.Active;
             upgradeSkillData.ActiveSkill = skill;
             upgradeSkillData.SkillLevelString = $"1";
+            upgradeSkillData.SkillLevel = 0;
 
             ActiveSkillsDisplayDataStruct skillDisplayData = GetActiveSkillDisplayData(skill);
 
@@ -265,12 +264,14 @@ public class SkillsManager : MonoBehaviour
                 upgradeSkillData.SkillType = SkillBasicTypes.Active;
                 upgradeSkillData.ActiveSkill = skill;
                 upgradeSkillData.SkillLevelString = $"1";
+                upgradeSkillData.SkillLevel = 0;
 
                 for (int j = 0; j < activeSkillsTakenList.Count; j++)
                 {
                     if (activeSkillsTakenList[j].skillType == skill)
                     {
                         upgradeSkillData.SkillLevelString = $"{activeSkillsTakenList[j].skillLevel + 1}";
+                        upgradeSkillData.SkillLevel = activeSkillsTakenList[j].skillLevel;
                         break;
                     }
                 }
@@ -291,12 +292,14 @@ public class SkillsManager : MonoBehaviour
                 upgradeSkillData.SkillType = SkillBasicTypes.Passive;
                 upgradeSkillData.PassiveSkill = skill;
                 upgradeSkillData.SkillLevelString = $"1";
+                upgradeSkillData.SkillLevel = 0;
 
                 for (int j = 0; j < passiveSkillsTakenList.Count; j++)
                 {
                     if (passiveSkillsTakenList[j].skillType == skill)
                     {
                         upgradeSkillData.SkillLevelString = $"{passiveSkillsTakenList[j].skillLevel + 1}";
+                        upgradeSkillData.SkillLevel = passiveSkillsTakenList[j].skillLevel;
                         break;
                     }
                 }
@@ -338,12 +341,12 @@ public class SkillsManager : MonoBehaviour
 
     private void GameProcessManager_OnPlayerLost_ExecuteReaction()
     {
-        _takenSkillsDisplayPanel.ResetSkillsData();
+        
     }
 
     private void GameProcessManager_OnPlayerWon_ExecuteReaction()
     {
-        _takenSkillsDisplayPanel.ResetSkillsData();
+        
     }
 
     private void PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction()

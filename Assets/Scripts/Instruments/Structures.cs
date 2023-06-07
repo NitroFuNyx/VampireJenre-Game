@@ -203,7 +203,7 @@ public struct ActiveSkillsTranslationDataStruct
 public struct PassiveSkillsTranslationDataStruct
 {
     public PassiveSkills skill;
-    public List<PlayerCharacteristicsForTranslation> skillDescribtionTexts_English;
+    public List<PlayerCharacteristicsForTranslation> skillDescribtionTexts;
 }
 
 [Serializable]
