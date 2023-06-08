@@ -37,6 +37,7 @@ Transform:
   - {fileID: 4172656271070030421}
   - {fileID: 6495281732687883336}
   - {fileID: 5546950660475809115}
+  - {fileID: 2073517015878230251}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -55,6 +56,7 @@ MonoBehaviour:
   animationsManager: {fileID: 4178861040698909552}
   boss: 0
   getHitVfx: {fileID: 6495281732702976404}
+  bloodPuddleVfxPos: {fileID: 2073517015878230251}
 --- !u!114 &2612514640753569538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,6 +722,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterAppearanceVFX: {fileID: 1923533163643622651}
+--- !u!1 &8253164467021159165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2073517015878230251}
+  m_Layer: 9
+  m_Name: Blood Puddle VFX Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2073517015878230251
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8253164467021159165}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2612514640753569598}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1001 &1923533163658088821
 PrefabInstance:
   m_ObjectHideFlags: 0

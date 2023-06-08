@@ -4886,6 +4886,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3367301630267509500, guid: ca5bb17567a5caa42803e83fef805f58,
         type: 3}
+    - target: {fileID: 3700015731398301273, guid: eddca4cb9a45135409512bd231bdbf54,
+        type: 3}
+      propertyPath: bloodPuddleVfxPrefab
+      value: 
+      objectReference: {fileID: 7763379780692356509, guid: ceeddfa094b15114db38e7b1a786a013,
+        type: 3}
     - target: {fileID: 3700015731398301278, guid: eddca4cb9a45135409512bd231bdbf54,
         type: 3}
       propertyPath: m_RootOrder
@@ -6200,6 +6206,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745594716539724276, guid: f7add5797b424f547b1ef86ffba2daab,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4745594716539724277, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}

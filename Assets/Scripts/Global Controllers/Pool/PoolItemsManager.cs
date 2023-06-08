@@ -18,6 +18,7 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private int bossSkillDarkMissilePoolSize = 15;
     [SerializeField] private int bossZombiePoolSize = 1;
     [SerializeField] private int pickableItemsPoolSize = 20;
+    [SerializeField] private int vfxPoolSize = 100;
 
 
     [Header("Active Pools")]
@@ -49,6 +50,8 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private PoolItem crystalOrangePrefab;
     [SerializeField] private PoolItem crystalPurplePrefab;
     [SerializeField] private PoolItem coinPrefab;
+    [Space]
+    [SerializeField] private PoolItem bloodPuddleVfxPrefab;
 
     private Dictionary<PoolItemsTypes, List<PoolItem>> itemsListsDictionary = new Dictionary<PoolItemsTypes, List<PoolItem>>();
     private Dictionary<PoolItemsTypes, Transform> itemsHoldersDictionary = new Dictionary<PoolItemsTypes, Transform>();
@@ -107,6 +110,8 @@ public class PoolItemsManager : MonoBehaviour
         CreatePool(crystalOrangePrefab, "Orange Crystal", pickableItemsPoolSize);
         CreatePool(crystalPurplePrefab, "Purple Crystal", pickableItemsPoolSize);
         CreatePool(coinPrefab, "Coin", pickableItemsPoolSize);
+
+        CreatePool(bloodPuddleVfxPrefab, "Blood Puddle VFX", vfxPoolSize);
     }
 
     public PoolItem SpawnItemFromPool(PoolItemsTypes poolItemType, Vector3 _spawnPos, Quaternion _rotation, Transform _parent)

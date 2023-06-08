@@ -72,6 +72,7 @@ public class PlayerCollisionsManager : MonoBehaviour
     private void SetStartSettings()
     {
         currentHp = _playerCharacteristicsManager.CurrentPlayerData.characterHp;
+        OnHpAmountChanged?.Invoke(currentHp, _playerCharacteristicsManager.CurrentPlayerData.characterHp);
     }
 
     private void DecreaseHp(float amount)

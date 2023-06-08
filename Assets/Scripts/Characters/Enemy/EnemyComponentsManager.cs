@@ -11,6 +11,9 @@ public class EnemyComponentsManager : EnemyBehaviour
     [Header("VFX")]
     [Space]
     [SerializeField] private ParticleSystem getHitVfx;
+    [Header("Positions")]
+    [Space]
+    [SerializeField] private Transform bloodPuddleVfxPos;
 
     private EnemyMovementManager movementManager;
     private EnemyCollisionsManager collisionsManager;
@@ -104,6 +107,9 @@ public class EnemyComponentsManager : EnemyBehaviour
         movementManager.StopMoving();
         animationsManager.SetAnimation_Die();
         getHitVfx.Play();
+        PoolItem bloodPuddleVfx = poolItemComponent.PoolItemsManager.SpawnItemFromPool(PoolItemsTypes.BloodPuddleVFX, bloodPuddleVfxPos.position,
+                                                                                       Quaternion.identity, null);
+        bloodPuddleVfx.SetObjectAwakeState();
         poolItemComponent.SpawnEnemiesManager.RemoveEnemyFronOnMapList(this);
 
         if (!boss)

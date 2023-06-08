@@ -60,7 +60,6 @@ public class EnemyCollisionsManager : MonoBehaviour
         }
 
         currentHp = startHp;
-        Debug.Log($"Current Hp = {currentHp}");
     }
 
     public void UpdateCharacteristics(bool battleHasNotStarted)

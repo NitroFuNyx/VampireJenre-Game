@@ -24,7 +24,8 @@ public enum PoolItemsTypes
 {
     Enemy_Skeleton,Enemy_Ghost,Enemy_Zombie,XP, Singleshot_Projectile, Missile_Projectile, Meteor_Projectile, Lightning_Bolt_Skill,
     Fireball_Skill, ChainLightning_Skill, PowerWave_Skill,
-    Boss_Dark_Missile,Zombie_Boss,TreasureChest, SkillScroll, CoinsMagnet, Gem_Green, Gem_Orange, Gem_Purple, Coin, Orc_Boss, Demon_Boss
+    Boss_Dark_Missile,Zombie_Boss,TreasureChest, SkillScroll, CoinsMagnet, Gem_Green, Gem_Orange, Gem_Purple, Coin, Orc_Boss, Demon_Boss,
+    BloodPuddleVFX
 }
 
 public enum RewardIndexes
