@@ -16,8 +16,8 @@ public class EnemyComponentsManager : EnemyBehaviour
     {
         SubscribeOnEvents();
 
-        movementManager.CashExternalComponents(poolItemComponent._EnemiesCharacteristicsManager);
-        collisionsManager.CashExternalComponents(poolItemComponent._EnemiesCharacteristicsManager);
+        movementManager.CashExternalComponents(poolItemComponent._EnemiesCharacteristicsManager, boss);
+        collisionsManager.CashExternalComponents(poolItemComponent._EnemiesCharacteristicsManager, boss);
     }
 
     private void OnDestroy()
@@ -111,6 +111,7 @@ public class EnemyComponentsManager : EnemyBehaviour
         }
         else
         {
+            Debug.Log($"Game Won");
             poolItemComponent.GameProcessManager.GameWin();
         }
     }
@@ -191,8 +192,11 @@ public class EnemyComponentsManager : EnemyBehaviour
     #region Enemies Characteristics Manager Events Reaction
     private void EnemyCharacteristicsUpgraded_ExecuteReaction()
     {
-        collisionsManager.UpdateCharacteristics();
-        movementManager.UpdateCharacteristics();
+        if(!boss)
+        {
+            collisionsManager.UpdateCharacteristics();
+            movementManager.UpdateCharacteristics();
+        }
     }
     #endregion Enemis Characteristics Manager Events Reaction
 

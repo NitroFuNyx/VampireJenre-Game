@@ -11,13 +11,16 @@ public class EnemyMovementManager : MonoBehaviour
     [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] private int movementDecreasePrecent = 20;
 
+    private EnemiesCharacteristicsManager _enemiesCharacteristicsManager;
+
     private PlayerController player;
 
     private Rigidbody rb;
 
-    private EnemiesCharacteristicsManager _enemiesCharacteristicsManager;
+    private BossDataHolder bossDataHolder;
 
     private bool canMove = false;
+    private bool isBoss;
 
     private float setStartCharacteristicsDelay = 1f;
 
@@ -49,7 +52,7 @@ public class EnemyMovementManager : MonoBehaviour
 
     public void DecreaseMovementSpeed()
     {
-        float debuffValue = (currentMoveSpeed * movementDecreasePrecent) / 100;
+        float debuffValue = (currentMoveSpeed * movementDecreasePrecent) / CommonValues.maxPercentAmount;
         currentMoveSpeed -= debuffValue;
 
         if (currentMoveSpeed < 0f)
@@ -60,19 +63,30 @@ public class EnemyMovementManager : MonoBehaviour
 
     public void ResetMovementSpeed()
     {
-        currentMoveSpeed = _enemiesCharacteristicsManager.CurrentEnemiesData.speed + GetSpeedBonusValue();
+        if(!isBoss)
+        {
+            currentMoveSpeed = _enemiesCharacteristicsManager.CurrentEnemiesData.speed + GetSpeedBonusValue();
+        }
+        else
+        {
+            currentMoveSpeed = bossDataHolder.MoveSpeed;
+        }
     }
 
-    public void CashExternalComponents(EnemiesCharacteristicsManager enemiesCharacteristicsManager)
+    public void CashExternalComponents(EnemiesCharacteristicsManager enemiesCharacteristicsManager, bool boss)
     {
         _enemiesCharacteristicsManager = enemiesCharacteristicsManager;
+        isBoss = boss;
 
         UpdateCharacteristics();
     }
 
     public void UpdateCharacteristics()
     {
-        currentMoveSpeed = _enemiesCharacteristicsManager.CurrentEnemiesData.speed + GetSpeedBonusValue();
+        if(!isBoss)
+        {
+            currentMoveSpeed = _enemiesCharacteristicsManager.CurrentEnemiesData.speed + GetSpeedBonusValue();
+        }
     }
 
     private void CashComponents()
@@ -86,6 +100,12 @@ public class EnemyMovementManager : MonoBehaviour
         else
         {
             Debug.LogWarning($"There is no Rigidbody component attached to {gameObject}", gameObject);
+        }
+
+        if (TryGetComponent(out BossDataHolder data))
+        {
+            bossDataHolder = data;
+            currentMoveSpeed = bossDataHolder.MoveSpeed;
         }
     }
 

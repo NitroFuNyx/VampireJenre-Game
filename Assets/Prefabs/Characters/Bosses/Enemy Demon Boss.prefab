@@ -61,6 +61,7 @@ GameObject:
   - component: {fileID: 1036216074367126346}
   - component: {fileID: 2690144381120273502}
   - component: {fileID: 7091709428090405143}
+  - component: {fileID: -3859916039738827301}
   m_Layer: 10
   m_Name: Enemy Demon Boss
   m_TagString: Untagged
@@ -113,7 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf0367378905c34e99b25718cc096c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMoveSpeed: 0.07
+  currentMoveSpeed: 0
+  enemyTypeSpeedBonusPercent: 0
   rotationSpeed: 10
   movementDecreasePrecent: 20
 --- !u!114 &3367301630267509501
@@ -185,6 +187,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpawnPoint: {fileID: 6837172549675708771}
+--- !u!114 &-3859916039738827301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3367301630267509497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96642f3e2f0e536499cbde5e4b7a6e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0.2
+  startHp: 100
 --- !u!1 &6871886196039368973
 GameObject:
   m_ObjectHideFlags: 0

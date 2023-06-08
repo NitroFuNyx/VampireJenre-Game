@@ -76,6 +76,7 @@ public class PlayerCollisionsManager : MonoBehaviour
 
     private void DecreaseHp(float amount)
     {
+        Debug.Log($"Hit. Preveous Hp {currentHp} Minus {GetReducedDamageAmount(amount)}");
         currentHp -= GetReducedDamageAmount(amount);
         isTakingDamage = true;
         if (currentHp <= 0)

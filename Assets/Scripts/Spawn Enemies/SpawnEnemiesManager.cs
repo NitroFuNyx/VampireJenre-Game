@@ -106,6 +106,7 @@ public class SpawnEnemiesManager : MonoBehaviour
 
         enemiesOnMapList.Clear();
         defeatedEnemiesCounter = 0;
+        Debug.Log($"Stop Enemies Spawn");
 
         StartCoroutine(StopEnemySpawnCoroutine());
     }
@@ -144,6 +145,7 @@ public class SpawnEnemiesManager : MonoBehaviour
 
     private IEnumerator StopEnemySpawnCoroutine()
     {
+        Debug.Log($"Hide Enemies");
         yield return null;
         spawner_BeyondMap.ReturnAllEnemiesToPool();
         spawner_OnMap.ReturnAllEnemiesToPool();

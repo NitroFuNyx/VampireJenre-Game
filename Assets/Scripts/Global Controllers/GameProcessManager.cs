@@ -76,6 +76,11 @@ public class GameProcessManager : MonoBehaviour
 
     public void StartGame()
     {
+        for (int i = 0; i < skillsObjectsList.Count; i++)
+        {
+            skillsObjectsList[i].SetActive(false);
+        }
+
         battleStarted = true;
         OnGameStarted?.Invoke();
         player.StartGame();
