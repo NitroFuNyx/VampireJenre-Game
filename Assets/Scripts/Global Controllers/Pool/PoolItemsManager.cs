@@ -28,6 +28,9 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private PoolItem enemySkeletonPrefab;
     [SerializeField] private PoolItem enemyGhostPrefab;
     [SerializeField] private PoolItem enemyZombiePrefab;
+    [SerializeField] private PoolItem bossZombiePrefab;
+    [SerializeField] private PoolItem bossOrcPrefab;
+    [SerializeField] private PoolItem bossDemonPrefab;
     [Space]
     [SerializeField] private PoolItem skillMissilePrefab;
     [SerializeField] private PoolItem skillMeteorPrefab;
@@ -37,7 +40,6 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private PoolItem skillSingleShotPrefab;
     [SerializeField] private PoolItem skillPowerWaveShotPrefab;
     [SerializeField] private PoolItem bossSkillDarkMissilePrefab;
-    [SerializeField] private PoolItem bossZombiePrefab;
     [Space]
     [SerializeField] private PoolItem treasureChestPrefab;
     [SerializeField] private PoolItem skillScrollPrefab;
@@ -84,6 +86,9 @@ public class PoolItemsManager : MonoBehaviour
         CreatePool(enemySkeletonPrefab, "Enemy Skeleton", enemiesPoolSize);
         CreatePool(enemyGhostPrefab, "Enemy Ghost", enemiesPoolSize);
         CreatePool(enemyZombiePrefab, "Enemy Zombie", enemiesPoolSize);
+        CreatePool(bossZombiePrefab, "Boss Zombie", bossZombiePoolSize);
+        CreatePool(bossOrcPrefab, "Boss Orc", bossZombiePoolSize);
+        CreatePool(bossDemonPrefab, "Boss Demon", bossZombiePoolSize);
 
         CreatePool(skillSingleShotPrefab , "Skill Single Shot", skillSingleShotPoolSize);
         CreatePool(skillMissilePrefab, "Skill Missile ", skillMissilePoolSize);
@@ -93,7 +98,6 @@ public class PoolItemsManager : MonoBehaviour
         CreatePool(skillChainLightningPrefab , "Skill Chain lightning ", skillChainLightningPoolSize);
         CreatePool(skillPowerWaveShotPrefab , "Skill Power Wave ", skillPowerWavePoolSize);
         CreatePool(bossSkillDarkMissilePrefab , "Boss Skill Dark Missile", bossSkillDarkMissilePoolSize);
-        CreatePool(bossZombiePrefab , "Boss Zombie", bossZombiePoolSize);
 
         CreatePool(treasureChestPrefab, "Treasure Chest", pickableItemsPoolSize);
         CreatePool(skillScrollPrefab, "Skill Scroll", pickableItemsPoolSize);

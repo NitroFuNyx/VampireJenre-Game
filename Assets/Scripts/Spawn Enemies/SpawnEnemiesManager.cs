@@ -22,6 +22,7 @@ public class SpawnEnemiesManager : MonoBehaviour
 
     private GameProcessManager _gameProcessManager;
     private PlayerExperienceManager _playerExperienceManager;
+    private ChaptersProgressManager _chaptersProgressManager;
 
     private bool canSpawnEnemies = true;
 
@@ -41,10 +42,12 @@ public class SpawnEnemiesManager : MonoBehaviour
 
     #region Zenject
     [Inject]
-    private void Construct(GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager)
+    private void Construct(GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager, 
+                           ChaptersProgressManager chaptersProgressManager)
     {
         _gameProcessManager = gameProcessManager;
         _playerExperienceManager = playerExperienceManager;
+        _chaptersProgressManager = chaptersProgressManager;
     }
     #endregion Zenject
 
@@ -57,7 +60,18 @@ public class SpawnEnemiesManager : MonoBehaviour
     [ContextMenu("Spawn Boss")]
     public void SpawnBossAtCenter()
     {
-        spawner_AtGates.SpawnBoss(PoolItemsTypes.Zombie_Boss);
+        if(_chaptersProgressManager.FinishedChaptersCounter == 0)
+        {
+            spawner_AtGates.SpawnBoss(PoolItemsTypes.Zombie_Boss);
+        }
+        else if (_chaptersProgressManager.FinishedChaptersCounter == 1)
+        {
+            spawner_AtGates.SpawnBoss(PoolItemsTypes.Orc_Boss);
+        }
+        else if (_chaptersProgressManager.FinishedChaptersCounter >= 2)
+        {
+            spawner_AtGates.SpawnBoss(PoolItemsTypes.Demon_Boss);
+        }
     }
 
     public void SpawnEnemiesWave()
