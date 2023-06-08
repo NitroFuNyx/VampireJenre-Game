@@ -198,11 +198,19 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
 
     private void AddCurrentLevelResourcesToGeneralAmount()
     {
+        currentLevelCoinsAmount += GetBonusCoinsAmountFromSkill();
+
         coinsAmount += currentLevelCoinsAmount;
         OnCoinsAmountChanged?.Invoke(coinsAmount);
 
         gemsAmount += currentLevelGemsAmount;
         OnGemsAmountChanged?.Invoke(gemsAmount);
+    }
+
+    private int GetBonusCoinsAmountFromSkill()
+    {
+        int coinsBonusAmount = (currentLevelCoinsAmount * (int)_playerCharacteristicsManager.CurrentPlayerData.characterCoinsSurplusPercent) / (int)CommonValues.maxPercentAmount;
+        return coinsBonusAmount;
     }
 
     private void GameProcessManager_GameStarted_ExecuteReaction()

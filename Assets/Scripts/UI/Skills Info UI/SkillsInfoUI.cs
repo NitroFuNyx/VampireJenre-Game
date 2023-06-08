@@ -18,15 +18,17 @@ public class SkillsInfoUI : MainCanvasPanel
 
     }
 
-    public void ShowActiveSkillsInfo()
+    public void ShowSkillsInfo(SkillBasicTypes skillsType)
     {
-        passiveSkillsPanel.SetActive(false);
-        activeSkillsPanel.SetActive(true);
-    }
-
-    public void ShowPassiveSkillsInfo()
-    {
-        activeSkillsPanel.SetActive(false);
-        passiveSkillsPanel.SetActive(true);
+        if(skillsType == SkillBasicTypes.Active)
+        {
+            passiveSkillsPanel.SetActive(false);
+            activeSkillsPanel.SetActive(true);
+        }
+        else
+        {
+            activeSkillsPanel.SetActive(false);
+            passiveSkillsPanel.SetActive(true);
+        }
     }
 }
