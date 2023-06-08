@@ -25,7 +25,7 @@ public class EnemiesCharacteristicsManager : MonoBehaviour
 
     public EnemyDataStruct CurrentEnemiesData { get => currentEnemiesData; }
 
-    public event Action OnEnemyCharacteristicsUpgraded;
+    public event Action<bool> OnEnemyCharacteristicsUpgraded;
 
     private void Start()
     {
@@ -59,7 +59,7 @@ public class EnemiesCharacteristicsManager : MonoBehaviour
 
         currentEnemiesData = newEnemyData;
 
-        OnEnemyCharacteristicsUpgraded?.Invoke();
+        OnEnemyCharacteristicsUpgraded?.Invoke(false);
     }
 
     private void UpgradeEnemiesDataInNewChapter()
@@ -72,7 +72,7 @@ public class EnemiesCharacteristicsManager : MonoBehaviour
 
         currentEnemiesData = newEnemyData;
 
-        OnEnemyCharacteristicsUpgraded?.Invoke();
+        OnEnemyCharacteristicsUpgraded?.Invoke(true);
     }
 
     private void GameProcessManager_OnGameStarted_ExecuteReaction()
@@ -85,7 +85,7 @@ public class EnemiesCharacteristicsManager : MonoBehaviour
         }
         else
         {
-            OnEnemyCharacteristicsUpgraded?.Invoke();
+            OnEnemyCharacteristicsUpgraded?.Invoke(true);
         }
     }
 

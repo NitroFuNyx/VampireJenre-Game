@@ -102,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationsManager: {fileID: 3318744712574519497}
   boss: 1
+  getHitVfx: {fileID: 2672163029487572563}
 --- !u!114 &3367301630267509442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +306,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3c24a5ae068ed44d950af671f99cc21, type: 3}
+--- !u!198 &2672163029487572563 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19894058, guid: a3c24a5ae068ed44d950af671f99cc21,
+    type: 3}
+  m_PrefabInstance: {fileID: 2672163029506218361}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2672163029505803151 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 416502, guid: a3c24a5ae068ed44d950af671f99cc21,

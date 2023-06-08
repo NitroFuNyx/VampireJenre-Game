@@ -60,13 +60,18 @@ public class EnemyCollisionsManager : MonoBehaviour
         }
 
         currentHp = startHp;
+        Debug.Log($"Current Hp = {currentHp}");
     }
 
-    public void UpdateCharacteristics()
+    public void UpdateCharacteristics(bool battleHasNotStarted)
     {
         if(!isBoss)
         {
             startHp = _enemiesCharacteristicsManager.CurrentEnemiesData.hp;
+            if(battleHasNotStarted)
+            {
+                currentHp = startHp;
+            }
         }
     }
 

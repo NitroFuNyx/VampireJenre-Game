@@ -8,6 +8,9 @@ public class EnemyComponentsManager : EnemyBehaviour
     [Header("Enemy Type")]
     [Space]
     [SerializeField] private bool boss = false;
+    [Header("VFX")]
+    [Space]
+    [SerializeField] private ParticleSystem getHitVfx;
 
     private EnemyMovementManager movementManager;
     private EnemyCollisionsManager collisionsManager;
@@ -53,9 +56,8 @@ public class EnemyComponentsManager : EnemyBehaviour
         collisionsManager.OnSpeedReset += CollisionManager_SpeedReset_ExecuteReaction;
         collisionsManager.OnSkillCollision += CollisionManager_SkillCollision_ExecuteReaction;
 
-        
-
         animationsManager.OnDieAnimationFinished += AnimationManager_DieAnimationFinished_ExecuteReaction;
+        animationsManager.OnGetHitAnimationFinished += AnimationManager_GetHitAnimationFinished_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
@@ -74,8 +76,8 @@ public class EnemyComponentsManager : EnemyBehaviour
         collisionsManager.OnSpeedReset -= CollisionManager_SpeedReset_ExecuteReaction;
         collisionsManager.OnSkillCollision -= CollisionManager_SkillCollision_ExecuteReaction;
 
-        
         animationsManager.OnDieAnimationFinished -= AnimationManager_DieAnimationFinished_ExecuteReaction;
+        animationsManager.OnGetHitAnimationFinished -= AnimationManager_GetHitAnimationFinished_ExecuteReaction;
     }
 
     #region Pool Item Component Events Reactions
@@ -101,6 +103,7 @@ public class EnemyComponentsManager : EnemyBehaviour
     {
         movementManager.StopMoving();
         animationsManager.SetAnimation_Die();
+        getHitVfx.Play();
         poolItemComponent.SpawnEnemiesManager.RemoveEnemyFronOnMapList(this);
 
         if (!boss)
@@ -118,7 +121,9 @@ public class EnemyComponentsManager : EnemyBehaviour
 
     private void CollisionManager_DamageReceived_ExecuteReaction()
     {
-        
+        animationsManager.SetAnimation_GetHit();
+        movementManager.StopMoving();
+        getHitVfx.Play();
     }
 
     private void CollisionManager_SpeedDebuffCollision_ExecuteReaction()
@@ -187,14 +192,18 @@ public class EnemyComponentsManager : EnemyBehaviour
         poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
     }
 
+    private void AnimationManager_GetHitAnimationFinished_ExecuteReaction()
+    {
+        movementManager.MoveToPlayer();
+    }
     #endregion Animation Manager Events Reaction
 
     #region Enemies Characteristics Manager Events Reaction
-    private void EnemyCharacteristicsUpgraded_ExecuteReaction()
+    private void EnemyCharacteristicsUpgraded_ExecuteReaction(bool battleHasNotStarted)
     {
         if(!boss)
         {
-            collisionsManager.UpdateCharacteristics();
+            collisionsManager.UpdateCharacteristics(battleHasNotStarted);
             movementManager.UpdateCharacteristics();
         }
     }
