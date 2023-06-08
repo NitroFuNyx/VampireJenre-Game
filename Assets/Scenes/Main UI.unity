@@ -4813,7 +4813,7 @@ PrefabInstance:
     - target: {fileID: 8919760217439607208, guid: 0c562b87359475f4890b51c2beffb138,
         type: 3}
       propertyPath: upgradeProgressValue
-      value: 10
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 8919760217439607208, guid: 0c562b87359475f4890b51c2beffb138,
         type: 3}
@@ -7047,6 +7047,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemies Characteristics Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7751914106692357439, guid: a52d5f135f8366349a354a5090a4258f,
+        type: 3}
+      propertyPath: hpUpgradeValue
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7751914106692357439, guid: a52d5f135f8366349a354a5090a4258f,
+        type: 3}
+      propertyPath: damageUpgradeValue
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a52d5f135f8366349a354a5090a4258f, type: 3}
