@@ -68,7 +68,7 @@ public class SpawnEnemiesManager : MonoBehaviour
         {
             spawner_AtGates.SpawnBoss(PoolItemsTypes.Orc_Boss);
         }
-        else if (_chaptersProgressManager.FinishedChaptersCounter >= 2)
+        else
         {
             spawner_AtGates.SpawnBoss(PoolItemsTypes.Demon_Boss);
         }
