@@ -65,7 +65,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf0367378905c34e99b25718cc096c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMoveSpeed: 0.6
+  currentMoveSpeed: 0
+  enemyTypeSpeedBonusPercent: 30
   rotationSpeed: 10
   movementDecreasePrecent: 20
 --- !u!114 &6642222442663905523

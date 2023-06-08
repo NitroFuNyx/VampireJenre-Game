@@ -19,6 +19,7 @@ public class ControllersInstaller : MonoInstaller
     [SerializeField] private TalentsManager talentsManager;
     [SerializeField] private PickableItemsManager pickableItemsManager;
     [SerializeField] private EnemiesCharacteristicsManager enemiesCharacteristicsManager;
+    [SerializeField] private ChaptersProgressManager chaptersProgressManager;
     [Header("Player References")]
     [Space]
     [SerializeField] private PlayerExperienceManager playerExperienceManager;
@@ -41,6 +42,7 @@ public class ControllersInstaller : MonoInstaller
         Container.Bind<TalentsManager>().FromInstance(talentsManager).AsSingle().NonLazy();
         Container.Bind<PickableItemsManager>().FromInstance(pickableItemsManager).AsSingle().NonLazy();
         Container.Bind<EnemiesCharacteristicsManager>().FromInstance(enemiesCharacteristicsManager).AsSingle().NonLazy();
+        Container.Bind<ChaptersProgressManager>().FromInstance(chaptersProgressManager).AsSingle().NonLazy();
 
         Container.Bind<PlayerExperienceManager>().FromInstance(playerExperienceManager).AsSingle().NonLazy();
         Container.Bind<PlayerCharacteristicsManager>().FromInstance(playerCharacteristicsManager).AsSingle().NonLazy();

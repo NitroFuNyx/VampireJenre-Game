@@ -46,6 +46,12 @@ public class MainUI : MonoBehaviour
         panelsDictionary[UIPanels.MenuButtonsUI].ShowPanel();
     }
 
+    public void ShowRoadmapUI()
+    {
+        ActivateMainCanvasPanel(UIPanels.RoadmapUI);
+        panelsDictionary[UIPanels.MenuButtonsUI].ShowPanel();
+    }
+
     public void PlayButtonPressed_ExecuteReaction()
     {
         ActivateMainCanvasPanel(UIPanels.GameLevelUI);

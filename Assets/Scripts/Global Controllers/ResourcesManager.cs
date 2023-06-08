@@ -196,6 +196,12 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         }
     }
 
+    public int GetCoinsForLevelAmountWithSkillBonus()
+    {
+        currentLevelCoinsAmount += GetBonusCoinsAmountFromSkill();
+        return currentLevelCoinsAmount;
+    }
+
     private void AddCurrentLevelResourcesToGeneralAmount()
     {
         coinsAmount += currentLevelCoinsAmount;
@@ -203,6 +209,12 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
 
         gemsAmount += currentLevelGemsAmount;
         OnGemsAmountChanged?.Invoke(gemsAmount);
+    }
+
+    private int GetBonusCoinsAmountFromSkill()
+    {
+        int coinsBonusAmount = (currentLevelCoinsAmount * (int)_playerCharacteristicsManager.CurrentPlayerData.characterCoinsSurplusPercent) / (int)CommonValues.maxPercentAmount;
+        return coinsBonusAmount;
     }
 
     private void GameProcessManager_GameStarted_ExecuteReaction()
