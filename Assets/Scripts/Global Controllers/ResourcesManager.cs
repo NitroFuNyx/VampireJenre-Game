@@ -196,10 +196,14 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         }
     }
 
-    private void AddCurrentLevelResourcesToGeneralAmount()
+    public int GetCoinsForLevelAmountWithSkillBonus()
     {
         currentLevelCoinsAmount += GetBonusCoinsAmountFromSkill();
+        return currentLevelCoinsAmount;
+    }
 
+    private void AddCurrentLevelResourcesToGeneralAmount()
+    {
         coinsAmount += currentLevelCoinsAmount;
         OnCoinsAmountChanged?.Invoke(coinsAmount);
 
