@@ -65,6 +65,16 @@ public class MainUI : MonoBehaviour
         _menuButtonsUI.ChangeScreenBlockingState(false);
     }
 
+    public void ShowSkillsInfoUI()
+    {
+        panelsDictionary[UIPanels.SkillsInfoUI].ShowPanel();
+    }
+
+    public void HideSkillsInfoUI()
+    {
+        panelsDictionary[UIPanels.SkillsInfoUI].HidePanel();
+    }
+
     public void ShowMenuButtonsUI()
     {
         panelsDictionary[UIPanels.MenuButtonsUI].ShowPanel();
