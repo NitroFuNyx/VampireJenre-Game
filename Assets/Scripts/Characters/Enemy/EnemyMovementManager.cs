@@ -35,8 +35,9 @@ public class EnemyMovementManager : MonoBehaviour
         {
             Vector3 targetPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
 
-            rb.MovePosition(Vector3.Lerp(transform.position, targetPos, currentMoveSpeed * Time.fixedDeltaTime));
+            //rb.MovePosition(Vector3.Lerp(transform.position, targetPos, currentMoveSpeed * Time.fixedDeltaTime));
             rb.MoveRotation(Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetPos - transform.position), rotationSpeed * Time.fixedDeltaTime));
+            rb.MovePosition(transform.position + (player.transform.position - transform.position).normalized * currentMoveSpeed * Time.fixedDeltaTime);
         }
     }
 
