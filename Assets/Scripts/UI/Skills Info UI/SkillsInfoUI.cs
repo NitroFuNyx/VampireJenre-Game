@@ -6,11 +6,15 @@ public class SkillsInfoUI : MainCanvasPanel
     [Space]
     [SerializeField] private GameObject activeSkillsPanel;
     [SerializeField] private GameObject passiveSkillsPanel;
- 
+
+    private void Start()
+    {
+        ShowSkillsInfo(SkillBasicTypes.Active);
+    }
+
     public override void PanelActivated_ExecuteReaction()
     {
-        activeSkillsPanel.SetActive(true);
-        passiveSkillsPanel.SetActive(false);
+        ShowSkillsInfo(SkillBasicTypes.Active);
     }
 
     public override void PanelDeactivated_ExecuteReaction()

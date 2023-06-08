@@ -19,6 +19,7 @@ public class SkillsInfoButton : ButtonInteractionHandler
 
     public override void ButtonActivated()
     {
+        ShowAnimation_ButtonPressed();
         _skillsInfoUI.ShowSkillsInfo(skillsType);
     }
 }
