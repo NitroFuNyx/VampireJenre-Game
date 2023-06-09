@@ -18,11 +18,13 @@ public class PlayerExperienceManager : MonoBehaviour
     #region Events Declaration
     public event Action<float, float> OnPlayerXpAmountChanged;
     public event Action OnPlayerGotNewLevel;
+    public event Action<int> OnPlayerLevelDataUpdated;
     #endregion Events Declaration
 
     private void Start()
     {
         SubscribeOnEvents();
+        OnPlayerLevelDataUpdated?.Invoke(currentLevel);
     }
 
     private void OnDestroy()
@@ -50,6 +52,7 @@ public class PlayerExperienceManager : MonoBehaviour
             upgradeXpValue = 10; // reset upgradeXpValue
             currentLevel++;
             OnPlayerGotNewLevel?.Invoke();
+            OnPlayerLevelDataUpdated?.Invoke(currentLevel);
         }
 
         OnPlayerXpAmountChanged?.Invoke(currentXp, upgradeXpValue);
@@ -72,6 +75,7 @@ public class PlayerExperienceManager : MonoBehaviour
         currentXp = 0f;
         currentLevel = 1;
         OnPlayerXpAmountChanged?.Invoke(currentXp, upgradeXpValue);
+        OnPlayerLevelDataUpdated?.Invoke(currentLevel);
     }
 
     private void GameProcessManager_PlayerLost_ExecuteReaction()
