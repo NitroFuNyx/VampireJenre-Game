@@ -107,7 +107,7 @@ public class EnemyComponentsManager : EnemyBehaviour
         movementManager.StopMoving();
         animationsManager.SetAnimation_Die();
         getHitVfx.Play();
-        PoolItem bloodPuddleVfx = poolItemComponent.PoolItemsManager.SpawnItemFromPool(PoolItemsTypes.BloodPuddleVFX, bloodPuddleVfxPos.position,
+        PoolItem bloodPuddleVfx = poolItemComponent.PoolItemsManager.SpawnItemFromPool(PoolItemsTypes.BloodPuddleVFX, transform.position,
                                                                                        Quaternion.identity, null);
         bloodPuddleVfx.SetObjectAwakeState();
         poolItemComponent.SpawnEnemiesManager.RemoveEnemyFronOnMapList(this);
