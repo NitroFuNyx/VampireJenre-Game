@@ -102,18 +102,19 @@ public class GameProcessManager : MonoBehaviour
     public void GameWin()
     {
         OnPlayerWon?.Invoke();
-        ResetMapData();
+        //ResetMapData();
     }
 
     public void ResetLevelDataWithSaving()
     {
         OnLevelDataReset?.Invoke();
+        ResetMapData();
     }
 
     public void GameLost_ExecuteReaction()
     {
         OnPlayerLost?.Invoke();
-        ResetMapData();
+        //ResetMapData();
     }
 
     private void ResetMapProgress()

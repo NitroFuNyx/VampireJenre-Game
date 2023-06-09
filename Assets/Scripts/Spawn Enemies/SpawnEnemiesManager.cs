@@ -86,6 +86,12 @@ public class SpawnEnemiesManager : MonoBehaviour
             spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave);
             spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave);
         }
+        else if(_playerExperienceManager.CurrentLevel >= 10)
+        {
+            spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave);
+            spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave);
+            spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave);
+        }
     }
 
     public void AddEnemyToOnMapList(EnemyComponentsManager enemy)
