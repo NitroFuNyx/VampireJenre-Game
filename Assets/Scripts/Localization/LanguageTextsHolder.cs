@@ -96,6 +96,8 @@ namespace Localization
         public string regenerationText;
         public string critChanceText;
         public string critPowerText;
+        public string itemDropChanceText;
+        public string coinsSurplusText;
     }
 
     [Serializable]

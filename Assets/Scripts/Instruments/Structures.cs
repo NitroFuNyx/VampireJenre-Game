@@ -24,6 +24,7 @@ public struct TalentDataStruct
     public TalentsIndexes talentIndex;
     public PassiveCharacteristicsTypes passiveSkillType;
     public SkillUpgradesTypes skillUpgradeType;
+    public PlayerCharacteristicsForTranslation talentNameForTranslation;
     public string talentDescribtion;
     public float upgradePercent;
     public Sprite talentSprite;

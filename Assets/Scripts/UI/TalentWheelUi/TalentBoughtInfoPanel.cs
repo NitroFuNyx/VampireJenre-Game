@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
+using Zenject;
 
 public class TalentBoughtInfoPanel : PanelActivationManager
 {
@@ -15,6 +16,8 @@ public class TalentBoughtInfoPanel : PanelActivationManager
     [SerializeField] private TextMeshProUGUI newLevelText;
     [SerializeField] private TextMeshProUGUI upgradeCharactersiticValueText;
 
+    private LanguageManager _languageManager;
+
     private float showInfoPanelDelay = 0.3f;
 
     private void Start()
@@ -22,11 +25,20 @@ public class TalentBoughtInfoPanel : PanelActivationManager
         HidePanel();
     }
 
+    #region Zenject
+    [Inject]
+    private void Construct(LanguageManager languageManager)
+    {
+        _languageManager = languageManager;
+    }
+    #endregion Zenject
+
     public void ShowPanelWithTalentData(TalentDataStruct talentMainData, int newLevel, float upgradePercent)
     {
         talentImage.sprite = talentMainData.talentSprite;
 
-        charactersisticNameText.text = $"{talentMainData.talentDescribtion}";
+        //charactersisticNameText.text = $"{talentMainData.talentDescribtion}";
+        charactersisticNameText.text = $"{_languageManager.SkillsTranslationHandler.GetTranslatedSkillText(talentMainData.talentNameForTranslation)}";
         preveousLevelText.text = $"lvl {newLevel - 1} -";
         newLevelText.text = $"lvl {newLevel}";
         upgradeCharactersiticValueText.text = $"{upgradePercent}%";

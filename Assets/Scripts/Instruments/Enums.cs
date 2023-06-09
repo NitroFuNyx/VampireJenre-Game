@@ -82,7 +82,7 @@ public enum PickableItemsCategories
 public enum PlayerCharacteristicsForTranslation
 {
     Damage, Range, Width, Cooldown, ProjectilesAmount, PostEffectDuration, JumpsAmount, Size, MovementSpeed, IncomeDamage, Regeneration, CritChance,
-    CritPower
+    CritPower, ItemDropChance, coinsSurplus
 }
 
 public enum ResourcesSaveTypes
