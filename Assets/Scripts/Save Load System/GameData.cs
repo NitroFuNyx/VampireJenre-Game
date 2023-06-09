@@ -10,6 +10,7 @@ public class GameData
     public int finishedChaptersCounter;
     public bool soundMuted;
     public bool canVibrate;
+    public bool blockAdsOptionPurchased;
     public PlayerBasicCharacteristicsStruct playerCharacteristcsData;
     public List<TalentLevelStruct> skillsLevelsList;
 
@@ -21,6 +22,7 @@ public class GameData
         finishedChaptersCounter = 0;
         soundMuted = false;
         canVibrate = true;
+        blockAdsOptionPurchased = false;
 
         playerCharacteristcsData = new PlayerBasicCharacteristicsStruct();
         skillsLevelsList = new List<TalentLevelStruct>();
