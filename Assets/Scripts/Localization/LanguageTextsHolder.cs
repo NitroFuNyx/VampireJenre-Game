@@ -16,6 +16,9 @@ namespace Localization
         public RewardsUIData rewardsUITexts;
         public GameLevelUIData gameLevelUITexts;
         public SkillsCharacteristicsData skillCharacteristicsTexts;
+        public TalentsUIData talentsUITexts;
+        public RoadmapUIData roadmapUITexts;
+        public SkillsInfoUIData skillsInfoUITexts;
     }
 
     [Serializable]
@@ -92,5 +95,54 @@ namespace Localization
         public string regenerationText;
         public string critChanceText;
         public string critPowerText;
+    }
+
+    [Serializable]
+    public class TalentsUIData
+    {
+        public string upgradeButtonText;
+        public string notEnoughCoinsText;
+        public string allTalentsUpgradedText;
+    }
+
+    [Serializable]
+    public class RoadmapUIData
+    {
+        public string titleText;
+        public string shopPanelTitleText;
+        public string shopPanelDescriptionText;
+        public string charactersPanelTitleText;
+        public string charactersPanelDescriptionText;
+        public string mapsPanelTitleText;
+        public string mapsPanelDescriptionText;
+    }
+
+    [Serializable]
+    public class SkillsInfoUIData
+    {
+        public string activeSkillsButtonText;
+        public string passiveSkillsButtonText;
+
+        public string singleShotText;
+        public string chainLightningText;
+        public string magicAuraText;
+        public string forceWaveText;
+        public string fireballsText;
+        public string lightningBoltText;
+        public string pulseAuraText;
+        public string allDirectionsShotsText;
+        public string weaponStrikeText;
+        public string meteorText;
+
+        public string critPowerText;
+        public string movementSpeedText;
+        public string itemDropChanceText;
+        public string coinsSurplusText;
+        public string decreaseIncomeDamageText;
+        public string regenerationText;
+        public string critChanceText;
+        public string increaseRangeText;
+        public string increaseDamageText;
+        public string increaseProjectilesAmountText;
     }
 }
