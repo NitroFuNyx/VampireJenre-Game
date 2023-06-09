@@ -64,7 +64,8 @@ public class PickableItemsManager : MonoBehaviour
 
             if (spawnPosList.Count > 0)
             {
-                PlayerVisionBorderDetector spawnPos = spawnPosList[0];
+                int spawnPosIndex = Random.Range(0, spawnPosList.Count);
+                PlayerVisionBorderDetector spawnPos = spawnPosList[spawnPosIndex];
 
                 PoolItem item = _poolItemsManager.SpawnItemFromPool(GetPoolItemTypeToSpawn(), spawnPos.transform.position, Quaternion.identity, spawnPos.transform);
                 takenSpawnPositionsList.Add(spawnPos);
