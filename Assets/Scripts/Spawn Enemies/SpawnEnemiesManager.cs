@@ -72,6 +72,10 @@ public class SpawnEnemiesManager : MonoBehaviour
         {
             spawner_AtGates.SpawnBoss(PoolItemsTypes.Demon_Boss);
         }
+
+        canSpawnEnemies = false;
+
+        StopAllCoroutines();
     }
 
     public void SpawnEnemiesWave()
