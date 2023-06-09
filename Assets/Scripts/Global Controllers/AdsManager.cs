@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using Zenject;
 
 public class AdsManager : MonoBehaviour, IDataPersistance
@@ -8,6 +9,9 @@ public class AdsManager : MonoBehaviour, IDataPersistance
     private bool blockAdsOptionPurchased = false;
 
     public bool BlockAdsOptionPurchased { get => blockAdsOptionPurchased; }
+
+    public Action OnSuccessfullAdsBlockerPurchase;
+    public Action OnAdsDataLoaded;
 
     private void Awake()
     {
@@ -26,6 +30,7 @@ public class AdsManager : MonoBehaviour, IDataPersistance
     public void LoadData(GameData data)
     {
         this.blockAdsOptionPurchased = data.blockAdsOptionPurchased;
+        OnAdsDataLoaded?.Invoke();
     }
 
     public void SaveData(GameData data)
@@ -39,6 +44,7 @@ public class AdsManager : MonoBehaviour, IDataPersistance
         if(!blockAdsOptionPurchased)
         {
             blockAdsOptionPurchased = true;
+            OnSuccessfullAdsBlockerPurchase?.Invoke();
             _dataPersistanceManager.SaveGame();
         }
     }
