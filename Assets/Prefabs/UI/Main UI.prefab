@@ -6765,7 +6765,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 169.87001}
+  m_SizeDelta: {x: 0, y: 207.18231}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5119946549405849641
 CanvasRenderer:
@@ -7454,7 +7454,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 3037837116167304523}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7776,6 +7776,10 @@ MonoBehaviour:
   - {fileID: 7735878191724053059}
   - {fileID: 3824229475132914414}
   skillsDescribtionTextsTranslationSO: {fileID: 11400000, guid: eee481c3a460c3c439400f1382fdc672,
+    type: 2}
+  activesSkillsLevelsData: {fileID: 11400000, guid: 9ac557872588dfc4491592aa3699acf7,
+    type: 2}
+  passiveSkillsLevelsData: {fileID: 11400000, guid: 14cbdd101d044c149bec5cdbb67c8015,
     type: 2}
 --- !u!1 &496295024035936188
 GameObject:
@@ -10049,7 +10053,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 169.87001}
+  m_SizeDelta: {x: 0, y: 207.18231}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7593594109336978502
 CanvasRenderer:
@@ -18621,6 +18625,10 @@ MonoBehaviour:
   - {fileID: 9106123538524768591}
   skillsDescribtionTextsTranslationSO: {fileID: 11400000, guid: eee481c3a460c3c439400f1382fdc672,
     type: 2}
+  activesSkillsLevelsData: {fileID: 11400000, guid: 9ac557872588dfc4491592aa3699acf7,
+    type: 2}
+  passiveSkillsLevelsData: {fileID: 11400000, guid: 14cbdd101d044c149bec5cdbb67c8015,
+    type: 2}
 --- !u!1 &2934214254054991527
 GameObject:
   m_ObjectHideFlags: 0
@@ -18742,7 +18750,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4169152209887664264}
   m_HandleRect: {fileID: 3588443464200107964}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0.9999998
   m_Size: 0.4524503
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -19240,7 +19248,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 5134379838449501953}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -21335,7 +21343,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 169.87001}
+  m_SizeDelta: {x: 0, y: 207.18231}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7962977024598268651
 CanvasRenderer:
@@ -35862,7 +35870,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 751091548119510914}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -37016,7 +37024,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 169.87001}
+  m_SizeDelta: {x: 0, y: 207.18231}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1254970914217171820
 CanvasRenderer:
@@ -38367,7 +38375,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 258.245}
+  m_SizeDelta: {x: 0, y: 267.64337}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8438523343754675232
 CanvasRenderer:
@@ -40243,6 +40251,10 @@ MonoBehaviour:
   - {fileID: 5763650255118398275}
   - {fileID: 7781820369975109654}
   skillsDescribtionTextsTranslationSO: {fileID: 11400000, guid: eee481c3a460c3c439400f1382fdc672,
+    type: 2}
+  activesSkillsLevelsData: {fileID: 11400000, guid: 9ac557872588dfc4491592aa3699acf7,
+    type: 2}
+  passiveSkillsLevelsData: {fileID: 11400000, guid: 14cbdd101d044c149bec5cdbb67c8015,
     type: 2}
 --- !u!1 &7937627934035886353
 GameObject:
@@ -44356,7 +44368,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 399660206442865169}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.97017807
+  m_Size: 0.97017795
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -45153,6 +45165,10 @@ MonoBehaviour:
   - {fileID: 404755881850933157}
   - {fileID: 6185079159541167164}
   skillsDescribtionTextsTranslationSO: {fileID: 11400000, guid: eee481c3a460c3c439400f1382fdc672,
+    type: 2}
+  activesSkillsLevelsData: {fileID: 11400000, guid: 9ac557872588dfc4491592aa3699acf7,
+    type: 2}
+  passiveSkillsLevelsData: {fileID: 11400000, guid: 14cbdd101d044c149bec5cdbb67c8015,
     type: 2}
 --- !u!1 &8979387088605457815
 GameObject:

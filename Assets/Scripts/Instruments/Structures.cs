@@ -197,7 +197,7 @@ public struct PassiveSkillUpgradeDataStruct
 public struct ActiveSkillsTranslationDataStruct
 {
     public ActiveSkills skill;
-    public List<PlayerCharacteristicsForTranslation> skillDescribtionTexts; 
+    public List<PlayerCharacteristicsForTranslation> skillDescribtionTexts;
 }
 
 [Serializable]
@@ -205,6 +205,7 @@ public struct PassiveSkillsTranslationDataStruct
 {
     public PassiveSkills skill;
     public List<PlayerCharacteristicsForTranslation> skillDescribtionTexts;
+    public float upgradeValue;
 }
 
 [Serializable]
@@ -213,4 +214,11 @@ public struct EnemyDataStruct
     public float hp;
     public float damage;
     public float speed;
+}
+
+[Serializable]
+public struct SkillUpgradeValuesStruct
+{
+    public PlayerCharacteristicsForTranslation characteristic;
+    public float upgradeValue;
 }

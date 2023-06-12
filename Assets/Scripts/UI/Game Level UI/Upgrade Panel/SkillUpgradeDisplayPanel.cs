@@ -20,6 +20,10 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
     [Header("Translation Data")]
     [Space]
     [SerializeField] private SkilllsDescribtionTextsTranslationSO skillsDescribtionTextsTranslationSO;
+    [Header("Skills Levels Data")]
+    [Space]
+    [SerializeField] private ActiveSkillsLevelsSO activesSkillsLevelsData;
+    [SerializeField] private PassiveSkillsLevelsSO passiveSkillsLevelsData;
 
     private LanguageManager _languageManager;
 
@@ -74,8 +78,22 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         {
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.ForceWaveTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts.Count; i++)
             {
-                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.ForceWaveTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i]);
-                describtionTextsList[i].text = translatedText;
+                if(upgradeSkillData.SkillLevel != 0)
+                {
+                    translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.ForceWaveTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i]);
+                    if(skillsDescribtionTextsTranslationSO.ForceWaveTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i] == PlayerCharacteristicsForTranslation.Damage)
+                    {
+                        describtionTextsList[i].text = $"+ {GetForceWaveSkillUpgradeValue(upgradeSkillData.SkillLevel + 1) - GetForceWaveSkillUpgradeValue(upgradeSkillData.SkillLevel)} {translatedText}";
+                    }
+                    else
+                    {
+                        describtionTextsList[i].text = $"+ {GetForceWaveSkillUpgradeValue(upgradeSkillData.SkillLevel + 1) - GetForceWaveSkillUpgradeValue(upgradeSkillData.SkillLevel)} % {translatedText}";
+                    }
+                }
+                else
+                {
+                    translatedText = "";
+                }
             }
         }
         else if(activeSkill == ActiveSkills.SingleShot)
@@ -83,7 +101,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.SingleShotTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts.Count; i++)
             {
                 translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.SingleShotTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i]);
-                describtionTextsList[i].text = translatedText;
+                describtionTextsList[i].text = $"+ {GetSingleShotSkillUpgradeValue(upgradeSkillData)} % {translatedText}";
             }
         }
         else if (activeSkill == ActiveSkills.MagicAura)
@@ -220,5 +238,53 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
                 describtionTextsList[i].text = translatedText;
             }
         }
+    }
+
+    private float GetForceWaveSkillUpgradeValue(int skillLevel)
+    {
+        float value = 0;
+
+        for (int i = 0; i < skillsDescribtionTextsTranslationSO.ForceWaveTranslationData[skillLevel].skillDescribtionTexts.Count; i++)
+        {
+            var characteristic = skillsDescribtionTextsTranslationSO.ForceWaveTranslationData[skillLevel].skillDescribtionTexts[i];
+            Debug.Log($"{characteristic} level {skillLevel}");
+            if(characteristic == PlayerCharacteristicsForTranslation.Damage)
+            {
+                value = activesSkillsLevelsData.ForceWaveUpgradesDataList[skillLevel].damage;
+            }
+            else if(characteristic == PlayerCharacteristicsForTranslation.Range)
+            {
+                value = activesSkillsLevelsData.ForceWaveUpgradesDataList[skillLevel].range;
+            }
+            else if (characteristic == PlayerCharacteristicsForTranslation.Width)
+            {
+                value = activesSkillsLevelsData.ForceWaveUpgradesDataList[skillLevel].width;
+            }
+        }
+        return value;
+    }
+
+    private float GetSingleShotSkillUpgradeValue(UpgradeSkillData upgradeSkillData)
+    {
+        float value = 0;
+
+        for (int i = 0; i < skillsDescribtionTextsTranslationSO.SingleShotTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts.Count; i++)
+        {
+            var characteristic = skillsDescribtionTextsTranslationSO.SingleShotTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i];
+            Debug.Log($"{characteristic} level {upgradeSkillData.SkillLevel}");
+            if (characteristic == PlayerCharacteristicsForTranslation.Damage)
+            {
+                value = activesSkillsLevelsData.SingleShotUpgradesDataList[upgradeSkillData.SkillLevel].damage;
+            }
+            else if (characteristic == PlayerCharacteristicsForTranslation.ProjectilesAmount)
+            {
+                value = activesSkillsLevelsData.SingleShotUpgradesDataList[upgradeSkillData.SkillLevel].projectilesAmount;
+            }
+            else if (characteristic == PlayerCharacteristicsForTranslation.Cooldown)
+            {
+                value = activesSkillsLevelsData.SingleShotUpgradesDataList[upgradeSkillData.SkillLevel].cooldown;
+            }
+        }
+        return value;
     }
 }
