@@ -80,15 +80,8 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
             {
                 if(upgradeSkillData.SkillLevel != 0)
                 {
-                    translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.ForceWaveTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i]);
-                    if(skillsDescribtionTextsTranslationSO.ForceWaveTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i] == PlayerCharacteristicsForTranslation.Damage)
-                    {
-                        describtionTextsList[i].text = $"+ {GetForceWaveSkillUpgradeValue(upgradeSkillData.SkillLevel + 1) - GetForceWaveSkillUpgradeValue(upgradeSkillData.SkillLevel)} {translatedText}";
-                    }
-                    else
-                    {
-                        describtionTextsList[i].text = $"+ {GetForceWaveSkillUpgradeValue(upgradeSkillData.SkillLevel + 1) - GetForceWaveSkillUpgradeValue(upgradeSkillData.SkillLevel)} % {translatedText}";
-                    }
+                    translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.ForceWaveTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i].characteristic);
+                    describtionTextsList[i].text = $"+ {GetForceWaveSkillUpgradeValue(upgradeSkillData.SkillLevel + 1) - GetForceWaveSkillUpgradeValue(upgradeSkillData.SkillLevel)} {translatedText}";
                 }
                 else
                 {
@@ -100,15 +93,22 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         {
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.SingleShotTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts.Count; i++)
             {
-                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.SingleShotTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i]);
-                describtionTextsList[i].text = $"+ {GetSingleShotSkillUpgradeValue(upgradeSkillData)} % {translatedText}";
+                if (upgradeSkillData.SkillLevel != 0)
+                {
+                    translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.SingleShotTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i].characteristic);
+                    describtionTextsList[i].text = $"+ {GetSingleShotSkillUpgradeValue(upgradeSkillData.SkillLevel + 1) - GetSingleShotSkillUpgradeValue(upgradeSkillData.SkillLevel)} {translatedText}";
+                }
+                else
+                {
+                    translatedText = "";
+                }
             }
         }
         else if (activeSkill == ActiveSkills.MagicAura)
         {
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.MagicAuraTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts.Count; i++)
             {
-                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.MagicAuraTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i]);
+                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.MagicAuraTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i].characteristic);
                 describtionTextsList[i].text = translatedText;
             }
         }
@@ -116,7 +116,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         {
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.PulseAuraTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts.Count; i++)
             {
-                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.PulseAuraTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i]);
+                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.PulseAuraTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i].characteristic);
                 describtionTextsList[i].text = translatedText;
             }
         }
@@ -124,7 +124,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         {
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.MeteorTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts.Count; i++)
             {
-                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.MeteorTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i]);
+                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.MeteorTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i].characteristic);
                 describtionTextsList[i].text = translatedText;
             }
         }
@@ -132,7 +132,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         {
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.LightningBoltTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts.Count; i++)
             {
-                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.LightningBoltTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i]);
+                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.LightningBoltTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i].characteristic);
                 describtionTextsList[i].text = translatedText;
             }
         }
@@ -140,7 +140,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         {
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.ChainLightningTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts.Count; i++)
             {
-                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.ChainLightningTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i]);
+                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.ChainLightningTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i].characteristic);
                 describtionTextsList[i].text = translatedText;
             }
         }
@@ -148,7 +148,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         {
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.FireballsTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts.Count; i++)
             {
-                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.FireballsTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i]);
+                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.FireballsTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i].characteristic);
                 describtionTextsList[i].text = translatedText;
             }
         }
@@ -156,7 +156,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         {
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.AllDiractionsTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts.Count; i++)
             {
-                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.AllDiractionsTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i]);
+                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.AllDiractionsTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i].characteristic);
                 describtionTextsList[i].text = translatedText;
             }
         }
@@ -164,7 +164,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         {
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.WeaponStrikeTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts.Count; i++)
             {
-                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.WeaponStrikeTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i]);
+                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.WeaponStrikeTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i].characteristic);
                 describtionTextsList[i].text = translatedText;
             }
         }
@@ -178,7 +178,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         {
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.IncreaseRangeTranslationData.skillDescribtionTexts.Count; i++)
             {
-                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseRangeTranslationData.skillDescribtionTexts[i]);
+                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseRangeTranslationData.skillDescribtionTexts[i].characteristic);
                 describtionTextsList[i].text = translatedText;
             }
         }
@@ -186,7 +186,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         {
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.IncreaseDamageTranslationData.skillDescribtionTexts.Count; i++)
             {
-                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseDamageTranslationData.skillDescribtionTexts[i]);
+                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseDamageTranslationData.skillDescribtionTexts[i].characteristic);
                 describtionTextsList[i].text = translatedText;
             }
         }
@@ -194,7 +194,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         {
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.IncreaseMovementSpeedTranslationData.skillDescribtionTexts.Count; i++)
             {
-                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseMovementSpeedTranslationData.skillDescribtionTexts[i]);
+                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseMovementSpeedTranslationData.skillDescribtionTexts[i].characteristic);
                 describtionTextsList[i].text = translatedText;
             }
         }
@@ -202,7 +202,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         {
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.DecreaseIncomeDamageTranslationData.skillDescribtionTexts.Count; i++)
             {
-                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.DecreaseIncomeDamageTranslationData.skillDescribtionTexts[i]);
+                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.DecreaseIncomeDamageTranslationData.skillDescribtionTexts[i].characteristic);
                 describtionTextsList[i].text = translatedText;
             }
         }
@@ -210,7 +210,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         {
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.IncreaseRegenerationTranslationData.skillDescribtionTexts.Count; i++)
             {
-                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseRegenerationTranslationData.skillDescribtionTexts[i]);
+                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseRegenerationTranslationData.skillDescribtionTexts[i].characteristic);
                 describtionTextsList[i].text = translatedText;
             }
         }
@@ -218,7 +218,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         {
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.IncreaseCritChanceTranslationData.skillDescribtionTexts.Count; i++)
             {
-                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseCritChanceTranslationData.skillDescribtionTexts[i]);
+                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseCritChanceTranslationData.skillDescribtionTexts[i].characteristic);
                 describtionTextsList[i].text = translatedText;
             }
         }
@@ -226,7 +226,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         {
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.IncreaseCritPowerTranslationData.skillDescribtionTexts.Count; i++)
             {
-                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseCritPowerTranslationData.skillDescribtionTexts[i]);
+                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseCritPowerTranslationData.skillDescribtionTexts[i].characteristic);
                 describtionTextsList[i].text = translatedText;
             }
         }
@@ -234,7 +234,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         {
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.IncreaseProjectileAmountTranslationData.skillDescribtionTexts.Count; i++)
             {
-                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseProjectileAmountTranslationData.skillDescribtionTexts[i]);
+                translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseProjectileAmountTranslationData.skillDescribtionTexts[i].characteristic);
                 describtionTextsList[i].text = translatedText;
             }
         }
@@ -246,7 +246,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
 
         for (int i = 0; i < skillsDescribtionTextsTranslationSO.ForceWaveTranslationData[skillLevel].skillDescribtionTexts.Count; i++)
         {
-            var characteristic = skillsDescribtionTextsTranslationSO.ForceWaveTranslationData[skillLevel].skillDescribtionTexts[i];
+            var characteristic = skillsDescribtionTextsTranslationSO.ForceWaveTranslationData[skillLevel].skillDescribtionTexts[i].characteristic;
             Debug.Log($"{characteristic} level {skillLevel}");
             if(characteristic == PlayerCharacteristicsForTranslation.Damage)
             {
@@ -264,25 +264,25 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         return value;
     }
 
-    private float GetSingleShotSkillUpgradeValue(UpgradeSkillData upgradeSkillData)
+    private float GetSingleShotSkillUpgradeValue(int skillLevel)
     {
         float value = 0;
 
-        for (int i = 0; i < skillsDescribtionTextsTranslationSO.SingleShotTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts.Count; i++)
+        for (int i = 0; i < skillsDescribtionTextsTranslationSO.SingleShotTranslationData[skillLevel].skillDescribtionTexts.Count; i++)
         {
-            var characteristic = skillsDescribtionTextsTranslationSO.SingleShotTranslationData[upgradeSkillData.SkillLevel].skillDescribtionTexts[i];
-            Debug.Log($"{characteristic} level {upgradeSkillData.SkillLevel}");
+            var characteristic = skillsDescribtionTextsTranslationSO.SingleShotTranslationData[skillLevel].skillDescribtionTexts[i].characteristic;
+            Debug.Log($"{characteristic} level {skillLevel}");
             if (characteristic == PlayerCharacteristicsForTranslation.Damage)
             {
-                value = activesSkillsLevelsData.SingleShotUpgradesDataList[upgradeSkillData.SkillLevel].damage;
+                value = activesSkillsLevelsData.SingleShotUpgradesDataList[skillLevel].damage;
             }
             else if (characteristic == PlayerCharacteristicsForTranslation.ProjectilesAmount)
             {
-                value = activesSkillsLevelsData.SingleShotUpgradesDataList[upgradeSkillData.SkillLevel].projectilesAmount;
+                value = activesSkillsLevelsData.SingleShotUpgradesDataList[skillLevel].projectilesAmount;
             }
             else if (characteristic == PlayerCharacteristicsForTranslation.Cooldown)
             {
-                value = activesSkillsLevelsData.SingleShotUpgradesDataList[upgradeSkillData.SkillLevel].cooldown;
+                value = activesSkillsLevelsData.SingleShotUpgradesDataList[skillLevel].cooldown;
             }
         }
         return value;

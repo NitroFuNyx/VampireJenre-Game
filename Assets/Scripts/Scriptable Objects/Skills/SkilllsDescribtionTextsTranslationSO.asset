@@ -14,235 +14,545 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceWaveTranslationData:
   - skill: 0
-    skillDescribtionTexts: 000000000100000002000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 20
+    - characteristic: 1
+      upgradeValue: 1.75
+    - characteristic: 2
+      upgradeValue: 1
   - skill: 0
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 22
+    - characteristic: 1
+      upgradeValue: 1.89
   - skill: 0
-    skillDescribtionTexts: 0000000001000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 24
+    - characteristic: 1
+      upgradeValue: 2.03
   - skill: 0
-    skillDescribtionTexts: 0000000002000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 26
+    - characteristic: 1
+      upgradeValue: 2.17
+    - characteristic: 2
+      upgradeValue: 1.4
   - skill: 0
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 28
+    - characteristic: 1
+      upgradeValue: 2.31
   - skill: 0
-    skillDescribtionTexts: 0000000001000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 30
+    - characteristic: 1
+      upgradeValue: 2.44
   - skill: 0
-    skillDescribtionTexts: 0000000002000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 32
+    - characteristic: 1
+      upgradeValue: 2.58
+    - characteristic: 2
+      upgradeValue: 1.8
   - skill: 0
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 34
+    - characteristic: 1
+      upgradeValue: 2.72
   - skill: 0
-    skillDescribtionTexts: 0000000002000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 36
+    - characteristic: 1
+      upgradeValue: 2.86
+    - characteristic: 2
+      upgradeValue: 2
   - skill: 0
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 38
+    - characteristic: 1
+      upgradeValue: 3
   singleShotTranslationData:
   - skill: 1
-    skillDescribtionTexts: 0000000001000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 20
+    - characteristic: 4
+      upgradeValue: 1
   - skill: 1
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 22
   - skill: 1
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 24
   - skill: 1
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 26
+    - characteristic: 4
+      upgradeValue: 2
   - skill: 1
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 28
   - skill: 1
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 30
   - skill: 1
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 32
   - skill: 1
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 34
+    - characteristic: 4
+      upgradeValue: 1
   - skill: 1
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 36
   - skill: 1
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 38
   magicAuraTranslationData:
   - skill: 2
-    skillDescribtionTexts: 0000000001000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 12
+    - characteristic: 1
+      upgradeValue: 2
   - skill: 2
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 14
   - skill: 2
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 16
   - skill: 2
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 17.5
   - skill: 2
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 19
   - skill: 2
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 20
   - skill: 2
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 22
   - skill: 2
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 24
   - skill: 2
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 26
   - skill: 2
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 27.5
   pulseAuraTranslationData:
   - skill: 3
-    skillDescribtionTexts: 0000000001000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 10
+    - characteristic: 1
+      upgradeValue: 3
   - skill: 3
-    skillDescribtionTexts: 0000000001000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 11
+    - characteristic: 1
+      upgradeValue: 3.2
   - skill: 3
-    skillDescribtionTexts: 0000000001000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 12
+    - characteristic: 1
+      upgradeValue: 3.4
   - skill: 3
-    skillDescribtionTexts: 0000000001000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 13
+    - characteristic: 1
+      upgradeValue: 3.6
   - skill: 3
-    skillDescribtionTexts: 0000000001000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 14
+    - characteristic: 1
+      upgradeValue: 3.8
   - skill: 3
-    skillDescribtionTexts: 0000000001000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 15
+    - characteristic: 1
+      upgradeValue: 4
   - skill: 3
-    skillDescribtionTexts: 0000000001000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 16
+    - characteristic: 1
+      upgradeValue: 4.2
   - skill: 3
-    skillDescribtionTexts: 0000000001000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 17
+    - characteristic: 1
+      upgradeValue: 4.4
   - skill: 3
-    skillDescribtionTexts: 0000000001000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 18
+    - characteristic: 1
+      upgradeValue: 4.6
   - skill: 3
-    skillDescribtionTexts: 0000000001000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 19
+    - characteristic: 1
+      upgradeValue: 4.8
   meteorTranslationData:
   - skill: 4
-    skillDescribtionTexts: 0000000005000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 25
+    - characteristic: 5
+      upgradeValue: 3
   - skill: 4
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 27.5
   - skill: 4
-    skillDescribtionTexts: 0000000005000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 30
+    - characteristic: 5
+      upgradeValue: 4
   - skill: 4
-    skillDescribtionTexts: 0000000005000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 35
+    - characteristic: 5
+      upgradeValue: 4.5
   - skill: 4
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 40
   - skill: 4
-    skillDescribtionTexts: 0000000005000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 45
+    - characteristic: 5
+      upgradeValue: 5
   - skill: 4
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 50
   - skill: 4
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 55
   - skill: 4
-    skillDescribtionTexts: 0000000005000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 60
+    - characteristic: 5
+      upgradeValue: 5.5
   - skill: 4
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 65
   lightningBoltTranslationData:
   - skill: 5
-    skillDescribtionTexts: 0000000003000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 30
+    - characteristic: 3
+      upgradeValue: 3
   - skill: 5
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 33
   - skill: 5
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 36
   - skill: 5
-    skillDescribtionTexts: 0000000003000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 39
+    - characteristic: 3
+      upgradeValue: 2.5
   - skill: 5
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 42
   - skill: 5
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 45
   - skill: 5
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 48
   - skill: 5
-    skillDescribtionTexts: 0000000003000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 51
+    - characteristic: 3
+      upgradeValue: 2
   - skill: 5
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 54
   - skill: 5
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 57
   chainLightningTranslationData:
   - skill: 6
-    skillDescribtionTexts: 0000000006000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 15
+    - characteristic: 6
+      upgradeValue: 2
   - skill: 6
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 16.5
   - skill: 6
-    skillDescribtionTexts: 0000000006000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 18
+    - characteristic: 6
+      upgradeValue: 3
   - skill: 6
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 19.5
   - skill: 6
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 21
   - skill: 6
-    skillDescribtionTexts: 0000000006000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 22.5
+    - characteristic: 6
+      upgradeValue: 4
   - skill: 6
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 24
   - skill: 6
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 25.5
   - skill: 6
-    skillDescribtionTexts: 0000000006000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 27
+    - characteristic: 6
+      upgradeValue: 5
   - skill: 6
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 28.5
   fireballsTranslationData:
   - skill: 7
-    skillDescribtionTexts: 0000000004000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 10
+    - characteristic: 4
+      upgradeValue: 2
   - skill: 7
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 11
   - skill: 7
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 12
   - skill: 7
-    skillDescribtionTexts: 0000000004000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 13
+    - characteristic: 4
+      upgradeValue: 3
   - skill: 7
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 14
   - skill: 7
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 15
   - skill: 7
-    skillDescribtionTexts: 0000000004000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 16
+    - characteristic: 4
+      upgradeValue: 4
   - skill: 7
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 17
   - skill: 7
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 18
   - skill: 7
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 20
   allDiractionsTranslationData:
   - skill: 8
-    skillDescribtionTexts: 0000000004000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 8
+    - characteristic: 4
+      upgradeValue: 3
   - skill: 8
-    skillDescribtionTexts: 0000000004000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 9
+    - characteristic: 4
+      upgradeValue: 4
   - skill: 8
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 10
   - skill: 8
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 11
   - skill: 8
-    skillDescribtionTexts: 0000000004000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 12
+    - characteristic: 4
+      upgradeValue: 5
   - skill: 8
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 13
   - skill: 8
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 14
   - skill: 8
-    skillDescribtionTexts: 0000000004000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 15
+    - characteristic: 4
+      upgradeValue: 6
   - skill: 8
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 16
   - skill: 8
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 18
   weaponStrikeTranslationData:
   - skill: 9
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 18
   - skill: 9
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 20
   - skill: 9
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 22
   - skill: 9
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 24
   - skill: 9
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 26
   - skill: 9
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 28
   - skill: 9
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 30
   - skill: 9
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 32
   - skill: 9
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 34
   - skill: 9
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 36
   increaseRangeTranslationData:
     skill: 0
-    skillDescribtionTexts: 01000000
+    skillDescribtionTexts:
+    - characteristic: 1
+      upgradeValue: 10
   increaseDamageTranslationData:
     skill: 1
-    skillDescribtionTexts: 00000000
+    skillDescribtionTexts:
+    - characteristic: 0
+      upgradeValue: 10
   increaseMovementSpeedTranslationData:
     skill: 2
-    skillDescribtionTexts: 08000000
+    skillDescribtionTexts:
+    - characteristic: 8
+      upgradeValue: 5
   decreaseIncomeDamageTranslationData:
     skill: 3
-    skillDescribtionTexts: 09000000
+    skillDescribtionTexts:
+    - characteristic: 9
+      upgradeValue: 5
   increaseRegenerationTranslationData:
     skill: 4
-    skillDescribtionTexts: 0a000000
+    skillDescribtionTexts:
+    - characteristic: 10
+      upgradeValue: 5
   increaseCritChanceTranslationData:
     skill: 5
-    skillDescribtionTexts: 0b000000
+    skillDescribtionTexts:
+    - characteristic: 11
+      upgradeValue: 2
   increaseCritPowerTranslationData:
     skill: 6
-    skillDescribtionTexts: 0c000000
+    skillDescribtionTexts:
+    - characteristic: 12
+      upgradeValue: 100
   increaseProjectileAmountTranslationData:
     skill: 7
-    skillDescribtionTexts: 04000000
+    skillDescribtionTexts:
+    - characteristic: 4
+      upgradeValue: 1
