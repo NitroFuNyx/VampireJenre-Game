@@ -89,3 +89,8 @@ public enum ResourcesSaveTypes
 {
     GeneralAmount, CurrentLevelAmount
 }
+
+public enum TreasureChestItems
+{
+    Skill, Gems, Coins
+}

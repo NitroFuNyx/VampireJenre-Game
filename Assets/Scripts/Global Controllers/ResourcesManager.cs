@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 using Zenject;
 
 public class ResourcesManager : MonoBehaviour, IDataPersistance
@@ -12,6 +13,14 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     [Space]
     [SerializeField] private float gemDropDefaultPercentChance = 10f;
     [SerializeField] private float coinDropDefaultPercentChance = 20f;
+    [Header("Treasure Chest Resources")]
+    [Space]
+    [SerializeField] private List<int> gemsTreasureAmountsList = new List<int>();
+    [SerializeField] private List<int> coinsTreasureAmountsList = new List<int>();
+    [Header("Sprites")]
+    [Space]
+    [SerializeField] private Sprite gemsSprite;
+    [SerializeField] private Sprite coinsSprite;
 
     private DataPersistanceManager _dataPersistanceManager;
     private PlayerCharacteristicsManager _playerCharacteristicsManager;
@@ -179,21 +188,60 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         }
     }
 
-    public void AddResourceForPickingUpTreasureChest()
+    public void AddTreasureForPickingUpTreasureChest(ResourcesTypes resource, int amount)
     {
-        float gemGrantingIndex;
-
-        gemGrantingIndex = UnityEngine.Random.Range(0, CommonValues.maxPercentAmount);
-
-        if (gemGrantingIndex < gemDropDefaultPercentChance)
+        if(resource == ResourcesTypes.Gems)
         {
-            IncreaseCurrentLevelGemsAmount(GemSurplusForKillingEnemy);
+            IncreaseCurrentLevelGemsAmount(amount);
         }
         else
         {
-            int coinsAmount = UnityEngine.Random.Range(CoinsSurplusForKillingEnemy_Min, CoinsSurplusForKillingEnemy_Max);
-            IncreaseCurrentLevelCoinsAmount(coinsAmount);
+            IncreaseCurrentLevelCoinsAmount(amount);
         }
+    }
+
+    //public void AddResourceForPickingUpTreasureChest()
+    //{
+    //    float gemGrantingIndex;
+
+    //    gemGrantingIndex = UnityEngine.Random.Range(0, CommonValues.maxPercentAmount);
+
+    //    if (gemGrantingIndex < gemDropDefaultPercentChance)
+    //    {
+    //        IncreaseCurrentLevelGemsAmount(GemSurplusForKillingEnemy);
+    //    }
+    //    else
+    //    {
+    //        int coinsAmount = UnityEngine.Random.Range(CoinsSurplusForKillingEnemy_Min, CoinsSurplusForKillingEnemy_Max);
+    //        IncreaseCurrentLevelCoinsAmount(coinsAmount);
+    //    }
+    //}
+
+    public TreasureChestResourceDataStruct GetResourceDataForPickingUpTreasureChest(TreasureChestItems resource)
+    {
+        TreasureChestResourceDataStruct resourceData = new TreasureChestResourceDataStruct();
+
+        int index;
+
+
+        if(resource == TreasureChestItems.Gems)
+        {
+            index = UnityEngine.Random.Range(0, gemsTreasureAmountsList.Count);
+
+            resourceData.resourceType = ResourcesTypes.Gems;
+            resourceData.resourceAmount = gemsTreasureAmountsList[index];
+            resourceData.resourceSprite = gemsSprite;
+        }
+        else if(resource == TreasureChestItems.Coins)
+        {
+            index = UnityEngine.Random.Range(0, coinsTreasureAmountsList.Count);
+
+            resourceData.resourceType = ResourcesTypes.Coins;
+            resourceData.resourceAmount = coinsTreasureAmountsList[index];
+            resourceData.resourceSprite = coinsSprite;
+        }
+
+        return resourceData;
     }
 
     public int GetCoinsForLevelAmountWithSkillBonus()

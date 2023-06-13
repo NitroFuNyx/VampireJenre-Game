@@ -6901,7 +6901,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 169.87001}
+  m_SizeDelta: {x: 0, y: 207.18231}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5119946549405849641
 CanvasRenderer:
@@ -7590,7 +7590,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 3037837116167304523}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10556,7 +10556,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 169.87001}
+  m_SizeDelta: {x: 0, y: 207.18231}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7593594109336978502
 CanvasRenderer:
@@ -11821,8 +11821,8 @@ GameObject:
   - component: {fileID: 7872179177611811551}
   - component: {fileID: 2623792628487334783}
   - component: {fileID: 1162728662121342711}
-  - component: {fileID: 2540831257473549013}
   - component: {fileID: 1257552137481927174}
+  - component: {fileID: 1606646496434079716}
   m_Layer: 0
   m_Name: Resource Panel
   m_TagString: Untagged
@@ -11892,35 +11892,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2540831257473549013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218980309216481340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbe90756f815fc04e9814811b6cccdfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillType: 0
-  activeSkill: 0
-  passiveSkill: 0
-  skillLevel: 0
-  skillImage: {fileID: 2875589905406382808}
-  skillLevelText: {fileID: 0}
-  skillNameText: {fileID: 0}
-  describtionTextsList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  skillsDescribtionTextsTranslationSO: {fileID: 11400000, guid: eee481c3a460c3c439400f1382fdc672,
-    type: 2}
-  activesSkillsLevelsData: {fileID: 11400000, guid: 9ac557872588dfc4491592aa3699acf7,
-    type: 2}
-  passiveSkillsLevelsData: {fileID: 11400000, guid: 14cbdd101d044c149bec5cdbb67c8015,
-    type: 2}
 --- !u!225 &1257552137481927174
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -11930,9 +11901,25 @@ CanvasGroup:
   m_GameObject: {fileID: 1218980309216481340}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &1606646496434079716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218980309216481340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2883c65ea86437642b5e0886016f4b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceImage: {fileID: 2875589905406382808}
+  resourceAmountText: {fileID: 2588627640372232743}
+  resourceType: 0
+  resourceAmount: 0
 --- !u!1 &1231541223468525383
 GameObject:
   m_ObjectHideFlags: 0
@@ -12908,7 +12895,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0.00024414062}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &3519850746348012244
@@ -15234,7 +15221,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0.00024414062}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2615362918578126342
@@ -15812,6 +15799,7 @@ GameObject:
   - component: {fileID: 4728360827620163916}
   - component: {fileID: 821372165423747625}
   - component: {fileID: 4704636308237088463}
+  - component: {fileID: 4730269337447977116}
   m_Layer: 0
   m_Name: First Treasure Item Panel
   m_TagString: Untagged
@@ -15879,6 +15867,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4730269337447977116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2193015802875234910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e62bcaa8411fe448c4ea6a2ef49678, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillsPanelCanvasGroup: {fileID: 5201869452117060336}
+  resourcePanelCanvasGroup: {fileID: 1257552137481927174}
+  skillPanel: {fileID: 5900442108043702439}
+  resourcePanel: {fileID: 1606646496434079716}
 --- !u!1 &2216901410814825244
 GameObject:
   m_ObjectHideFlags: 0
@@ -19998,8 +20002,8 @@ CanvasGroup:
   m_GameObject: {fileID: 2889559430946577254}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &2896425139089713599
 GameObject:
@@ -20675,7 +20679,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4169152209887664264}
   m_HandleRect: {fileID: 3588443464200107964}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0.9999998
   m_Size: 0.4524503
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -21173,7 +21177,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 5134379838449501953}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -23345,7 +23349,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 169.87001}
+  m_SizeDelta: {x: 0, y: 207.18231}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7962977024598268651
 CanvasRenderer:
@@ -24791,7 +24795,7 @@ GameObject:
   - component: {fileID: 6190575102833616154}
   - component: {fileID: 8780241082286902357}
   - component: {fileID: 4597212372901742621}
-  - component: {fileID: 9173308555263506975}
+  - component: {fileID: 1381072981255447092}
   m_Layer: 0
   m_Name: Get All Treasure Items Button
   m_TagString: Untagged
@@ -24916,7 +24920,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 1
   m_AspectRatio: 2.2285714
---- !u!114 &9173308555263506975
+--- !u!114 &1381072981255447092
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -24925,14 +24929,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3735161886164966979}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68ddaa14bd70d064187e3d2a9d9e1f5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b69d8dff49cb83418fe7600320c255b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonImage: {fileID: 6190575102833616154}
+  buttonImage: {fileID: 0}
   minScale: {x: 0.8, y: 0.8, z: 0.8}
   scaleDuration: 0.3
   standartAudio: 1
-  doubleUpgrade: 0
+  getAllTreasures: 1
 --- !u!1 &3753385472399093480
 GameObject:
   m_ObjectHideFlags: 0
@@ -28316,6 +28320,7 @@ MonoBehaviour:
   - {fileID: 1248157760}
   - {fileID: 7131063196647460173}
   - {fileID: 1176717523674578921}
+  - {fileID: 4745594715618477340}
   skillUpgradeDisplayPanelsList:
   - {fileID: 672414035}
   - {fileID: 1892374502}
@@ -29308,7 +29313,7 @@ GameObject:
   - component: {fileID: 3272765999685864827}
   - component: {fileID: 7831072218750272296}
   - component: {fileID: 5012286330426376515}
-  - component: {fileID: 9026498188281155524}
+  - component: {fileID: 4745594715618477340}
   m_Layer: 0
   m_Name: Treasure Chest Info Panel
   m_TagString: Untagged
@@ -29358,7 +29363,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &9026498188281155524
+--- !u!114 &4745594715618477340
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -29367,10 +29372,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4878069077088373302}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 456a68b59748c3f42a0dc571bec99fb6, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a7df1425c86fb34186990e7eeddf644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   panelType: 5
+  firstTreasurePanel: {fileID: 4730269337447977116}
+  secondTreasurePanel: {fileID: 208589843136586341}
 --- !u!1 &4881886454457091906
 GameObject:
   m_ObjectHideFlags: 0
@@ -29827,7 +29834,7 @@ GameObject:
   - component: {fileID: 133889555882705200}
   - component: {fileID: 3206021236574008262}
   - component: {fileID: 5225204199553605672}
-  - component: {fileID: 6772841988711267229}
+  - component: {fileID: 3598030610752351186}
   m_Layer: 0
   m_Name: Get One Treasure Item Button
   m_TagString: Untagged
@@ -29952,7 +29959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 1
   m_AspectRatio: 2.2285714
---- !u!114 &6772841988711267229
+--- !u!114 &3598030610752351186
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -29961,14 +29968,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5001277172369258370}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68ddaa14bd70d064187e3d2a9d9e1f5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b69d8dff49cb83418fe7600320c255b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonImage: {fileID: 133889555882705200}
+  buttonImage: {fileID: 0}
   minScale: {x: 0.8, y: 0.8, z: 0.8}
   scaleDuration: 0.3
   standartAudio: 1
-  doubleUpgrade: 0
+  getAllTreasures: 0
 --- !u!1 &5043803097622952435
 GameObject:
   m_ObjectHideFlags: 0
@@ -39657,7 +39664,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 751091548119510914}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -39906,8 +39913,8 @@ GameObject:
   - component: {fileID: 8602432713556724377}
   - component: {fileID: 1971474325319676058}
   - component: {fileID: 7256978908355842707}
-  - component: {fileID: 5512712379277328409}
   - component: {fileID: 4645847531668702945}
+  - component: {fileID: 3350630628583043023}
   m_Layer: 0
   m_Name: Resource Panel
   m_TagString: Untagged
@@ -39977,35 +39984,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5512712379277328409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6916795958694137427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbe90756f815fc04e9814811b6cccdfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillType: 0
-  activeSkill: 0
-  passiveSkill: 0
-  skillLevel: 0
-  skillImage: {fileID: 8316056174943472373}
-  skillLevelText: {fileID: 0}
-  skillNameText: {fileID: 0}
-  describtionTextsList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  skillsDescribtionTextsTranslationSO: {fileID: 11400000, guid: eee481c3a460c3c439400f1382fdc672,
-    type: 2}
-  activesSkillsLevelsData: {fileID: 11400000, guid: 9ac557872588dfc4491592aa3699acf7,
-    type: 2}
-  passiveSkillsLevelsData: {fileID: 11400000, guid: 14cbdd101d044c149bec5cdbb67c8015,
-    type: 2}
 --- !u!225 &4645847531668702945
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -40015,9 +39993,25 @@ CanvasGroup:
   m_GameObject: {fileID: 6916795958694137427}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &3350630628583043023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6916795958694137427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2883c65ea86437642b5e0886016f4b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceImage: {fileID: 8316056174943472373}
+  resourceAmountText: {fileID: 6612374226601214571}
+  resourceType: 0
+  resourceAmount: 0
 --- !u!1 &6956266734414234542
 GameObject:
   m_ObjectHideFlags: 0
@@ -40934,7 +40928,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 169.87001}
+  m_SizeDelta: {x: 0, y: 207.18231}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1254970914217171820
 CanvasRenderer:
@@ -42557,7 +42551,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 258.245}
+  m_SizeDelta: {x: 0, y: 267.64337}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8438523343754675232
 CanvasRenderer:
@@ -48357,8 +48351,8 @@ CanvasGroup:
   m_GameObject: {fileID: 8570585125658732974}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &8582101018605989613
 GameObject:
@@ -48371,6 +48365,7 @@ GameObject:
   - component: {fileID: 8767020229358170136}
   - component: {fileID: 6293411313902099583}
   - component: {fileID: 5925115307599087829}
+  - component: {fileID: 208589843136586341}
   m_Layer: 0
   m_Name: Second Treasure Item Panel
   m_TagString: Untagged
@@ -48438,6 +48433,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &208589843136586341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8582101018605989613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e62bcaa8411fe448c4ea6a2ef49678, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillsPanelCanvasGroup: {fileID: 5137514817610956401}
+  resourcePanelCanvasGroup: {fileID: 4645847531668702945}
+  skillPanel: {fileID: 3999414667294078358}
+  resourcePanel: {fileID: 3350630628583043023}
 --- !u!1 &8593626985991729920
 GameObject:
   m_ObjectHideFlags: 0
@@ -49466,7 +49477,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6905860975135033462}
   m_HandleRect: {fileID: 399660206442865169}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0.9999975
   m_Size: 0.97017807
   m_NumberOfSteps: 0
   m_OnValueChanged:

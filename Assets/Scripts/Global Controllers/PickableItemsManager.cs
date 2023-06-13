@@ -31,7 +31,7 @@ public class PickableItemsManager : MonoBehaviour
 
     #region Events Declaration
     public event System.Action OnSkillScrollCollected;
-    public event System.Action OnTreasureChestCollected;
+    public event System.Action<TreasureChestItems, TreasureChestItems> OnTreasureChestCollected;
     #endregion Events Declaration
 
     private void Start()
@@ -90,7 +90,10 @@ public class PickableItemsManager : MonoBehaviour
 
     public void CollectTreasureChest()
     {
-        OnTreasureChestCollected?.Invoke();
+        TreasureChestItems firstTreasure = GetRandomTreasureChestItem();
+        TreasureChestItems secondTreasure = GetRandomTreasureChestItem();
+        
+        OnTreasureChestCollected?.Invoke(firstTreasure, secondTreasure);
     }
 
     public void SpawnResourceForKillingEnemy(Vector3 spawnPos)
@@ -214,6 +217,13 @@ public class PickableItemsManager : MonoBehaviour
         //SpawnItems();
         canSpawnItems = true;
         StartCoroutine(SpawnItemsCoroutine());
+    }
+
+    private TreasureChestItems GetRandomTreasureChestItem()
+    {
+        int itemIndex = Random.Range(0, System.Enum.GetValues(typeof(TreasureChestItems)).Length);
+        TreasureChestItems item = (TreasureChestItems)itemIndex;
+        return item;
     }
 
     private IEnumerator SpawnItemsCoroutine()

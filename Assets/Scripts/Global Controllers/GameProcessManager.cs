@@ -24,6 +24,7 @@ public class GameProcessManager : MonoBehaviour
     private PlayerExperienceManager _playerExperienceManager;
     private PickableItemsManager _pickableItemsManager;
     private GameLevelUI _gameLevelUI;
+    private TreasureChestInfoPanel _treasureChestInfoPanel;
 
     private bool battleStarted = false;
 
@@ -49,6 +50,8 @@ public class GameProcessManager : MonoBehaviour
 
         _pickableItemsManager.OnSkillScrollCollected += PickableItemsManager_SkillScrollCollected_ExecuteReaction;
         _pickableItemsManager.OnTreasureChestCollected += PickableItemsManager_TreasureChestCollected_ExecuteReaction;
+
+        _treasureChestInfoPanel.OnTreasureChestItemsCollected += TreasureChestInfoPanel_OnTreasureChestItemsCollected_ExecuteReaction;
     }
 
     private void OnDestroy()
@@ -59,12 +62,15 @@ public class GameProcessManager : MonoBehaviour
 
         _pickableItemsManager.OnSkillScrollCollected -= PickableItemsManager_SkillScrollCollected_ExecuteReaction;
         _pickableItemsManager.OnTreasureChestCollected -= PickableItemsManager_TreasureChestCollected_ExecuteReaction;
+
+        _treasureChestInfoPanel.OnTreasureChestItemsCollected -= TreasureChestInfoPanel_OnTreasureChestItemsCollected_ExecuteReaction;
     }
 
     #region Zenject
     [Inject]
     private void Construct(SpawnEnemiesManager spawnEnemiesManager, MainUI mainUI, SystemTimeManager systemTimeManager, SkillsManager skillsManager,
-                           PlayerExperienceManager playerExperienceManager, PickableItemsManager pickableItemsManager, GameLevelUI gameLevelUI)
+                           PlayerExperienceManager playerExperienceManager, PickableItemsManager pickableItemsManager, GameLevelUI gameLevelUI,
+                           TreasureChestInfoPanel treasureChestInfoPanel)
     {
         _spawnEnemiesManager = spawnEnemiesManager;
         _mainUI = mainUI;
@@ -73,6 +79,7 @@ public class GameProcessManager : MonoBehaviour
         _playerExperienceManager = playerExperienceManager;
         _pickableItemsManager = pickableItemsManager;
         _gameLevelUI = gameLevelUI;
+        _treasureChestInfoPanel = treasureChestInfoPanel;
     }
     #endregion Zenject
 
@@ -146,9 +153,14 @@ public class GameProcessManager : MonoBehaviour
         StartCoroutine(PauseGameWithDelayCoroutine());
     }
 
-    private void PickableItemsManager_TreasureChestCollected_ExecuteReaction()
+    private void PickableItemsManager_TreasureChestCollected_ExecuteReaction(TreasureChestItems _, TreasureChestItems __)
     {
         StartCoroutine(PauseGameWithDelayCoroutine());
+    }
+
+    private void TreasureChestInfoPanel_OnTreasureChestItemsCollected_ExecuteReaction()
+    {
+        _systemTimeManager.ResumeGame();
     }
 
     private void ResetMapData()

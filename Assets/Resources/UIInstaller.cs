@@ -14,6 +14,7 @@ public class UIInstaller : MonoInstaller
     [SerializeField] private GameLevelUI gameLevelUI;
     [SerializeField] private SkillsInfoUI skillsInfoUI;
     [SerializeField] private AdsBlockerPurchasedPanel adsBlockerPurchasedPanel;
+    [SerializeField] private TreasureChestInfoPanel treasureChestInfoPanel;
     [Header("Talent UI")]
     [Space]
     [SerializeField] private TalentWheel talentWheel;
@@ -30,6 +31,7 @@ public class UIInstaller : MonoInstaller
         Container.Bind<GameLevelUI>().FromInstance(gameLevelUI).AsSingle().NonLazy();
         Container.Bind<SkillsInfoUI>().FromInstance(skillsInfoUI).AsSingle().NonLazy();
         Container.Bind<AdsBlockerPurchasedPanel>().FromInstance(adsBlockerPurchasedPanel).AsSingle().NonLazy();
+        Container.Bind<TreasureChestInfoPanel>().FromInstance(treasureChestInfoPanel).AsSingle().NonLazy();
 
         Container.Bind<TalentWheel>().FromInstance(talentWheel).AsSingle().NonLazy();
         Container.Bind<TalentBoughtInfoPanel>().FromInstance(talentBoughtInfoPanel).AsSingle().NonLazy();

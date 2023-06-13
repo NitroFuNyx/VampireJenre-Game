@@ -222,3 +222,11 @@ public struct SkillUpgradeValuesStruct
     public PlayerCharacteristicsForTranslation characteristic;
     public float upgradeValue;
 }
+
+[Serializable]
+public struct TreasureChestResourceDataStruct
+{
+    public ResourcesTypes resourceType;
+    public int resourceAmount;
+    public Sprite resourceSprite;
+}
