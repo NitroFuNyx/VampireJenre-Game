@@ -1,7 +1,13 @@
+using UnityEngine;
+using System.Collections;
 using Zenject;
 
 public class UpgradeSkillButton : ButtonInteractionHandler
 {
+    [Header("Upgrade Type")]
+    [Space]
+    [SerializeField] private bool doubleUpgrade = false;
+
     private SkillsManager _skillsManager;
 
     private SkillUpgradeDisplayPanel skillUpgradeDisplayPanel;
@@ -26,7 +32,7 @@ public class UpgradeSkillButton : ButtonInteractionHandler
     {
         int skillndex;
 
-        if(skillUpgradeDisplayPanel.SkillType == SkillBasicTypes.Active)
+        if (skillUpgradeDisplayPanel.SkillType == SkillBasicTypes.Active)
         {
             skillndex = (int)skillUpgradeDisplayPanel.ActiveSkill;
         }
@@ -36,5 +42,16 @@ public class UpgradeSkillButton : ButtonInteractionHandler
         }
 
         _skillsManager.DefineSkillToUpgrade((int)skillUpgradeDisplayPanel.SkillType, skillndex);
+
+        if (doubleUpgrade)
+        {
+            StartCoroutine(UpgradeAdditionalSkillLevelCoroutine(skillndex));
+        }
+    }
+
+    private IEnumerator UpgradeAdditionalSkillLevelCoroutine(int skillIndex)
+    {
+        yield return null;
+        _skillsManager.DefineSkillToUpgrade((int)skillUpgradeDisplayPanel.SkillType, skillIndex);
     }
 }

@@ -11,6 +11,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
     [SerializeField] private SkillBasicTypes skillType;
     [SerializeField] private ActiveSkills activeSkill;
     [SerializeField] private PassiveSkills passiveSkill;
+    [SerializeField] private int skillLevel;
     [Header("Internal References")]
     [Space]
     [SerializeField] private Image skillImage;
@@ -30,6 +31,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
     public SkillBasicTypes SkillType { get => skillType; set => skillType = value; }
     public ActiveSkills ActiveSkill { get => activeSkill; set => activeSkill = value; }
     public PassiveSkills PassiveSkill { get => passiveSkill; set => passiveSkill = value; }
+    public int SkillLevel { get => skillLevel; private set => skillLevel = value; }
 
     #region Zenject
     [Inject]
@@ -60,6 +62,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
         skillImage.sprite = upgradeSkillData.SkillSprite;
         skillLevelText.text = upgradeSkillData.SkillLevelString;
         skillNameText.text = upgradeSkillData.SkillNameString;
+        skillLevel = upgradeSkillData.SkillLevel;
     }
 
     private void ClearSkillUpgradeDescribtion()
