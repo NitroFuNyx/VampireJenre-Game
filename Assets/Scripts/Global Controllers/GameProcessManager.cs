@@ -48,6 +48,7 @@ public class GameProcessManager : MonoBehaviour
         _playerExperienceManager.OnPlayerGotNewLevel += PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction;
 
         _pickableItemsManager.OnSkillScrollCollected += PickableItemsManager_SkillScrollCollected_ExecuteReaction;
+        _pickableItemsManager.OnTreasureChestCollected += PickableItemsManager_TreasureChestCollected_ExecuteReaction;
     }
 
     private void OnDestroy()
@@ -57,6 +58,7 @@ public class GameProcessManager : MonoBehaviour
         _playerExperienceManager.OnPlayerGotNewLevel -= PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction;
 
         _pickableItemsManager.OnSkillScrollCollected -= PickableItemsManager_SkillScrollCollected_ExecuteReaction;
+        _pickableItemsManager.OnTreasureChestCollected -= PickableItemsManager_TreasureChestCollected_ExecuteReaction;
     }
 
     #region Zenject
@@ -140,6 +142,11 @@ public class GameProcessManager : MonoBehaviour
     }
 
     private void PickableItemsManager_SkillScrollCollected_ExecuteReaction()
+    {
+        StartCoroutine(PauseGameWithDelayCoroutine());
+    }
+
+    private void PickableItemsManager_TreasureChestCollected_ExecuteReaction()
     {
         StartCoroutine(PauseGameWithDelayCoroutine());
     }

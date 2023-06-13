@@ -17,7 +17,7 @@ public enum SettingsPanels
 
 public enum GameLevelPanels
 {
-    PausePanel, LevelUpgradePanel, VictoryPanel, LoosePanel, SkillScrollInfoPanel
+    PausePanel, LevelUpgradePanel, VictoryPanel, LoosePanel, SkillScrollInfoPanel, TreasureChestInfoPanel
 }
 
 public enum PoolItemsTypes
