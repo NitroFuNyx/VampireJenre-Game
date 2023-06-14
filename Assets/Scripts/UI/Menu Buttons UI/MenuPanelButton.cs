@@ -27,9 +27,17 @@ public class MenuPanelButton : ButtonInteractionHandler
 
     public override void ButtonActivated()
     {
-        _mainUI.MenuButtonPressed_ExecuteReaction(panelType);
-        _menuButtonsUI.ResetButtonsSprites();
-        buttonImage.sprite = highlightedButtonSprite;
+        if(panelType == UIPanels.CharacterSelectionUI || panelType == UIPanels.ShopUI)
+        {
+            _mainUI.ShowRoadmapUI();
+            _menuButtonsUI.ResetButtonsSprites();
+        }
+        else
+        {
+            _mainUI.MenuButtonPressed_ExecuteReaction(panelType);
+            _menuButtonsUI.ResetButtonsSprites();
+            buttonImage.sprite = highlightedButtonSprite;
+        }
     }
 
     public void SetStandartButtonSprite()

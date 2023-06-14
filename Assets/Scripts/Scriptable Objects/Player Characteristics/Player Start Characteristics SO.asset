@@ -16,13 +16,13 @@ MonoBehaviour:
   - playerCharacterType: 0
     characterHp: 100
     characterSpeed: 3.75
-    characterDamageIncreasePercent: 10
-    characterDamageReductionPercent: 0
-    characterCritChance: 30
+    characterDamageIncreasePercent: 1
+    characterDamageReductionPercent: 1
+    characterCritChance: 5
     characterCritPower: 2
-    characterRegenerationPercent: 10
-    characterItemDropChancePercent: 0
-    characterCoinsSurplusPercent: 0
+    characterRegenerationPercent: 5
+    characterItemDropChancePercent: 1
+    characterCoinsSurplusPercent: 1
     playerSkillsData:
       playerForceWaveData:
         damage: 0

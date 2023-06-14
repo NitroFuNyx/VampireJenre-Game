@@ -1,29 +1,32 @@
 using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyMovementManager : MonoBehaviour
 {
     [Header("Move Data")]
     [Space]
-    [SerializeField] private float startMoveSpeed = 10f;
+    [SerializeField] private float currentMoveSpeed;
+    [SerializeField] private float enemyTypeSpeedBonusPercent;
     [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] private int movementDecreasePrecent = 20;
+
+    private EnemiesCharacteristicsManager _enemiesCharacteristicsManager;
 
     private PlayerController player;
 
     private Rigidbody rb;
 
-    private EnemiesCharacteristicsManager _enemiesCharacteristicsManager;
-
-    private float currentMoveSpeed;
+    private BossDataHolder bossDataHolder;
 
     private bool canMove = false;
+    private bool isBoss;
+
+    private float setStartCharacteristicsDelay = 1f;
 
     private void Awake()
     {
         CashComponents();
-
-        currentMoveSpeed = startMoveSpeed;
     }
 
     private void FixedUpdate()
@@ -32,8 +35,9 @@ public class EnemyMovementManager : MonoBehaviour
         {
             Vector3 targetPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
 
-            rb.MovePosition(Vector3.Lerp(transform.position, targetPos, currentMoveSpeed * Time.fixedDeltaTime));
+            //rb.MovePosition(Vector3.Lerp(transform.position, targetPos, currentMoveSpeed * Time.fixedDeltaTime));
             rb.MoveRotation(Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetPos - transform.position), rotationSpeed * Time.fixedDeltaTime));
+            rb.MovePosition(transform.position + (player.transform.position - transform.position).normalized * currentMoveSpeed * Time.fixedDeltaTime);
         }
     }
 
@@ -49,7 +53,7 @@ public class EnemyMovementManager : MonoBehaviour
 
     public void DecreaseMovementSpeed()
     {
-        float debuffValue = (currentMoveSpeed * movementDecreasePrecent) / 100;
+        float debuffValue = (currentMoveSpeed * movementDecreasePrecent) / CommonValues.maxPercentAmount;
         currentMoveSpeed -= debuffValue;
 
         if (currentMoveSpeed < 0f)
@@ -60,18 +64,30 @@ public class EnemyMovementManager : MonoBehaviour
 
     public void ResetMovementSpeed()
     {
-        currentMoveSpeed = startMoveSpeed;
+        if(!isBoss)
+        {
+            currentMoveSpeed = _enemiesCharacteristicsManager.CurrentEnemiesData.speed + GetSpeedBonusValue();
+        }
+        else
+        {
+            currentMoveSpeed = bossDataHolder.MoveSpeed;
+        }
     }
 
-    public void CashExternalComponents(EnemiesCharacteristicsManager enemiesCharacteristicsManager)
+    public void CashExternalComponents(EnemiesCharacteristicsManager enemiesCharacteristicsManager, bool boss)
     {
         _enemiesCharacteristicsManager = enemiesCharacteristicsManager;
+        isBoss = boss;
+
+        UpdateCharacteristics();
     }
 
     public void UpdateCharacteristics()
     {
-        startMoveSpeed = _enemiesCharacteristicsManager.CurrentEnemiesData.hp;
-        currentMoveSpeed = startMoveSpeed;
+        if(!isBoss)
+        {
+            currentMoveSpeed = _enemiesCharacteristicsManager.CurrentEnemiesData.speed + GetSpeedBonusValue();
+        }
     }
 
     private void CashComponents()
@@ -86,5 +102,18 @@ public class EnemyMovementManager : MonoBehaviour
         {
             Debug.LogWarning($"There is no Rigidbody component attached to {gameObject}", gameObject);
         }
+
+        if (TryGetComponent(out BossDataHolder data))
+        {
+            bossDataHolder = data;
+            currentMoveSpeed = bossDataHolder.MoveSpeed;
+        }
+    }
+
+    private float GetSpeedBonusValue()
+    {
+        float percentValue = (_enemiesCharacteristicsManager.CurrentEnemiesData.speed * enemyTypeSpeedBonusPercent) / CommonValues.maxPercentAmount;
+
+        return percentValue;
     }
 }

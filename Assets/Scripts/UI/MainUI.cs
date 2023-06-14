@@ -46,6 +46,12 @@ public class MainUI : MonoBehaviour
         panelsDictionary[UIPanels.MenuButtonsUI].ShowPanel();
     }
 
+    public void ShowRoadmapUI()
+    {
+        ActivateMainCanvasPanel(UIPanels.RoadmapUI);
+        panelsDictionary[UIPanels.MenuButtonsUI].ShowPanel();
+    }
+
     public void PlayButtonPressed_ExecuteReaction()
     {
         ActivateMainCanvasPanel(UIPanels.GameLevelUI);
@@ -57,6 +63,16 @@ public class MainUI : MonoBehaviour
         ActivateMainCanvasPanel(UIPanels.RewardsUI);
         panelsDictionary[UIPanels.MenuButtonsUI].ShowPanel();
         _menuButtonsUI.ChangeScreenBlockingState(false);
+    }
+
+    public void ShowSkillsInfoUI()
+    {
+        panelsDictionary[UIPanels.SkillsInfoUI].ShowPanel();
+    }
+
+    public void HideSkillsInfoUI()
+    {
+        panelsDictionary[UIPanels.SkillsInfoUI].HidePanel();
     }
 
     public void ShowMenuButtonsUI()

@@ -22,6 +22,7 @@ public class SpawnEnemiesManager : MonoBehaviour
 
     private GameProcessManager _gameProcessManager;
     private PlayerExperienceManager _playerExperienceManager;
+    private ChaptersProgressManager _chaptersProgressManager;
 
     private bool canSpawnEnemies = true;
 
@@ -41,10 +42,12 @@ public class SpawnEnemiesManager : MonoBehaviour
 
     #region Zenject
     [Inject]
-    private void Construct(GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager)
+    private void Construct(GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager, 
+                           ChaptersProgressManager chaptersProgressManager)
     {
         _gameProcessManager = gameProcessManager;
         _playerExperienceManager = playerExperienceManager;
+        _chaptersProgressManager = chaptersProgressManager;
     }
     #endregion Zenject
 
@@ -57,7 +60,18 @@ public class SpawnEnemiesManager : MonoBehaviour
     [ContextMenu("Spawn Boss")]
     public void SpawnBossAtCenter()
     {
-        spawner_AtGates.SpawnBoss(PoolItemsTypes.Zombie_Boss);
+        if(_chaptersProgressManager.FinishedChaptersCounter == 0)
+        {
+            spawner_AtGates.SpawnBoss(PoolItemsTypes.Zombie_Boss);
+        }
+        else if (_chaptersProgressManager.FinishedChaptersCounter == 1)
+        {
+            spawner_AtGates.SpawnBoss(PoolItemsTypes.Orc_Boss);
+        }
+        else
+        {
+            spawner_AtGates.SpawnBoss(PoolItemsTypes.Demon_Boss);
+        }
     }
 
     public void SpawnEnemiesWave()
@@ -106,6 +120,7 @@ public class SpawnEnemiesManager : MonoBehaviour
 
         enemiesOnMapList.Clear();
         defeatedEnemiesCounter = 0;
+        Debug.Log($"Stop Enemies Spawn");
 
         StartCoroutine(StopEnemySpawnCoroutine());
     }
@@ -144,6 +159,7 @@ public class SpawnEnemiesManager : MonoBehaviour
 
     private IEnumerator StopEnemySpawnCoroutine()
     {
+        Debug.Log($"Hide Enemies");
         yield return null;
         spawner_BeyondMap.ReturnAllEnemiesToPool();
         spawner_OnMap.ReturnAllEnemiesToPool();

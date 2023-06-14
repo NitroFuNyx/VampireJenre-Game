@@ -7,6 +7,7 @@ public class GameData
     public int languageIndex;
     public int coinsAmount;
     public int gemsAmount;
+    public int finishedChaptersCounter;
     public bool soundMuted;
     public bool canVibrate;
     public PlayerBasicCharacteristicsStruct playerCharacteristcsData;
@@ -17,6 +18,7 @@ public class GameData
         languageIndex = 0;
         coinsAmount = 0;
         gemsAmount = 0;
+        finishedChaptersCounter = 0;
         soundMuted = false;
         canVibrate = true;
 

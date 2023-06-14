@@ -10,10 +10,15 @@ public class EnemyCollisionsManager : MonoBehaviour
 
     private EnemiesCharacteristicsManager _enemiesCharacteristicsManager;
 
+    private BossDataHolder bossDataHolder;
+
     private Collider _collider;
     private bool canCheckCollisions = true;
+    private bool isBoss = false;
     private int startLayer;
-    
+
+    private float setStartCharacteristicsDelay = 1f;
+
     #region Events Declaration
     public event Action OnCharacterOutOfHp;
     public event Action OnDamageReceived;
@@ -40,17 +45,33 @@ public class EnemyCollisionsManager : MonoBehaviour
         DecreaseHp(startHp);
     }
 
-    public void CashExternalComponents(EnemiesCharacteristicsManager enemiesCharacteristicsManager)
+    public void CashExternalComponents(EnemiesCharacteristicsManager enemiesCharacteristicsManager, bool boss)
     {
         _enemiesCharacteristicsManager = enemiesCharacteristicsManager;
+        isBoss = boss;
 
-        startHp = enemiesCharacteristicsManager.CurrentEnemiesData.hp;
+        if(!isBoss)
+        {
+            startHp = enemiesCharacteristicsManager.CurrentEnemiesData.hp;
+        }
+        else
+        {
+            startHp = bossDataHolder.StartHp;
+        }
+
         currentHp = startHp;
     }
 
-    public void UpdateCharacteristics()
+    public void UpdateCharacteristics(bool battleHasNotStarted)
     {
-        startHp = _enemiesCharacteristicsManager.CurrentEnemiesData.hp;
+        if(!isBoss)
+        {
+            startHp = _enemiesCharacteristicsManager.CurrentEnemiesData.hp;
+            if(battleHasNotStarted)
+            {
+                currentHp = startHp;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -138,6 +159,13 @@ public class EnemyCollisionsManager : MonoBehaviour
         else
         {
             Debug.LogWarning($"There is no Collider component attached to {gameObject}", gameObject);
+        }
+
+        if(TryGetComponent(out BossDataHolder data))
+        {
+            bossDataHolder = data;
+            startHp = bossDataHolder.StartHp;
+            currentHp = startHp;
         }
     }
 

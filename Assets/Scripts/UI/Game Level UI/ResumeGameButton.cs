@@ -17,6 +17,6 @@ public class ResumeGameButton : ButtonInteractionHandler
     public override void ButtonActivated()
     {
         _systemTimeManager.ResumeGame();
-        StartCoroutine(ActivateDelayedButtonMethodCoroutine(_gameLevelUI.ResumeGame));
+        _gameLevelUI.ResumeGame();
     }
 }

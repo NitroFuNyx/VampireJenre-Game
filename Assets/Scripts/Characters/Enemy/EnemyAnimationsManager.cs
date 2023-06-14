@@ -7,6 +7,7 @@ public class EnemyAnimationsManager : MonoBehaviour
 
     #region Events Declaration
     public event Action OnDieAnimationFinished;
+    public event Action OnGetHitAnimationFinished;
     #endregion Events Declaration
 
     private void Awake()
@@ -36,8 +37,18 @@ public class EnemyAnimationsManager : MonoBehaviour
         animator.SetTrigger(EnemyAnimations.Die);
     }
 
+    public void SetAnimation_GetHit()
+    {
+        animator.SetTrigger(EnemyAnimations.GetHit);
+    }
+
     public void AnimationEvent_DieAnimationFinished_ExecuteReaction()
     {
         OnDieAnimationFinished?.Invoke();
+    }
+
+    public void AnimationEvent_GetHitAnimationFinished_ExecuteReaction()
+    {
+        OnGetHitAnimationFinished?.Invoke();
     }
 }

@@ -21,7 +21,7 @@ public class VictoryPanel : GameLevelSubPanel
 
     public void UpdatePlayerResults()
     {
-        coinsAmountForLevelText.text = $"{_resourcesManager.CurrentLevelCoinsAmount}";
+        coinsAmountForLevelText.text = $"{_resourcesManager.GetCoinsForLevelAmountWithSkillBonus()}";
         gemsAmountForLevelText.text = $"{_resourcesManager.CurrentLevelGemsAmount}";
     }
 }

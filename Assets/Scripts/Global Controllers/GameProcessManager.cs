@@ -13,7 +13,6 @@ public class GameProcessManager : MonoBehaviour
     [Space]
     [SerializeField] private float currentMapProgress = 0;
     [SerializeField] private float upgradeProgressValue = 100;
-
     [Header("Skills")]
     [Space]
     [SerializeField] private List<GameObject> skillsObjectsList = new List<GameObject>();
@@ -77,6 +76,11 @@ public class GameProcessManager : MonoBehaviour
 
     public void StartGame()
     {
+        for (int i = 0; i < skillsObjectsList.Count; i++)
+        {
+            skillsObjectsList[i].SetActive(false);
+        }
+
         battleStarted = true;
         OnGameStarted?.Invoke();
         player.StartGame();
@@ -94,6 +98,7 @@ public class GameProcessManager : MonoBehaviour
         }
     }
 
+    [ContextMenu("Win")]
     public void GameWin()
     {
         OnPlayerWon?.Invoke();

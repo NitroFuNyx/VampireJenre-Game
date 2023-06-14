@@ -18,6 +18,7 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private int bossSkillDarkMissilePoolSize = 15;
     [SerializeField] private int bossZombiePoolSize = 1;
     [SerializeField] private int pickableItemsPoolSize = 20;
+    [SerializeField] private int vfxPoolSize = 100;
 
 
     [Header("Active Pools")]
@@ -28,6 +29,9 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private PoolItem enemySkeletonPrefab;
     [SerializeField] private PoolItem enemyGhostPrefab;
     [SerializeField] private PoolItem enemyZombiePrefab;
+    [SerializeField] private PoolItem bossZombiePrefab;
+    [SerializeField] private PoolItem bossOrcPrefab;
+    [SerializeField] private PoolItem bossDemonPrefab;
     [Space]
     [SerializeField] private PoolItem skillMissilePrefab;
     [SerializeField] private PoolItem skillMeteorPrefab;
@@ -37,7 +41,6 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private PoolItem skillSingleShotPrefab;
     [SerializeField] private PoolItem skillPowerWaveShotPrefab;
     [SerializeField] private PoolItem bossSkillDarkMissilePrefab;
-    [SerializeField] private PoolItem bossZombiePrefab;
     [Space]
     [SerializeField] private PoolItem treasureChestPrefab;
     [SerializeField] private PoolItem skillScrollPrefab;
@@ -47,6 +50,8 @@ public class PoolItemsManager : MonoBehaviour
     [SerializeField] private PoolItem crystalOrangePrefab;
     [SerializeField] private PoolItem crystalPurplePrefab;
     [SerializeField] private PoolItem coinPrefab;
+    [Space]
+    [SerializeField] private PoolItem bloodPuddleVfxPrefab;
 
     private Dictionary<PoolItemsTypes, List<PoolItem>> itemsListsDictionary = new Dictionary<PoolItemsTypes, List<PoolItem>>();
     private Dictionary<PoolItemsTypes, Transform> itemsHoldersDictionary = new Dictionary<PoolItemsTypes, Transform>();
@@ -84,6 +89,9 @@ public class PoolItemsManager : MonoBehaviour
         CreatePool(enemySkeletonPrefab, "Enemy Skeleton", enemiesPoolSize);
         CreatePool(enemyGhostPrefab, "Enemy Ghost", enemiesPoolSize);
         CreatePool(enemyZombiePrefab, "Enemy Zombie", enemiesPoolSize);
+        CreatePool(bossZombiePrefab, "Boss Zombie", bossZombiePoolSize);
+        CreatePool(bossOrcPrefab, "Boss Orc", bossZombiePoolSize);
+        CreatePool(bossDemonPrefab, "Boss Demon", bossZombiePoolSize);
 
         CreatePool(skillSingleShotPrefab , "Skill Single Shot", skillSingleShotPoolSize);
         CreatePool(skillMissilePrefab, "Skill Missile ", skillMissilePoolSize);
@@ -93,7 +101,6 @@ public class PoolItemsManager : MonoBehaviour
         CreatePool(skillChainLightningPrefab , "Skill Chain lightning ", skillChainLightningPoolSize);
         CreatePool(skillPowerWaveShotPrefab , "Skill Power Wave ", skillPowerWavePoolSize);
         CreatePool(bossSkillDarkMissilePrefab , "Boss Skill Dark Missile", bossSkillDarkMissilePoolSize);
-        CreatePool(bossZombiePrefab , "Boss Zombie", bossZombiePoolSize);
 
         CreatePool(treasureChestPrefab, "Treasure Chest", pickableItemsPoolSize);
         CreatePool(skillScrollPrefab, "Skill Scroll", pickableItemsPoolSize);
@@ -103,6 +110,8 @@ public class PoolItemsManager : MonoBehaviour
         CreatePool(crystalOrangePrefab, "Orange Crystal", pickableItemsPoolSize);
         CreatePool(crystalPurplePrefab, "Purple Crystal", pickableItemsPoolSize);
         CreatePool(coinPrefab, "Coin", pickableItemsPoolSize);
+
+        CreatePool(bloodPuddleVfxPrefab, "Blood Puddle VFX", vfxPoolSize);
     }
 
     public PoolItem SpawnItemFromPool(PoolItemsTypes poolItemType, Vector3 _spawnPos, Quaternion _rotation, Transform _parent)

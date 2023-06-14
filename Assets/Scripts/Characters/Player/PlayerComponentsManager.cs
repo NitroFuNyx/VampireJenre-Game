@@ -47,6 +47,7 @@ public class PlayerComponentsManager : MonoBehaviour
         collisionsManager.OnDamageReceived += CollisionManager_DamageReceived_ExecuteReaction;
 
         _gameProcessManager.OnPlayerWon += GameProcessManager_PlayerWon_ExecuteReaction;
+        _gameProcessManager.OnLevelDataReset += GameProcessManager_LevelDataReset_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
@@ -55,14 +56,15 @@ public class PlayerComponentsManager : MonoBehaviour
         collisionsManager.OnDamageReceived -= CollisionManager_DamageReceived_ExecuteReaction;
 
         _gameProcessManager.OnPlayerWon -= GameProcessManager_PlayerWon_ExecuteReaction;
+        _gameProcessManager.OnLevelDataReset -= GameProcessManager_LevelDataReset_ExecuteReaction;
     }
 
     private void CollisionManager_PlayerOutOfHp_ExecuteReaction()
     {
         _gameProcessManager.GameLost_ExecuteReaction();
         movementManager.ChaneCanMoveState(false);
-        movementManager.ResetComponent();
-        collisionsManager.ResetComponent();
+        //movementManager.ResetComponent();
+        //collisionsManager.ResetComponent();
         collisionsManager.StopRegeneration();
     }
 
@@ -74,8 +76,14 @@ public class PlayerComponentsManager : MonoBehaviour
     private void GameProcessManager_PlayerWon_ExecuteReaction()
     {
         movementManager.ChaneCanMoveState(false);
+        //movementManager.ResetComponent();
+        //collisionsManager.ResetComponent();
+        collisionsManager.StopRegeneration();
+    }
+
+    private void GameProcessManager_LevelDataReset_ExecuteReaction()
+    {
         movementManager.ResetComponent();
         collisionsManager.ResetComponent();
-        collisionsManager.StopRegeneration();
     }
 }
