@@ -20,6 +20,8 @@ public class RewardsManager : MonoBehaviour, IDataPersistance
     public bool FreeRewardSpinUsed { get => freeRewardSpinUsed;}
     public bool RewardForAdSpinUsed { get => rewardForAdSpinUsed;}
 
+    public event System.Action OnSpinButtonUpdateRequired;
+
     private void Awake()
     {
         _dataPersistanceManager.AddObjectToSaveSystemObjectsList(this);
@@ -116,6 +118,13 @@ public class RewardsManager : MonoBehaviour, IDataPersistance
             freeRewardSpinUsed = false;
             rewardForAdSpinUsed = false;
             _dataPersistanceManager.SaveGame();
+        }
+        else
+        {
+            if(freeRewardSpinUsed || rewardForAdSpinUsed)
+            {
+                OnSpinButtonUpdateRequired?.Invoke();
+            }
         }
     }
 }
