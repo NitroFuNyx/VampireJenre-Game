@@ -18,6 +18,7 @@ public class RewardWheelSpinner : MonoBehaviour
     [SerializeField] private Transform pointer;
 
     private MenuButtonsUI _menuButtonsUI;
+    private SystemTimeManager _systemTimeManager;
 
     private List<RewardObject> updatedRewardsList = new List<RewardObject>();
 
@@ -34,6 +35,9 @@ public class RewardWheelSpinner : MonoBehaviour
 
     private bool canSpin = true;
     private bool isSpinning = false;
+
+    private bool freeSpinUsed = false;
+    private bool adSpinUsed = false;
 
     #region Events Declartation
     public event System.Action<RewardObject> OnRewardDefined;
@@ -78,14 +82,20 @@ public class RewardWheelSpinner : MonoBehaviour
 
     #region Zenject
     [Inject]
-    private void Construct(MenuButtonsUI menuButtonsUI)
+    private void Construct(MenuButtonsUI menuButtonsUI, SystemTimeManager systemTimeManager)
     {
         _menuButtonsUI = menuButtonsUI;
+        _systemTimeManager = systemTimeManager;
     }
     #endregion Zenject
 
     public void Spin()
     {
+        //if(_systemTimeManager.NewDay && )
+        //{
+
+        //}
+
         if(canSpin)
         {
             canSpin = false;

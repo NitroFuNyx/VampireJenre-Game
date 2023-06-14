@@ -8,6 +8,7 @@ public class GameData
     public int coinsAmount;
     public int gemsAmount;
     public int finishedChaptersCounter;
+    public int lastDayPlaying;
     public bool soundMuted;
     public bool canVibrate;
     public bool blockAdsOptionPurchased;
@@ -20,6 +21,7 @@ public class GameData
         coinsAmount = 0;
         gemsAmount = 0;
         finishedChaptersCounter = 0;
+        lastDayPlaying = 0;
         soundMuted = false;
         canVibrate = true;
         blockAdsOptionPurchased = false;
