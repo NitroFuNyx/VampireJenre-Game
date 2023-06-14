@@ -7,18 +7,19 @@ public class UpgradeSkillButton : ButtonInteractionHandler
     [Header("Upgrade Type")]
     [Space]
     [SerializeField] private bool doubleUpgrade = false;
+    [Header("Panels")]
+    [Space]
+    [SerializeField] private SkillUpgradeDisplayPanel skillUpgradeDisplayPanel;
 
     private SkillsManager _skillsManager;
 
-    private SkillUpgradeDisplayPanel skillUpgradeDisplayPanel;
-
-    private void Start()
-    {
-        if(transform.parent.TryGetComponent(out SkillUpgradeDisplayPanel panel))
-        {
-            skillUpgradeDisplayPanel = panel;
-        }
-    }
+    //private void Start()
+    //{
+    //    if(transform.parent.TryGetComponent(out SkillUpgradeDisplayPanel panel))
+    //    {
+    //        skillUpgradeDisplayPanel = panel;
+    //    }
+    //}
 
     #region Zenject
     [Inject]
