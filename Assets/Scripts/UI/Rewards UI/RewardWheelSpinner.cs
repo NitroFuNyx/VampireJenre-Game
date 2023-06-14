@@ -18,7 +18,7 @@ public class RewardWheelSpinner : MonoBehaviour
     [SerializeField] private Transform pointer;
 
     private MenuButtonsUI _menuButtonsUI;
-    private SystemTimeManager _systemTimeManager;
+    private RewardsManager _rewardsManager;
 
     private List<RewardObject> updatedRewardsList = new List<RewardObject>();
 
@@ -35,9 +35,6 @@ public class RewardWheelSpinner : MonoBehaviour
 
     private bool canSpin = true;
     private bool isSpinning = false;
-
-    private bool freeSpinUsed = false;
-    private bool adSpinUsed = false;
 
     #region Events Declartation
     public event System.Action<RewardObject> OnRewardDefined;
@@ -82,21 +79,30 @@ public class RewardWheelSpinner : MonoBehaviour
 
     #region Zenject
     [Inject]
-    private void Construct(MenuButtonsUI menuButtonsUI, SystemTimeManager systemTimeManager)
+    private void Construct(MenuButtonsUI menuButtonsUI, RewardsManager rewardsManager)
     {
         _menuButtonsUI = menuButtonsUI;
-        _systemTimeManager = systemTimeManager;
+        _rewardsManager = rewardsManager;
     }
     #endregion Zenject
 
+    public void PressSpinButton()
+    {
+        if (!_rewardsManager.FreeRewardSpinUsed)
+        {
+            _rewardsManager.UseFreeRewardSpin();
+            Spin();
+        }
+        else if(_rewardsManager.FreeRewardSpinUsed && !_rewardsManager.RewardForAdSpinUsed)
+        {
+            _rewardsManager.UseRewardSpinForAd();
+            Spin();
+        }
+    }
+
     public void Spin()
     {
-        //if(_systemTimeManager.NewDay && )
-        //{
-
-        //}
-
-        if(canSpin)
+        if (canSpin)
         {
             canSpin = false;
             _menuButtonsUI.ChangeScreenBlockingState(true);

@@ -17,7 +17,7 @@ public class SpinButton : ButtonInteractionHandler
         if(_rewardWheelSpinner.CanSpin)
         {
             ShowAnimation_ButtonPressed();
-            _rewardWheelSpinner.Spin();
+            _rewardWheelSpinner.PressSpinButton();
         }
     }
 }

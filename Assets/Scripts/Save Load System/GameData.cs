@@ -12,6 +12,8 @@ public class GameData
     public bool soundMuted;
     public bool canVibrate;
     public bool blockAdsOptionPurchased;
+    public bool freeRewardSpinUsed;
+    public bool rewardForAdSpinUsed;
     public PlayerBasicCharacteristicsStruct playerCharacteristcsData;
     public List<TalentLevelStruct> skillsLevelsList;
 
@@ -25,6 +27,8 @@ public class GameData
         soundMuted = false;
         canVibrate = true;
         blockAdsOptionPurchased = false;
+        freeRewardSpinUsed = false;
+        rewardForAdSpinUsed = false;
 
         playerCharacteristcsData = new PlayerBasicCharacteristicsStruct();
         skillsLevelsList = new List<TalentLevelStruct>();
