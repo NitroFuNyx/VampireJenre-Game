@@ -1,7 +1,13 @@
+using UnityEngine;
+using System.Collections;
 using Zenject;
 
 public class MenuButton : ButtonInteractionHandler
 {
+    [Header("Button Type")]
+    [Space]
+    [SerializeField] bool loosePanelButton = false;
+
     private MainUI _mainUI;
     private GameProcessManager _gameProcessManager;
 
@@ -16,6 +22,23 @@ public class MenuButton : ButtonInteractionHandler
 
     public override void ButtonActivated()
     {
+        if(loosePanelButton && !_gameProcessManager.PlayerRecoveryOptionUsed)
+        {
+            Debug.Log($"Loose Without Get Up");
+            _gameProcessManager.GameLost_ExecuteReaction();
+            StartCoroutine(ReturnToMenuCoroutine());
+        }
+        else
+        {
+            Debug.Log($"Menu");
+            _mainUI.ShowMainScreen();
+            _gameProcessManager.ResetLevelDataWithSaving();
+        }
+    }
+
+    private IEnumerator ReturnToMenuCoroutine()
+    {
+        yield return null;
         _mainUI.ShowMainScreen();
         _gameProcessManager.ResetLevelDataWithSaving();
     }

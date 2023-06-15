@@ -27,14 +27,17 @@ public class GameProcessManager : MonoBehaviour
     private TreasureChestInfoPanel _treasureChestInfoPanel;
 
     private bool battleStarted = false;
+    private bool playerRecoveryOptionUsed = false;
 
     private int mapProgressDelta = 1;
 
     public bool BattleStarted { get => battleStarted; private set => battleStarted = value; }
+    public bool PlayerRecoveryOptionUsed { get => playerRecoveryOptionUsed; private set => playerRecoveryOptionUsed = value; }
 
     #region Events Declaration
     public event Action OnGameStarted;
     public event Action OnPlayerLost;
+    public event Action OnPlayerRecoveryOptionUsed;
     public event Action OnPlayerWon;
     public event Action OnLevelDataReset;
     public event Action<float, float> OnMapProgressChanged;
@@ -118,12 +121,32 @@ public class GameProcessManager : MonoBehaviour
     {
         OnLevelDataReset?.Invoke();
         ResetMapData();
+        playerRecoveryOptionUsed = false;
     }
 
+    [ContextMenu("Loose")]
     public void GameLost_ExecuteReaction()
     {
-        OnPlayerLost?.Invoke();
+        StartCoroutine(PauseGameWithDelayCoroutine());
+
+        if(playerRecoveryOptionUsed)
+        {
+            Debug.Log($"Player Lost");
+            OnPlayerLost?.Invoke();
+        }
+        else
+        {
+            Debug.Log($"Player Out Of Hp");
+            _gameLevelUI.ShowLoosePanelUI();
+        }
         //ResetMapData();
+    }
+
+    public void UsePlayerRecoveryOption()
+    {
+        playerRecoveryOptionUsed = true;
+        OnPlayerRecoveryOptionUsed?.Invoke();
+        _systemTimeManager.ResumeGame();
     }
 
     private void ResetMapProgress()

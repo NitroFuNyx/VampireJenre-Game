@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion Zenject
 
-    public void ChaneCanMoveState(bool canMove)
+    public void ChangeCanMoveState(bool canMove)
     {
         this.canMove = canMove;
     }

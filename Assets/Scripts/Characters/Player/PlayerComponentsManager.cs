@@ -36,7 +36,7 @@ public class PlayerComponentsManager : MonoBehaviour
 
     public void StartGame()
     {
-        movementManager.ChaneCanMoveState(true);
+        movementManager.ChangeCanMoveState(true);
         collisionsManager.ResetComponent();
         collisionsManager.StartRegeneration();
     }
@@ -48,6 +48,7 @@ public class PlayerComponentsManager : MonoBehaviour
 
         _gameProcessManager.OnPlayerWon += GameProcessManager_PlayerWon_ExecuteReaction;
         _gameProcessManager.OnLevelDataReset += GameProcessManager_LevelDataReset_ExecuteReaction;
+        _gameProcessManager.OnPlayerRecoveryOptionUsed += GameProcessManager_OnPlayerRecoveryOptionUsed_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
@@ -57,14 +58,14 @@ public class PlayerComponentsManager : MonoBehaviour
 
         _gameProcessManager.OnPlayerWon -= GameProcessManager_PlayerWon_ExecuteReaction;
         _gameProcessManager.OnLevelDataReset -= GameProcessManager_LevelDataReset_ExecuteReaction;
+        _gameProcessManager.OnPlayerRecoveryOptionUsed -= GameProcessManager_OnPlayerRecoveryOptionUsed_ExecuteReaction;
     }
 
     private void CollisionManager_PlayerOutOfHp_ExecuteReaction()
     {
         _gameProcessManager.GameLost_ExecuteReaction();
-        movementManager.ChaneCanMoveState(false);
-        //movementManager.ResetComponent();
-        //collisionsManager.ResetComponent();
+        movementManager.ChangeCanMoveState(false);
+
         collisionsManager.StopRegeneration();
     }
 
@@ -73,11 +74,15 @@ public class PlayerComponentsManager : MonoBehaviour
         _hapticManager.Vibrate();
     }
 
+    private void GameProcessManager_OnPlayerRecoveryOptionUsed_ExecuteReaction()
+    {
+        StartGame();
+    }
+
     private void GameProcessManager_PlayerWon_ExecuteReaction()
     {
-        movementManager.ChaneCanMoveState(false);
-        //movementManager.ResetComponent();
-        //collisionsManager.ResetComponent();
+        movementManager.ChangeCanMoveState(false);
+
         collisionsManager.StopRegeneration();
     }
 
