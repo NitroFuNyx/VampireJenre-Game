@@ -33,7 +33,6 @@ private AdsController adsController;
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize((InitializationStatus status) => 
         {
-            RequestBanner();
         });
     }
     
@@ -51,12 +50,14 @@ private AdsController adsController;
 
     private void SubscribeEvents()
     {
-        adsController.LoadBannerAd += RequestBanner;
+        adsController.LoadBannerAd += ShowAd;
+        adsController.DeleteBannerAd += DestroyAd;
     }
 
     private void UnSubscribeEvents()
     {
-        adsController.LoadBannerAd -= RequestBanner;
+        adsController.LoadBannerAd -= ShowAd;
+        adsController.DeleteBannerAd -= DestroyAd;
 
     }
 
@@ -77,9 +78,13 @@ private AdsController adsController;
           0.25f * Screen.height,
           0.7f * Screen.width,
           0.3f * Screen.height);
-        GUI.Label(textOutputRect, "Adaptive Banner Example");
     }
 
+    private void ShowAd()
+    {
+        RequestBanner();
+
+    }
     private void RequestBanner()
     {
         // These ad units are configured to always serve test ads.
