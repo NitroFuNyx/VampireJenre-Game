@@ -21,8 +21,8 @@ public class AdsRewardedSetup : MonoBehaviour
         
         MobileAds.Initialize((InitializationStatus initStatus) =>
         {
-            RegisterEventHandlers(rewardedAd);
             LoadRewardedAd();
+            RegisterEventHandlers(rewardedAd);
         });
     }
 
