@@ -4,7 +4,8 @@ using UnityEngine;
 public class AdsController : MonoBehaviour
 {
     public event Action LoadInterstitialAd;
-    public event Action LoadRewardedAd;
+    public event Action<Action> LoadRewardedAd;
+    public event Action OnRewardAdViewed;
     public event Action LoadBannerAd;
     public event Action DeleteBannerAd;
 
@@ -14,7 +15,7 @@ public class AdsController : MonoBehaviour
     }
     public void LoadRewarded()
     {
-        LoadRewardedAd?.Invoke();
+        LoadRewardedAd?.Invoke(GiveAReward);
     }
     public void LoadBanner()
     {
@@ -23,5 +24,10 @@ public class AdsController : MonoBehaviour
     public void DestroyBanner()
     {
         DeleteBannerAd?.Invoke();
+    }
+
+    public void GiveAReward()
+    {
+        OnRewardAdViewed?.Invoke();
     }
 }

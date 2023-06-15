@@ -2,9 +2,14 @@ using System;
 using GoogleMobileAds;
 using GoogleMobileAds.Api;
 using UnityEngine;
+using Zenject;
 
 public class AdsInterstitialSetup : MonoBehaviour
 {
+    
+    private InterstitialAd interstitialAd;
+    private AdsController adsController;
+    
 #if UNITY_ANDROID
     //private string _adUnitId = "ca-app-pub-3940256099942544/1033173712";
     private string _adUnitId = "ca-app-pub-4398823708131797/4227292415";
@@ -19,12 +24,43 @@ public class AdsInterstitialSetup : MonoBehaviour
         MobileAds.Initialize((InitializationStatus initStatus) =>
         {
             LoadInterstitialAd();
+            RegisterEventHandlers(interstitialAd);
         });
     }
     // These ad units are configured to always serve test ads.
+    private void OnEnable()
+    {
+        SubscribeEvents();
+    }
 
+    private void OnDisable()
+    {
+        UnSubscribeEvents();
+    }
 
-    private InterstitialAd interstitialAd;
+    #region Subscribe events
+
+    private void SubscribeEvents()
+    {
+        adsController.LoadInterstitialAd += ShowAd;
+    }
+
+    private void UnSubscribeEvents()
+    {
+        adsController.LoadInterstitialAd -= ShowAd;
+
+    }
+
+    #endregion
+    #region Zenject
+    [Inject]
+    private void InjectDependencies(AdsController adsController)
+    {
+        this.adsController = adsController;
+    }
+    #endregion
+
+   
 
     /// <summary>
     /// Loads the interstitial ad.
@@ -60,7 +96,7 @@ public class AdsInterstitialSetup : MonoBehaviour
                           + ad.GetResponseInfo());
 
                 interstitialAd = ad;
-                RegisterEventHandlers(ad);
+                
             });
     }
     /// <summary>

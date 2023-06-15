@@ -1,9 +1,12 @@
 using System;
 using GoogleMobileAds.Api;
 using UnityEngine;
-                
+using Zenject;
+
 public class AdsRewardedSetup : MonoBehaviour
 {
+    private RewardedAd rewardedAd;
+    private AdsController adsController;
 #if UNITY_ANDROID
     //private string _adUnitId = "ca-app-pub-3940256099942544/5224354917";
     private string _adUnitId = "ca-app-pub-4398823708131797/5025314860";
@@ -18,18 +21,45 @@ public class AdsRewardedSetup : MonoBehaviour
         
         MobileAds.Initialize((InitializationStatus initStatus) =>
         {
+            RegisterEventHandlers(rewardedAd);
             LoadRewardedAd();
         });
     }
+
+    private void OnEnable()
+    {
+        SubscribeEvents();
+    }
+
+    private void OnDisable()
+    {
+        UnSubscribeEvents();
+    }
+
     // These ad units are configured to always serve test ads.
+    private void SubscribeEvents()
+    {
+        adsController.LoadRewardedAd += ShowRewardedAd;
+    }
 
+    private void UnSubscribeEvents()
+    {
+        adsController.LoadRewardedAd -= ShowRewardedAd;
 
-    private RewardedAd rewardedAd;
+    }
+    #region Zenject
+    [Inject]
+    private void InjectDependencies(AdsController adsController)
+    {
+        this.adsController = adsController;
+    }
+    #endregion
+    
 
     /// <summary>
     /// Loads the rewarded ad.
     /// </summary>
-    public void LoadRewardedAd()
+    private void LoadRewardedAd()
     {
         // Clean up the old ad before loading a new one.
         if (rewardedAd != null)
@@ -62,7 +92,7 @@ public class AdsRewardedSetup : MonoBehaviour
                 rewardedAd = ad;
             });
     }
-    public void ShowRewardedAd(Action OnComplete)
+    private void ShowRewardedAd(Action onPlayerRewarded)
     {
         const string rewardMsg =
             "Rewarded ad rewarded the user. Type: {0}, amount: {1}.";
@@ -71,12 +101,10 @@ public class AdsRewardedSetup : MonoBehaviour
         {
             rewardedAd.Show((Reward reward) =>
             {
-                LoadRewardedAd();
-
-                // TODO: Reward the user.
-                OnComplete.Invoke();
+                onPlayerRewarded?.Invoke();
             });
         }
+        LoadRewardedAd();
     }
     
     private void RegisterEventHandlers(RewardedAd ad)

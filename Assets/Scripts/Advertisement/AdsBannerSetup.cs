@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using GoogleMobileAds;
 using GoogleMobileAds.Api;
 using UnityEngine;
+using Zenject;
 
 public class AdsBannerSetup : MonoBehaviour
 {
     
 private BannerView _bannerView;
+private AdsController adsController;
 
-    // Use this for initialization
+// Use this for initialization
     void Start()
     {
         
@@ -34,6 +36,38 @@ private BannerView _bannerView;
             RequestBanner();
         });
     }
+    
+    private void OnEnable()
+    {
+        SubscribeEvents();
+    }
+
+    private void OnDisable()
+    {
+        UnSubscribeEvents();
+    }
+
+    #region Subscribe events
+
+    private void SubscribeEvents()
+    {
+        adsController.LoadBannerAd += RequestBanner;
+    }
+
+    private void UnSubscribeEvents()
+    {
+        adsController.LoadBannerAd -= RequestBanner;
+
+    }
+
+    #endregion
+    #region Zenject
+    [Inject]
+    private void InjectDependencies(AdsController adsController)
+    {
+        this.adsController = adsController;
+    }
+    #endregion
 
     public void OnGUI()
     {
