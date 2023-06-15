@@ -4,7 +4,12 @@ using Zenject;
 
 public class AdsManager : MonoBehaviour, IDataPersistance
 {
+    [Header("Ad Possibilities")]
+    [Space]
+    [SerializeField] private float levelUpAdChance = 25f;
+
     private DataPersistanceManager _dataPersistanceManager;
+    private PlayerExperienceManager _playerExperienceManager;
 
     private bool blockAdsOptionPurchased = false;
 
@@ -18,11 +23,22 @@ public class AdsManager : MonoBehaviour, IDataPersistance
         _dataPersistanceManager.AddObjectToSaveSystemObjectsList(this);
     }
 
+    private void Start()
+    {
+        _playerExperienceManager.OnPlayerGotNewLevel += PlayerExperienceManager_OnPlayerGottNewLevel_ExecuteReaction;
+    }
+
+    private void OnDestroy()
+    {
+        _playerExperienceManager.OnPlayerGotNewLevel -= PlayerExperienceManager_OnPlayerGottNewLevel_ExecuteReaction;
+    }
+
     #region Zenject
     [Inject]
-    private void Construct(DataPersistanceManager dataPersistanceManager)
+    private void Construct(DataPersistanceManager dataPersistanceManager, PlayerExperienceManager playerExperienceManager)
     {
         _dataPersistanceManager = dataPersistanceManager;
+        _playerExperienceManager = playerExperienceManager;
     }
     #endregion Zenject
 
@@ -63,5 +79,15 @@ public class AdsManager : MonoBehaviour, IDataPersistance
         }
 
         return activeConnection;
+    }
+
+    private void PlayerExperienceManager_OnPlayerGottNewLevel_ExecuteReaction()
+    {
+        float adIndex = UnityEngine.Random.Range(0, CommonValues.maxPercentAmount);
+
+        if(adIndex < levelUpAdChance)
+        {
+            // show ad
+        }
     }
 }
