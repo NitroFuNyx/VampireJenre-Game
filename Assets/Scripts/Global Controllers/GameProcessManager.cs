@@ -142,6 +142,11 @@ public class GameProcessManager : MonoBehaviour
         //ResetMapData();
     }
 
+    public void GameLostSecondTime_ExecuteReaction()
+    {
+        OnPlayerLost?.Invoke();
+    }
+
     public void UsePlayerRecoveryOption()
     {
         playerRecoveryOptionUsed = true;

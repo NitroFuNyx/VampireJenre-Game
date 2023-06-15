@@ -138,6 +138,10 @@ public class SpawnEnemiesManager : MonoBehaviour
     private void GameProcessManager_PlayerLost_ExecuteReaction()
     {
         StopEnemySpawn();
+
+        spawner_BeyondMap.ReturnAllEnemiesToPool();
+        spawner_OnMap.ReturnAllEnemiesToPool();
+        spawner_AtGates.ReturnAllEnemiesToPool();
     }
 
     private void GameProcessManager_PlayerWon_ExecuteReaction()
