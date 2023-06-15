@@ -93,12 +93,12 @@ public class MainUI : MonoBehaviour
 
     private void SubscribeOnEvents()
     {
-        _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
+        
     }
 
     private void UnsubscribeFromEvents()
     {
-        _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
+        
     }
 
     private void FillPanelsListAndDictionary()
@@ -142,10 +142,5 @@ public class MainUI : MonoBehaviour
     private void MainLoaderAnimationFinished_ExecuteReaction()
     {
         MenuButtonPressed_ExecuteReaction(UIPanels.MainScreenPanel);
-    }
-
-    private void GameProcessManager_PlayerLost_ExecuteReaction()
-    {
-        //MenuButtonPressed_ExecuteReaction(UIPanels.MainScreenPanel);
     }
 }

@@ -7,7 +7,7 @@ public enum Languages
 public enum UIPanels
 {
     MainLoaderPanel, MainScreenPanel, GameLevelUI , TalentWheelUI, ShopUI, CharacterSelectionUI, SettingsUI, MenuButtonsUI, RewardsUI, RoadmapUI,
-    SkillsInfoUI
+    SkillsInfoUI, AdsBlockerPurchasedUI
 }
 
 public enum SettingsPanels
@@ -17,7 +17,7 @@ public enum SettingsPanels
 
 public enum GameLevelPanels
 {
-    PausePanel, LevelUpgradePanel, VictoryPanel, LoosePanel, SkillScrollInfoPanel
+    PausePanel, LevelUpgradePanel, VictoryPanel, LoosePanel, SkillScrollInfoPanel, TreasureChestInfoPanel
 }
 
 public enum PoolItemsTypes
@@ -82,10 +82,15 @@ public enum PickableItemsCategories
 public enum PlayerCharacteristicsForTranslation
 {
     Damage, Range, Width, Cooldown, ProjectilesAmount, PostEffectDuration, JumpsAmount, Size, MovementSpeed, IncomeDamage, Regeneration, CritChance,
-    CritPower
+    CritPower, ItemDropChance, coinsSurplus
 }
 
 public enum ResourcesSaveTypes
 {
     GeneralAmount, CurrentLevelAmount
+}
+
+public enum TreasureChestItems
+{
+    Skill, Gems, Coins
 }

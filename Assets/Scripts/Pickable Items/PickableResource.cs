@@ -12,7 +12,7 @@ public class PickableResource : PickableItem
 
     private bool canMove = false;
 
-    private float moveSpeed = 2f;
+    private float moveSpeed = 3.5f;
 
     private void Start()
     {

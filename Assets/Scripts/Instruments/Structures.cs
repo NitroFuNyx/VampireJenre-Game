@@ -24,6 +24,7 @@ public struct TalentDataStruct
     public TalentsIndexes talentIndex;
     public PassiveCharacteristicsTypes passiveSkillType;
     public SkillUpgradesTypes skillUpgradeType;
+    public PlayerCharacteristicsForTranslation talentNameForTranslation;
     public string talentDescribtion;
     public float upgradePercent;
     public Sprite talentSprite;
@@ -196,14 +197,15 @@ public struct PassiveSkillUpgradeDataStruct
 public struct ActiveSkillsTranslationDataStruct
 {
     public ActiveSkills skill;
-    public List<PlayerCharacteristicsForTranslation> skillDescribtionTexts; 
+    public List<SkillUpgradeValuesStruct> skillDescribtionTexts;
 }
 
 [Serializable]
 public struct PassiveSkillsTranslationDataStruct
 {
     public PassiveSkills skill;
-    public List<PlayerCharacteristicsForTranslation> skillDescribtionTexts;
+    public List<SkillUpgradeValuesStruct> skillDescribtionTexts;
+    //public float upgradeValue;
 }
 
 [Serializable]
@@ -212,4 +214,19 @@ public struct EnemyDataStruct
     public float hp;
     public float damage;
     public float speed;
+}
+
+[Serializable]
+public struct SkillUpgradeValuesStruct
+{
+    public PlayerCharacteristicsForTranslation characteristic;
+    public float upgradeValue;
+}
+
+[Serializable]
+public struct TreasureChestResourceDataStruct
+{
+    public ResourcesTypes resourceType;
+    public int resourceAmount;
+    public Sprite resourceSprite;
 }

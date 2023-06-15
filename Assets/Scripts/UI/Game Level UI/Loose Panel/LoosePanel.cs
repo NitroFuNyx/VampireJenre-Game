@@ -26,4 +26,9 @@ public class LoosePanel : GameLevelSubPanel
         defeatedEnemyCounterText.text = $"{_spawnEnemiesManager.DefeatedEnemiesCounter}";
         coinsAmountForLevelText.text = $"{_resourcesManager.CurrentLevelCoinsAmount}";
     }
+
+    public void GetUpButtonPressed_ExecuteReaction()
+    {
+
+    }
 }

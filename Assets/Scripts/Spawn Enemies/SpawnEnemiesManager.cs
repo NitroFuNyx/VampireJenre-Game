@@ -72,11 +72,21 @@ public class SpawnEnemiesManager : MonoBehaviour
         {
             spawner_AtGates.SpawnBoss(PoolItemsTypes.Demon_Boss);
         }
+
+        canSpawnEnemies = false;
+
+        StopAllCoroutines();
     }
 
     public void SpawnEnemiesWave()
     {
         if(_playerExperienceManager.CurrentLevel < 10 && enemiesOnMapList.Count < maxEnemiesAmount)
+        {
+            spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave);
+            spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave);
+            spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave);
+        }
+        else if(_playerExperienceManager.CurrentLevel >= 10)
         {
             spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave);
             spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave);

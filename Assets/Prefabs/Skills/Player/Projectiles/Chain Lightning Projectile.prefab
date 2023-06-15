@@ -64,9 +64,6 @@ MonoBehaviour:
   speed: 14
   _dynamicEnvironment: {fileID: 0}
   projectileRigidBody: {fileID: 8555089699058945031}
-  targetLayers:
-    serializedVersion: 2
-    m_Bits: 3584
   radius: 86.34
   jumpsCount: 3
 --- !u!54 &8555089699058945031
@@ -188,6 +185,11 @@ PrefabInstance:
     - target: {fileID: 4199218180146718, guid: 2f2314147e0ac4f449c6328e4cfc72c6, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82515374117216522, guid: 2f2314147e0ac4f449c6328e4cfc72c6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198791676421599458, guid: 2f2314147e0ac4f449c6328e4cfc72c6,
         type: 3}

@@ -1,7 +1,8 @@
 using UnityEngine;
+using System.Collections;
 using Zenject;
 
-public class RewardsManager : MonoBehaviour
+public class RewardsManager : MonoBehaviour, IDataPersistance
 {
     [Header("Scriptable Objects")]
     [Space]
@@ -10,8 +11,21 @@ public class RewardsManager : MonoBehaviour
     private RewardWheelSpinner _rewardWheelSpinner;
     private ResourcesManager _resourcesManager;
     private DataPersistanceManager _dataPersistanceManager;
+    private SystemTimeManager _systemTimeManager;
+
+    [SerializeField] private bool freeRewardSpinUsed = false;
+    [SerializeField] private bool rewardForAdSpinUsed = false;
 
     public DailyRewardsSO DailyRewardsSO { get => dailyRewardsSO; }
+    public bool FreeRewardSpinUsed { get => freeRewardSpinUsed;}
+    public bool RewardForAdSpinUsed { get => rewardForAdSpinUsed;}
+
+    public event System.Action OnSpinButtonUpdateRequired;
+
+    private void Awake()
+    {
+        _dataPersistanceManager.AddObjectToSaveSystemObjectsList(this);
+    }
 
     private void Start()
     {
@@ -25,13 +39,31 @@ public class RewardsManager : MonoBehaviour
 
     #region Zenject
     [Inject]
-    private void Construct(RewardWheelSpinner rewardWheelSpinner, ResourcesManager resourcesManager, DataPersistanceManager dataPersistanceManager)
+    private void Construct(RewardWheelSpinner rewardWheelSpinner, ResourcesManager resourcesManager,
+                           DataPersistanceManager dataPersistanceManager, SystemTimeManager systemTimeManager)
     {
         _rewardWheelSpinner = rewardWheelSpinner;
         _resourcesManager = resourcesManager;
         _dataPersistanceManager = dataPersistanceManager;
+        _systemTimeManager = systemTimeManager;
     }
     #endregion Zenject
+
+    #region Save/Load Methods
+    public void LoadData(GameData data)
+    {
+        freeRewardSpinUsed = data.freeRewardSpinUsed;
+        rewardForAdSpinUsed = data.rewardForAdSpinUsed;
+
+        StartCoroutine(SetRewardsSpinDataCoroutine());
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.freeRewardSpinUsed = freeRewardSpinUsed;
+        data.rewardForAdSpinUsed = rewardForAdSpinUsed;
+    }
+    #endregion Save/Load Methods
 
     public RewardDataStruct GetRewardData(RewardObject rewardObject)
     {
@@ -49,6 +81,18 @@ public class RewardsManager : MonoBehaviour
         return targetRewardData;
     }
 
+    public void UseFreeRewardSpin()
+    {
+        freeRewardSpinUsed = true;
+        _dataPersistanceManager.SaveGame();
+    }
+
+    public void UseRewardSpinForAd()
+    {
+        rewardForAdSpinUsed = true;
+        _dataPersistanceManager.SaveGame();
+    }
+
     private void RewardDefined_ExecuteReaction(RewardObject rewardObject)
     {
         RewardDataStruct currentRewardData = GetRewardData(rewardObject);
@@ -63,5 +107,24 @@ public class RewardsManager : MonoBehaviour
         }
 
         _dataPersistanceManager.SaveGame();
+    }
+
+    private IEnumerator SetRewardsSpinDataCoroutine()
+    {
+        yield return null;
+
+        if(_systemTimeManager.NewDay)
+        {
+            freeRewardSpinUsed = false;
+            rewardForAdSpinUsed = false;
+            _dataPersistanceManager.SaveGame();
+        }
+        else
+        {
+            if(freeRewardSpinUsed || rewardForAdSpinUsed)
+            {
+                OnSpinButtonUpdateRequired?.Invoke();
+            }
+        }
     }
 }

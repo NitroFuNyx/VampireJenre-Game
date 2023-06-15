@@ -57,6 +57,8 @@ public class SkillsTranslationHandler : MonoBehaviour
         skillsCharacteristicsDictionary_English.Add(PlayerCharacteristicsForTranslation.Regeneration, _languageManager.EnglishTextsHolder.data.skillCharacteristicsTexts.regenerationText);
         skillsCharacteristicsDictionary_English.Add(PlayerCharacteristicsForTranslation.CritChance, _languageManager.EnglishTextsHolder.data.skillCharacteristicsTexts.critChanceText);
         skillsCharacteristicsDictionary_English.Add(PlayerCharacteristicsForTranslation.CritPower, _languageManager.EnglishTextsHolder.data.skillCharacteristicsTexts.critPowerText);
+        skillsCharacteristicsDictionary_English.Add(PlayerCharacteristicsForTranslation.ItemDropChance, _languageManager.EnglishTextsHolder.data.skillCharacteristicsTexts.itemDropChanceText);
+        skillsCharacteristicsDictionary_English.Add(PlayerCharacteristicsForTranslation.coinsSurplus, _languageManager.EnglishTextsHolder.data.skillCharacteristicsTexts.coinsSurplusText);
     }
 
     private void FillUkrainianDictionariy()
@@ -74,5 +76,7 @@ public class SkillsTranslationHandler : MonoBehaviour
         skillsCharacteristicsDictionary_Ukrainian.Add(PlayerCharacteristicsForTranslation.Regeneration, _languageManager.UkrainianTextsHolder.data.skillCharacteristicsTexts.regenerationText);
         skillsCharacteristicsDictionary_Ukrainian.Add(PlayerCharacteristicsForTranslation.CritChance, _languageManager.UkrainianTextsHolder.data.skillCharacteristicsTexts.critChanceText);
         skillsCharacteristicsDictionary_Ukrainian.Add(PlayerCharacteristicsForTranslation.CritPower, _languageManager.UkrainianTextsHolder.data.skillCharacteristicsTexts.critPowerText);
+        skillsCharacteristicsDictionary_Ukrainian.Add(PlayerCharacteristicsForTranslation.ItemDropChance, _languageManager.UkrainianTextsHolder.data.skillCharacteristicsTexts.itemDropChanceText);
+        skillsCharacteristicsDictionary_Ukrainian.Add(PlayerCharacteristicsForTranslation.coinsSurplus, _languageManager.UkrainianTextsHolder.data.skillCharacteristicsTexts.coinsSurplusText);
     }
 }

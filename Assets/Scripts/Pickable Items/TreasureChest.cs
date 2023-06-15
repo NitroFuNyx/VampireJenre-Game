@@ -3,7 +3,8 @@ public class TreasureChest : PickableItem
 {
     protected override void PlayerCollision_ExecuteReaction()
     {
-        poolItemComponent.ResourcesManager.AddResourceForPickingUpTreasureChest();
+        //poolItemComponent.ResourcesManager.AddResourceForPickingUpTreasureChest();
+        poolItemComponent.PickableItemsManager.CollectTreasureChest();
         poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
     }
 

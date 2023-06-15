@@ -53,6 +53,7 @@ public class GameLevelUI : MainCanvasPanel
         _timersManager.OnStopwatchValueChanged += TimersManager_OnStopwatchValueChanged_ExecuteReaction;
         _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
         _gameProcessManager.OnPlayerWon += GameProcessManager_PlayerWon_ExecuteReaction;
+        _gameProcessManager.OnPlayerRecoveryOptionUsed += GameProcessManager_PlayerRecoveryOptionUsed_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
@@ -60,6 +61,7 @@ public class GameLevelUI : MainCanvasPanel
         _timersManager.OnStopwatchValueChanged -= TimersManager_OnStopwatchValueChanged_ExecuteReaction;
         _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
         _gameProcessManager.OnPlayerWon -= GameProcessManager_PlayerWon_ExecuteReaction;
+        _gameProcessManager.OnPlayerRecoveryOptionUsed -= GameProcessManager_PlayerRecoveryOptionUsed_ExecuteReaction;
     }
 
     private void CashComponents()
@@ -124,6 +126,13 @@ public class GameLevelUI : MainCanvasPanel
         subpanelsDictionary[GameLevelPanels.SkillScrollInfoPanel].HidePanel();
     }
 
+    public void ShowLoosePanelUI()
+    {
+        HideAllSubpanels();
+        loosePanel.UpdatePlayerResults();
+        subpanelsDictionary[GameLevelPanels.LoosePanel].ShowPanel();
+    }
+
     private void HideAllSubpanels()
     {
         for(int i = 0; i < subpanelsList.Count; i++)
@@ -137,11 +146,14 @@ public class GameLevelUI : MainCanvasPanel
         stopwatchValueText.text = timeString;
     }
 
-    private void GameProcessManager_PlayerLost_ExecuteReaction()
+    private void GameProcessManager_PlayerRecoveryOptionUsed_ExecuteReaction()
     {
         HideAllSubpanels();
-        loosePanel.UpdatePlayerResults();
-        subpanelsDictionary[GameLevelPanels.LoosePanel].ShowPanel();
+    }
+
+    private void GameProcessManager_PlayerLost_ExecuteReaction()
+    {
+        ShowLoosePanelUI();
     }
 
     private void GameProcessManager_PlayerWon_ExecuteReaction()

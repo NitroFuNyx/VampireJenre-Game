@@ -16,8 +16,12 @@ public class RewardWheelSpinner : MonoBehaviour
     [Space]
     [SerializeField] private Transform wheelImage;
     [SerializeField] private Transform pointer;
+    [Header("Buttons")]
+    [Space]
+    [SerializeField] private SpinButton spinButton;
 
     private MenuButtonsUI _menuButtonsUI;
+    private RewardsManager _rewardsManager;
 
     private List<RewardObject> updatedRewardsList = new List<RewardObject>();
 
@@ -47,6 +51,8 @@ public class RewardWheelSpinner : MonoBehaviour
         {
             updatedRewardsList.Add(rewardsList[i]);
         }
+
+        _rewardsManager.OnSpinButtonUpdateRequired += RewardsManager_OnSpinButtonUpdateRequired_ExecuteReaction;
     }
 
     private void Update()
@@ -76,17 +82,39 @@ public class RewardWheelSpinner : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        _rewardsManager.OnSpinButtonUpdateRequired -= RewardsManager_OnSpinButtonUpdateRequired_ExecuteReaction;
+    }
+
     #region Zenject
     [Inject]
-    private void Construct(MenuButtonsUI menuButtonsUI)
+    private void Construct(MenuButtonsUI menuButtonsUI, RewardsManager rewardsManager)
     {
         _menuButtonsUI = menuButtonsUI;
+        _rewardsManager = rewardsManager;
     }
     #endregion Zenject
 
+    public void PressSpinButton()
+    {
+        if (!_rewardsManager.FreeRewardSpinUsed)
+        {
+            _rewardsManager.UseFreeRewardSpin();
+            spinButton.SetState_FreeSpinUsed();
+            Spin();
+        }
+        else if(_rewardsManager.FreeRewardSpinUsed && !_rewardsManager.RewardForAdSpinUsed)
+        {
+            _rewardsManager.UseRewardSpinForAd();
+            spinButton.SetState_AllSpinsUsed();
+            Spin();
+        }
+    }
+
     public void Spin()
     {
-        if(canSpin)
+        if (canSpin)
         {
             canSpin = false;
             _menuButtonsUI.ChangeScreenBlockingState(true);
@@ -101,5 +129,17 @@ public class RewardWheelSpinner : MonoBehaviour
         updatedRewardsList = updatedRewardsList.OrderBy(s => Vector3.Distance(s.transform.position, pointer.position)).ToList();
         currentReward = updatedRewardsList[0];
         OnRewardDefined?.Invoke(currentReward);
+    }
+
+    private void RewardsManager_OnSpinButtonUpdateRequired_ExecuteReaction()
+    {
+        if(_rewardsManager.FreeRewardSpinUsed && _rewardsManager.RewardForAdSpinUsed)
+        {
+            spinButton.SetState_AllSpinsUsed();
+        }
+        else if(_rewardsManager.FreeRewardSpinUsed)
+        {
+            spinButton.SetState_FreeSpinUsed();
+        }
     }
 }

@@ -33,6 +33,7 @@ public class DataPersistanceManager : MonoBehaviour
         FileDataHandler.Write(gameData); // create json file and write default data
 
         _talentsManager.InitializeTalentsLevelsData(gameData);
+        InitializeDayOfPlayingData(gameData);
 
         SaveGame(); // save actual Unity data set in json file
     }
@@ -66,6 +67,11 @@ public class DataPersistanceManager : MonoBehaviour
     public void AddObjectToSaveSystemObjectsList(IDataPersistance saveSystemObject)
     {
         saveSystemDataObjectsList.Add(saveSystemObject);
+    }
+
+    private void InitializeDayOfPlayingData(GameData gameData)
+    {
+        gameData.lastDayPlaying = DateConstants.newGameIndexForData;
     }
 
     private IEnumerator LoadStartDataCoroutine()

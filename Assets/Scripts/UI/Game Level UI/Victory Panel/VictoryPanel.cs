@@ -24,4 +24,12 @@ public class VictoryPanel : GameLevelSubPanel
         coinsAmountForLevelText.text = $"{_resourcesManager.GetCoinsForLevelAmountWithSkillBonus()}";
         gemsAmountForLevelText.text = $"{_resourcesManager.CurrentLevelGemsAmount}";
     }
+
+    public void MultiplyCoinsButtonPressed_ExecuteReaction()
+    {
+        // show ad
+        _resourcesManager.MultiplyCurrentLevelCoinsAmount();
+        coinsAmountForLevelText.text = $"{_resourcesManager.CurrentLevelCoinsAmount}";
+        gemsAmountForLevelText.text = $"{_resourcesManager.CurrentLevelGemsAmount}";
+    }
 }

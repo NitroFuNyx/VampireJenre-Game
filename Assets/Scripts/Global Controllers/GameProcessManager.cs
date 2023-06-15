@@ -24,16 +24,20 @@ public class GameProcessManager : MonoBehaviour
     private PlayerExperienceManager _playerExperienceManager;
     private PickableItemsManager _pickableItemsManager;
     private GameLevelUI _gameLevelUI;
+    private TreasureChestInfoPanel _treasureChestInfoPanel;
 
     private bool battleStarted = false;
+    private bool playerRecoveryOptionUsed = false;
 
     private int mapProgressDelta = 1;
 
     public bool BattleStarted { get => battleStarted; private set => battleStarted = value; }
+    public bool PlayerRecoveryOptionUsed { get => playerRecoveryOptionUsed; private set => playerRecoveryOptionUsed = value; }
 
     #region Events Declaration
     public event Action OnGameStarted;
     public event Action OnPlayerLost;
+    public event Action OnPlayerRecoveryOptionUsed;
     public event Action OnPlayerWon;
     public event Action OnLevelDataReset;
     public event Action<float, float> OnMapProgressChanged;
@@ -48,6 +52,9 @@ public class GameProcessManager : MonoBehaviour
         _playerExperienceManager.OnPlayerGotNewLevel += PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction;
 
         _pickableItemsManager.OnSkillScrollCollected += PickableItemsManager_SkillScrollCollected_ExecuteReaction;
+        _pickableItemsManager.OnTreasureChestCollected += PickableItemsManager_TreasureChestCollected_ExecuteReaction;
+
+        _treasureChestInfoPanel.OnTreasureChestItemsCollected += TreasureChestInfoPanel_OnTreasureChestItemsCollected_ExecuteReaction;
     }
 
     private void OnDestroy()
@@ -57,12 +64,16 @@ public class GameProcessManager : MonoBehaviour
         _playerExperienceManager.OnPlayerGotNewLevel -= PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction;
 
         _pickableItemsManager.OnSkillScrollCollected -= PickableItemsManager_SkillScrollCollected_ExecuteReaction;
+        _pickableItemsManager.OnTreasureChestCollected -= PickableItemsManager_TreasureChestCollected_ExecuteReaction;
+
+        _treasureChestInfoPanel.OnTreasureChestItemsCollected -= TreasureChestInfoPanel_OnTreasureChestItemsCollected_ExecuteReaction;
     }
 
     #region Zenject
     [Inject]
     private void Construct(SpawnEnemiesManager spawnEnemiesManager, MainUI mainUI, SystemTimeManager systemTimeManager, SkillsManager skillsManager,
-                           PlayerExperienceManager playerExperienceManager, PickableItemsManager pickableItemsManager, GameLevelUI gameLevelUI)
+                           PlayerExperienceManager playerExperienceManager, PickableItemsManager pickableItemsManager, GameLevelUI gameLevelUI,
+                           TreasureChestInfoPanel treasureChestInfoPanel)
     {
         _spawnEnemiesManager = spawnEnemiesManager;
         _mainUI = mainUI;
@@ -71,6 +82,7 @@ public class GameProcessManager : MonoBehaviour
         _playerExperienceManager = playerExperienceManager;
         _pickableItemsManager = pickableItemsManager;
         _gameLevelUI = gameLevelUI;
+        _treasureChestInfoPanel = treasureChestInfoPanel;
     }
     #endregion Zenject
 
@@ -102,18 +114,39 @@ public class GameProcessManager : MonoBehaviour
     public void GameWin()
     {
         OnPlayerWon?.Invoke();
-        ResetMapData();
+        //ResetMapData();
     }
 
     public void ResetLevelDataWithSaving()
     {
         OnLevelDataReset?.Invoke();
+        ResetMapData();
+        playerRecoveryOptionUsed = false;
     }
 
+    [ContextMenu("Loose")]
     public void GameLost_ExecuteReaction()
     {
-        OnPlayerLost?.Invoke();
-        ResetMapData();
+        StartCoroutine(PauseGameWithDelayCoroutine());
+
+        if(playerRecoveryOptionUsed)
+        {
+            Debug.Log($"Player Lost");
+            OnPlayerLost?.Invoke();
+        }
+        else
+        {
+            Debug.Log($"Player Out Of Hp");
+            _gameLevelUI.ShowLoosePanelUI();
+        }
+        //ResetMapData();
+    }
+
+    public void UsePlayerRecoveryOption()
+    {
+        playerRecoveryOptionUsed = true;
+        OnPlayerRecoveryOptionUsed?.Invoke();
+        _systemTimeManager.ResumeGame();
     }
 
     private void ResetMapProgress()
@@ -141,6 +174,16 @@ public class GameProcessManager : MonoBehaviour
     private void PickableItemsManager_SkillScrollCollected_ExecuteReaction()
     {
         StartCoroutine(PauseGameWithDelayCoroutine());
+    }
+
+    private void PickableItemsManager_TreasureChestCollected_ExecuteReaction(TreasureChestItems _, TreasureChestItems __)
+    {
+        StartCoroutine(PauseGameWithDelayCoroutine());
+    }
+
+    private void TreasureChestInfoPanel_OnTreasureChestItemsCollected_ExecuteReaction()
+    {
+        _systemTimeManager.ResumeGame();
     }
 
     private void ResetMapData()

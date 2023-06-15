@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -11,6 +12,7 @@ public class PickableItemsManager : MonoBehaviour
     [Header("Spawn Items Main Data")]
     [Space] 
     [SerializeField] private int itemsSpawnAmount = 3;
+    [SerializeField] private float spawnItemsDelay = 20f;
     [Header("Holders")]
     [Space]
     [SerializeField] private Transform gemsHolder;
@@ -25,8 +27,11 @@ public class PickableItemsManager : MonoBehaviour
     private PlayerCollisionsManager _player;
     private GameProcessManager _gameProcessManager;
 
+    private bool canSpawnItems = false;
+
     #region Events Declaration
     public event System.Action OnSkillScrollCollected;
+    public event System.Action<TreasureChestItems, TreasureChestItems> OnTreasureChestCollected;
     #endregion Events Declaration
 
     private void Start()
@@ -58,18 +63,22 @@ public class PickableItemsManager : MonoBehaviour
     [ContextMenu("Spawn Items")]
     public void SpawnItems()
     {
-        for(int i = 0; i < itemsSpawnAmount; i++)
+        if(GetAvailablePositionsListForItemToSpawn().Count > 0)
         {
-            List<PlayerVisionBorderDetector> spawnPosList = GetAvailablePositionsListForItemToSpawn();
-
-            if (spawnPosList.Count > 0)
+            for (int i = 0; i < itemsSpawnAmount; i++)
             {
-                PlayerVisionBorderDetector spawnPos = spawnPosList[0];
+                List<PlayerVisionBorderDetector> spawnPosList = GetAvailablePositionsListForItemToSpawn();
 
-                PoolItem item = _poolItemsManager.SpawnItemFromPool(GetPoolItemTypeToSpawn(), spawnPos.transform.position, Quaternion.identity, spawnPos.transform);
-                takenSpawnPositionsList.Add(spawnPos);
-                availableSpawnPositionsList.Remove(spawnPos);
-                allPickableItemsOnMap.Add(item);
+                if (spawnPosList.Count > 0)
+                {
+                    int spawnPosIndex = Random.Range(0, spawnPosList.Count);
+                    PlayerVisionBorderDetector spawnPos = spawnPosList[spawnPosIndex];
+
+                    PoolItem item = _poolItemsManager.SpawnItemFromPool(GetPoolItemTypeToSpawn(), spawnPos.transform.position, Quaternion.identity, spawnPos.transform);
+                    takenSpawnPositionsList.Add(spawnPos);
+                    availableSpawnPositionsList.Remove(spawnPos);
+                    allPickableItemsOnMap.Add(item);
+                }
             }
         }
     }
@@ -77,6 +86,14 @@ public class PickableItemsManager : MonoBehaviour
     public void CollectSkillScroll()
     {
         OnSkillScrollCollected?.Invoke();
+    }
+
+    public void CollectTreasureChest()
+    {
+        TreasureChestItems firstTreasure = GetRandomTreasureChestItem();
+        TreasureChestItems secondTreasure = GetRandomTreasureChestItem();
+        
+        OnTreasureChestCollected?.Invoke(firstTreasure, secondTreasure);
     }
 
     public void SpawnResourceForKillingEnemy(Vector3 spawnPos)
@@ -176,7 +193,8 @@ public class PickableItemsManager : MonoBehaviour
 
     private void ResetItems()
     {
-        Debug.Log($"All Pickable Items {allPickableItemsOnMap.Count}");
+        canSpawnItems = false;
+        StopAllCoroutines();
 
         for(int i = 0; i < allPickableItemsOnMap.Count; i++)
         {
@@ -196,6 +214,24 @@ public class PickableItemsManager : MonoBehaviour
 
     private void GameProcessManager_GameStarted_ExecuteReaction()
     {
-        SpawnItems();
+        //SpawnItems();
+        canSpawnItems = true;
+        StartCoroutine(SpawnItemsCoroutine());
+    }
+
+    private TreasureChestItems GetRandomTreasureChestItem()
+    {
+        int itemIndex = Random.Range(0, System.Enum.GetValues(typeof(TreasureChestItems)).Length);
+        TreasureChestItems item = (TreasureChestItems)itemIndex;
+        return item;
+    }
+
+    private IEnumerator SpawnItemsCoroutine()
+    {
+        while(canSpawnItems)
+        {
+            SpawnItems();
+            yield return new WaitForSeconds(spawnItemsDelay);
+        }
     }
 }

@@ -19,6 +19,7 @@ namespace Localization
         public TalentsUIData talentsUITexts;
         public RoadmapUIData roadmapUITexts;
         public SkillsInfoUIData skillsInfoUITexts;
+        public AdsBlockerPurchasedUIData adsBlockerPurchasedUITexts;
     }
 
     [Serializable]
@@ -95,6 +96,8 @@ namespace Localization
         public string regenerationText;
         public string critChanceText;
         public string critPowerText;
+        public string itemDropChanceText;
+        public string coinsSurplusText;
     }
 
     [Serializable]
@@ -144,5 +147,11 @@ namespace Localization
         public string increaseRangeText;
         public string increaseDamageText;
         public string increaseProjectilesAmountText;
+    }
+
+    [Serializable]
+    public class AdsBlockerPurchasedUIData
+    {
+        public string titleText;
     }
 }
