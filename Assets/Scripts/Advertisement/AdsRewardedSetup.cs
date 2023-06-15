@@ -23,7 +23,6 @@ public class AdsRewardedSetup : MonoBehaviour
         {
             LoadRewardedAd();
             RegisterEventHandlers(rewardedAd);
-
         });
     }
 
