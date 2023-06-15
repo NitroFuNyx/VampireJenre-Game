@@ -25,7 +25,8 @@ public class MenuButton : ButtonInteractionHandler
         if(loosePanelButton && !_gameProcessManager.PlayerRecoveryOptionUsed)
         {
             Debug.Log($"Loose Without Get Up");
-            _gameProcessManager.GameLost_ExecuteReaction();
+
+            _gameProcessManager.GameLostSecondTime_ExecuteReaction();
             StartCoroutine(ReturnToMenuCoroutine());
         }
         else

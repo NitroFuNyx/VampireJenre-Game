@@ -162,6 +162,7 @@ public class SkillsManager : MonoBehaviour
         _gameProcessManager.OnGameStarted += GameProcessManager_OnGameStarted_ExecuteReaction;
         _gameProcessManager.OnPlayerLost += GameProcessManager_OnPlayerLost_ExecuteReaction;
         _gameProcessManager.OnPlayerWon += GameProcessManager_OnPlayerWon_ExecuteReaction;
+        _gameProcessManager.OnLevelDataReset += GameProcessManager_OnLevelDataReset_ExecuteReaction;
 
         _playerExperienceManager.OnPlayerGotNewLevel += PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction;
 
@@ -173,6 +174,7 @@ public class SkillsManager : MonoBehaviour
         _gameProcessManager.OnGameStarted -= GameProcessManager_OnGameStarted_ExecuteReaction;
         _gameProcessManager.OnPlayerLost -= GameProcessManager_OnPlayerLost_ExecuteReaction;
         _gameProcessManager.OnPlayerWon -= GameProcessManager_OnPlayerWon_ExecuteReaction;
+        _gameProcessManager.OnLevelDataReset -= GameProcessManager_OnLevelDataReset_ExecuteReaction;
 
         _playerExperienceManager.OnPlayerGotNewLevel -= PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction;
 
@@ -347,6 +349,12 @@ public class SkillsManager : MonoBehaviour
     private void GameProcessManager_OnPlayerWon_ExecuteReaction()
     {
         
+    }
+
+    private void GameProcessManager_OnLevelDataReset_ExecuteReaction()
+    {
+        activeSkillsTakenList.Clear();
+        passiveSkillsTakenList.Clear();
     }
 
     private void PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction()
