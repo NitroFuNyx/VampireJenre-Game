@@ -24,7 +24,6 @@ public class AdsInterstitialSetup : MonoBehaviour
         MobileAds.Initialize((InitializationStatus initStatus) =>
         {
             LoadInterstitialAd();
-            RegisterEventHandlers(interstitialAd);
         });
     }
     // These ad units are configured to always serve test ads.
@@ -96,6 +95,8 @@ public class AdsInterstitialSetup : MonoBehaviour
                           + ad.GetResponseInfo());
 
                 interstitialAd = ad;
+                RegisterEventHandlers(interstitialAd);
+
                 
             });
     }

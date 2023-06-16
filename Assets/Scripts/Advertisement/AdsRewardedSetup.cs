@@ -22,7 +22,6 @@ public class AdsRewardedSetup : MonoBehaviour
         MobileAds.Initialize((InitializationStatus initStatus) =>
         {
             LoadRewardedAd();
-            RegisterEventHandlers(rewardedAd);
         });
     }
 
@@ -90,6 +89,8 @@ public class AdsRewardedSetup : MonoBehaviour
                           + ad.GetResponseInfo());
 
                 rewardedAd = ad;
+                RegisterEventHandlers(rewardedAd);
+
             });
     }
     private void ShowRewardedAd(Action onPlayerRewarded)
