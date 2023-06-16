@@ -66,12 +66,15 @@ public class PoolItemsManager : MonoBehaviour
     private Transform dynamicEnvironment;
     private SpawnEnemiesManager _spawnEnemiesManager;
     private EnemiesCharacteristicsManager _enemiesCharacteristicsManager;
+    private AdsManager _adsManager;
+    private AdsController _adsController;
 
     #region Zenject
     [Inject]
     private void Construct(ResourcesManager resourcesManager, GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager,
                            PlayerCharacteristicsManager playerCharacteristicsManager, PickableItemsManager pickableItemsManager,
-                           Transform dynamicEnvironment, SpawnEnemiesManager spawnEnemiesManager, EnemiesCharacteristicsManager enemiesCharacteristicsManager )
+                           Transform dynamicEnvironment, SpawnEnemiesManager spawnEnemiesManager, EnemiesCharacteristicsManager enemiesCharacteristicsManager,
+                           AdsManager adsManager, AdsController adsController)
     {
         this.dynamicEnvironment = dynamicEnvironment;
         this.playerCharacteristicsManager = playerCharacteristicsManager;
@@ -81,6 +84,8 @@ public class PoolItemsManager : MonoBehaviour
         _pickableItemsManager = pickableItemsManager;
         _spawnEnemiesManager = spawnEnemiesManager;
         _enemiesCharacteristicsManager = enemiesCharacteristicsManager;
+        _adsManager = adsManager;
+        _adsController = adsController;
     }
     #endregion Zenject
 
@@ -179,7 +184,8 @@ public class PoolItemsManager : MonoBehaviour
             PoolItem poolItem = Instantiate(poolItemPrefab, Vector3.zero, Quaternion.identity, poolItemsParent.transform);
             poolItem.transform.localPosition = Vector3.zero;
             poolItem.CashComponents(this, _resourcesManager, _gameProcessManager, _playerExperienceManager,playerCharacteristicsManager,
-                                    _pickableItemsManager,dynamicEnvironment, _spawnEnemiesManager, _enemiesCharacteristicsManager);
+                                    _pickableItemsManager,dynamicEnvironment, _spawnEnemiesManager, _enemiesCharacteristicsManager,
+                                    _adsManager, _adsController);
             itemsList.Add(poolItem);
             poolItem.name = $"{itemName} {i}";
         }

@@ -19,6 +19,9 @@ public class PoolItem : MonoBehaviour
     private SpawnEnemiesManager _spawnEnemiesManager;
     private EnemiesCharacteristicsManager _enemiesCharacteristicsManager;
 
+    private AdsManager _adsManager;
+    private AdsController _adsController;
+
     public PoolItemsTypes PoolItemType { get => poolItemType;}
     public PoolItemsManager PoolItemsManager { get => _poolItemsManager; private set => _poolItemsManager = value; }
 
@@ -52,7 +55,7 @@ public class PoolItem : MonoBehaviour
     public void CashComponents(PoolItemsManager poolItemsManager, ResourcesManager resourcesManager, GameProcessManager gameProcessManager,
                                PlayerExperienceManager playerExperienceManager,PlayerCharacteristicsManager playerCharacteristicsManager,
                                PickableItemsManager pickableItemsManager, Transform dynamicEnvironment, SpawnEnemiesManager spawnEnemiesManager,
-                               EnemiesCharacteristicsManager enemiesCharacteristicsManager)
+                               EnemiesCharacteristicsManager enemiesCharacteristicsManager, AdsManager adsManager, AdsController adsController)
     {
         this.dynamicEnvironment = dynamicEnvironment;
         this.playerCharacteristicsManager = playerCharacteristicsManager;
@@ -63,5 +66,7 @@ public class PoolItem : MonoBehaviour
         _pickableItemsManager = pickableItemsManager;
         _spawnEnemiesManager = spawnEnemiesManager;
         _enemiesCharacteristicsManager = enemiesCharacteristicsManager;
+        _adsManager = adsManager;
+        _adsController = adsController;
     }
 }
