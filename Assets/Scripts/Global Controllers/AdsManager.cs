@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 using Zenject;
 
 public class AdsManager : MonoBehaviour, IDataPersistance
@@ -10,6 +11,7 @@ public class AdsManager : MonoBehaviour, IDataPersistance
 
     private DataPersistanceManager _dataPersistanceManager;
     private PlayerExperienceManager _playerExperienceManager;
+    private AdsController _adsController;
 
     private bool blockAdsOptionPurchased = false;
 
@@ -35,10 +37,12 @@ public class AdsManager : MonoBehaviour, IDataPersistance
 
     #region Zenject
     [Inject]
-    private void Construct(DataPersistanceManager dataPersistanceManager, PlayerExperienceManager playerExperienceManager)
+    private void Construct(DataPersistanceManager dataPersistanceManager, PlayerExperienceManager playerExperienceManager,
+                           AdsController adsController)
     {
         _dataPersistanceManager = dataPersistanceManager;
         _playerExperienceManager = playerExperienceManager;
+        _adsController = adsController;
     }
     #endregion Zenject
 
@@ -85,9 +89,10 @@ public class AdsManager : MonoBehaviour, IDataPersistance
     {
         float adIndex = UnityEngine.Random.Range(0, CommonValues.maxPercentAmount);
 
-        if(adIndex < levelUpAdChance)
-        {
-            // show ad
-        }
+        //if (adIndex < levelUpAdChance)
+        //{
+        _adsController.LoadInterstitial();
+        //show ad
+        //}
     }
 }
