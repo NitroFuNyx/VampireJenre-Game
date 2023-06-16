@@ -89,10 +89,9 @@ public class AdsManager : MonoBehaviour, IDataPersistance
     {
         float adIndex = UnityEngine.Random.Range(0, CommonValues.maxPercentAmount);
 
-        //if (adIndex < levelUpAdChance)
-        //{
-        _adsController.LoadInterstitial();
-        //show ad
-        //}
+        if (adIndex < levelUpAdChance)
+        {
+            _adsController.LoadInterstitial();
+        }
     }
 }
