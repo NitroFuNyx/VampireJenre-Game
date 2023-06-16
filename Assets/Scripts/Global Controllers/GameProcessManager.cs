@@ -25,6 +25,7 @@ public class GameProcessManager : MonoBehaviour
     private PickableItemsManager _pickableItemsManager;
     private GameLevelUI _gameLevelUI;
     private TreasureChestInfoPanel _treasureChestInfoPanel;
+    private AdsController _adsController;
 
     private bool battleStarted = false;
     private bool playerRecoveryOptionUsed = false;
@@ -55,6 +56,8 @@ public class GameProcessManager : MonoBehaviour
         _pickableItemsManager.OnTreasureChestCollected += PickableItemsManager_TreasureChestCollected_ExecuteReaction;
 
         _treasureChestInfoPanel.OnTreasureChestItemsCollected += TreasureChestInfoPanel_OnTreasureChestItemsCollected_ExecuteReaction;
+
+        _adsController.OnInterstialAdClosed += AdsController_InterstialAdClosed_ExecuteReaction;
     }
 
     private void OnDestroy()
@@ -67,13 +70,15 @@ public class GameProcessManager : MonoBehaviour
         _pickableItemsManager.OnTreasureChestCollected -= PickableItemsManager_TreasureChestCollected_ExecuteReaction;
 
         _treasureChestInfoPanel.OnTreasureChestItemsCollected -= TreasureChestInfoPanel_OnTreasureChestItemsCollected_ExecuteReaction;
+
+        _adsController.OnInterstialAdClosed -= AdsController_InterstialAdClosed_ExecuteReaction;
     }
 
     #region Zenject
     [Inject]
     private void Construct(SpawnEnemiesManager spawnEnemiesManager, MainUI mainUI, SystemTimeManager systemTimeManager, SkillsManager skillsManager,
                            PlayerExperienceManager playerExperienceManager, PickableItemsManager pickableItemsManager, GameLevelUI gameLevelUI,
-                           TreasureChestInfoPanel treasureChestInfoPanel)
+                           TreasureChestInfoPanel treasureChestInfoPanel, AdsController adsController)
     {
         _spawnEnemiesManager = spawnEnemiesManager;
         _mainUI = mainUI;
@@ -83,6 +88,7 @@ public class GameProcessManager : MonoBehaviour
         _pickableItemsManager = pickableItemsManager;
         _gameLevelUI = gameLevelUI;
         _treasureChestInfoPanel = treasureChestInfoPanel;
+        _adsController = adsController;
     }
     #endregion Zenject
 
@@ -189,6 +195,12 @@ public class GameProcessManager : MonoBehaviour
     private void TreasureChestInfoPanel_OnTreasureChestItemsCollected_ExecuteReaction()
     {
         _systemTimeManager.ResumeGame();
+    }
+
+    private void AdsController_InterstialAdClosed_ExecuteReaction()
+    {
+        Debug.Log($"Interstial Closed");
+        StartCoroutine(PauseGameWithDelayCoroutine());
     }
 
     private void ResetMapData()
