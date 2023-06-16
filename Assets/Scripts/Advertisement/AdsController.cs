@@ -30,4 +30,9 @@ public class AdsController : MonoBehaviour
     {
         OnRewardAdViewed?.Invoke();
     }
+
+    public void CloseInterstitial()
+    {
+        
+    }
 }

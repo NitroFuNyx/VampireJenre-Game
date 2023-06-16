@@ -158,6 +158,7 @@ public class AdsInterstitialSetup : MonoBehaviour
         // Raised when the ad closed full screen content.
         ad.OnAdFullScreenContentClosed += () =>
         {
+            adsController.CloseInterstitial();
             LoadInterstitialAd();
         };
         // Raised when the ad failed to open full screen content.
