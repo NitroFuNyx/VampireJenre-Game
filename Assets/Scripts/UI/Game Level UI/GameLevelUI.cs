@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Zenject;
@@ -15,10 +16,14 @@ public class GameLevelUI : MainCanvasPanel
     [Space]
     [SerializeField] private List<SkillUpgradeDisplayPanel> skillUpgradeDisplayPanelsList = new List<SkillUpgradeDisplayPanel>();
     [SerializeField] private SkillUpgradeDisplayPanel scrollSkillDisplayPanel;
+    [Header("Ad Buttons")]
+    [Space]
+    [SerializeField] private List<GameObject> adButtonsList = new List<GameObject>();
 
     private TimersManager _timersManager;
     private SystemTimeManager _systemTimeManager;
     private GameProcessManager _gameProcessManager;
+    private AdsManager _adsManager;
 
     private VictoryPanel victoryPanel;
     private LoosePanel loosePanel;
@@ -40,11 +45,13 @@ public class GameLevelUI : MainCanvasPanel
 
     #region Zenject
     [Inject]
-    private void Construct(TimersManager timersManager, SystemTimeManager systemTimeManager, GameProcessManager gameProcessManager)
+    private void Construct(TimersManager timersManager, SystemTimeManager systemTimeManager, GameProcessManager gameProcessManager,
+                           AdsManager adsManager)
     {
         _timersManager = timersManager;
         _systemTimeManager = systemTimeManager;
         _gameProcessManager = gameProcessManager;
+        _adsManager = adsManager;
     }
     #endregion Zenject
 
@@ -81,6 +88,11 @@ public class GameLevelUI : MainCanvasPanel
     public override void PanelActivated_ExecuteReaction()
     {
         HideAllSubpanels();
+
+        for (int i = 0; i < adButtonsList.Count; i++)
+        {
+            adButtonsList[i].SetActive(!_adsManager.BlockAdsOptionPurchased);
+        }
     }
 
     public override void PanelDeactivated_ExecuteReaction()
