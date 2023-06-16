@@ -19,16 +19,25 @@ public class GameLevelUI : MainCanvasPanel
     [Header("Ad Buttons")]
     [Space]
     [SerializeField] private List<GameObject> adButtonsList = new List<GameObject>();
+    [Header("Hp Bar")]
+    [Space]
+    [SerializeField] private Transform hpBar;
+    [SerializeField] private Transform hpBarPos_WithAdBanner;
+    [SerializeField] private Transform hpBarPos_WithoutAdBanner;
 
     private TimersManager _timersManager;
     private SystemTimeManager _systemTimeManager;
     private GameProcessManager _gameProcessManager;
     private AdsManager _adsManager;
+    private AdsController _adsController;
 
     private VictoryPanel victoryPanel;
     private LoosePanel loosePanel;
 
     private Dictionary<GameLevelPanels, GameLevelSubPanel> subpanelsDictionary = new Dictionary<GameLevelPanels, GameLevelSubPanel>();
+
+    private float hpBarHeightWithAdBanner = 265f;
+    private float hpBarHeightWithoutAd = 120f;
 
     private void Start()
     {
@@ -46,12 +55,13 @@ public class GameLevelUI : MainCanvasPanel
     #region Zenject
     [Inject]
     private void Construct(TimersManager timersManager, SystemTimeManager systemTimeManager, GameProcessManager gameProcessManager,
-                           AdsManager adsManager)
+                           AdsManager adsManager, AdsController adsController)
     {
         _timersManager = timersManager;
         _systemTimeManager = systemTimeManager;
         _gameProcessManager = gameProcessManager;
         _adsManager = adsManager;
+        _adsController = adsController;
     }
     #endregion Zenject
 
@@ -93,11 +103,21 @@ public class GameLevelUI : MainCanvasPanel
         {
             adButtonsList[i].SetActive(!_adsManager.BlockAdsOptionPurchased);
         }
+
+        if(!_adsManager.BlockAdsOptionPurchased)
+        {
+            _adsController.LoadBanner();
+            hpBar.position = new Vector3(hpBar.position.x, hpBarPos_WithAdBanner.position.y, hpBar.position.z);
+        }
+        else
+        {
+            hpBar.position = new Vector3(hpBar.position.x, hpBarPos_WithoutAdBanner.position.y, hpBar.position.z);
+        }
     }
 
     public override void PanelDeactivated_ExecuteReaction()
     {
-
+        _adsController.DestroyBanner();
     }
 
     public void ShowPausePanel()
