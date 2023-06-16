@@ -9,6 +9,8 @@ public class AdsController : MonoBehaviour
     public event Action LoadBannerAd;
     public event Action DeleteBannerAd;
 
+    public event Action OnInterstialAdClosed;
+
     public void LoadInterstitial()
     {
         LoadInterstitialAd?.Invoke();
@@ -33,6 +35,7 @@ public class AdsController : MonoBehaviour
 
     public void CloseInterstitial()
     {
-        
+        Debug.Log($"Close Interstial Event");
+        OnInterstialAdClosed?.Invoke();
     }
 }
