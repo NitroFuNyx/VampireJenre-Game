@@ -22,6 +22,8 @@ public class PoolItem : MonoBehaviour
     private AdsManager _adsManager;
     private AdsController _adsController;
 
+    private VFXManager _vfxManager;
+
     public PoolItemsTypes PoolItemType { get => poolItemType;}
     public PoolItemsManager PoolItemsManager { get => _poolItemsManager; private set => _poolItemsManager = value; }
 
@@ -36,6 +38,7 @@ public class PoolItem : MonoBehaviour
     public PickableItemsManager PickableItemsManager { get => _pickableItemsManager; private set => _pickableItemsManager = value; }
     public SpawnEnemiesManager SpawnEnemiesManager { get => _spawnEnemiesManager; private set => _spawnEnemiesManager = value; }
     public EnemiesCharacteristicsManager _EnemiesCharacteristicsManager { get => _enemiesCharacteristicsManager; private set => _enemiesCharacteristicsManager = value; }
+    public VFXManager VfxManager { get => _vfxManager; }
 
     #region Events Declaration
     public event Action OnItemResetRequired;
@@ -55,7 +58,8 @@ public class PoolItem : MonoBehaviour
     public void CashComponents(PoolItemsManager poolItemsManager, ResourcesManager resourcesManager, GameProcessManager gameProcessManager,
                                PlayerExperienceManager playerExperienceManager,PlayerCharacteristicsManager playerCharacteristicsManager,
                                PickableItemsManager pickableItemsManager, Transform dynamicEnvironment, SpawnEnemiesManager spawnEnemiesManager,
-                               EnemiesCharacteristicsManager enemiesCharacteristicsManager, AdsManager adsManager, AdsController adsController)
+                               EnemiesCharacteristicsManager enemiesCharacteristicsManager, AdsManager adsManager, AdsController adsController,
+                               VFXManager vfxManager)
     {
         this.dynamicEnvironment = dynamicEnvironment;
         this.playerCharacteristicsManager = playerCharacteristicsManager;
@@ -68,5 +72,6 @@ public class PoolItem : MonoBehaviour
         _enemiesCharacteristicsManager = enemiesCharacteristicsManager;
         _adsManager = adsManager;
         _adsController = adsController;
+        _vfxManager = vfxManager;
     }
 }
