@@ -42,6 +42,7 @@ public class AdsInterstitialSetup : MonoBehaviour
 
         });
         AppLovin.Initialize();
+        
     }
     // These ad units are configured to always serve test ads.
     private void OnEnable()
