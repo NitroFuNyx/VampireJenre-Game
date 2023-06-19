@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2098089033208720800}
   - component: {fileID: 1274777263316030897}
+  - component: {fileID: 3938941085594604146}
   m_Layer: 0
   m_Name: IAP Manager
   m_TagString: Untagged
@@ -44,3 +45,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 309e874cad6e18749b98aa8ae11d3eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3938941085594604146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8767507209237945529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f7dd963c1a8b427b96975fa211478a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  consumePurchase: 1
+  dontDestroyOnLoad: 1
+  onPurchaseComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1274777263316030897}
+        m_TargetAssemblyTypeName: IAPManager, Assembly-CSharp
+        m_MethodName: OnPurchaseComplete
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPurchaseFailed:
+    m_PersistentCalls:
+      m_Calls: []
