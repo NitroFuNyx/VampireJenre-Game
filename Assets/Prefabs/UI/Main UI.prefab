@@ -28725,7 +28725,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4745594715236899953}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -47833,6 +47833,10 @@ MonoBehaviour:
   scaleDuration: 0.3
   standartAudio: 1
   skillsType: 1
+  buttonActivatedSprite: {fileID: 21300000, guid: 61ec3eccde16d184ca881e3f901ca3d0,
+    type: 3}
+  buttonDeactivatedSprite: {fileID: 21300000, guid: fee9495cf742fa3408b47a9636cad6e5,
+    type: 3}
 --- !u!1 &8406606381605835087
 GameObject:
   m_ObjectHideFlags: 0
@@ -48335,6 +48339,10 @@ MonoBehaviour:
   scaleDuration: 0.3
   standartAudio: 1
   skillsType: 0
+  buttonActivatedSprite: {fileID: 21300000, guid: 61ec3eccde16d184ca881e3f901ca3d0,
+    type: 3}
+  buttonDeactivatedSprite: {fileID: 21300000, guid: fee9495cf742fa3408b47a9636cad6e5,
+    type: 3}
 --- !u!1 &8449144409515445821
 GameObject:
   m_ObjectHideFlags: 0
@@ -48476,7 +48484,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8451719773413442640}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0

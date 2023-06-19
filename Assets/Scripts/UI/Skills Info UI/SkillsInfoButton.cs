@@ -6,8 +6,22 @@ public class SkillsInfoButton : ButtonInteractionHandler
     [Header("Skills Type")]
     [Space]
     [SerializeField] private SkillBasicTypes skillsType;
+    [Header("Sprites")]
+    [Space]
+    [SerializeField] private Sprite buttonActivatedSprite;
+    [SerializeField] private Sprite buttonDeactivatedSprite;
 
     private SkillsInfoUI _skillsInfoUI;
+
+    private void Start()
+    {
+        _skillsInfoUI.OnCurrentSkillsInfoPanelChanged += SkillsInfoPanel_CurrentSkillsPanelChanged_ExecuteReaction;
+    }
+
+    private void OnDestroy()
+    {
+        _skillsInfoUI.OnCurrentSkillsInfoPanelChanged -= SkillsInfoPanel_CurrentSkillsPanelChanged_ExecuteReaction;
+    }
 
     #region Zenject
     [Inject]
@@ -21,5 +35,17 @@ public class SkillsInfoButton : ButtonInteractionHandler
     {
         ShowAnimation_ButtonPressed();
         _skillsInfoUI.ShowSkillsInfo(skillsType);
+    }
+
+    private void SkillsInfoPanel_CurrentSkillsPanelChanged_ExecuteReaction(SkillBasicTypes skillType)
+    {
+        if(this.skillsType == skillType)
+        {
+            buttonImage.sprite = buttonActivatedSprite;
+        }
+        else
+        {
+            buttonImage.sprite = buttonDeactivatedSprite;
+        }
     }
 }
