@@ -1,6 +1,7 @@
 using System;
 using GoogleMobileAds;
 using GoogleMobileAds.Api;
+using GoogleMobileAds.Api.Mediation.AppLovin;
 using UnityEngine;
 using Zenject;
 
@@ -21,10 +22,26 @@ public class AdsInterstitialSetup : MonoBehaviour
     public void Start()
     {
         // Initialize the Google Mobile Ads SDK.
-        MobileAds.Initialize((InitializationStatus initStatus) =>
+        MobileAds.Initialize(initStatus =>
         {
-            LoadInterstitialAd();
+            var map = initStatus.getAdapterStatusMap();
+            foreach (var (className,status) in map) {
+                switch (status.InitializationState) {
+                    case AdapterState.NotReady:
+                        Debug.Log(
+                            $"Ads - AdsManager - Adapter: {className} Description: {status.Description} status : not ready.");
+                        break;
+                    case AdapterState.Ready:
+                        Debug.Log(
+                            $"Ads - AdsManager - Adapter: {className} Description: {status.Description} status : ready");
+                        
+                        break;
+                }
+            }
+           // LoadInterstitialAd();
+
         });
+        AppLovin.Initialize();
     }
     // These ad units are configured to always serve test ads.
     private void OnEnable()

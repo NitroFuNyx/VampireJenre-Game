@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using GoogleMobileAds;
 using GoogleMobileAds.Api;
+using GoogleMobileAds.Api.Mediation.AppLovin;
 using UnityEngine;
 using Zenject;
 
@@ -31,9 +32,23 @@ private AdsController adsController;
         MobileAds.SetRequestConfiguration(requestConfiguration);
 
         // Initialize the Google Mobile Ads SDK.
-        MobileAds.Initialize((InitializationStatus status) => 
+        MobileAds.Initialize(initStatus =>
         {
+            var map = initStatus.getAdapterStatusMap();
+            foreach (var (className,status) in map) {
+                switch (status.InitializationState) {
+                    case AdapterState.NotReady:
+                        Debug.Log(
+                            $"Ads - AdsManager - Adapter: {className} Description: {status.Description} status : not ready.");
+                        break;
+                    case AdapterState.Ready:
+                        Debug.Log(
+                            $"Ads - AdsManager - Adapter: {className} Description: {status.Description} status : ready");
+                        break;
+                }
+            }
         });
+        AppLovin.Initialize();
     }
     
     private void OnEnable()

@@ -1,8 +1,16 @@
 using System;
+using GoogleMobileAds.Api.Mediation.AppLovin;
 using UnityEngine;
 
 public class AdsController : MonoBehaviour
 {
+    private void Awake()
+    {
+        AppLovin.SetHasUserConsent(true);
+    }
+
+    #region Events declaration
+
     public event Action LoadInterstitialAd;
     public event Action<Action> LoadRewardedAd;
     public event Action OnRewardAdViewed;
@@ -10,6 +18,8 @@ public class AdsController : MonoBehaviour
     public event Action DeleteBannerAd;
 
     public event Action OnInterstialAdClosed;
+
+    #endregion
 
     public void LoadInterstitial()
     {
