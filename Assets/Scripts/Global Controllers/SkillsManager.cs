@@ -17,7 +17,11 @@ public class SkillsManager : MonoBehaviour
     [Space]
     [SerializeField] private SkillsDisplayDataSO skillsDisplayDataSO;
     [SerializeField] private SkilllsDescribtionTextsTranslationSO skillsDescribtionTextsTranslationSO;
+    [Header("Skills objects")]
+    [Space]
+    [SerializeField] private List<GameObject> skillsObjectsList = new List<GameObject>();
 
+    
     private GameProcessManager _gameProcessManager;
     private GameLevelUI _gameLevelUI;
     private PlayerExperienceManager _playerExperienceManager;
@@ -26,6 +30,7 @@ public class SkillsManager : MonoBehaviour
 
     private List<ActiveSkills> activeSkillsUpgradedToMax = new List<ActiveSkills>();
     private List<PassiveSkills> passiveSkillsUpgradedToMax = new List<PassiveSkills>();
+    private SystemTimeManager _systemTimeManager;
 
     #region Events Declaration
     public event Action<int, int> OnSkillToUpgradeDefined;
@@ -50,8 +55,9 @@ public class SkillsManager : MonoBehaviour
     #region Zenject
     [Inject]
     private void Construct(GameProcessManager gameProcessManager, GameLevelUI gameLevelUI, PlayerExperienceManager playerExperienceManager, 
-                           PlayerCharacteristicsManager playerCharacteristicsManager, PickableItemsManager pickableItemsManager)
+                           PlayerCharacteristicsManager playerCharacteristicsManager, PickableItemsManager pickableItemsManager, SystemTimeManager systemTimeManager)
     {
+        _systemTimeManager = systemTimeManager;
         _gameProcessManager = gameProcessManager;
         _gameLevelUI = gameLevelUI;
         _playerExperienceManager = playerExperienceManager;
@@ -63,6 +69,7 @@ public class SkillsManager : MonoBehaviour
     public void DefineSkillToUpgrade(int skillCategoryIndex, int skillIndex)
     {
         OnSkillToUpgradeDefined?.Invoke(skillCategoryIndex, skillIndex);
+        UpgrageSkill(skillCategoryIndex, skillIndex);
         _gameLevelUI.HideUpgradePanel();
         _gameLevelUI.HideSkillScrollInfoPanel();
         Debug.Log($"{(SkillBasicTypes)skillCategoryIndex} {skillIndex}");
@@ -157,6 +164,17 @@ public class SkillsManager : MonoBehaviour
         OnUpgradedSkillVisualDataDefined?.Invoke(skillCategoryIndex, skillIndex, skillSprite);
     }
 
+    private void UpgrageSkill(int skillCategory, int skillIndex)//skill manager
+    {
+        //_systemTimeManager.ResumeGame();
+        if((SkillBasicTypes)skillCategory == SkillBasicTypes.Active)
+        {
+            Debug.Log($" SPAWNED:{ skillsObjectsList[skillIndex]} CATEGORY {skillCategory}");
+           Debug.Log($"Skill index = {skillIndex}");
+            skillsObjectsList[skillIndex].gameObject.SetActive(true);
+        }
+    }
+    
     private void SubscribeOnEvents()
     {
         _gameProcessManager.OnGameStarted += GameProcessManager_OnGameStarted_ExecuteReaction;
@@ -181,6 +199,13 @@ public class SkillsManager : MonoBehaviour
         _pickableItemsManager.OnSkillScrollCollected -= PickableItemsManager_SkillScrollCollected_ExecuteReaction;
     }
 
+    private void ResetSkillActivation()
+    {
+        for (int i = 0; i < skillsObjectsList.Count; i++)
+        {
+            skillsObjectsList[i].SetActive(false);
+        }
+    }
     private void ChooseFirstSkill()
     {
         List<UpgradeSkillData> upgradeSkillsDataList = new List<UpgradeSkillData>();
@@ -338,6 +363,10 @@ public class SkillsManager : MonoBehaviour
 
     private void GameProcessManager_OnGameStarted_ExecuteReaction()
     {
+        for (int i = 0; i < skillsObjectsList.Count; i++)
+        {
+            skillsObjectsList[i].SetActive(false);
+        }
         ChooseFirstSkill();
     }
 
@@ -353,6 +382,7 @@ public class SkillsManager : MonoBehaviour
 
     private void GameProcessManager_OnLevelDataReset_ExecuteReaction()
     {
+        ResetSkillActivation();
         activeSkillsTakenList.Clear();
         passiveSkillsTakenList.Clear();
     }

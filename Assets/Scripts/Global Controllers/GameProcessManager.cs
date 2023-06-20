@@ -15,7 +15,6 @@ public class GameProcessManager : MonoBehaviour
     [SerializeField] private float upgradeProgressValue = 100;
     [Header("Skills")]
     [Space]
-    [SerializeField] private List<GameObject> skillsObjectsList = new List<GameObject>();
 
     private SpawnEnemiesManager _spawnEnemiesManager;
     private MainUI _mainUI;
@@ -40,7 +39,7 @@ public class GameProcessManager : MonoBehaviour
     public event Action OnPlayerLost;
     public event Action OnPlayerRecoveryOptionUsed;
     public event Action OnPlayerWon;
-    public event Action OnLevelDataReset;
+    public event Action OnLevelDataReset; 
     public event Action<float, float> OnMapProgressChanged;
     #endregion Events Declaration
 
@@ -63,6 +62,7 @@ public class GameProcessManager : MonoBehaviour
     private void OnDestroy()
     {
         _skillsManager.OnSkillToUpgradeDefined -= SkillToUpgradeDefined_ExecuteReaction;
+
 
         _playerExperienceManager.OnPlayerGotNewLevel -= PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction;
 
@@ -94,10 +94,7 @@ public class GameProcessManager : MonoBehaviour
 
     public void StartGame()
     {
-        for (int i = 0; i < skillsObjectsList.Count; i++)
-        {
-            skillsObjectsList[i].SetActive(false);
-        }
+        
 
         battleStarted = true;
         OnGameStarted?.Invoke();
@@ -167,14 +164,14 @@ public class GameProcessManager : MonoBehaviour
         battleStarted = false;
     }
 
-    private void SkillToUpgradeDefined_ExecuteReaction(int skillCategory, int skillIndex)
-    {
-        _systemTimeManager.ResumeGame();
-        if((SkillBasicTypes)skillCategory == SkillBasicTypes.Active)
-        {
-            skillsObjectsList[skillIndex].gameObject.SetActive(true);
-        }
-        StartCoroutine(StartGameCoroutine());
+    private void SkillToUpgradeDefined_ExecuteReaction(int _, int __)//skill manager
+     {
+         _systemTimeManager.ResumeGame();
+       //   if((SkillBasicTypes)skillCategory == SkillBasicTypes.Active)
+       //   {
+       //      skillsObjectsList[skillIndex].gameObject.SetActive(true);
+       // }
+         StartCoroutine(StartGameCoroutine());
     }
 
     private void PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction()
@@ -205,14 +202,11 @@ public class GameProcessManager : MonoBehaviour
 
     private void ResetMapData()
     {
-        for (int i = 0; i < skillsObjectsList.Count; i++)
-        {
-            skillsObjectsList[i].SetActive(false);
-        }
+       
         ResetMapProgress();
         _systemTimeManager.ResumeGame();
     }
-
+    
     private IEnumerator StartGameCoroutine()
     {
         yield return new WaitForSeconds(2f);
