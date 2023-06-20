@@ -22,6 +22,8 @@ public class RewardWheelSpinner : MonoBehaviour
 
     private MenuButtonsUI _menuButtonsUI;
     private RewardsManager _rewardsManager;
+    private AdsController _adsController;
+    private AdsManager _adsManager;
 
     private List<RewardObject> updatedRewardsList = new List<RewardObject>();
 
@@ -39,6 +41,8 @@ public class RewardWheelSpinner : MonoBehaviour
     private bool canSpin = true;
     private bool isSpinning = false;
 
+    private bool rewardRequested = false;
+
     #region Events Declartation
     public event System.Action<RewardObject> OnRewardDefined;
     #endregion Events Declaration
@@ -47,19 +51,21 @@ public class RewardWheelSpinner : MonoBehaviour
 
     private void Start()
     {
-        for(int i = 0; i < rewardsList.Count; i++)
+        for (int i = 0; i < rewardsList.Count; i++)
         {
             updatedRewardsList.Add(rewardsList[i]);
         }
 
         _rewardsManager.OnSpinButtonUpdateRequired += RewardsManager_OnSpinButtonUpdateRequired_ExecuteReaction;
+
+        _adsController.OnRewardAdViewed += AdsController_RewardGranted_ExecuteReaction;
     }
 
     private void Update()
     {
-        if(isSpinning)
+        if (isSpinning)
         {
-            if(spinSpeed > speedTreshold)
+            if (spinSpeed > speedTreshold)
             {
                 spinSpeed -= maxSpeedSlowdownDelta * Time.deltaTime;
             }
@@ -71,7 +77,7 @@ public class RewardWheelSpinner : MonoBehaviour
             rotation += rotationCoefficient * Time.deltaTime * spinSpeed;
             wheelImage.localRotation = Quaternion.Euler(0f, 0f, -rotation);
 
-            if(spinSpeed < 0f)
+            if (spinSpeed < 0f)
             {
                 spinSpeed = 0f;
                 isSpinning = false;
@@ -85,14 +91,19 @@ public class RewardWheelSpinner : MonoBehaviour
     private void OnDestroy()
     {
         _rewardsManager.OnSpinButtonUpdateRequired -= RewardsManager_OnSpinButtonUpdateRequired_ExecuteReaction;
+
+        _adsController.OnRewardAdViewed -= AdsController_RewardGranted_ExecuteReaction;
     }
 
     #region Zenject
     [Inject]
-    private void Construct(MenuButtonsUI menuButtonsUI, RewardsManager rewardsManager)
+    private void Construct(MenuButtonsUI menuButtonsUI, RewardsManager rewardsManager, AdsController adsController,
+                           AdsManager adsManager)
     {
         _menuButtonsUI = menuButtonsUI;
         _rewardsManager = rewardsManager;
+        _adsController = adsController;
+        _adsManager = adsManager;
     }
     #endregion Zenject
 
@@ -104,11 +115,19 @@ public class RewardWheelSpinner : MonoBehaviour
             spinButton.SetState_FreeSpinUsed();
             Spin();
         }
-        else if(_rewardsManager.FreeRewardSpinUsed && !_rewardsManager.RewardForAdSpinUsed)
+        else if (_rewardsManager.FreeRewardSpinUsed && !_rewardsManager.RewardForAdSpinUsed)
         {
-            _rewardsManager.UseRewardSpinForAd();
-            spinButton.SetState_AllSpinsUsed();
-            Spin();
+            if (!_adsManager.BlockAdsOptionPurchased)
+            {
+                rewardRequested = true;
+                _adsController.LoadRewarded();
+            }
+            else
+            {
+                _rewardsManager.UseRewardSpinForAd();
+                spinButton.SetState_AllSpinsUsed();
+                Spin();
+            }
         }
     }
 
@@ -133,13 +152,25 @@ public class RewardWheelSpinner : MonoBehaviour
 
     private void RewardsManager_OnSpinButtonUpdateRequired_ExecuteReaction()
     {
-        if(_rewardsManager.FreeRewardSpinUsed && _rewardsManager.RewardForAdSpinUsed)
+        if (_rewardsManager.FreeRewardSpinUsed && _rewardsManager.RewardForAdSpinUsed)
         {
             spinButton.SetState_AllSpinsUsed();
         }
-        else if(_rewardsManager.FreeRewardSpinUsed)
+        else if (_rewardsManager.FreeRewardSpinUsed)
         {
             spinButton.SetState_FreeSpinUsed();
+        }
+    }
+
+    private void AdsController_RewardGranted_ExecuteReaction()
+    {
+        if(rewardRequested)
+        {
+            Debug.Log($"Reward For Ad Granted");
+            rewardRequested = false;
+            _rewardsManager.UseRewardSpinForAd();
+            spinButton.SetState_AllSpinsUsed();
+            Spin();
         }
     }
 }

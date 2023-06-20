@@ -2,34 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Purchasing;
+using Zenject;
 
-public class IAPManager : MonoBehaviour, IStoreListener
+public class IAPManager : MonoBehaviour
 {
-    private void Awake()
+    private const string removeAllAdsId = "crazyheads.removeallads";
+
+    private AdsManager _adsManager;
+
+    #region Zenject
+    [Inject]
+    private void Construct(AdsManager adsManager)
     {
-        if (Application.internetReachability != NetworkReachability.NotReachable)
+        _adsManager = adsManager;
+    }
+    #endregion Zenject
+
+    public void OnPurchaseComplete(Product product)
+    {
+        if(product.definition.id == removeAllAdsId)
         {
-            
+            Debug.Log($"No Ads Option Purchased");
+            _adsManager.PurchaseAdsBlocker();
         }
-    }
-
-    public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnInitializeFailed(InitializationFailureReason error)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
-    {
-        throw new System.NotImplementedException();
     }
 }

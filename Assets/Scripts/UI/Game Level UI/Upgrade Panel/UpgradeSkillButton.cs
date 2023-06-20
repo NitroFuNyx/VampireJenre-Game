@@ -12,20 +12,30 @@ public class UpgradeSkillButton : ButtonInteractionHandler
     [SerializeField] private SkillUpgradeDisplayPanel skillUpgradeDisplayPanel;
 
     private SkillsManager _skillsManager;
+    private AdsManager _adsManager;
+    private AdsController _adsController;
 
-    //private void Start()
-    //{
-    //    if(transform.parent.TryGetComponent(out SkillUpgradeDisplayPanel panel))
-    //    {
-    //        skillUpgradeDisplayPanel = panel;
-    //    }
-    //}
+    private bool rewardRequested = false;
+
+    private int currentSkillIndex;
+
+    private void Start()
+    {
+        _adsController.OnRewardAdViewed += AdsController_RewardGranted_ExecuteReaction;
+    }
+
+    private void OnDestroy()
+    {
+        _adsController.OnRewardAdViewed -= AdsController_RewardGranted_ExecuteReaction;
+    }
 
     #region Zenject
     [Inject]
-    private void Construct(SkillsManager skillsManager)
+    private void Construct(SkillsManager skillsManager, AdsManager adsManager, AdsController adsController)
     {
         _skillsManager = skillsManager;
+        _adsManager = adsManager;
+        _adsController = adsController;
     }
     #endregion Zenject
 
@@ -46,7 +56,23 @@ public class UpgradeSkillButton : ButtonInteractionHandler
 
         if (doubleUpgrade)
         {
-            StartCoroutine(UpgradeAdditionalSkillLevelCoroutine(skillndex));
+            if (!_adsManager.BlockAdsOptionPurchased)
+            {
+                rewardRequested = true;
+                currentSkillIndex = skillndex;
+                _adsController.LoadRewarded();
+                //StartCoroutine(UpgradeAdditionalSkillLevelCoroutine(skillndex));
+            }
+        }
+    }
+
+    private void AdsController_RewardGranted_ExecuteReaction()
+    {
+        if(rewardRequested)
+        {
+            Debug.Log($"Ad Reward For Scroll");
+            rewardRequested = false;
+            StartCoroutine(UpgradeAdditionalSkillLevelCoroutine(currentSkillIndex));
         }
     }
 

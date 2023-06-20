@@ -17,26 +17,37 @@ public class TreasureChestInfoPanel : GameLevelSubPanel
     private PickableItemsManager _pickableItemsManager;
     private SkillsManager _skillsManager;
     private ResourcesManager _resourcesManager;
+    private AdsManager _adsManager;
+    private AdsController _adsController;
+
+    private bool rewardRequested = false;
 
     public event Action OnTreasureChestItemsCollected;
 
     private void Start()
     {
         _pickableItemsManager.OnTreasureChestCollected += PickableItemsManager_OnTreasureChestCollected_ExecuteReaction;
+
+        _adsController.OnRewardAdViewed += AdsController_RewardGranted_ExecuteReaction;
     }
 
     private void OnDestroy()
     {
         _pickableItemsManager.OnTreasureChestCollected -= PickableItemsManager_OnTreasureChestCollected_ExecuteReaction;
+
+        _adsController.OnRewardAdViewed -= AdsController_RewardGranted_ExecuteReaction;
     }
 
     #region Zenject
     [Inject]
-    private void Construct(PickableItemsManager pickableItemsManager, SkillsManager skillsManager, ResourcesManager resourcesManager)
+    private void Construct(PickableItemsManager pickableItemsManager, SkillsManager skillsManager, ResourcesManager resourcesManager,
+                           AdsManager adsManager, AdsController adsController)
     {
         _pickableItemsManager = pickableItemsManager;
         _skillsManager = skillsManager;
         _resourcesManager = resourcesManager;
+        _adsManager = adsManager;
+        _adsController = adsController;
     }
     #endregion Zenject
 
@@ -46,11 +57,18 @@ public class TreasureChestInfoPanel : GameLevelSubPanel
 
         if(getAllTreasures)
         {
-            GetSecondTreasure();
+            if(!_adsManager.BlockAdsOptionPurchased)
+            {
+                rewardRequested = true;
+                _adsController.LoadRewarded();
+            }
+            //GetSecondTreasure();
         }
-
-        OnTreasureChestItemsCollected?.Invoke();
-        HidePanel();
+        else
+        {
+            OnTreasureChestItemsCollected?.Invoke();
+            HidePanel();
+        }
     }
 
     private void GetFirstTreasure()
@@ -142,6 +160,19 @@ public class TreasureChestInfoPanel : GameLevelSubPanel
             TreasureChestResourceDataStruct resource = _resourcesManager.GetResourceDataForPickingUpTreasureChest(secondItem);
             secondTreasurePanel.UpdateResourcePanelData(resource);
             treasureResourcesList.Add(resource);
+        }
+    }
+
+    private void AdsController_RewardGranted_ExecuteReaction()
+    {
+        if(rewardRequested)
+        {
+            rewardRequested = false;
+            Debug.Log($"Reward for Chest");
+            GetSecondTreasure();
+
+            OnTreasureChestItemsCollected?.Invoke();
+            HidePanel();
         }
     }
 }

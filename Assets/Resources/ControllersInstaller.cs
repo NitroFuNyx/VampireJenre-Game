@@ -21,6 +21,7 @@ public class ControllersInstaller : MonoInstaller
     [SerializeField] private EnemiesCharacteristicsManager enemiesCharacteristicsManager;
     [SerializeField] private ChaptersProgressManager chaptersProgressManager;
     [SerializeField] private AdsManager adsManager;
+    [SerializeField] private VFXManager vfxManager;
     [Header("Player References")]
     [Space]
     [SerializeField] private PlayerExperienceManager playerExperienceManager;
@@ -45,6 +46,7 @@ public class ControllersInstaller : MonoInstaller
         Container.Bind<EnemiesCharacteristicsManager>().FromInstance(enemiesCharacteristicsManager).AsSingle().NonLazy();
         Container.Bind<ChaptersProgressManager>().FromInstance(chaptersProgressManager).AsSingle().NonLazy();
         Container.Bind<AdsManager>().FromInstance(adsManager).AsSingle().NonLazy();
+        Container.Bind<VFXManager>().FromInstance(vfxManager).AsSingle().NonLazy();
 
         Container.Bind<PlayerExperienceManager>().FromInstance(playerExperienceManager).AsSingle().NonLazy();
         Container.Bind<PlayerCharacteristicsManager>().FromInstance(playerCharacteristicsManager).AsSingle().NonLazy();

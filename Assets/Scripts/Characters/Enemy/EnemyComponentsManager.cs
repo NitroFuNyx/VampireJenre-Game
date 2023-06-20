@@ -108,7 +108,7 @@ public class EnemyComponentsManager : EnemyBehaviour
         animationsManager.SetAnimation_Die();
         getHitVfx.Play();
         PoolItem bloodPuddleVfx = poolItemComponent.PoolItemsManager.SpawnItemFromPool(PoolItemsTypes.BloodPuddleVFX, transform.position,
-                                                                                       Quaternion.identity, null);
+                                                                                       Quaternion.identity, poolItemComponent.VfxManager.BloodPudleVfxXHolder);
         if(bloodPuddleVfx != null)
         {
             bloodPuddleVfx.SetObjectAwakeState();

@@ -19,7 +19,7 @@ public class BlockAdsButton : ButtonInteractionHandler
     public override void ButtonActivated()
     {
         ShowAnimation_ButtonPressed();
-        _adsManager.PurchaseAdsBlocker();
+        //_adsManager.PurchaseAdsBlocker();
     }
 
     #region Zenject

@@ -1,4 +1,6 @@
 using UnityEngine;
+using System;
+using System.Collections;
 
 public class SkillsInfoUI : MainCanvasPanel
 {
@@ -7,9 +9,13 @@ public class SkillsInfoUI : MainCanvasPanel
     [SerializeField] private GameObject activeSkillsPanel;
     [SerializeField] private GameObject passiveSkillsPanel;
 
+    private float setStartSettingsDelay = 0.5f;
+
+    public event Action<SkillBasicTypes> OnCurrentSkillsInfoPanelChanged;
+
     private void Start()
     {
-        ShowSkillsInfo(SkillBasicTypes.Active);
+        StartCoroutine(SetStartSettingsCoroutine());
     }
 
     public override void PanelActivated_ExecuteReaction()
@@ -24,7 +30,9 @@ public class SkillsInfoUI : MainCanvasPanel
 
     public void ShowSkillsInfo(SkillBasicTypes skillsType)
     {
-        if(skillsType == SkillBasicTypes.Active)
+        OnCurrentSkillsInfoPanelChanged?.Invoke(skillsType);
+
+        if (skillsType == SkillBasicTypes.Active)
         {
             passiveSkillsPanel.SetActive(false);
             activeSkillsPanel.SetActive(true);
@@ -34,5 +42,11 @@ public class SkillsInfoUI : MainCanvasPanel
             activeSkillsPanel.SetActive(false);
             passiveSkillsPanel.SetActive(true);
         }
+    }
+
+    private IEnumerator SetStartSettingsCoroutine()
+    {
+        yield return new WaitForSeconds(setStartSettingsDelay);
+        ShowSkillsInfo(SkillBasicTypes.Active);
     }
 }
