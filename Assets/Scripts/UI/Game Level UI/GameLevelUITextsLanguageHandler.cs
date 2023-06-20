@@ -50,6 +50,24 @@ public class GameLevelUITextsLanguageHandler : TextsLanguageUpdateHandler
 
         getUpButtonText.text = languageHolder.data.gameLevelUITexts.defeatPanelTexts.getUpButtonText;
 
+        skillScrollPanelTitleText.text = languageHolder.data.gameLevelUITexts.skillScrollPanelTexts.panelTitleText;
+        skillScrollPanelContinueText.text = languageHolder.data.gameLevelUITexts.skillScrollPanelTexts.continueButtonText;
+        skillScrollPanelMultiplySkillText.text = languageHolder.data.gameLevelUITexts.skillScrollPanelTexts.multiplyLevelButtonText;
+
+        treasurePanelTitleText.text = languageHolder.data.gameLevelUITexts.treasureChestPanelTexts.panelTitleText;
+        treasurePanelGetOneTreasureText.text = languageHolder.data.gameLevelUITexts.treasureChestPanelTexts.getOneTreasureButtonText;
+        treasurePanelGetAllTreasuresText.text = languageHolder.data.gameLevelUITexts.treasureChestPanelTexts.getAllTreasuresButtonText;
+
+        for(int i = 0; i < treasurePanelFirstTreasureTextsList.Count; i++)
+        {
+            treasurePanelFirstTreasureTextsList[i].text = languageHolder.data.gameLevelUITexts.treasureChestPanelTexts.firstTreasureText;
+        }
+
+        for (int i = 0; i < treasurePanelSecondTreasureTextsList.Count; i++)
+        {
+            treasurePanelSecondTreasureTextsList[i].text = languageHolder.data.gameLevelUITexts.treasureChestPanelTexts.secondTreasureText;
+        }
+
         for (int i = 0; i < menuButtonsTextsList.Count; i++)
         {
             menuButtonsTextsList[i].text = languageHolder.data.gameLevelUITexts.menuButtonText;
