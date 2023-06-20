@@ -50,6 +50,8 @@ namespace Localization
         public LevelUpgradePanelData levelUpgradePanelTexts;
         public VictoryPanelData victoryPanelTexts;
         public DefeatPanelData defeatPanelTexts;
+        public SkillScrollPanelData skillScrollPanelTexts;
+        public TreasureChestPanelData treasureChestPanelTexts;
         public string menuButtonText;
     }
 
@@ -78,6 +80,24 @@ namespace Localization
     public class DefeatPanelData
     {
         public string getUpButtonText;
+    }
+
+    [Serializable]
+    public class SkillScrollPanelData
+    {
+        public string panelTitleText;
+        public string continueButtonText;
+        public string multiplyLevelButtonText;
+    }
+
+    [Serializable]
+    public class TreasureChestPanelData
+    {
+        public string panelTitleText;
+        public string getOneTreasureButtonText;
+        public string getAllTreasuresButtonText;
+        public string firstTreasureText;
+        public string secondTreasureText;
     }
 
     [Serializable]
