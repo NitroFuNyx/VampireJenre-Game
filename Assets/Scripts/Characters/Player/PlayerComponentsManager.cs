@@ -8,11 +8,13 @@ public class PlayerComponentsManager : MonoBehaviour
 
     private PlayerCollisionsManager collisionsManager;
     private PlayerController movementManager;
+    private PlayerCharactersManager charactersManager;
 
     private void Awake()
     {
         collisionsManager = GetComponent<PlayerCollisionsManager>();
         movementManager = GetComponent<PlayerController>();
+        charactersManager = GetComponent<PlayerCharactersManager>();
     }
 
     private void Start()
@@ -49,6 +51,8 @@ public class PlayerComponentsManager : MonoBehaviour
         _gameProcessManager.OnPlayerWon += GameProcessManager_PlayerWon_ExecuteReaction;
         _gameProcessManager.OnLevelDataReset += GameProcessManager_LevelDataReset_ExecuteReaction;
         _gameProcessManager.OnPlayerRecoveryOptionUsed += GameProcessManager_OnPlayerRecoveryOptionUsed_ExecuteReaction;
+
+        charactersManager.OnPlayerModelChanged += CharactersManager_OnPlayerModelChanged_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
@@ -59,6 +63,8 @@ public class PlayerComponentsManager : MonoBehaviour
         _gameProcessManager.OnPlayerWon -= GameProcessManager_PlayerWon_ExecuteReaction;
         _gameProcessManager.OnLevelDataReset -= GameProcessManager_LevelDataReset_ExecuteReaction;
         _gameProcessManager.OnPlayerRecoveryOptionUsed -= GameProcessManager_OnPlayerRecoveryOptionUsed_ExecuteReaction;
+
+        charactersManager.OnPlayerModelChanged -= CharactersManager_OnPlayerModelChanged_ExecuteReaction;
     }
 
     private void CollisionManager_PlayerOutOfHp_ExecuteReaction()
@@ -90,5 +96,10 @@ public class PlayerComponentsManager : MonoBehaviour
     {
         movementManager.ResetComponent();
         collisionsManager.ResetComponent();
+    }
+
+    private void CharactersManager_OnPlayerModelChanged_ExecuteReaction(Animator animator)
+    {
+        movementManager.SetAnimator(animator);
     }
 }

@@ -63,4 +63,9 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(0f, transform.position.y, 0f);
         transform.rotation = Quaternion.identity;
     }
+
+    public void SetAnimator(Animator animator)
+    {
+        playerAnimator = animator;
+    }
 }
