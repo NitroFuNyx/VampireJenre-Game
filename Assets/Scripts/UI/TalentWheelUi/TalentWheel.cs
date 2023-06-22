@@ -1,17 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class TalentWheel : MonoBehaviour
 {
     [SerializeField] private List<TalentItem> Items;
     [SerializeField] private AnimationCurve curve;
 
+    private AudioManager _audioManager;
+
     private Keyframe frame;
     private Keyframe startKeyframe = new Keyframe(0,0.1f);
     private int counter;
 
     public System.Action<TalentItem> OnTalentToUpgradeDefined;
+
+    #region Zenject
+    [Inject]
+    private void Construct(AudioManager audioManager)
+    {
+        _audioManager = audioManager;
+    }
+    #endregion Zenject
 
     [ContextMenu("Talents/StartWheel")]
     public void StartWheel()
@@ -47,6 +58,7 @@ public class TalentWheel : MonoBehaviour
             for (int j = 0; j < TalentSlotAmount.maxSlotAmount; j++)
             {
                 Items[j].ChangeTalentSelectionState(true);
+                _audioManager.PlaySFXSound_TalentSlotChange();
                 var delay = curve.Evaluate(counter);
                 
                 yield return new WaitForSecondsRealtime(delay);
@@ -65,5 +77,7 @@ public class TalentWheel : MonoBehaviour
                     counter++;
             }
         }
+
+        _audioManager.PlaySFXSound_TalentGranted();
     }
 }

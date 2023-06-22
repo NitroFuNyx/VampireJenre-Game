@@ -25,9 +25,11 @@ public class GameProcessManager : MonoBehaviour
     private GameLevelUI _gameLevelUI;
     private TreasureChestInfoPanel _treasureChestInfoPanel;
     private AdsController _adsController;
+    private AudioManager _audioManager;
 
     private bool battleStarted = false;
     private bool playerRecoveryOptionUsed = false;
+    private bool firstSkillDefined = false;
 
     private int mapProgressDelta = 1;
 
@@ -78,7 +80,7 @@ public class GameProcessManager : MonoBehaviour
     [Inject]
     private void Construct(SpawnEnemiesManager spawnEnemiesManager, MainUI mainUI, SystemTimeManager systemTimeManager, SkillsManager skillsManager,
                            PlayerExperienceManager playerExperienceManager, PickableItemsManager pickableItemsManager, GameLevelUI gameLevelUI,
-                           TreasureChestInfoPanel treasureChestInfoPanel, AdsController adsController)
+                           TreasureChestInfoPanel treasureChestInfoPanel, AdsController adsController, AudioManager audioManager)
     {
         _spawnEnemiesManager = spawnEnemiesManager;
         _mainUI = mainUI;
@@ -89,13 +91,12 @@ public class GameProcessManager : MonoBehaviour
         _gameLevelUI = gameLevelUI;
         _treasureChestInfoPanel = treasureChestInfoPanel;
         _adsController = adsController;
+        _audioManager = audioManager;
     }
     #endregion Zenject
 
     public void StartGame()
     {
-        
-
         battleStarted = true;
         OnGameStarted?.Invoke();
         player.StartGame();
@@ -110,12 +111,15 @@ public class GameProcessManager : MonoBehaviour
         if(currentMapProgress >= upgradeProgressValue)
         {
             _spawnEnemiesManager.SpawnBossAtCenter();
+            _audioManager.PlayMusic_Boss();
         }
     }
 
     [ContextMenu("Win")]
     public void GameWin()
     {
+        _audioManager.StopMusicAudio();
+        _audioManager.PlaySFXSound_Victory();
         OnPlayerWon?.Invoke();
         //ResetMapData();
     }
@@ -123,6 +127,7 @@ public class GameProcessManager : MonoBehaviour
     public void ResetLevelDataWithSaving()
     {
         OnLevelDataReset?.Invoke();
+        _audioManager.PlayMusic_MainScreen_Loader();
         ResetMapData();
         playerRecoveryOptionUsed = false;
     }
@@ -131,6 +136,8 @@ public class GameProcessManager : MonoBehaviour
     public void GameLost_ExecuteReaction()
     {
         StartCoroutine(PauseGameWithDelayCoroutine());
+        _audioManager.StopMusicAudio();
+        _audioManager.PlaySFXSound_Defeat();
 
         if(playerRecoveryOptionUsed)
         {
@@ -147,6 +154,8 @@ public class GameProcessManager : MonoBehaviour
 
     public void GameLostSecondTime_ExecuteReaction()
     {
+        _audioManager.StopMusicAudio();
+        _audioManager.PlaySFXSound_Defeat();
         OnPlayerLost?.Invoke();
     }
 
@@ -171,7 +180,13 @@ public class GameProcessManager : MonoBehaviour
        //   {
        //      skillsObjectsList[skillIndex].gameObject.SetActive(true);
        // }
-         StartCoroutine(StartGameCoroutine());
+        if(!firstSkillDefined)
+        {
+            firstSkillDefined = true;
+            _audioManager.PlayMusic_Battle();
+            Debug.Log($"First Skill Defined");
+            StartCoroutine(StartGameCoroutine());
+        }
     }
 
     private void PlayerExperienceManager_PlayerGotNewLevel_ExecuteReaction()
@@ -202,7 +217,6 @@ public class GameProcessManager : MonoBehaviour
 
     private void ResetMapData()
     {
-       
         ResetMapProgress();
         _systemTimeManager.ResumeGame();
     }

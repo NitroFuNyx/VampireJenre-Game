@@ -12,6 +12,7 @@ public class AdsManager : MonoBehaviour, IDataPersistance
     private DataPersistanceManager _dataPersistanceManager;
     private PlayerExperienceManager _playerExperienceManager;
     private AdsController _adsController;
+    private AudioManager _audioManager;
 
     private bool blockAdsOptionPurchased = false;
 
@@ -38,11 +39,12 @@ public class AdsManager : MonoBehaviour, IDataPersistance
     #region Zenject
     [Inject]
     private void Construct(DataPersistanceManager dataPersistanceManager, PlayerExperienceManager playerExperienceManager,
-                           AdsController adsController)
+                           AdsController adsController, AudioManager audioManager)
     {
         _dataPersistanceManager = dataPersistanceManager;
         _playerExperienceManager = playerExperienceManager;
         _adsController = adsController;
+        _audioManager = audioManager;
     }
     #endregion Zenject
 
@@ -64,6 +66,7 @@ public class AdsManager : MonoBehaviour, IDataPersistance
         if(!blockAdsOptionPurchased)
         {
             blockAdsOptionPurchased = true;
+            _audioManager.PlaySFXSound_BuyItem();
             OnSuccessfullAdsBlockerPurchase?.Invoke();
             _dataPersistanceManager.SaveGame();
         }
