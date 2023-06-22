@@ -109,6 +109,7 @@ public class SpawnEnemiesManager : MonoBehaviour
     {
         _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
         _gameProcessManager.OnPlayerWon += GameProcessManager_PlayerWon_ExecuteReaction;
+        _gameProcessManager.OnLevelDataReset += StopEnemySpawn;
 
         _playerExperienceManager.OnPlayerGotNewLevel += PlayerExperienceManager_OnPlayerGotNewLevel_ExecuteReaction;
     }
@@ -117,6 +118,7 @@ public class SpawnEnemiesManager : MonoBehaviour
     {
         _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
         _gameProcessManager.OnPlayerWon -= GameProcessManager_PlayerWon_ExecuteReaction;
+        _gameProcessManager.OnLevelDataReset -= StopEnemySpawn;
 
         _playerExperienceManager.OnPlayerGotNewLevel -= PlayerExperienceManager_OnPlayerGotNewLevel_ExecuteReaction;
     }

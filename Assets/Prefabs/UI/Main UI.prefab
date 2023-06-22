@@ -1936,6 +1936,7 @@ MonoBehaviour:
   scaleDuration: 0.3
   standartAudio: 1
   loosePanelButton: 0
+  pauseButton: 0
 --- !u!1 &583790651
 GameObject:
   m_ObjectHideFlags: 0
@@ -6902,7 +6903,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 207.55347}
+  m_SizeDelta: {x: 0, y: 207.38257}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5119946549405849641
 CanvasRenderer:
@@ -10654,6 +10655,7 @@ MonoBehaviour:
   scaleDuration: 0.3
   standartAudio: 1
   loosePanelButton: 1
+  pauseButton: 0
 --- !u!1 &981618688152130610
 GameObject:
   m_ObjectHideFlags: 0
@@ -10695,7 +10697,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 207.55347}
+  m_SizeDelta: {x: 0, y: 207.38257}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7593594109336978502
 CanvasRenderer:
@@ -11583,6 +11585,7 @@ MonoBehaviour:
   scaleDuration: 0.3
   standartAudio: 1
   loosePanelButton: 0
+  pauseButton: 0
 --- !u!1 &1152890934109307983
 GameObject:
   m_ObjectHideFlags: 0
@@ -20946,8 +20949,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4169152209887664264}
   m_HandleRect: {fileID: 3588443464200107964}
   m_Direction: 2
-  m_Value: 1.0000001
-  m_Size: 0.45245025
+  m_Value: 1.0000004
+  m_Size: 0.45245034
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -23692,7 +23695,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 207.55347}
+  m_SizeDelta: {x: 0, y: 207.38257}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7962977024598268651
 CanvasRenderer:
@@ -41527,7 +41530,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 207.55347}
+  m_SizeDelta: {x: 0, y: 207.38257}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1254970914217171820
 CanvasRenderer:
@@ -43150,7 +43153,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 267.73685}
+  m_SizeDelta: {x: 0, y: 267.69382}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8438523343754675232
 CanvasRenderer:
@@ -47791,7 +47794,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8582756923425156982}
   m_HandleRect: {fileID: 8342300023738185959}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0.9999999
   m_Size: 0.2558746
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -50098,7 +50101,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 399660206442865169}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.32499334
+  m_Size: 0.32499337
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

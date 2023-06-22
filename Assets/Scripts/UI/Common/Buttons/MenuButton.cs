@@ -7,6 +7,7 @@ public class MenuButton : ButtonInteractionHandler
     [Header("Button Type")]
     [Space]
     [SerializeField] bool loosePanelButton = false;
+    [SerializeField] private bool pauseButton = false;
 
     private MainUI _mainUI;
     private GameProcessManager _gameProcessManager;
