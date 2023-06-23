@@ -19,13 +19,6 @@ public class MagicNovaSkill : MonoBehaviour
     {
         _playerCharacteristicsManager = playerCharacteristicsManager;
     }
-
-
-    private void Start()
-    {
-        particle.SetActive(true);
-    }
-
     public void Update()
     {
         _cooldownTimer += Time.deltaTime;
@@ -34,6 +27,16 @@ public class MagicNovaSkill : MonoBehaviour
             StartCoroutine(ExplodingSphere());
             _cooldownTimer = 0;
         }
+    }
+
+    private void OnEnable()
+    {
+        particle.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        particle.SetActive(false);
     }
 
     private IEnumerator ExplodingSphere()

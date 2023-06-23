@@ -27,10 +27,7 @@ public class AuraSpawner : MonoBehaviour
     }
 
     #endregion
-    private void Start()
-    {
-        particle.SetActive(true);
-    }
+    
     
     public void Update()
     {
@@ -40,6 +37,12 @@ public class AuraSpawner : MonoBehaviour
             StartCoroutine(ExplodingSphere());
             _cooldownTimer = 0;
         }
+    }
+
+    private void OnEnable()
+    {
+        particle.SetActive(true);
+
     }
 
     private void OnDisable()

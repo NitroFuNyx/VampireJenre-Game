@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using Zenject;
 
@@ -32,6 +34,12 @@ public class FireballSkillSpawner : ProjectileSpawnerBase
     {
         StartCoroutine(SpawningProjectile());
     }
+
+    private void OnDisable()
+    {
+        ReturnToPoolItems();
+    }
+
     protected override IEnumerator SpawningProjectile()
     {
         while (true)
@@ -44,17 +52,24 @@ public class FireballSkillSpawner : ProjectileSpawnerBase
     {
         if (_playerCharacteristicsManager.CurrentPlayerData.playerSkillsData.fireballsSkillData.projectilesAmount-1 < projectiles.Count) yield break;
         Debug.Log(_playerCharacteristicsManager.CurrentPlayerData.playerSkillsData.fireballsSkillData.projectilesAmount);
-        PoolItem lightning = _poolmanager.SpawnItemFromPool(PoolItemsTypes.Fireball_Skill, transform.position,Quaternion.identity, spawnPoint);
-        if (lightning != null) 
+        PoolItem fireball = _poolmanager.SpawnItemFromPool(PoolItemsTypes.Fireball_Skill, transform.position,Quaternion.identity, spawnPoint);
+        if (fireball != null) 
         {
             
-            projectiles.Add(lightning);
+            projectiles.Add(fireball);
             ReformatCircle();
-            lightning.SetObjectAwakeState();
+            fireball.SetObjectAwakeState();
         }
         yield return null;
     }
 
+    private void ReturnToPoolItems()
+    {
+        foreach (var fireball in projectiles)
+        {
+            fireball.PoolItemsManager.ReturnItemToPool(fireball);
+        }
+    }
     private void ReformatCircle()
     {
         for(int i = 0; i < projectiles.Count; ++i)
