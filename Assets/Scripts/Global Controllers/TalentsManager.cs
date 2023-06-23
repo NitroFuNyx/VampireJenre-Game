@@ -73,7 +73,7 @@ public class TalentsManager : MonoBehaviour, IDataPersistance
 
     public void BuyTalent(Action OnBuyingProcessLaunced, Action OnBuyingProcessFinished)
     {
-        if(_resourcesManager.CoinsAmount >= talentCostAmount)
+        if(_resourcesManager.GameData.coinsAmount.GetValue() >= talentCostAmount)
         {
             OnBuyingProcessLaunced?.Invoke();
             OnBuyingProcessFinishedCallback = OnBuyingProcessFinished;

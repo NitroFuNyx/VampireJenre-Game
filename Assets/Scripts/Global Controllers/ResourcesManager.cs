@@ -7,8 +7,8 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
 {
     [Header("Resources Data")]
     [Space]
-    [SerializeField] private int coinsAmount;
-    [SerializeField] private int gemsAmount;
+    //[SerializeField] private int coinsAmount;
+    //[SerializeField] private int gemsAmount;
     [Header("Percents Data")]
     [Space]
     [SerializeField] private float gemDropDefaultPercentChance = 10f;
@@ -25,19 +25,25 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     private DataPersistanceManager _dataPersistanceManager;
     private PlayerCharacteristicsManager _playerCharacteristicsManager;
     private GameProcessManager _gameProcessManager;
+    [SerializeField]private GameData gameData;
+    public GameData GameData
+    {
+        get => gameData;
+       private  set => gameData = value;
+    }
 
     private const int GemSurplusForKillingEnemy = 1;
 
     private const int CoinsSurplusForKillingEnemy_Min = 1;
     private const int CoinsSurplusForKillingEnemy_Max = 6;
 
-    private int currentLevelCoinsAmount = 0;
-    private int currentLevelGemsAmount = 0;
+    private GameData.Secureint currentLevelCoinsAmount = new GameData.Secureint();
+    private GameData.Secureint currentLevelGemsAmount =  new GameData.Secureint();
     private int coinsMultiplyerForAd = 2;
 
-    public int CoinsAmount { get => coinsAmount; private set => coinsAmount = value; }
-    public int CurrentLevelCoinsAmount { get => currentLevelCoinsAmount; private set => currentLevelCoinsAmount = value; }
-    public int CurrentLevelGemsAmount { get => currentLevelGemsAmount; private set => currentLevelGemsAmount = value; }
+    //public int CoinsAmount { get => coinsAmount; private set => coinsAmount = value; }
+    public GameData.Secureint CurrentLevelCoinsAmount { get => currentLevelCoinsAmount; private set => currentLevelCoinsAmount = value; }
+    public GameData.Secureint CurrentLevelGemsAmount { get => currentLevelGemsAmount; private set => currentLevelGemsAmount = value; }
 
     #region Events Declaration
     public event Action<int> OnCoinsAmountChanged;
@@ -50,10 +56,12 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     private void Awake()
     {
         _dataPersistanceManager.AddObjectToSaveSystemObjectsList(this);
+        gameData = new GameData();
     }
 
     private void Start()
     {
+        
         _gameProcessManager.OnGameStarted += GameProcessManager_GameStarted_ExecuteReaction;
         _gameProcessManager.OnLevelDataReset += GameProcessManager_LevelDataReset_ExecuteReaction;
     }
@@ -78,69 +86,69 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     #region Save/Load Methods
     public void LoadData(GameData data)
     {
-        coinsAmount = data.coinsAmount;
-        gemsAmount = data.gemsAmount;
+        gameData.coinsAmount = data.coinsAmount;
+        gameData.gemsAmount = data.gemsAmount;
 
-        OnCoinsAmountChanged?.Invoke(coinsAmount);
-        OnGemsAmountChanged?.Invoke(gemsAmount);
+        OnCoinsAmountChanged?.Invoke(data.coinsAmount.GetValue());
+        OnGemsAmountChanged?.Invoke(data.gemsAmount.GetValue());
     }
 
     public void SaveData(GameData data)
     {
-        data.coinsAmount = coinsAmount;
-        data.gemsAmount = gemsAmount;
+        data.coinsAmount = new GameData.Secureint(gameData.coinsAmount.GetValue());
+        data.gemsAmount = new GameData.Secureint(gameData.gemsAmount.GetValue());
     }
     #endregion Save/Load Methods
 
     #region Basic Resources Methods
     public void IncreaseCoinsAmount(int deltaAmount)
     {
-        coinsAmount += deltaAmount;
-        OnCoinsAmountChanged?.Invoke(coinsAmount);
+        gameData.coinsAmount += new GameData.Secureint(deltaAmount);
+        OnCoinsAmountChanged?.Invoke(gameData.coinsAmount.GetValue());
         Debug.Log($"Coins {deltaAmount}");
     }
 
     public void IncreaseCurrentLevelCoinsAmount(int deltaAmount)
     {
-        currentLevelCoinsAmount += deltaAmount;
-        OnCurrentLevelCoinsAmountChanged?.Invoke(currentLevelCoinsAmount);
+        currentLevelCoinsAmount += new GameData.Secureint(deltaAmount);
+        OnCurrentLevelCoinsAmountChanged?.Invoke(currentLevelCoinsAmount.GetValue());
     }
 
     public void DecreaseCoinsAmount(int deltaAmount)
     {
-        coinsAmount -= deltaAmount;
+        gameData.coinsAmount -= new GameData.Secureint(deltaAmount);
 
-        if(coinsAmount < 0)
+        if( gameData.coinsAmount.GetValue() < 0)
         {
-            coinsAmount = 0;
+            gameData.coinsAmount =new GameData.Secureint(0);
         }
 
-        OnCoinsAmountChanged?.Invoke(coinsAmount);
+        OnCoinsAmountChanged?.Invoke(gameData.coinsAmount.GetValue());
     }
 
     public void IncreaseGemsAmount(int deltaAmount)
     {
-        gemsAmount += deltaAmount;
-        OnGemsAmountChanged?.Invoke(gemsAmount);
+        gameData.gemsAmount += new GameData.Secureint(deltaAmount);
+        OnGemsAmountChanged?.Invoke(gameData.gemsAmount.GetValue());
         Debug.Log($"Gems {deltaAmount}");
     }
 
     public void IncreaseCurrentLevelGemsAmount(int deltaAmount)
     {
-        currentLevelGemsAmount += deltaAmount;
-        OnCurrentLevelGemsAmountChanged?.Invoke(currentLevelGemsAmount);
+        currentLevelGemsAmount += new GameData.Secureint(deltaAmount);
+        OnCurrentLevelGemsAmountChanged?.Invoke(currentLevelGemsAmount.GetValue());
     }
 
     public void DecreaseGemsAmount(int deltaAmount)
     {
-        gemsAmount -= deltaAmount;
+        gameData.gemsAmount -= new GameData.Secureint(deltaAmount);
 
-        if(gemsAmount < 0)
+        if( gameData.gemsAmount.GetValue() < 0)
         {
-            gemsAmount = 0;
+            gameData.gemsAmount = new GameData.Secureint(0);
         }
 
-        OnGemsAmountChanged?.Invoke(gemsAmount);
+        OnGemsAmountChanged?.Invoke(gameData.gemsAmount.GetValue());
     }
     #endregion Basic Resources Methods
 
@@ -247,37 +255,37 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
 
     public void MultiplyCurrentLevelCoinsAmount()
     {
-        currentLevelCoinsAmount *= coinsMultiplyerForAd;
+        currentLevelCoinsAmount *= new GameData.Secureint(coinsMultiplyerForAd);
     }
 
     public int GetCoinsForLevelAmountWithSkillBonus()
     {
-        currentLevelCoinsAmount += GetBonusCoinsAmountFromSkill();
-        return currentLevelCoinsAmount;
+        currentLevelCoinsAmount += new GameData.Secureint(GetBonusCoinsAmountFromSkill());
+        return currentLevelCoinsAmount.GetValue();
     }
 
     private void AddCurrentLevelResourcesToGeneralAmount()
     {
-        coinsAmount += currentLevelCoinsAmount;
-        OnCoinsAmountChanged?.Invoke(coinsAmount);
+        gameData.coinsAmount += new GameData.Secureint(currentLevelCoinsAmount.GetValue());
+        OnCoinsAmountChanged?.Invoke( gameData.coinsAmount.GetValue());
 
-        gemsAmount += currentLevelGemsAmount;
-        OnGemsAmountChanged?.Invoke(gemsAmount);
+        gameData.gemsAmount += new GameData.Secureint(currentLevelGemsAmount.GetValue());
+        OnGemsAmountChanged?.Invoke(gameData.gemsAmount.GetValue());
     }
 
     private int GetBonusCoinsAmountFromSkill()
     {
-        int coinsBonusAmount = (currentLevelCoinsAmount * (int)_playerCharacteristicsManager.CurrentPlayerData.characterCoinsSurplusPercent) / (int)CommonValues.maxPercentAmount;
+        int coinsBonusAmount = (currentLevelCoinsAmount.GetValue() * (int)_playerCharacteristicsManager.CurrentPlayerData.characterCoinsSurplusPercent) / (int)CommonValues.maxPercentAmount;
         return coinsBonusAmount;
     }
 
     private void GameProcessManager_GameStarted_ExecuteReaction()
     {
-        currentLevelCoinsAmount = 0;
-        currentLevelGemsAmount = 0;
+        currentLevelCoinsAmount = new GameData.Secureint();
+        currentLevelGemsAmount = new GameData.Secureint();
 
-        OnCurrentLevelCoinsAmountChanged?.Invoke(currentLevelCoinsAmount);
-        OnCurrentLevelGemsAmountChanged?.Invoke(currentLevelGemsAmount);
+        OnCurrentLevelCoinsAmountChanged?.Invoke(currentLevelCoinsAmount.GetValue());
+        OnCurrentLevelGemsAmountChanged?.Invoke(currentLevelGemsAmount.GetValue());
     }
 
     private void GameProcessManager_LevelDataReset_ExecuteReaction()
