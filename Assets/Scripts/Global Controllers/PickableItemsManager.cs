@@ -39,6 +39,7 @@ public class PickableItemsManager : MonoBehaviour
         _gameProcessManager.OnGameStarted += GameProcessManager_GameStarted_ExecuteReaction;
         _gameProcessManager.OnPlayerLost += ResetItems;
         _gameProcessManager.OnPlayerWon += ResetItems;
+        _gameProcessManager.OnLevelDataReset += ResetItems;
     }
 
     private void OnDestroy()
@@ -46,6 +47,7 @@ public class PickableItemsManager : MonoBehaviour
         _gameProcessManager.OnGameStarted -= GameProcessManager_GameStarted_ExecuteReaction;
         _gameProcessManager.OnPlayerLost -= ResetItems;
         _gameProcessManager.OnPlayerWon -= ResetItems;
+        _gameProcessManager.OnLevelDataReset -= ResetItems;
     }
 
     #region Zenject

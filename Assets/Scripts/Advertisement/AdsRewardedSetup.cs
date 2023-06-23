@@ -36,7 +36,7 @@ public class AdsRewardedSetup : MonoBehaviour
                         break;
                 }
             }
-            //LoadRewardedAd();
+            LoadRewardedAd();
 
         });
         AppLovin.Initialize();

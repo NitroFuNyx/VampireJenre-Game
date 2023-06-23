@@ -17,6 +17,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<ParticleSystem> vfxSpawnList = new List<ParticleSystem>();
 
     private PoolItemsManager _poolItemsManager;
+    private PoolItem spawnedBoss;
 
     private List<Transform> takenSpawnPositionsList = new List<Transform>();
 
@@ -75,6 +76,7 @@ public class EnemySpawner : MonoBehaviour
         if(spawnPoint != null)
         {
             PoolItem poolItem = _poolItemsManager.SpawnItemFromPool(enemyType, Vector3.zero, spawnPoint.rotation, spawnedObjectsHolder);
+            spawnedBoss = poolItem;
             if (poolItem != null)
             {
                 if (poolItem.TryGetComponent(out EnemySkillsManager skillsManager))
@@ -105,6 +107,12 @@ public class EnemySpawner : MonoBehaviour
         for(int i = 0; i < poolItemsList.Count; i++)
         {
             poolItemsList[i].PoolItemsManager.ReturnItemToPool(poolItemsList[i]);
+        }
+
+        if(spawnedBoss != null)
+        {
+            spawnedBoss.PoolItemsManager.ReturnItemToPool(spawnedBoss);
+            spawnedBoss = null;
         }
     }
 

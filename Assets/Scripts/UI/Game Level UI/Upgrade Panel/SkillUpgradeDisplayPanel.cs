@@ -312,7 +312,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.IncreaseProjectileAmountTranslationData.skillDescribtionTexts.Count; i++)
             {
                 translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseProjectileAmountTranslationData.skillDescribtionTexts[i].characteristic);
-                describtionTextsList[i].text = $"+ {passiveSkillsLevelsData.IncreaseProjectilesAmountUpgradesDataList[upgradeSkillData.SkillLevel].upgradeValue} % {translatedText}";
+                describtionTextsList[i].text = $"+ {passiveSkillsLevelsData.IncreaseProjectilesAmountUpgradesDataList[upgradeSkillData.SkillLevel].upgradeValue} {translatedText}";
             }
         }
     }

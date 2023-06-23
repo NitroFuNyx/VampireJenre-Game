@@ -3,6 +3,7 @@ public class SkillScroll : PickableItem
 {
     protected override void PlayerCollision_ExecuteReaction()
     {
+        poolItemComponent.AudioManager.PlaySFXSound_PickUpItem();
         poolItemComponent.PickableItemsManager.CollectSkillScroll();
         poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
     }

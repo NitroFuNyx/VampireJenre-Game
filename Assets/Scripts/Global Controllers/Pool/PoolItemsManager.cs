@@ -69,13 +69,14 @@ public class PoolItemsManager : MonoBehaviour
     private AdsManager _adsManager;
     private AdsController _adsController;
     private VFXManager _vfxManager;
+    private AudioManager _audioManager;
 
     #region Zenject
     [Inject]
     private void Construct(ResourcesManager resourcesManager, GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager,
                            PlayerCharacteristicsManager playerCharacteristicsManager, PickableItemsManager pickableItemsManager,
                            Transform dynamicEnvironment, SpawnEnemiesManager spawnEnemiesManager, EnemiesCharacteristicsManager enemiesCharacteristicsManager,
-                           AdsManager adsManager, AdsController adsController, VFXManager vfxManager)
+                           AdsManager adsManager, AdsController adsController, VFXManager vfxManager, AudioManager audioManager)
     {
         this.dynamicEnvironment = dynamicEnvironment;
         this.playerCharacteristicsManager = playerCharacteristicsManager;
@@ -88,6 +89,7 @@ public class PoolItemsManager : MonoBehaviour
         _adsManager = adsManager;
         _adsController = adsController;
         _vfxManager = vfxManager;
+        _audioManager = audioManager;
     }
     #endregion Zenject
 
@@ -187,7 +189,7 @@ public class PoolItemsManager : MonoBehaviour
             poolItem.transform.localPosition = Vector3.zero;
             poolItem.CashComponents(this, _resourcesManager, _gameProcessManager, _playerExperienceManager,playerCharacteristicsManager,
                                     _pickableItemsManager,dynamicEnvironment, _spawnEnemiesManager, _enemiesCharacteristicsManager,
-                                    _adsManager, _adsController, _vfxManager);
+                                    _adsManager, _adsController, _vfxManager, _audioManager);
             itemsList.Add(poolItem);
             poolItem.name = $"{itemName} {i}";
         }

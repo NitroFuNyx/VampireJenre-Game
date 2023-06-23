@@ -23,6 +23,7 @@ public class PoolItem : MonoBehaviour
     private AdsController _adsController;
 
     private VFXManager _vfxManager;
+    private AudioManager _audioManager;
 
     public PoolItemsTypes PoolItemType { get => poolItemType;}
     public PoolItemsManager PoolItemsManager { get => _poolItemsManager; private set => _poolItemsManager = value; }
@@ -39,6 +40,7 @@ public class PoolItem : MonoBehaviour
     public SpawnEnemiesManager SpawnEnemiesManager { get => _spawnEnemiesManager; private set => _spawnEnemiesManager = value; }
     public EnemiesCharacteristicsManager _EnemiesCharacteristicsManager { get => _enemiesCharacteristicsManager; private set => _enemiesCharacteristicsManager = value; }
     public VFXManager VfxManager { get => _vfxManager; }
+    public AudioManager AudioManager { get => _audioManager; }
 
     #region Events Declaration
     public event Action OnItemResetRequired;
@@ -59,7 +61,7 @@ public class PoolItem : MonoBehaviour
                                PlayerExperienceManager playerExperienceManager,PlayerCharacteristicsManager playerCharacteristicsManager,
                                PickableItemsManager pickableItemsManager, Transform dynamicEnvironment, SpawnEnemiesManager spawnEnemiesManager,
                                EnemiesCharacteristicsManager enemiesCharacteristicsManager, AdsManager adsManager, AdsController adsController,
-                               VFXManager vfxManager)
+                               VFXManager vfxManager, AudioManager audioManager)
     {
         this.dynamicEnvironment = dynamicEnvironment;
         this.playerCharacteristicsManager = playerCharacteristicsManager;
@@ -73,5 +75,6 @@ public class PoolItem : MonoBehaviour
         _adsManager = adsManager;
         _adsController = adsController;
         _vfxManager = vfxManager;
+        _audioManager = audioManager;
     }
 }

@@ -50,6 +50,7 @@ public class PickableResource : PickableItem
     protected override void PlayerCollision_ExecuteReaction()
     {
         canMove = false;
+        poolItemComponent.AudioManager.PlaySFXSound_PickUpResource();
         poolItemComponent.ResourcesManager.AddResourceForKillingEnemy(resourceBonusData);
         poolItemComponent.PoolItemsManager.ReturnItemToPool(poolItemComponent);
     }

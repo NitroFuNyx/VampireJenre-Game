@@ -62,12 +62,14 @@ public class PlayerExperienceManager : MonoBehaviour
     {
         _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
         _gameProcessManager.OnPlayerWon += GameProcessManager_PlayerWon_ExecuteReaction;
+        _gameProcessManager.OnLevelDataReset += ResetPlayerProgress;
     }
 
     private void UnsubscribeFromEvents()
     {
         _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
         _gameProcessManager.OnPlayerWon -= GameProcessManager_PlayerWon_ExecuteReaction;
+        _gameProcessManager.OnLevelDataReset -= ResetPlayerProgress;
     }
 
     private void ResetPlayerProgress()

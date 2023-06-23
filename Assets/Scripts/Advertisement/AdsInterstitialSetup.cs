@@ -38,13 +38,10 @@ public class AdsInterstitialSetup : MonoBehaviour
                         break;
                 }
             }
-
-            
             LoadInterstitialAd();
 
         });
         AppLovin.Initialize();
-        
         
     }
     // These ad units are configured to always serve test ads.

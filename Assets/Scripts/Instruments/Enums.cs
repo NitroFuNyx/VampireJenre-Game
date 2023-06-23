@@ -94,3 +94,8 @@ public enum TreasureChestItems
 {
     Skill, Gems, Coins
 }
+
+public enum PlayerModels
+{
+    Knight, Dryad, Wizzard
+}
