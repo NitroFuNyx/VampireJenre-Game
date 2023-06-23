@@ -126,6 +126,8 @@ public class GameProcessManager : MonoBehaviour
 
     public void ResetLevelDataWithSaving()
     {
+        Debug.Log($"Reset Level");
+        StopAllCoroutines();
         OnLevelDataReset?.Invoke();
         firstSkillDefined = false;
         _audioManager.PlayMusic_MainScreen_Loader();
