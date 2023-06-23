@@ -41,6 +41,7 @@ public class PlayerComponentsManager : MonoBehaviour
         movementManager.ChangeCanMoveState(true);
         collisionsManager.ResetComponent();
         collisionsManager.StartRegeneration();
+        movementManager.SetAnimation_Idle();
     }
 
     private void SubscribeOnEvents()
@@ -73,6 +74,8 @@ public class PlayerComponentsManager : MonoBehaviour
         movementManager.ChangeCanMoveState(false);
 
         collisionsManager.StopRegeneration();
+
+        movementManager.SetAnimation_Die();
     }
 
     private void CollisionManager_DamageReceived_ExecuteReaction()
@@ -96,6 +99,7 @@ public class PlayerComponentsManager : MonoBehaviour
     {
         movementManager.ResetComponent();
         collisionsManager.ResetComponent();
+        movementManager.SetAnimation_Idle();
     }
 
     private void CharactersManager_OnPlayerModelChanged_ExecuteReaction(Animator animator)

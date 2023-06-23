@@ -30,6 +30,8 @@ public class Layers
 public class PlayerAnimations
 {
     public const string IsRunning = "IsRunning";
+    public const string Die = "Die";
+    public const string Idle = "Idle";
 }
 
 public class EnemyAnimations

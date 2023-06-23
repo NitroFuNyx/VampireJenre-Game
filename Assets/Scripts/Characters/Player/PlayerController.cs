@@ -68,4 +68,14 @@ public class PlayerController : MonoBehaviour
     {
         playerAnimator = animator;
     }
+
+    public void SetAnimation_Idle()
+    {
+        playerAnimator.SetTrigger(PlayerAnimations.Idle);
+    }
+
+    public void SetAnimation_Die()
+    {
+        playerAnimator.SetTrigger(PlayerAnimations.Die);
+    }
 }
