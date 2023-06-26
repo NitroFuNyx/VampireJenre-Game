@@ -51,8 +51,8 @@ public class MeteorProjectileSpawner : ProjectileSpawnerBase
         //int projectileSpawnerCounter = 0;
         while (projectiles.Count < _playerCharacteristicsManager.CurrentPlayerData.playerSkillsData.meteorSkillData.projectilesAmount)
         {
-            Vector3 spawnPoint = new Vector3(GetSpawnPosition(), spawnZone.transform.position.y + spawnZone.size.y,
-                GetSpawnPosition());
+            Vector3 spawnPoint = new Vector3(GetSpawnPositionX(), spawnZone.transform.position.y + spawnZone.size.y,
+                GetSpawnPositionZ());
             PoolItem meteor = _poolmanager.SpawnItemFromPool(PoolItemsTypes.Meteor_Projectile, spawnPoint,
                 Quaternion.identity, dynamicEnvironment);
             if (meteor != null)
@@ -88,8 +88,12 @@ public class MeteorProjectileSpawner : ProjectileSpawnerBase
         }
     }
 
-    private float GetSpawnPosition()
+    private float GetSpawnPositionX()
     {
-        return Random.Range((float) -spawnZoneWidth/2, (float) spawnZoneWidth/2);
+        return Random.Range((float) (-spawnZoneWidth / 2)+transform.position.x, (float) spawnZoneWidth / 2+transform.position.x);
+    }
+    private float GetSpawnPositionZ()
+    {
+        return Random.Range((float) (-spawnZoneWidth / 2)+transform.position.z, (float) spawnZoneWidth / 2+transform.position.z);
     }
 }

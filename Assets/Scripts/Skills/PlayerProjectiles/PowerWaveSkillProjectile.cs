@@ -68,7 +68,10 @@ public class PowerWaveSkillProjectile : SkillParameterBase, ISkillProjectile
     public void Move()
     {
         if(target!=null)
-            _thisTransform.LookAt(target.transform.position,Vector3.up);
+        {
+            _thisTransform.LookAt(target.transform.position, Vector3.up);
+        
+        }
         projectileRigidBody.AddForce(_thisTransform.forward * speed,ForceMode.Acceleration);
     }
 
@@ -126,6 +129,7 @@ public class PowerWaveSkillProjectile : SkillParameterBase, ISkillProjectile
         }
 
         Move();
+        
     }
     #endregion Pool Item Component Events Reactions
    

@@ -51,8 +51,8 @@ public class LightningBoltSkillSpawner : ProjectileSpawnerBase
         while (projectileSpawnerCounter < _playerCharacteristicsManager.CurrentPlayerData.playerSkillsData
             .lightningBoltSkillData.projectilesAmount)
         {
-            Vector3 spawnPoint = new Vector3(GetSpawnPosition(), 0,
-                GetSpawnPosition());
+            Vector3 spawnPoint = new Vector3(GetSpawnPositionX(), 0,
+                GetSpawnPositionZ());
             PoolItem lightning = _poolmanager.SpawnItemFromPool(PoolItemsTypes.Lightning_Bolt_Skill, spawnPoint,
                 Quaternion.identity, dynamicEnvironment);
             if (lightning != null)
@@ -77,8 +77,12 @@ public class LightningBoltSkillSpawner : ProjectileSpawnerBase
         }
     }
 
-    private float GetSpawnPosition()
+    private float GetSpawnPositionX()
     {
-        return Random.Range((float) -spawnZoneWidth / 2, (float) spawnZoneWidth / 2);
+        return Random.Range((float) (-spawnZoneWidth / 2)+transform.position.x, (float) spawnZoneWidth / 2+transform.position.x);
+    }
+    private float GetSpawnPositionZ()
+    {
+        return Random.Range((float) (-spawnZoneWidth / 2)+transform.position.z, (float) spawnZoneWidth / 2+transform.position.z);
     }
 }

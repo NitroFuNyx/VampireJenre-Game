@@ -39,7 +39,8 @@ public class AdsRewardedSetup : MonoBehaviour
             LoadRewardedAd();
 
         });
-        AppLovin.Initialize();
+       GoogleMobileAds.Mediation.AppLovin.Api.AppLovin.Initialize();
+        
     }
 
     private void OnEnable()
