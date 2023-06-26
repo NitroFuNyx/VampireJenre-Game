@@ -41,7 +41,9 @@ public class AdsInterstitialSetup : MonoBehaviour
             LoadInterstitialAd();
 
         });
-        AppLovin.Initialize();
+        GoogleMobileAds.Mediation.AppLovin.Api.AppLovin.Initialize();
+
+        
         
     }
     // These ad units are configured to always serve test ads.
