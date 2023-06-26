@@ -99,3 +99,8 @@ public enum PlayerModels
 {
     Knight, Dryad, Wizzard
 }
+
+public enum SelectionArrowTypes
+{
+    Left, Right
+}
