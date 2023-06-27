@@ -270,6 +270,9 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     {
          gameData.coinsAmount += new GameData.Secureint(1000);
          gameData.gemsAmount += new GameData.Secureint(1000);
+
+        OnCoinsAmountChanged?.Invoke(gameData.coinsAmount.GetValue());
+        OnGemsAmountChanged?.Invoke(gameData.gemsAmount.GetValue());
     }
     // End Of Test Methods
 
