@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 using Zenject;
 
 public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
@@ -17,6 +18,8 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
 
     private DataPersistanceManager _dataPersistanceManager;
     private GameProcessManager _gameProcessManager;
+
+    private Dictionary<PlayersCharactersTypes, PlayerBasicCharacteristicsStruct> charactersDictionary = new Dictionary<PlayersCharactersTypes, PlayerBasicCharacteristicsStruct>();
 
     public PlayerBasicCharacteristicsStruct CurrentPlayerData { get => currentPlayerData; private set => currentPlayerData = value; }
 

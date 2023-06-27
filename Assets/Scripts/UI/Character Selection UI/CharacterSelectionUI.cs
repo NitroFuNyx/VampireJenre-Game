@@ -16,13 +16,12 @@ public class CharacterSelectionUI : MainCanvasPanel
     private List<PlayersCharactersTypes> charactersList = new List<PlayersCharactersTypes>();
     private Dictionary<PlayersCharactersTypes, Sprite> charactersDictionary = new Dictionary<PlayersCharactersTypes, Sprite>();
 
-    private PlayersCharactersTypes currentlySelectedCharacter;
     private PlayersCharactersTypes visibleCharacter;
 
     private void Start()
     {
         FillCharactersListAndDictionary();
-        currentlySelectedCharacter = PlayersCharactersTypes.Knight;
+        //currentlySelectedCharacter = PlayersCharactersTypes.Knight;
         visibleCharacter = PlayersCharactersTypes.Knight;
         UpdateCharacterSprite(visibleCharacter);
     }
