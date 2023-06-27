@@ -16,7 +16,7 @@ public class GameData
     public bool blockAdsOptionPurchased;
     public bool freeRewardSpinUsed;
     public bool rewardForAdSpinUsed;
-    public PlayerBasicCharacteristicsStruct playerCharacteristcsData;
+    public List<PlayerBasicCharacteristicsStruct> playerClasesDataList;
     public List<TalentLevelStruct> skillsLevelsList;
 
     public GameData()
@@ -32,7 +32,7 @@ public class GameData
         freeRewardSpinUsed = false;
         rewardForAdSpinUsed = false;
 
-        playerCharacteristcsData = new PlayerBasicCharacteristicsStruct();
+        playerClasesDataList = new List<PlayerBasicCharacteristicsStruct>();
         skillsLevelsList = new List<TalentLevelStruct>();
     }
    
@@ -73,7 +73,5 @@ public class GameData
         {
             return new Secureint(i1.GetValue() / i2.GetValue());
         }
-        
-        
     }
 }

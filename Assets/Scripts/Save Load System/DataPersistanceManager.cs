@@ -13,6 +13,7 @@ public class DataPersistanceManager : MonoBehaviour
     private GameData gameData;
 
     private TalentsManager _talentsManager;
+    private PlayerCharacteristicsManager _playerCharacteristicsManager;
 
     private void Start()
     {
@@ -21,20 +22,22 @@ public class DataPersistanceManager : MonoBehaviour
 
     #region Zenject
     [Inject]
-    private void Construct(TalentsManager talentsManager)
+    private void Construct(TalentsManager talentsManager, PlayerCharacteristicsManager playerCharacteristicsManager)
     {
         _talentsManager = talentsManager;
+        _playerCharacteristicsManager = playerCharacteristicsManager;
     }
     #endregion Zenject
     
     public void NewGame()
     {
-        gameData=new GameData(); // make class with default data
+        gameData = new GameData(); // make class with default data
         
         FileDataHandler.Write(gameData); // create json file and write default data
 
         _talentsManager.InitializeTalentsLevelsData(gameData);
         InitializeDayOfPlayingData(gameData);
+        InitializeCharacterClasesData(gameData);
 
         SaveGame(); // save actual Unity data set in json file
     }
@@ -73,6 +76,14 @@ public class DataPersistanceManager : MonoBehaviour
     private void InitializeDayOfPlayingData(GameData gameData)
     {
         gameData.lastDayPlaying = DateConstants.newGameIndexForData;
+    }
+
+    private void InitializeCharacterClasesData(GameData gameData)
+    {
+        for(int i = 0; i <_playerCharacteristicsManager.PlayerCharactersClasesDataSO.PlayerBasicDataLists.Count; i++)
+        {
+            gameData.playerClasesDataList.Add(_playerCharacteristicsManager.PlayerCharactersClasesDataSO.PlayerBasicDataLists[i]);
+        }
     }
 
     private IEnumerator LoadStartDataCoroutine()

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 using Zenject;
 
 public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
@@ -10,6 +11,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     [Header("Current Data")]
     [Space]
     [SerializeField] private PlayerBasicCharacteristicsStruct currentPlayerData;
+    [SerializeField] private List<PlayerBasicCharacteristicsStruct> charactersClasesDataList = new List<PlayerBasicCharacteristicsStruct>();
     [Header("Skills Levels Data")]
     [Space]
     [SerializeField] private ActiveSkillsLevelsSO activesSkillsLevelsData;
@@ -19,6 +21,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     private GameProcessManager _gameProcessManager;
 
     public PlayerBasicCharacteristicsStruct CurrentPlayerData { get => currentPlayerData; private set => currentPlayerData = value; }
+    public PlayerCharacteristicsSO PlayerCharactersClasesDataSO { get => playerCharacteristicsSO; }
 
     private void Awake()
     {
@@ -52,14 +55,35 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     #region Save/Load Methods
     public void LoadData(GameData data)
     {
-        currentPlayerData = data.playerCharacteristcsData;
+        if(charactersClasesDataList.Count > 0)
+        {
+            for (int i = 0; i < charactersClasesDataList.Count; i++)
+            {
+                charactersClasesDataList[i] = data.playerClasesDataList[i];
+            }
+        }
+        else
+        {
+            for (int i = 0; i < data.playerClasesDataList.Count; i++)
+            {
+                charactersClasesDataList.Add(data.playerClasesDataList[i]);
+            }
+        }
+        //currentPlayerData = data.playerCharacteristcsData;
     }
 
     public void SaveData(GameData data)
     {
         if (!_gameProcessManager.BattleStarted)
         {
-            data.playerCharacteristcsData = currentPlayerData;
+            for (int i = 0; i < charactersClasesDataList.Count; i++)
+            {
+                if(charactersClasesDataList[i].playerCharacterType == data.playerClasesDataList[i].playerCharacterType)
+                {
+                    data.playerClasesDataList[i] = charactersClasesDataList[i];
+                }
+            }
+            //data.playerCharacteristcsData = currentPlayerData;
         }
     }
     #endregion Save/Load Methods
