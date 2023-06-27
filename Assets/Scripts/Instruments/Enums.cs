@@ -66,7 +66,7 @@ public enum PassiveSkills
 
 public enum PlayersCharactersTypes
 {
-    Knight, Druid, Wizzard
+    Knight, Dryad, Wizzard
 }
 
 public enum SkillUpgradesTypes
@@ -93,11 +93,6 @@ public enum ResourcesSaveTypes
 public enum TreasureChestItems
 {
     Skill, Gems, Coins
-}
-
-public enum PlayerModels
-{
-    Knight, Dryad, Wizzard
 }
 
 public enum SelectionArrowTypes

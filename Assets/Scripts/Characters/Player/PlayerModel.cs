@@ -4,11 +4,11 @@ public class PlayerModel : MonoBehaviour
 {
     [Header("Model Data")]
     [Space]
-    [SerializeField] private PlayerModels modelType;
+    [SerializeField] private PlayersCharactersTypes modelType;
 
     private Animator animatorComponent;
 
-    public PlayerModels ModelType { get => modelType; }
+    public PlayersCharactersTypes ModelType { get => modelType; }
     public Animator AnimatorComponent { get => animatorComponent; }
 
     private void Awake()

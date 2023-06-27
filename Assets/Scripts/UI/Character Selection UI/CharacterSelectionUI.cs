@@ -22,8 +22,8 @@ public class CharacterSelectionUI : MainCanvasPanel
     {
         FillCharactersListAndDictionary();
         //currentlySelectedCharacter = PlayersCharactersTypes.Knight;
-        visibleCharacter = PlayersCharactersTypes.Knight;
-        UpdateCharacterSprite(visibleCharacter);
+        //visibleCharacter = PlayersCharactersTypes.Knight;
+        //UpdateCharacterSprite(visibleCharacter);
     }
 
     public override void PanelActivated_ExecuteReaction()
@@ -46,11 +46,11 @@ public class CharacterSelectionUI : MainCanvasPanel
     private void FillCharactersListAndDictionary()
     {
         charactersList.Add(PlayersCharactersTypes.Knight);
-        charactersList.Add(PlayersCharactersTypes.Druid);
+        charactersList.Add(PlayersCharactersTypes.Dryad);
         charactersList.Add(PlayersCharactersTypes.Wizzard);
 
         charactersDictionary.Add(PlayersCharactersTypes.Knight, knightSprite);
-        charactersDictionary.Add(PlayersCharactersTypes.Druid, druidSprite);
+        charactersDictionary.Add(PlayersCharactersTypes.Dryad, druidSprite);
         charactersDictionary.Add(PlayersCharactersTypes.Wizzard, wizzardSprite);
     }
 

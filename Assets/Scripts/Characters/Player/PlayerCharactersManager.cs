@@ -9,13 +9,14 @@ public class PlayerCharactersManager : MonoBehaviour
     [SerializeField] private List<PlayerModel> modelsList = new List<PlayerModel>();
 
     public event Action<Animator> OnPlayerModelChanged;
+    public event Action<PlayersCharactersTypes> OnCharacterChanged;
 
     private void Start()
     {
-        SetPlayCharacterModel(PlayerModels.Knight);
+        SetPlayCharacterModel(PlayersCharactersTypes.Knight);
     }
 
-    public void SetPlayCharacterModel(PlayerModels model)
+    public void SetPlayCharacterModel(PlayersCharactersTypes model)
     {
         for(int i = 0; i < modelsList.Count; i++)
         {
@@ -23,6 +24,7 @@ public class PlayerCharactersManager : MonoBehaviour
             {
                 modelsList[i].gameObject.SetActive(true);
                 OnPlayerModelChanged?.Invoke(modelsList[i].AnimatorComponent);
+                OnCharacterChanged?.Invoke(modelsList[i].ModelType);
             }
             else
             {
