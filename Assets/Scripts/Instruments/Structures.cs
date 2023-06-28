@@ -75,6 +75,7 @@ public struct PlayerBasicCharacteristicsStruct
     public PlayerClasses playerCharacterType;
     public float characterHp; // Talent
     public float characterSpeed;
+    public float skillsRangeIncreasePercent;
     public float characterDamageIncreasePercent;
     public float characterDamageReductionPercent;
     public float characterCritChance;
