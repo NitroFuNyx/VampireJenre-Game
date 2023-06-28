@@ -115,11 +115,6 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
             {
                 tempSkillStruct = charactersClasesDataList[i];
                 UpgradePassiveCharacteristic_AddPercent(ref tempSkillStruct.skillsRangeIncreasePercent, talentData.upgradePercent);
-                //UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.playerForceWaveData.range, talentData.upgradePercent);
-                //UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.magicAuraSkillData.radius, talentData.upgradePercent);
-                //UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.pulseAuraSkillData.radius, talentData.upgradePercent);
-                //UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.fireballsSkillData.radius, talentData.upgradePercent);
-                //UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.weaponStrikeSkillData.size, talentData.upgradePercent);
                 charactersClasesDataList[i] = tempSkillStruct;
             }
         }
