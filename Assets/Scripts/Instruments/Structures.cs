@@ -73,6 +73,7 @@ public struct PassiveSkillInGameDataStruct
 public struct PlayerBasicCharacteristicsStruct
 {
     public PlayerClasses playerCharacterType;
+    public int characterLevel;
     public float characterHp; // Talent
     public float characterSpeed;
     public float skillsRangeIncreasePercent;

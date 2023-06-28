@@ -21,6 +21,8 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     private GameProcessManager _gameProcessManager;
     private PlayerCharactersManager _playerCharactersManager;
 
+    private int characterMaxLevel = 50;
+
     public PlayerBasicCharacteristicsStruct CurrentPlayerData { get => currentPlayerData; private set => currentPlayerData = value; }
     public PlayerCharacteristicsSO PlayerCharactersClasesDataSO { get => playerCharacteristicsSO; }
 
@@ -276,6 +278,33 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
                 UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.playerSkillsData.playerForceWaveData.projectilesAmount, passiveSkillsLevelsData.IncreaseProjectilesAmountUpgradesDataList[skillLevel - 1].upgradeValue);
             }
         }
+    }
+
+    [ContextMenu("Upgrade")]
+    public void UpgradeCharacterLevel()
+    {
+        PlayerBasicCharacteristicsStruct tempSkillStruct = new PlayerBasicCharacteristicsStruct();
+
+        for(int i = 0; i < charactersClasesDataList.Count; i++)
+        {
+            if(charactersClasesDataList[i].playerCharacterType == currentPlayerData.playerCharacterType)
+            {
+                tempSkillStruct = charactersClasesDataList[i];
+                if(charactersClasesDataList[i].characterLevel < characterMaxLevel)
+                {
+                    tempSkillStruct.characterLevel++;
+                    charactersClasesDataList[i] = tempSkillStruct;
+                    currentPlayerData = charactersClasesDataList[i];
+                }
+                else
+                {
+                    // Show Max Level Message
+                }
+                break;
+            }
+        }
+
+        _dataPersistanceManager.SaveGame();
     }
 
     public void ResetPlayerCharacteristicAfterBattle()
