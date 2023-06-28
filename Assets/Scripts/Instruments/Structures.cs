@@ -72,7 +72,7 @@ public struct PassiveSkillInGameDataStruct
 [Serializable]
 public struct PlayerBasicCharacteristicsStruct
 {
-    public PlayersCharactersTypes playerCharacterType;
+    public PlayerClasses playerCharacterType;
     public float characterHp; // Talent
     public float characterSpeed;
     public float characterDamageIncreasePercent;

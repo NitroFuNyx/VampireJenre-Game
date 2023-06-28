@@ -64,7 +64,7 @@ public enum PassiveSkills
     IncreaseRange, IncreaseDamage, IncreaseMovementSpeed, DecreaseIncomeDamage, IncreaseRegeneration, IncreaseCritChance, IncreaseCritPower, IncreaseProjectileAmount,  
 }
 
-public enum PlayersCharactersTypes
+public enum PlayerClasses
 {
     Knight, Dryad, Wizzard
 }

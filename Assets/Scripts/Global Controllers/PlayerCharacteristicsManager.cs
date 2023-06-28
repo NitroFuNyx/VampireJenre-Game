@@ -19,13 +19,14 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
 
     private DataPersistanceManager _dataPersistanceManager;
     private GameProcessManager _gameProcessManager;
+    private PlayerCharactersManager _playerCharactersManager;
 
     public PlayerBasicCharacteristicsStruct CurrentPlayerData { get => currentPlayerData; private set => currentPlayerData = value; }
     public PlayerCharacteristicsSO PlayerCharactersClasesDataSO { get => playerCharacteristicsSO; }
 
     private void Awake()
     {
-        currentPlayerData = GetCharacterCharacteristicsData(PlayersCharactersTypes.Knight);
+        //currentPlayerData = GetCharacterCharacteristicsData(PlayerClasses.Knight);
         _dataPersistanceManager.AddObjectToSaveSystemObjectsList(this);
     }
 
@@ -34,6 +35,8 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         _gameProcessManager.OnGameStarted += GameProcessManager_GameStarted_ExecuteReaction;
         _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
         _gameProcessManager.OnPlayerWon += GameProcessManager_PlayerWon_ExecuteReaction;
+
+        _playerCharactersManager.OnCharacterChanged += PlayerCharactersManager_OnCharacterChanged_ExecuteReaction;
     }
 
     private void OnDestroy()
@@ -41,14 +44,18 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         _gameProcessManager.OnGameStarted -= GameProcessManager_GameStarted_ExecuteReaction;
         _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
         _gameProcessManager.OnPlayerWon -= GameProcessManager_PlayerWon_ExecuteReaction;
+
+        _playerCharactersManager.OnCharacterChanged -= PlayerCharactersManager_OnCharacterChanged_ExecuteReaction;
     }
 
     #region Zenject
     [Inject]
-    private void Construct(DataPersistanceManager dataPersistanceManager, GameProcessManager gameProcessManager)
+    private void Construct(DataPersistanceManager dataPersistanceManager, GameProcessManager gameProcessManager, 
+                           PlayerCharactersManager playerCharactersManager)
     {
         _dataPersistanceManager = dataPersistanceManager;
         _gameProcessManager = gameProcessManager;
+        _playerCharactersManager = playerCharactersManager;
     }
     #endregion Zenject
 
@@ -88,59 +95,107 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     }
     #endregion Save/Load Methods
 
-    public void UpgradePlayerDataWithSaving(TalentDataStruct talentData)
+    public void UpgradePlayerData_DueToTalentAquired(TalentDataStruct talentData)
     {
         Debug.Log($"Talent {talentData.passiveSkillType}");
+        PlayerBasicCharacteristicsStruct tempSkillStruct = new PlayerBasicCharacteristicsStruct();
 
-        if(talentData.passiveSkillType == PassiveCharacteristicsTypes.IncreseItemDropChance)
+        if (talentData.passiveSkillType == PassiveCharacteristicsTypes.IncreseItemDropChance)
         {
-            UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.characterItemDropChancePercent, talentData.upgradePercent);
+            for (int i = 0; i < charactersClasesDataList.Count; i++)
+            {
+                tempSkillStruct = charactersClasesDataList[i];
+                UpgradePassiveCharacteristic_AddPercent(ref tempSkillStruct.characterItemDropChancePercent, talentData.upgradePercent);
+                charactersClasesDataList[i] = tempSkillStruct;
+            }
         }
         else if(talentData.passiveSkillType == PassiveCharacteristicsTypes.IncreseSkillsRadius)
         {
-            UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.playerForceWaveData.range, talentData.upgradePercent);
-            UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.magicAuraSkillData.radius, talentData.upgradePercent);
-            UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.pulseAuraSkillData.radius, talentData.upgradePercent);
-            UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.fireballsSkillData.radius, talentData.upgradePercent);
-            UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.weaponStrikeSkillData.size, talentData.upgradePercent);
+            for (int i = 0; i < charactersClasesDataList.Count; i++)
+            {
+                tempSkillStruct = charactersClasesDataList[i];
+                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.playerForceWaveData.range, talentData.upgradePercent);
+                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.magicAuraSkillData.radius, talentData.upgradePercent);
+                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.pulseAuraSkillData.radius, talentData.upgradePercent);
+                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.fireballsSkillData.radius, talentData.upgradePercent);
+                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.weaponStrikeSkillData.size, talentData.upgradePercent);
+                charactersClasesDataList[i] = tempSkillStruct;
+            }
         }
         else if (talentData.passiveSkillType == PassiveCharacteristicsTypes.IncreaseDamage)
         {
-            UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.playerForceWaveData.damage, talentData.upgradePercent);
-            UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.singleShotSkillData.damage, talentData.upgradePercent);
-            UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.magicAuraSkillData.damage, talentData.upgradePercent);
-            UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.pulseAuraSkillData.damage, talentData.upgradePercent);
-            UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.meteorSkillData.damage, talentData.upgradePercent);
-            UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.lightningBoltSkillData.damage, talentData.upgradePercent);
-            UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.chainLightningSkillData.damage, talentData.upgradePercent);
-            UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.fireballsSkillData.damage, talentData.upgradePercent);
-            UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.allDirectionsShotsSkillData.damage, talentData.upgradePercent);
-            UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.playerSkillsData.weaponStrikeSkillData.damage, talentData.upgradePercent);
+            for (int i = 0; i < charactersClasesDataList.Count; i++)
+            {
+                tempSkillStruct = charactersClasesDataList[i];
+                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.playerForceWaveData.damage, talentData.upgradePercent);
+                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.singleShotSkillData.damage, talentData.upgradePercent);
+                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.magicAuraSkillData.damage, talentData.upgradePercent);
+                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.pulseAuraSkillData.damage, talentData.upgradePercent);
+                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.meteorSkillData.damage, talentData.upgradePercent);
+                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.lightningBoltSkillData.damage, talentData.upgradePercent);
+                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.chainLightningSkillData.damage, talentData.upgradePercent);
+                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.fireballsSkillData.damage, talentData.upgradePercent);
+                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.allDirectionsShotsSkillData.damage, talentData.upgradePercent);
+                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.weaponStrikeSkillData.damage, talentData.upgradePercent);
+                charactersClasesDataList[i] = tempSkillStruct;
+            }
         }
         else if (talentData.passiveSkillType == PassiveCharacteristicsTypes.IncreaseMovementSpeed)
         {
-            UpgradePassiveCharacteristic_PercentOfValue(ref currentPlayerData.characterSpeed, talentData.upgradePercent);
+            for (int i = 0; i < charactersClasesDataList.Count; i++)
+            {
+                tempSkillStruct = charactersClasesDataList[i];
+                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.characterSpeed, talentData.upgradePercent);
+                charactersClasesDataList[i] = tempSkillStruct;
+            }
         }
         else if (talentData.passiveSkillType == PassiveCharacteristicsTypes.DecreaseIncomeDamage)
         {
-            UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.characterDamageReductionPercent, talentData.upgradePercent);
+            for (int i = 0; i < charactersClasesDataList.Count; i++)
+            {
+                tempSkillStruct = charactersClasesDataList[i];
+                UpgradePassiveCharacteristic_AddPercent(ref tempSkillStruct.characterDamageReductionPercent, talentData.upgradePercent);
+                charactersClasesDataList[i] = tempSkillStruct;
+            }
         }
         else if (talentData.passiveSkillType == PassiveCharacteristicsTypes.IncreaseRegeneration)
         {
-            UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.characterRegenerationPercent, talentData.upgradePercent);
+            for (int i = 0; i < charactersClasesDataList.Count; i++)
+            {
+                tempSkillStruct = charactersClasesDataList[i];
+                UpgradePassiveCharacteristic_AddPercent(ref tempSkillStruct.characterRegenerationPercent, talentData.upgradePercent);
+                charactersClasesDataList[i] = tempSkillStruct;
+            }
         }
         else if (talentData.passiveSkillType == PassiveCharacteristicsTypes.IncreaseCritChance)
         {
-            UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.characterCritChance, talentData.upgradePercent);
+            for (int i = 0; i < charactersClasesDataList.Count; i++)
+            {
+                tempSkillStruct = charactersClasesDataList[i];
+                UpgradePassiveCharacteristic_AddPercent(ref tempSkillStruct.characterCritChance, talentData.upgradePercent);
+                charactersClasesDataList[i] = tempSkillStruct;
+            }
         }
         else if (talentData.passiveSkillType == PassiveCharacteristicsTypes.IncreaseCritPower)
         {
-            UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.characterCritPower, talentData.upgradePercent);
+            for (int i = 0; i < charactersClasesDataList.Count; i++)
+            {
+                tempSkillStruct = charactersClasesDataList[i];
+                UpgradePassiveCharacteristic_AddPercent(ref tempSkillStruct.characterCritPower, talentData.upgradePercent);
+                charactersClasesDataList[i] = tempSkillStruct;
+            }
         }
         else if (talentData.passiveSkillType == PassiveCharacteristicsTypes.IncreaseCoinsSurplus)
         {
-            UpgradePassiveCharacteristic_AddPercent(ref currentPlayerData.characterCoinsSurplusPercent, talentData.upgradePercent);
+            for (int i = 0; i < charactersClasesDataList.Count; i++)
+            {
+                tempSkillStruct = charactersClasesDataList[i];
+                UpgradePassiveCharacteristic_AddPercent(ref tempSkillStruct.characterCoinsSurplusPercent, talentData.upgradePercent);
+                charactersClasesDataList[i] = tempSkillStruct;
+            }
         }
+
+        SetCurrentCharacterData(_playerCharactersManager.CurrentClass);
 
         _dataPersistanceManager.SaveGame();
     }
@@ -374,7 +429,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     }
     #endregion Active Skills Upgrade Methods
 
-    private PlayerBasicCharacteristicsStruct GetCharacterCharacteristicsData(PlayersCharactersTypes characterType)
+    private PlayerBasicCharacteristicsStruct GetCharacterCharacteristicsData(PlayerClasses characterType)
     {
         PlayerBasicCharacteristicsStruct characterData = new PlayerBasicCharacteristicsStruct();
 
@@ -387,5 +442,23 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         }
 
         return characterData;
+    }
+
+    private void SetCurrentCharacterData(PlayerClasses playerClass)
+    {
+        for (int i = 0; i < charactersClasesDataList.Count; i++)
+        {
+            if (playerClass == charactersClasesDataList[i].playerCharacterType)
+            {
+                Debug.Log($"Character {playerClass}");
+                currentPlayerData = charactersClasesDataList[i];
+                break;
+            }
+        }
+    }
+
+    private void PlayerCharactersManager_OnCharacterChanged_ExecuteReaction(PlayerClasses playerClass)
+    {
+        SetCurrentCharacterData(playerClass);
     }
 }

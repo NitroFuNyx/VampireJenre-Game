@@ -13,10 +13,10 @@ public class CharacterSelectionUI : MainCanvasPanel
     [Space]
     [SerializeField] private Image characterImage;
 
-    private List<PlayersCharactersTypes> charactersList = new List<PlayersCharactersTypes>();
-    private Dictionary<PlayersCharactersTypes, Sprite> charactersDictionary = new Dictionary<PlayersCharactersTypes, Sprite>();
+    private List<PlayerClasses> charactersList = new List<PlayerClasses>();
+    private Dictionary<PlayerClasses, Sprite> charactersDictionary = new Dictionary<PlayerClasses, Sprite>();
 
-    private PlayersCharactersTypes visibleCharacter;
+    private PlayerClasses visibleCharacter;
 
     private void Start()
     {
@@ -45,21 +45,21 @@ public class CharacterSelectionUI : MainCanvasPanel
 
     private void FillCharactersListAndDictionary()
     {
-        charactersList.Add(PlayersCharactersTypes.Knight);
-        charactersList.Add(PlayersCharactersTypes.Dryad);
-        charactersList.Add(PlayersCharactersTypes.Wizzard);
+        charactersList.Add(PlayerClasses.Knight);
+        charactersList.Add(PlayerClasses.Dryad);
+        charactersList.Add(PlayerClasses.Wizzard);
 
-        charactersDictionary.Add(PlayersCharactersTypes.Knight, knightSprite);
-        charactersDictionary.Add(PlayersCharactersTypes.Dryad, druidSprite);
-        charactersDictionary.Add(PlayersCharactersTypes.Wizzard, wizzardSprite);
+        charactersDictionary.Add(PlayerClasses.Knight, knightSprite);
+        charactersDictionary.Add(PlayerClasses.Dryad, druidSprite);
+        charactersDictionary.Add(PlayerClasses.Wizzard, wizzardSprite);
     }
 
-    private void UpdateCharacterSprite(PlayersCharactersTypes characterType)
+    private void UpdateCharacterSprite(PlayerClasses characterType)
     {
         characterImage.sprite = charactersDictionary[characterType];
     }
 
-    private PlayersCharactersTypes GetNewVisibleCharacter(SelectionArrowTypes arrowType)
+    private PlayerClasses GetNewVisibleCharacter(SelectionArrowTypes arrowType)
     {
         int newCharacterIndex = charactersList.IndexOf(visibleCharacter);
 

@@ -115,7 +115,7 @@ public class TalentsManager : MonoBehaviour, IDataPersistance
             }
         }
 
-        _playerCharacteristicsManager.UpgradePlayerDataWithSaving(currentTalentData);
+        _playerCharacteristicsManager.UpgradePlayerData_DueToTalentAquired(currentTalentData);
         OnBuyingProcessFinishedCallback?.Invoke();
     }
 
