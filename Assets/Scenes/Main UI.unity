@@ -1814,6 +1814,7 @@ MonoBehaviour:
   playerCharacteristicsManager: {fileID: 4607836227784106769}
   skillsManager: {fileID: 1666441263}
   playerCharactersManager: {fileID: 5867185270158019656}
+  playerAnimationsManager: {fileID: 5867185270158019657}
 --- !u!1 &1051674024
 GameObject:
   m_ObjectHideFlags: 0
@@ -3393,6 +3394,7 @@ GameObject:
   - component: {fileID: 5867185270158019655}
   - component: {fileID: 1174459874201176450}
   - component: {fileID: 5867185270158019656}
+  - component: {fileID: 5867185270158019657}
   m_Layer: 28
   m_Name: Player
   m_TagString: Untagged
@@ -7745,7 +7747,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joystick: {fileID: 4745594715618477337}
   playerRigidBody: {fileID: 3811640028764972928}
-  playerAnimator: {fileID: 95759372024376998}
   playerTargetPosition: {fileID: 1955307498}
 --- !u!1001 &3938941085594604143
 PrefabInstance:
@@ -8588,7 +8589,7 @@ PrefabInstance:
     - target: {fileID: 1643615658217278995, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 207.45973
+      value: 207.00502
       objectReference: {fileID: 0}
     - target: {fileID: 1643615658217278995, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
@@ -8663,7 +8664,7 @@ PrefabInstance:
     - target: {fileID: 2356250549093977375, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 207.45973
+      value: 207.00502
       objectReference: {fileID: 0}
     - target: {fileID: 2356250549093977375, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
@@ -8903,7 +8904,7 @@ PrefabInstance:
     - target: {fileID: 3365618134673111086, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 207.45973
+      value: 207.00502
       objectReference: {fileID: 0}
     - target: {fileID: 3365618134673111086, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
@@ -9358,7 +9359,7 @@ PrefabInstance:
     - target: {fileID: 5018339162812492940, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 267.71323
+      value: 267.5987
       objectReference: {fileID: 0}
     - target: {fileID: 5018339162812492940, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
@@ -9813,7 +9814,7 @@ PrefabInstance:
     - target: {fileID: 8672601916240592175, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 207.45973
+      value: 207.00502
       objectReference: {fileID: 0}
     - target: {fileID: 8672601916240592175, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
@@ -10634,6 +10635,19 @@ MonoBehaviour:
   - {fileID: 95328251717959146}
   - {fileID: 95851636951719906}
   currentClass: 0
+--- !u!114 &5867185270158019657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865405404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03abd73699016dd47b05a455cd8287fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 95759372024376998}
 --- !u!1001 &6200038746507229330
 PrefabInstance:
   m_ObjectHideFlags: 0

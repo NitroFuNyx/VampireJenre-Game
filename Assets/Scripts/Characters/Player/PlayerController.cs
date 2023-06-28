@@ -4,15 +4,15 @@ using Zenject;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    //[Header("Parametres")]
+    [Header("Parametres")]
     //[Range(0.1f, 10)] [SerializeField] private float speed;
     [Space]
     [Header("References")]
     [SerializeField] private FloatingJoystick joystick;
     [SerializeField] private Rigidbody playerRigidBody;
-    [SerializeField] private Animator playerAnimator;
 
     private PlayerCharacteristicsManager _playerCharacteristicsManager;
+    private PlayerAnimationsManager _animationsManager;
 
     private bool canMove = true;
 
@@ -31,20 +31,23 @@ public class PlayerController : MonoBehaviour
             if (joystick.Vertical != 0 || joystick.Horizontal != 0)
             {
                 transform.rotation = Quaternion.LookRotation(playerRigidBody.velocity);
-                playerAnimator.SetBool(PlayerAnimations.IsRunning, true);
+                _animationsManager.SetRunningAnimationState(true);
+                //playerAnimator.SetBool(PlayerAnimations.IsRunning, true);
             }
             else
             {
-                playerAnimator.SetBool(PlayerAnimations.IsRunning, false);
+                _animationsManager.SetRunningAnimationState(false);
+                //playerAnimator.SetBool(PlayerAnimations.IsRunning, false);
             }
         }
     }
 
     #region Zenject
     [Inject]
-    private void Construct(PlayerCharacteristicsManager playerCharacteristicsManager)
+    private void Construct(PlayerCharacteristicsManager playerCharacteristicsManager, PlayerAnimationsManager playerAnimationsManager)
     {
         _playerCharacteristicsManager = playerCharacteristicsManager;
+        _animationsManager = playerAnimationsManager;
     }
     #endregion Zenject
 
@@ -62,20 +65,5 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = new Vector3(0f, transform.position.y, 0f);
         transform.rotation = Quaternion.identity;
-    }
-
-    public void SetAnimator(Animator animator)
-    {
-        playerAnimator = animator;
-    }
-
-    public void SetAnimation_Idle()
-    {
-        playerAnimator.SetTrigger(PlayerAnimations.Idle);
-    }
-
-    public void SetAnimation_Die()
-    {
-        playerAnimator.SetTrigger(PlayerAnimations.Die);
     }
 }

@@ -9,12 +9,14 @@ public class PlayerComponentsManager : MonoBehaviour
     private PlayerCollisionsManager collisionsManager;
     private PlayerController movementManager;
     private PlayerCharactersManager charactersManager;
+    private PlayerAnimationsManager animationsManager;
 
     private void Awake()
     {
         collisionsManager = GetComponent<PlayerCollisionsManager>();
         movementManager = GetComponent<PlayerController>();
         charactersManager = GetComponent<PlayerCharactersManager>();
+        animationsManager = GetComponent<PlayerAnimationsManager>();
     }
 
     private void Start()
@@ -41,7 +43,8 @@ public class PlayerComponentsManager : MonoBehaviour
         movementManager.ChangeCanMoveState(true);
         collisionsManager.ResetComponent();
         collisionsManager.StartRegeneration();
-        movementManager.SetAnimation_Idle();
+        collisionsManager.SetCanCheckCollisionsState(true);
+        animationsManager.SetAnimation_Idle();
     }
 
     private void SubscribeOnEvents()
@@ -54,6 +57,8 @@ public class PlayerComponentsManager : MonoBehaviour
         _gameProcessManager.OnPlayerRecoveryOptionUsed += GameProcessManager_OnPlayerRecoveryOptionUsed_ExecuteReaction;
 
         charactersManager.OnPlayerModelChanged += CharactersManager_OnPlayerModelChanged_ExecuteReaction;
+
+        animationsManager.OnDieAnimationFinished += AnimationManager_DieAnimationFinished_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
@@ -66,16 +71,19 @@ public class PlayerComponentsManager : MonoBehaviour
         _gameProcessManager.OnPlayerRecoveryOptionUsed -= GameProcessManager_OnPlayerRecoveryOptionUsed_ExecuteReaction;
 
         charactersManager.OnPlayerModelChanged -= CharactersManager_OnPlayerModelChanged_ExecuteReaction;
+
+        animationsManager.OnDieAnimationFinished -= AnimationManager_DieAnimationFinished_ExecuteReaction;
     }
 
     private void CollisionManager_PlayerOutOfHp_ExecuteReaction()
     {
-        _gameProcessManager.GameLost_ExecuteReaction();
+        //_gameProcessManager.GameLost_ExecuteReaction();
         movementManager.ChangeCanMoveState(false);
 
         collisionsManager.StopRegeneration();
-
-        movementManager.SetAnimation_Die();
+        collisionsManager.SetCanCheckCollisionsState(false);
+        Debug.Log($"Set Animation");
+        animationsManager.SetAnimation_Die();
     }
 
     private void CollisionManager_DamageReceived_ExecuteReaction()
@@ -99,11 +107,16 @@ public class PlayerComponentsManager : MonoBehaviour
     {
         movementManager.ResetComponent();
         collisionsManager.ResetComponent();
-        movementManager.SetAnimation_Idle();
+        animationsManager.SetAnimation_Idle();
     }
 
     private void CharactersManager_OnPlayerModelChanged_ExecuteReaction(Animator animator)
     {
-        movementManager.SetAnimator(animator);
+        animationsManager.SetAnimator(animator);
+    }
+
+    private void AnimationManager_DieAnimationFinished_ExecuteReaction()
+    {
+        _gameProcessManager.GameLost_ExecuteReaction();
     }
 }

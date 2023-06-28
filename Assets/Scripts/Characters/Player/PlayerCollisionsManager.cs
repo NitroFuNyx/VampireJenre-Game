@@ -33,16 +33,24 @@ public class PlayerCollisionsManager : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if(collision.gameObject.layer == Layers.EnemySkeleton || collision.gameObject.layer == Layers.EnemyGhost || collision.gameObject.layer == Layers.EnemyZombie)
+        if(canCheckCollisions)
         {
-            DecreaseHp(_enemiesCharacteristicsManager.CurrentEnemiesData.damage);
+            if (collision.gameObject.layer == Layers.EnemySkeleton || collision.gameObject.layer == Layers.EnemyGhost || collision.gameObject.layer == Layers.EnemyZombie)
+            {
+                DecreaseHp(_enemiesCharacteristicsManager.CurrentEnemiesData.damage);
+            }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == Layers.BossProjectile)
-            DecreaseHp(20);
+        if(canCheckCollisions)
+        {
+            if (other.gameObject.layer == Layers.BossProjectile)
+            {
+                DecreaseHp(20);
+            }
+        }
     }
 
     #region Zenject
@@ -67,6 +75,11 @@ public class PlayerCollisionsManager : MonoBehaviour
     public void StopRegeneration()
     {
         StopAllCoroutines();
+    }
+
+    public void SetCanCheckCollisionsState(bool canCheck)
+    {
+        canCheckCollisions = canCheck;
     }
 
     private void SetStartSettings()
