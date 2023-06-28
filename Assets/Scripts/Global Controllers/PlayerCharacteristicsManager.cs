@@ -127,16 +127,17 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
             for (int i = 0; i < charactersClasesDataList.Count; i++)
             {
                 tempSkillStruct = charactersClasesDataList[i];
-                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.playerForceWaveData.damage, talentData.upgradePercent);
-                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.singleShotSkillData.damage, talentData.upgradePercent);
-                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.magicAuraSkillData.damage, talentData.upgradePercent);
-                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.pulseAuraSkillData.damage, talentData.upgradePercent);
-                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.meteorSkillData.damage, talentData.upgradePercent);
-                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.lightningBoltSkillData.damage, talentData.upgradePercent);
-                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.chainLightningSkillData.damage, talentData.upgradePercent);
-                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.fireballsSkillData.damage, talentData.upgradePercent);
-                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.allDirectionsShotsSkillData.damage, talentData.upgradePercent);
-                UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.weaponStrikeSkillData.damage, talentData.upgradePercent);
+                UpgradePassiveCharacteristic_AddPercent(ref tempSkillStruct.characterDamageIncreasePercent, talentData.upgradePercent);
+                //UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.playerForceWaveData.damage, talentData.upgradePercent);
+                //UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.singleShotSkillData.damage, talentData.upgradePercent);
+                //UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.magicAuraSkillData.damage, talentData.upgradePercent);
+                //UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.pulseAuraSkillData.damage, talentData.upgradePercent);
+                //UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.meteorSkillData.damage, talentData.upgradePercent);
+                //UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.lightningBoltSkillData.damage, talentData.upgradePercent);
+                //UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.chainLightningSkillData.damage, talentData.upgradePercent);
+                //UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.fireballsSkillData.damage, talentData.upgradePercent);
+                //UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.allDirectionsShotsSkillData.damage, talentData.upgradePercent);
+                //UpgradePassiveCharacteristic_PercentOfValue(ref tempSkillStruct.playerSkillsData.weaponStrikeSkillData.damage, talentData.upgradePercent);
                 charactersClasesDataList[i] = tempSkillStruct;
             }
         }
