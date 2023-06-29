@@ -33,7 +33,18 @@ public class PlayerCollisionsManager : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if(canCheckCollisions)
+        //if(canCheckCollisions)
+        //{
+        //    if (collision.gameObject.layer == Layers.EnemySkeleton || collision.gameObject.layer == Layers.EnemyGhost || collision.gameObject.layer == Layers.EnemyZombie)
+        //    {
+        //        DecreaseHp(_enemiesCharacteristicsManager.CurrentEnemiesData.damage);
+        //    }
+        //}
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (canCheckCollisions)
         {
             if (collision.gameObject.layer == Layers.EnemySkeleton || collision.gameObject.layer == Layers.EnemyGhost || collision.gameObject.layer == Layers.EnemyZombie)
             {
