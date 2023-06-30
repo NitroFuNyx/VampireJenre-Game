@@ -17,6 +17,8 @@ public class CharacterSelectionUI : MainCanvasPanel
     [Header("Internal References")]
     [Space]
     [SerializeField] private Transform characterSelectionPanel;
+    [SerializeField] private PanelActivationManager baseCharacatersInfoPanel;
+    [SerializeField] private PanelActivationManager characterUpgradePanel;
 
     private PlayerCharacteristicsManager _playerCharacteristicsManager;
 
@@ -44,12 +46,14 @@ public class CharacterSelectionUI : MainCanvasPanel
 
     public override void PanelActivated_ExecuteReaction()
     {
-        
+        baseCharacatersInfoPanel.ShowPanel();
+        characterUpgradePanel.HidePanel();
     }
 
     public override void PanelDeactivated_ExecuteReaction()
     {
-       
+        baseCharacatersInfoPanel.ShowPanel();
+        characterUpgradePanel.HidePanel();
     }
 
     public void ChangeVisibleCharacterButtonPressed_ExecuteReaction(SelectionArrowTypes arrowType)
