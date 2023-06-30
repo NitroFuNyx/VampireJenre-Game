@@ -25,6 +25,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
 
     public PlayerBasicCharacteristicsStruct CurrentPlayerData { get => currentPlayerData; private set => currentPlayerData = value; }
     public PlayerCharacteristicsSO PlayerCharactersClasesDataSO { get => playerCharacteristicsSO; }
+    public List<PlayerBasicCharacteristicsStruct> CharactersClasesDataList { get => charactersClasesDataList; }
 
     private void Awake()
     {

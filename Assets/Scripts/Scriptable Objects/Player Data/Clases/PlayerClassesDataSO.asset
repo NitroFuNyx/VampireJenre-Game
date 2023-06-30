@@ -12,4 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df12a6e8a55fe654ab8f3069756052ba, type: 3}
   m_Name: PlayerClassesDataSO
   m_EditorClassIdentifier: 
-  playerClassesDataList: []
+  playerClassesDataList:
+  - playerClass: 0
+    classSprite: {fileID: 21300000, guid: d6b9518dcf40d164aa27c075f91aebf2, type: 3}
+    characterName: Roland the Bloody Wolf
+  - playerClass: 1
+    classSprite: {fileID: 21300000, guid: c0b1cac5dff098b46a6dabd8226a976f, type: 3}
+    characterName: Eliza the Dryad Queen
+  - playerClass: 2
+    classSprite: {fileID: 21300000, guid: f928da3d8da2d364f88565ab7f2229a1, type: 3}
+    characterName: Mordred the Sorcerer

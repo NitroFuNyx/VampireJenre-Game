@@ -1,17 +1,24 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using Zenject;
 
 public class CharacterSelectionUI : MainCanvasPanel
 {
-    [Header("Sprites")]
+    [Header("Clases Data")]
     [Space]
-    [SerializeField] private Sprite knightSprite;
-    [SerializeField] private Sprite druidSprite;
-    [SerializeField] private Sprite wizzardSprite;
+    [SerializeField] private PlayerClassesDataSO classesDataSO;
     [Header("Images")]
     [Space]
     [SerializeField] private Image characterImage;
+    [Header("Prefabs")]
+    [Space]
+    [SerializeField] private CharacterDisplayPanel characterDisplayPanelPrefab;
+    [Header("Internal References")]
+    [Space]
+    [SerializeField] private Transform characterSelectionPanel;
+
+    private PlayerCharacteristicsManager _playerCharacteristicsManager;
 
     private List<PlayerClasses> charactersList = new List<PlayerClasses>();
     private Dictionary<PlayerClasses, Sprite> charactersDictionary = new Dictionary<PlayerClasses, Sprite>();
@@ -21,10 +28,19 @@ public class CharacterSelectionUI : MainCanvasPanel
     private void Start()
     {
         FillCharactersListAndDictionary();
+        FillCharactersDisplayPanels();
         //currentlySelectedCharacter = PlayersCharactersTypes.Knight;
         //visibleCharacter = PlayersCharactersTypes.Knight;
         //UpdateCharacterSprite(visibleCharacter);
     }
+
+    #region Zenject
+    [Inject]
+    private void Construct(PlayerCharacteristicsManager playerCharacteristicsManager)
+    {
+        _playerCharacteristicsManager = playerCharacteristicsManager;
+    }
+    #endregion Zenject
 
     public override void PanelActivated_ExecuteReaction()
     {
@@ -49,9 +65,9 @@ public class CharacterSelectionUI : MainCanvasPanel
         charactersList.Add(PlayerClasses.Dryad);
         charactersList.Add(PlayerClasses.Wizzard);
 
-        charactersDictionary.Add(PlayerClasses.Knight, knightSprite);
-        charactersDictionary.Add(PlayerClasses.Dryad, druidSprite);
-        charactersDictionary.Add(PlayerClasses.Wizzard, wizzardSprite);
+        charactersDictionary.Add(PlayerClasses.Knight, GetClassSprite(PlayerClasses.Knight));
+        charactersDictionary.Add(PlayerClasses.Dryad, GetClassSprite(PlayerClasses.Dryad));
+        charactersDictionary.Add(PlayerClasses.Wizzard, GetClassSprite(PlayerClasses.Wizzard));
     }
 
     private void UpdateCharacterSprite(PlayerClasses characterType)
@@ -88,5 +104,46 @@ public class CharacterSelectionUI : MainCanvasPanel
     private void UpdateCharacterDisplayData()
     {
         UpdateCharacterSprite(visibleCharacter);
+    }
+
+    private Sprite GetClassSprite(PlayerClasses characterType)
+    {
+        Sprite sprite = null;
+
+        for(int i = 0; i < classesDataSO.PlayerClassesDataList.Count; i++)
+        {
+            if(classesDataSO.PlayerClassesDataList[i].playerClass == characterType)
+            {
+                sprite = classesDataSO.PlayerClassesDataList[i].classSprite;
+                break;
+            }
+        }
+
+        return sprite;
+    }
+
+    private int GetCharacterLevel(PlayerClasses characterType)
+    {
+        int level = 0;
+
+        for (int i = 0; i < _playerCharacteristicsManager.CharactersClasesDataList.Count; i++)
+        {
+            if (_playerCharacteristicsManager.CharactersClasesDataList[i].playerCharacterType == characterType)
+            {
+                level = _playerCharacteristicsManager.CharactersClasesDataList[i].characterLevel;
+                break;
+            }
+        }
+
+        return level;
+    }
+
+    private void FillCharactersDisplayPanels()
+    {
+        for (int i = 0; i < classesDataSO.PlayerClassesDataList.Count; i++)
+        {
+            CharacterDisplayPanel panel = Instantiate(characterDisplayPanelPrefab, Vector3.zero, Quaternion.identity, characterSelectionPanel);
+            panel.SetCharacterData(classesDataSO.PlayerClassesDataList[i], GetCharacterLevel(classesDataSO.PlayerClassesDataList[i].playerClass));
+        }
     }
 }

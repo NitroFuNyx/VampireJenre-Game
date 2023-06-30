@@ -16,8 +16,13 @@ public class CharacterDisplayPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI classText;
     [SerializeField] private TextMeshProUGUI characterNameText;
 
-    public void SetCharacterData(PlayerClasses character, int level)
+    public void SetCharacterData(PlayerClassDataStruct characterInfo, int level)
     {
+        characterClass = characterInfo.playerClass;
+        characterImage.sprite = characterInfo.classSprite;
+        classText.text = $"{characterClass}";
+        characterNameText.text = $"{characterInfo.characterName}";
 
+        levelText.text = $"{level}";
     }
 }
