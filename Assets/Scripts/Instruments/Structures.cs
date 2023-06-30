@@ -232,3 +232,11 @@ public struct TreasureChestResourceDataStruct
     public int resourceAmount;
     public Sprite resourceSprite;
 }
+
+[Serializable]
+public struct PlayerClassDataStruct
+{
+    public PlayerClasses playerClass;
+    public Sprite classSprite;
+    public string characterName;
+}

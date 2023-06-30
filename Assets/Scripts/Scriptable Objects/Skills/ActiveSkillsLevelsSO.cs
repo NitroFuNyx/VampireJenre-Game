@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ActiveSkillsLevelsSO", menuName = "ScriptableObjects/ActiveSkillsLevelsSO", order = 4)]
+[CreateAssetMenu(fileName = "ActiveSkillsLevelsSO", menuName = "ScriptableObjects/Skills/ActiveSkillsLevelsSO", order = 4)]
 public class ActiveSkillsLevelsSO : ScriptableObject
 {
     [Header("Active Skills Upgrades")]

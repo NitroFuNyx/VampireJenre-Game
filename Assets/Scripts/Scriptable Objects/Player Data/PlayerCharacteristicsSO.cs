@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerCharacteristicsSO", menuName = "ScriptableObjects/PlayerCharacteristicsSO", order = 3)]
+[CreateAssetMenu(fileName = "PlayerCharacteristicsSO", menuName = "ScriptableObjects/Player/PlayerCharacteristicsSO")]
 public class PlayerCharacteristicsSO : ScriptableObject
 {
     [Header("Player Default Characteristics")]

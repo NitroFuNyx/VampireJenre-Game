@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SkilllsDescribtionTextsTranslationSO", menuName = "ScriptableObjects/SkilllsDescribtionTextsTranslationSO")]
+[CreateAssetMenu(fileName = "SkilllsDescribtionTextsTranslationSO", menuName = "ScriptableObjects/Skills/SkilllsDescribtionTextsTranslationSO")]
 public class SkilllsDescribtionTextsTranslationSO : ScriptableObject
 {
     [Header("Active Skills")]

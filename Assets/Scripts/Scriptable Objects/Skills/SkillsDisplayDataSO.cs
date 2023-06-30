@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SkillsDisplayDataSO", menuName = "ScriptableObjects/SkillsDisplayDataSO")]
+[CreateAssetMenu(fileName = "SkillsDisplayDataSO", menuName = "ScriptableObjects/Skills/SkillsDisplayDataSO")]
 public class SkillsDisplayDataSO : ScriptableObject
 {
     [Header("Active Skills Display Data")]
