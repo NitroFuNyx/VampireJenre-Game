@@ -24,6 +24,10 @@ public class CharacterSelectionUI : MainCanvasPanel
     private PlayerCharactersManager _playerCharactersManager;
 
     private ChangeActiveCharacterButton button_ChangeActiveCharacter;
+    private GameObject button_detailsCharacter;
+    private GameObject button_buyCharacter;
+
+    private GameObject characterCostPanel;
 
     private List<PlayerClasses> charactersList = new List<PlayerClasses>();
     private Dictionary<PlayerClasses, Sprite> charactersDictionary = new Dictionary<PlayerClasses, Sprite>();
@@ -125,13 +129,28 @@ public class CharacterSelectionUI : MainCanvasPanel
     {
         UpdateCharacterSprite(visibleCharacter);
 
-        if(visibleCharacter != _playerCharacteristicsManager.CurrentPlayerData.playerCharacterType)
+        if(_playerCharacteristicsManager.CurrentPlayerData.locked)
         {
-            button_ChangeActiveCharacter.SetButtonSprite(false);
+            //button_ChangeActiveCharacter.gameObject.SetActive(false);
+            //button_detailsCharacter.SetActive(false);
+            //button_buyCharacter.SetActive(true);
+            //characterCostPanel.SetActive(true);
         }
         else
         {
-            button_ChangeActiveCharacter.SetButtonSprite(true);
+            //button_ChangeActiveCharacter.gameObject.SetActive(true);
+            //button_detailsCharacter.SetActive(true);
+            //button_buyCharacter.SetActive(false);
+            //characterCostPanel.SetActive(false);
+
+            if (visibleCharacter != _playerCharacteristicsManager.CurrentPlayerData.playerCharacterType)
+            {
+                button_ChangeActiveCharacter.SetButtonSprite(false);
+            }
+            else
+            {
+                button_ChangeActiveCharacter.SetButtonSprite(true);
+            }
         }
     }
 
