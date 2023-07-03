@@ -461,7 +461,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         return characterData;
     }
 
-    private void SetCurrentCharacterData(PlayerClasses playerClass)
+    public void SetCurrentCharacterData(PlayerClasses playerClass)
     {
         for (int i = 0; i < charactersClasesDataList.Count; i++)
         {

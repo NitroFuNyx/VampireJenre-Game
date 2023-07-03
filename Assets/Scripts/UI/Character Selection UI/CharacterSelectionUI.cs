@@ -21,6 +21,7 @@ public class CharacterSelectionUI : MainCanvasPanel
     [SerializeField] private PanelActivationManager characterUpgradePanel;
 
     private PlayerCharacteristicsManager _playerCharacteristicsManager;
+    private PlayerCharactersManager _playerCharactersManager;
 
     private ChangeActiveCharacterButton button_ChangeActiveCharacter;
 
@@ -34,9 +35,6 @@ public class CharacterSelectionUI : MainCanvasPanel
         FillCharactersListAndDictionary();
         FillCharactersDisplayPanels();
         SubscribeOnEvents();
-        //currentlySelectedCharacter = PlayersCharactersTypes.Knight;
-        //visibleCharacter = PlayersCharactersTypes.Knight;
-        //UpdateCharacterSprite(visibleCharacter);
     }
 
     private void OnDestroy()
@@ -46,10 +44,12 @@ public class CharacterSelectionUI : MainCanvasPanel
 
     #region Zenject
     [Inject]
-    private void Construct(PlayerCharacteristicsManager playerCharacteristicsManager, ChangeActiveCharacterButton changeActiveCharacterButton)
+    private void Construct(PlayerCharacteristicsManager playerCharacteristicsManager,
+                           ChangeActiveCharacterButton changeActiveCharacterButton, PlayerCharactersManager playerCharactersManager)
     {
         _playerCharacteristicsManager = playerCharacteristicsManager;
         button_ChangeActiveCharacter = changeActiveCharacterButton;
+        _playerCharactersManager = playerCharactersManager;
     }
     #endregion Zenject
 
@@ -68,11 +68,15 @@ public class CharacterSelectionUI : MainCanvasPanel
     private void SubscribeOnEvents()
     {
         button_ChangeActiveCharacter.OnChangeActiveCharacterButtonPressed += ChangeActiveCharacterButtonPressed_ExecuteReaction;
+
+        _playerCharactersManager.OnCharacterChanged += PlayerCharactersManager_OnCharacterChanged_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
     {
         button_ChangeActiveCharacter.OnChangeActiveCharacterButtonPressed -= ChangeActiveCharacterButtonPressed_ExecuteReaction;
+
+        _playerCharactersManager.OnCharacterChanged -= PlayerCharactersManager_OnCharacterChanged_ExecuteReaction;
     }
 
     private void FillCharactersListAndDictionary()
@@ -120,6 +124,15 @@ public class CharacterSelectionUI : MainCanvasPanel
     private void UpdateCharacterDisplayData()
     {
         UpdateCharacterSprite(visibleCharacter);
+
+        if(visibleCharacter != _playerCharacteristicsManager.CurrentPlayerData.playerCharacterType)
+        {
+            button_ChangeActiveCharacter.SetButtonSprite(false);
+        }
+        else
+        {
+            button_ChangeActiveCharacter.SetButtonSprite(true);
+        }
     }
 
     private Sprite GetClassSprite(PlayerClasses characterType)
@@ -182,7 +195,13 @@ public class CharacterSelectionUI : MainCanvasPanel
 
     private void ChangeActiveCharacterButtonPressed_ExecuteReaction()
     {
-        
+        _playerCharacteristicsManager.SetCurrentCharacterData(visibleCharacter);
     }
     #endregion Buttons Events
+
+    private void PlayerCharactersManager_OnCharacterChanged_ExecuteReaction(PlayerClasses playerClass)
+    {
+        visibleCharacter = playerClass;
+        UpdateCharacterDisplayData();
+    }
 }
