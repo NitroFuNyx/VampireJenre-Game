@@ -73,8 +73,9 @@ public struct PassiveSkillInGameDataStruct
 public struct PlayerBasicCharacteristicsStruct
 {
     public PlayerClasses playerCharacterType;
+    public bool locked;
     public int characterLevel;
-    public float characterHp; // Talent
+    public float characterHp; 
     public float characterSpeed;
     public float skillsRangeIncreasePercent;
     public float characterDamageIncreasePercent;
@@ -82,8 +83,8 @@ public struct PlayerBasicCharacteristicsStruct
     public float characterCritChance;
     public float characterCritPower;
     public float characterRegenerationPercent;
-    public float characterItemDropChancePercent; // Common
-    public float characterCoinsSurplusPercent;  // Common
+    public float characterItemDropChancePercent; 
+    public float characterCoinsSurplusPercent;  
 
     public PlayerSkillsCharacteristicsStruct playerSkillsData;
 }

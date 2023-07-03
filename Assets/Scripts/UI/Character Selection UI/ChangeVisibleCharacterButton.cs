@@ -5,7 +5,13 @@ public class ChangeVisibleCharacterButton : ButtonInteractionHandler
 {
     [Header("Button Type")]
     [Space]
-    [SerializeField] private SelectionArrowTypes buttonType;
+    [SerializeField] private ShowNextCharacterButtonsTypes buttonType;
+    [Header("Arrow Button Data")]
+    [Space]
+    [SerializeField] private SelectionArrowTypes arrowType;
+    [Header("Fixed Character Button Data")]
+    [Space]
+    [SerializeField] private PlayerClasses playerClass;
 
     private CharacterSelectionUI _characterSelectionUI;
 
@@ -19,6 +25,6 @@ public class ChangeVisibleCharacterButton : ButtonInteractionHandler
 
     public override void ButtonActivated()
     {
-        _characterSelectionUI.ChangeVisibleCharacterButtonPressed_ExecuteReaction(buttonType);
+        _characterSelectionUI.ChangeVisibleCharacterButtonPressed_ExecuteReaction(buttonType, arrowType, playerClass);
     }
 }

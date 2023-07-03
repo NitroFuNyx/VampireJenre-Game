@@ -99,3 +99,8 @@ public enum SelectionArrowTypes
 {
     Left, Right
 }
+
+public enum ShowNextCharacterButtonsTypes
+{
+    ArrowButton, FixedCharacterButton
+}

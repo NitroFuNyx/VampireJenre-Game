@@ -467,7 +467,6 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         {
             if (playerClass == charactersClasesDataList[i].playerCharacterType)
             {
-                Debug.Log($"Character {playerClass}");
                 currentPlayerData = charactersClasesDataList[i];
                 break;
             }

@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBasicDataLists:
   - playerCharacterType: 0
+    locked: 0
+    characterLevel: 0
     characterHp: 100
     characterSpeed: 3.75
+    skillsRangeIncreasePercent: 0
     characterDamageIncreasePercent: 0
     characterDamageReductionPercent: 0
     characterCritChance: 0
@@ -69,8 +72,11 @@ MonoBehaviour:
         size: 0
         cooldown: 0
   - playerCharacterType: 1
+    locked: 1
+    characterLevel: 0
     characterHp: 90
     characterSpeed: 4.68
+    skillsRangeIncreasePercent: 0
     characterDamageIncreasePercent: 0
     characterDamageReductionPercent: 0
     characterCritChance: 0
@@ -124,8 +130,11 @@ MonoBehaviour:
         size: 0
         cooldown: 0
   - playerCharacterType: 2
+    locked: 1
+    characterLevel: 0
     characterHp: 90
     characterSpeed: 3.37
+    skillsRangeIncreasePercent: 0
     characterDamageIncreasePercent: 0
     characterDamageReductionPercent: 0
     characterCritChance: 0

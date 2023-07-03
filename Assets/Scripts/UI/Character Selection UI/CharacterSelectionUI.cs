@@ -22,6 +22,8 @@ public class CharacterSelectionUI : MainCanvasPanel
 
     private PlayerCharacteristicsManager _playerCharacteristicsManager;
 
+    private ChangeActiveCharacterButton button_ChangeActiveCharacter;
+
     private List<PlayerClasses> charactersList = new List<PlayerClasses>();
     private Dictionary<PlayerClasses, Sprite> charactersDictionary = new Dictionary<PlayerClasses, Sprite>();
 
@@ -31,16 +33,23 @@ public class CharacterSelectionUI : MainCanvasPanel
     {
         FillCharactersListAndDictionary();
         FillCharactersDisplayPanels();
+        SubscribeOnEvents();
         //currentlySelectedCharacter = PlayersCharactersTypes.Knight;
         //visibleCharacter = PlayersCharactersTypes.Knight;
         //UpdateCharacterSprite(visibleCharacter);
     }
 
+    private void OnDestroy()
+    {
+        UnsubscribeFromEvents();
+    }
+
     #region Zenject
     [Inject]
-    private void Construct(PlayerCharacteristicsManager playerCharacteristicsManager)
+    private void Construct(PlayerCharacteristicsManager playerCharacteristicsManager, ChangeActiveCharacterButton changeActiveCharacterButton)
     {
         _playerCharacteristicsManager = playerCharacteristicsManager;
+        button_ChangeActiveCharacter = changeActiveCharacterButton;
     }
     #endregion Zenject
 
@@ -56,11 +65,14 @@ public class CharacterSelectionUI : MainCanvasPanel
         characterUpgradePanel.HidePanel();
     }
 
-    public void ChangeVisibleCharacterButtonPressed_ExecuteReaction(SelectionArrowTypes arrowType)
+    private void SubscribeOnEvents()
     {
-        visibleCharacter = GetNewVisibleCharacter(arrowType);
+        button_ChangeActiveCharacter.OnChangeActiveCharacterButtonPressed += ChangeActiveCharacterButtonPressed_ExecuteReaction;
+    }
 
-        UpdateCharacterDisplayData();
+    private void UnsubscribeFromEvents()
+    {
+        button_ChangeActiveCharacter.OnChangeActiveCharacterButtonPressed -= ChangeActiveCharacterButtonPressed_ExecuteReaction;
     }
 
     private void FillCharactersListAndDictionary()
@@ -150,4 +162,27 @@ public class CharacterSelectionUI : MainCanvasPanel
             panel.SetCharacterData(classesDataSO.PlayerClassesDataList[i], GetCharacterLevel(classesDataSO.PlayerClassesDataList[i].playerClass));
         }
     }
+
+    #region Buttons Events
+    public void ChangeVisibleCharacterButtonPressed_ExecuteReaction(ShowNextCharacterButtonsTypes buttonType,
+                                                                    SelectionArrowTypes arrowType, PlayerClasses playerClass)
+    {
+        if(buttonType == ShowNextCharacterButtonsTypes.ArrowButton)
+        {
+            visibleCharacter = GetNewVisibleCharacter(arrowType);
+        }
+        else
+        {
+            visibleCharacter = playerClass;
+        }
+        
+
+        UpdateCharacterDisplayData();
+    }
+
+    private void ChangeActiveCharacterButtonPressed_ExecuteReaction()
+    {
+        
+    }
+    #endregion Buttons Events
 }
