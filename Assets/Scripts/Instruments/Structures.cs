@@ -239,4 +239,6 @@ public struct PlayerClassDataStruct
     public PlayerClasses playerClass;
     public Sprite classSprite;
     public string characterName;
+    public ResourcesTypes buyingCurrency;
+    public float price;
 }
