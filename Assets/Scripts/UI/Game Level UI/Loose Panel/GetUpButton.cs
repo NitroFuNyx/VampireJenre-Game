@@ -1,8 +1,11 @@
 using UnityEngine;
+using TMPro;
 using Zenject;
 
 public class GetUpButton : ButtonInteractionHandler
 {
+    [SerializeField] private TextMeshProUGUI text;
+
     private GameProcessManager _gameProcessManager;
     private AdsManager _adsManager;
     private AdsController _adsController;
@@ -37,6 +40,7 @@ public class GetUpButton : ButtonInteractionHandler
     public override void ButtonActivated()
     {
         Debug.Log($"Get Up Button Pressed {buttonPressed}");
+        //text.text = $"Get Up Button Pressed {buttonPressed}";
         if (!buttonPressed)
         {
             buttonPressed = true;
@@ -47,6 +51,7 @@ public class GetUpButton : ButtonInteractionHandler
             {
                 rewardRequested = true;
                 _adsController.LoadRewarded();
+                //text.text += $" Show Ad";
             }
             //_gameProcessManager.UsePlayerRecoveryOption();
         }

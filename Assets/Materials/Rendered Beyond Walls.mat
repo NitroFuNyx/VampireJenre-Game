@@ -98,6 +98,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _Blend: 0
+    - _BlendOp: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -118,6 +119,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _SampleGI: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -127,8 +129,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0.7921569, g: 0.1599185, b: 0.15294115, a: 0.6039216}
-    - _Color: {r: 0.7921569, g: 0.15991846, b: 0.15294111, a: 0.6039216}
+    - _BaseColor: {r: 0.7921569, g: 0.15991846, b: 0.15294111, a: 0.41960785}
+    - _Color: {r: 0.7921569, g: 0.15991843, b: 0.15294108, a: 0.41960785}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Emission_Color: {r: 0, g: 1.9144772, b: 12.844469, a: 1}
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}
