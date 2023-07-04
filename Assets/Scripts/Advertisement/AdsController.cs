@@ -1,12 +1,9 @@
 using System;
 using GoogleMobileAds.Api.Mediation.AppLovin;
 using UnityEngine;
-using TMPro;
 
 public class AdsController : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI text;
-
     private void Awake()
     {
         AppLovin.SetHasUserConsent(true);
@@ -31,7 +28,6 @@ public class AdsController : MonoBehaviour
     public void LoadRewarded()
     {
         LoadRewardedAd?.Invoke(GiveAReward);
-        text.text = $"Load Ad";
     }
     public void LoadBanner()
     {
@@ -45,7 +41,6 @@ public class AdsController : MonoBehaviour
     public void GiveAReward()
     {
         OnRewardAdViewed?.Invoke();
-        text.text += $" Grant Bonus";
     }
 
     public void CloseInterstitial()

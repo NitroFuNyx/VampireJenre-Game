@@ -31,10 +31,15 @@ public class GameProcessManager : MonoBehaviour
     private bool playerRecoveryOptionUsed = false;
     private bool firstSkillDefined = false;
 
+    private bool gameDefeatResultIsBeingShown = false;
+    private bool gameVictoryResultIsBeingShown = false;
+
     private int mapProgressDelta = 1;
 
     public bool BattleStarted { get => battleStarted; private set => battleStarted = value; }
     public bool PlayerRecoveryOptionUsed { get => playerRecoveryOptionUsed; private set => playerRecoveryOptionUsed = value; }
+    public bool GameDefeatResultIsBeingShown { get => gameDefeatResultIsBeingShown; set => gameDefeatResultIsBeingShown = value; }
+    public bool GameVictoryResultIsBeingShown { get => gameVictoryResultIsBeingShown; set => gameVictoryResultIsBeingShown = value; }
 
     #region Events Declaration
     public event Action OnGameStarted;
@@ -98,6 +103,8 @@ public class GameProcessManager : MonoBehaviour
     public void StartGame()
     {
         battleStarted = true;
+        gameDefeatResultIsBeingShown = false;
+        gameVictoryResultIsBeingShown = false;
         OnGameStarted?.Invoke();
         player.StartGame();
         _systemTimeManager.PauseGame();
@@ -118,10 +125,13 @@ public class GameProcessManager : MonoBehaviour
     [ContextMenu("Win")]
     public void GameWin()
     {
-        _audioManager.StopMusicAudio();
-        _audioManager.PlaySFXSound_Victory();
-        OnPlayerWon?.Invoke();
-        //ResetMapData();
+        if(!gameDefeatResultIsBeingShown)
+        {
+            gameVictoryResultIsBeingShown = true;
+            _audioManager.StopMusicAudio();
+            _audioManager.PlaySFXSound_Victory();
+            OnPlayerWon?.Invoke();
+        }
     }
 
     public void ResetLevelDataWithSaving()
@@ -133,6 +143,8 @@ public class GameProcessManager : MonoBehaviour
         _audioManager.PlayMusic_MainScreen_Loader();
         ResetMapData();
         playerRecoveryOptionUsed = false;
+        gameDefeatResultIsBeingShown = false;
+        gameVictoryResultIsBeingShown = false;
     }
 
     [ContextMenu("Loose")]

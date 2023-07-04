@@ -77,13 +77,15 @@ public class PlayerComponentsManager : MonoBehaviour
 
     private void CollisionManager_PlayerOutOfHp_ExecuteReaction()
     {
-        //_gameProcessManager.GameLost_ExecuteReaction();
-        movementManager.ChangeCanMoveState(false);
+        if(!_gameProcessManager.GameVictoryResultIsBeingShown)
+        {
+            _gameProcessManager.GameDefeatResultIsBeingShown = true;
 
-        collisionsManager.StopRegeneration();
-        collisionsManager.SetCanCheckCollisionsState(false);
-        Debug.Log($"Set Animation");
-        animationsManager.SetAnimation_Die();
+            movementManager.ChangeCanMoveState(false);
+            collisionsManager.StopRegeneration();
+            collisionsManager.SetCanCheckCollisionsState(false);
+            animationsManager.SetAnimation_Die();
+        }
     }
 
     private void CollisionManager_DamageReceived_ExecuteReaction()
@@ -93,6 +95,7 @@ public class PlayerComponentsManager : MonoBehaviour
 
     private void GameProcessManager_OnPlayerRecoveryOptionUsed_ExecuteReaction()
     {
+        _gameProcessManager.GameDefeatResultIsBeingShown = false;
         StartGame();
     }
 
