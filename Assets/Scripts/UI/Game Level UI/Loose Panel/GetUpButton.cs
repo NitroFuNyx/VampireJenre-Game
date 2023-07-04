@@ -36,6 +36,7 @@ public class GetUpButton : ButtonInteractionHandler
 
     public override void ButtonActivated()
     {
+        Debug.Log($"Get Up Button Pressed {buttonPressed}");
         if (!buttonPressed)
         {
             buttonPressed = true;
