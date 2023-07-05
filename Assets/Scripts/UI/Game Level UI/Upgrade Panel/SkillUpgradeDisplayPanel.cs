@@ -248,15 +248,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.IncreaseRangeTranslationData.skillDescribtionTexts.Count; i++)
             {
                 translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseRangeTranslationData.skillDescribtionTexts[i].characteristic);
-                
-                //if (upgradeSkillData.SkillLevel != 0)
-                //{
-                    describtionTextsList[i].text = $"+ {passiveSkillsLevelsData.IncreaseRangeUpgradesDataList[upgradeSkillData.SkillLevel].upgradeValue} % {translatedText}";
-                //}
-                //else
-                //{
-                 //   describtionTextsList[i].text = $"+ {GetWeaponStrikeSkillUpgradeValue(upgradeSkillData.SkillLevel)} % {translatedText}";
-                //}
+                describtionTextsList[i].text = $"+ {Mathf.Round(passiveSkillsLevelsData.IncreaseRangeUpgradesDataList[upgradeSkillData.SkillLevel].upgradeValue)} % {translatedText}";
             }
         }
         else if (passiveSkill == PassiveSkills.IncreaseDamage)
@@ -264,7 +256,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.IncreaseDamageTranslationData.skillDescribtionTexts.Count; i++)
             {
                 translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseDamageTranslationData.skillDescribtionTexts[i].characteristic);
-                describtionTextsList[i].text = $"+ {passiveSkillsLevelsData.IncreaseDamageUpgradesDataList[upgradeSkillData.SkillLevel].upgradeValue} % {translatedText}";
+                describtionTextsList[i].text = $"+ {Mathf.Round(passiveSkillsLevelsData.IncreaseDamageUpgradesDataList[upgradeSkillData.SkillLevel].upgradeValue)} % {translatedText}";
             }
         }
         else if (passiveSkill == PassiveSkills.IncreaseMovementSpeed)
@@ -272,7 +264,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.IncreaseMovementSpeedTranslationData.skillDescribtionTexts.Count; i++)
             {
                 translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseMovementSpeedTranslationData.skillDescribtionTexts[i].characteristic);
-                describtionTextsList[i].text = $"+ {passiveSkillsLevelsData.IncreaseMovementSpeedUpgradesDataList[upgradeSkillData.SkillLevel].upgradeValue} % {translatedText}"; ;
+                describtionTextsList[i].text = $"+ {Mathf.Round(passiveSkillsLevelsData.IncreaseMovementSpeedUpgradesDataList[upgradeSkillData.SkillLevel].upgradeValue)} % {translatedText}"; ;
             }
         }
         else if (passiveSkill == PassiveSkills.DecreaseIncomeDamage)
@@ -280,7 +272,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.DecreaseIncomeDamageTranslationData.skillDescribtionTexts.Count; i++)
             {
                 translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.DecreaseIncomeDamageTranslationData.skillDescribtionTexts[i].characteristic);
-                describtionTextsList[i].text = $"+ {passiveSkillsLevelsData.DecreaseIncomeDamageUpgradesDataList[upgradeSkillData.SkillLevel].upgradeValue} % {translatedText}";
+                describtionTextsList[i].text = $"+ {Mathf.Round(passiveSkillsLevelsData.DecreaseIncomeDamageUpgradesDataList[upgradeSkillData.SkillLevel].upgradeValue)} % {translatedText}";
             }
         }
         else if (passiveSkill == PassiveSkills.IncreaseRegeneration)
@@ -288,7 +280,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.IncreaseRegenerationTranslationData.skillDescribtionTexts.Count; i++)
             {
                 translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseRegenerationTranslationData.skillDescribtionTexts[i].characteristic);
-                describtionTextsList[i].text = $"+ {passiveSkillsLevelsData.IncreaseRegenerationUpgradesDataList[upgradeSkillData.SkillLevel].upgradeValue} % {translatedText}";
+                describtionTextsList[i].text = $"+ {Mathf.Round(passiveSkillsLevelsData.IncreaseRegenerationUpgradesDataList[upgradeSkillData.SkillLevel].upgradeValue)} % {translatedText}";
             }
         }
         else if (passiveSkill == PassiveSkills.IncreaseCritChance)
@@ -296,7 +288,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.IncreaseCritChanceTranslationData.skillDescribtionTexts.Count; i++)
             {
                 translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseCritChanceTranslationData.skillDescribtionTexts[i].characteristic);
-                describtionTextsList[i].text = $"+ {passiveSkillsLevelsData.IncreaseCritChanceUpgradesDataList[upgradeSkillData.SkillLevel].upgradeValue} % {translatedText}";
+                describtionTextsList[i].text = $"+ {Mathf.Round(passiveSkillsLevelsData.IncreaseCritChanceUpgradesDataList[upgradeSkillData.SkillLevel].upgradeValue)} % {translatedText}";
             }
         }
         else if (passiveSkill == PassiveSkills.IncreaseCritPower)
@@ -304,7 +296,7 @@ public class SkillUpgradeDisplayPanel : MonoBehaviour
             for (int i = 0; i < skillsDescribtionTextsTranslationSO.IncreaseCritPowerTranslationData.skillDescribtionTexts.Count; i++)
             {
                 translatedText = _languageManager.SkillsTranslationHandler.GetTranslatedSkillText(skillsDescribtionTextsTranslationSO.IncreaseCritPowerTranslationData.skillDescribtionTexts[i].characteristic);
-                describtionTextsList[i].text = $"+ {passiveSkillsLevelsData.IncreaseCritPowerUpgradesDataList[upgradeSkillData.SkillLevel].upgradeValue} % {translatedText}";
+                describtionTextsList[i].text = $"+ {passiveSkillsLevelsData.IncreaseCritPowerUpgradesDataList[upgradeSkillData.SkillLevel].upgradeValue} {translatedText}";
             }
         }
         else if (passiveSkill == PassiveSkills.IncreaseProjectileAmount)
