@@ -9,7 +9,7 @@ public class UIDisolveHandler : MonoBehaviour
     [SerializeField] private Material disolveMaterial;
     [Header("Disolve Data")]
     [Space]
-    [SerializeField] private float fadeDelta = 0.06f;
+    [SerializeField] private float fadeDelta = 0.006f;
 
     private GameProcessManager _gameProcessManager;
 
