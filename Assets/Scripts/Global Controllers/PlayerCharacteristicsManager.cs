@@ -39,7 +39,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
         _gameProcessManager.OnPlayerWon += GameProcessManager_PlayerWon_ExecuteReaction;
 
-        _playerCharactersManager.OnCharacterChanged += PlayerCharactersManager_OnCharacterChanged_ExecuteReaction;
+        //_playerCharactersManager.OnCharacterChanged += PlayerCharactersManager_OnCharacterChanged_ExecuteReaction;
     }
 
     private void OnDestroy()
@@ -48,7 +48,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
         _gameProcessManager.OnPlayerWon -= GameProcessManager_PlayerWon_ExecuteReaction;
 
-        _playerCharactersManager.OnCharacterChanged -= PlayerCharactersManager_OnCharacterChanged_ExecuteReaction;
+        //_playerCharactersManager.OnCharacterChanged -= PlayerCharactersManager_OnCharacterChanged_ExecuteReaction;
     }
 
     #region Zenject
@@ -79,7 +79,9 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
                 charactersClasesDataList.Add(data.playerClasesDataList[i]);
             }
         }
-        //currentPlayerData = data.playerCharacteristcsData;
+
+        SetCurrentCharacterData(data.lastPlayedClass);
+        _playerCharactersManager.SetPlayCharacterModel(data.lastPlayedClass);
     }
 
     public void SaveData(GameData data)
@@ -93,7 +95,8 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
                     data.playerClasesDataList[i] = charactersClasesDataList[i];
                 }
             }
-            //data.playerCharacteristcsData = currentPlayerData;
+
+            data.lastPlayedClass = currentPlayerData.playerCharacterType;
         }
     }
     #endregion Save/Load Methods
@@ -187,7 +190,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
 
         SetCurrentCharacterData(_playerCharactersManager.CurrentClass);
 
-        _dataPersistanceManager.SaveGame();
+        //_dataPersistanceManager.SaveGame();
     }
 
     public void UpgradePlayerSkill(int skillCategoryIndex, int skillIndex, int skillLevel)
@@ -471,6 +474,9 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
                 break;
             }
         }
+
+        _playerCharactersManager.SetPlayCharacterModel(playerClass);
+        _dataPersistanceManager.SaveGame();
     }
 
     private void PlayerCharactersManager_OnCharacterChanged_ExecuteReaction(PlayerClasses playerClass)

@@ -34,7 +34,7 @@ public class PlayerCharactersManager : MonoBehaviour
                 currentClass = modelsList[i].ModelType;
                 Debug.Log($"Character Changed {currentClass}");
                 OnPlayerModelChanged?.Invoke(modelsList[i].AnimatorComponent);
-                OnCharacterChanged?.Invoke(currentClass);
+                //OnCharacterChanged?.Invoke(currentClass);
             }
             else
             {
@@ -46,6 +46,6 @@ public class PlayerCharactersManager : MonoBehaviour
     private IEnumerator SetStartCharacterCoroutine()
     {
         yield return new WaitForSeconds(setStartCharacterDelay);
-        SetPlayCharacterModel(PlayerClasses.Knight);
+        //SetPlayCharacterModel(PlayerClasses.Knight);
     }
 }
