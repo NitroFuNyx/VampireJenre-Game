@@ -4,6 +4,10 @@ using Zenject;
 
 public class MainUI : MonoBehaviour
 {
+    [Header("Internal References")]
+    [Space]
+    [SerializeField] private UIDisolveHandler disolveImageHandler;
+
     private List<MainCanvasPanel> panelsList = new List<MainCanvasPanel>();
     private Dictionary<UIPanels, MainCanvasPanel> panelsDictionary = new Dictionary<UIPanels, MainCanvasPanel>();
 
@@ -54,8 +58,9 @@ public class MainUI : MonoBehaviour
 
     public void PlayButtonPressed_ExecuteReaction()
     {
-        ActivateMainCanvasPanel(UIPanels.GameLevelUI);
-        _gameProcessManager.StartGame();
+        disolveImageHandler.DisolveImage(DisolveProccessFinished_ExecuteReaction);
+        //ActivateMainCanvasPanel(UIPanels.GameLevelUI);
+        //_gameProcessManager.StartGame();
     }
 
     public void ShowRewardsUI()
@@ -99,6 +104,12 @@ public class MainUI : MonoBehaviour
     private void UnsubscribeFromEvents()
     {
         
+    }
+
+    private void DisolveProccessFinished_ExecuteReaction()
+    {
+        ActivateMainCanvasPanel(UIPanels.GameLevelUI);
+        _gameProcessManager.StartGame();
     }
 
     private void FillPanelsListAndDictionary()

@@ -66,3 +66,8 @@ public class DateConstants
 {
     public const int newGameIndexForData = -1;
 }
+
+public class DisolveMaterialReferences
+{
+    public const string FadeValue = "_Fade";
+}
