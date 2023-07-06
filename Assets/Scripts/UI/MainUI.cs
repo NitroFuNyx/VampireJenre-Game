@@ -58,9 +58,9 @@ public class MainUI : MonoBehaviour
 
     public void PlayButtonPressed_ExecuteReaction()
     {
-        disolveImageHandler.DisolveImage(DisolveProccessFinished_ExecuteReaction);
-        //ActivateMainCanvasPanel(UIPanels.GameLevelUI);
-        //_gameProcessManager.StartGame();
+        //disolveImageHandler.DisolveImage(DisolveProccessFinished_ExecuteReaction);
+        ActivateMainCanvasPanel(UIPanels.GameLevelUI);
+        _gameProcessManager.StartGame();
     }
 
     public void ShowRewardsUI()
