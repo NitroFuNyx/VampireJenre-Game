@@ -64,6 +64,7 @@ public class GameProcessManager : MonoBehaviour
         _treasureChestInfoPanel.OnTreasureChestItemsCollected += TreasureChestInfoPanel_OnTreasureChestItemsCollected_ExecuteReaction;
 
         _adsController.OnInterstialAdClosed += AdsController_InterstialAdClosed_ExecuteReaction;
+        _adsController.OnAdvertAbsence += AdsController_OnAdvertAbsence_ExecuteReaction;
     }
 
     private void OnDestroy()
@@ -79,6 +80,7 @@ public class GameProcessManager : MonoBehaviour
         _treasureChestInfoPanel.OnTreasureChestItemsCollected -= TreasureChestInfoPanel_OnTreasureChestItemsCollected_ExecuteReaction;
 
         _adsController.OnInterstialAdClosed -= AdsController_InterstialAdClosed_ExecuteReaction;
+        _adsController.OnAdvertAbsence -= AdsController_OnAdvertAbsence_ExecuteReaction;
     }
 
     #region Zenject
@@ -234,6 +236,15 @@ public class GameProcessManager : MonoBehaviour
     {
         ResetMapProgress();
         _systemTimeManager.ResumeGame();
+    }
+
+    private void AdsController_OnAdvertAbsence_ExecuteReaction()
+    {
+        if(battleStarted)
+        {
+            _systemTimeManager.PauseGame();
+        }
+        _mainUI.ShowNoAdsUI();
     }
     
     private IEnumerator StartGameCoroutine()
