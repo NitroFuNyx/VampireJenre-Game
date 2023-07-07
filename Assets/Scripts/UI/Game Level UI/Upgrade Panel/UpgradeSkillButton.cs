@@ -43,7 +43,17 @@ public class UpgradeSkillButton : ButtonInteractionHandler
 
     public override void ButtonActivated()
     {
-        if(!firstSkillLearned)
+        if (doubleUpgrade)
+        {
+            if (!_adsManager.BlockAdsOptionPurchased)
+            {
+                rewardRequested = true;
+                currentSkillIndex = skillndex;
+                _adsController.LoadRewarded();
+                //StartCoroutine(UpgradeAdditionalSkillLevelCoroutine(skillndex));
+            }
+        }
+        else
         {
             firstSkillLearned = true;
 
@@ -60,23 +70,30 @@ public class UpgradeSkillButton : ButtonInteractionHandler
 
             _skillsManager.DefineSkillToUpgrade((int)skillUpgradeDisplayPanel.SkillType, skillndex);
         }
-
-        if (doubleUpgrade)
-        {
-            if (!_adsManager.BlockAdsOptionPurchased)
-            {
-                rewardRequested = true;
-                currentSkillIndex = skillndex;
-                _adsController.LoadRewarded();
-                //StartCoroutine(UpgradeAdditionalSkillLevelCoroutine(skillndex));
-            }
-        }
     }
 
     private void AdsController_RewardGranted_ExecuteReaction()
     {
         if(rewardRequested)
         {
+            if (!firstSkillLearned)
+            {
+                firstSkillLearned = true;
+
+                //int skillndex;
+
+                if (skillUpgradeDisplayPanel.SkillType == SkillBasicTypes.Active)
+                {
+                    skillndex = (int)skillUpgradeDisplayPanel.ActiveSkill;
+                }
+                else
+                {
+                    skillndex = (int)skillUpgradeDisplayPanel.PassiveSkill;
+                }
+
+                _skillsManager.DefineSkillToUpgrade((int)skillUpgradeDisplayPanel.SkillType, skillndex);
+            }
+
             Debug.Log($"Ad Reward For Scroll");
             rewardRequested = false;
             firstSkillLearned = false;
