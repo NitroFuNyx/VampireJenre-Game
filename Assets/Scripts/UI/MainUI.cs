@@ -58,9 +58,9 @@ public class MainUI : MonoBehaviour
 
     public void PlayButtonPressed_ExecuteReaction()
     {
-        disolveImageHandler.DisolveImage(DisolveProccessFinished_ExecuteReaction);
-        //ActivateMainCanvasPanel(UIPanels.GameLevelUI);
-        //_gameProcessManager.StartGame();
+        //disolveImageHandler.DisolveImage(DisolveProccessFinished_ExecuteReaction);
+        ActivateMainCanvasPanel(UIPanels.GameLevelUI);
+        _gameProcessManager.StartGame();
     }
 
     public void ShowRewardsUI()
@@ -94,6 +94,16 @@ public class MainUI : MonoBehaviour
     {
         ActivateMainCanvasPanel(UIPanels.MainScreenPanel);
         ShowMenuButtonsUI();
+    }
+
+    public void ShowNoAdsUI()
+    {
+        panelsDictionary[UIPanels.NoAdsUI].ShowPanel();
+    }
+
+    public void HideNoAdsUI()
+    {
+        panelsDictionary[UIPanels.NoAdsUI].HidePanel();
     }
 
     private void SubscribeOnEvents()
