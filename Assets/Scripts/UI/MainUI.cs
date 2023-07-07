@@ -96,6 +96,16 @@ public class MainUI : MonoBehaviour
         ShowMenuButtonsUI();
     }
 
+    public void ShowNoAdsUI()
+    {
+        panelsDictionary[UIPanels.NoAdsUI].ShowPanel();
+    }
+
+    public void HideNoAdsUI()
+    {
+        panelsDictionary[UIPanels.NoAdsUI].HidePanel();
+    }
+
     private void SubscribeOnEvents()
     {
         
