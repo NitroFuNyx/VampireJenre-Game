@@ -89,7 +89,7 @@ public class AdsRewardedSetup : MonoBehaviour
 
         // create our request used to load the ad.
         var adRequest = new AdRequest();
-        adRequest.Keywords.Add("unity-admob-sample");
+            //adRequest.Keywords.Add("unity-admob-sample");
 
         // send the request to load the ad.
         RewardedAd.Load(_adUnitId, adRequest,
@@ -102,7 +102,7 @@ public class AdsRewardedSetup : MonoBehaviour
                                    "with error : " + error);
                     return;
                 }
-
+    
                 Debug.Log("Rewarded ad loaded with response : "
                           + ad.GetResponseInfo());
 
@@ -113,17 +113,26 @@ public class AdsRewardedSetup : MonoBehaviour
     }
     private void ShowRewardedAd(Action onPlayerRewarded)
     {
-        const string rewardMsg =
-            "Rewarded ad rewarded the user. Type: {0}, amount: {1}.";
-
+        //Debug.LogWarning($"IN METHOD OF SHOWING REWARDED next {rewardedAd} {rewardedAd.CanShowAd()}");
+       
+        Debug.LogWarning("Showing IN METHOD reward" );
+        
         if (rewardedAd != null && rewardedAd.CanShowAd())
         {
             rewardedAd.Show((Reward reward) =>
             {
+                Debug.LogWarning("Showing reward");
+
                 onPlayerRewarded?.Invoke();
             });
         }
-        LoadRewardedAd();
+        else
+        {
+            Debug.LogError("Rewarded ad is not ready yet.");
+            LoadRewardedAd();
+            adsController.NotifyNoAds();
+
+        }
     }
     
     private void RegisterEventHandlers(RewardedAd ad)

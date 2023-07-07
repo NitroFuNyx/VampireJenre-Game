@@ -14,6 +14,7 @@ public class AdsController : MonoBehaviour
     public event Action LoadInterstitialAd;
     public event Action<Action> LoadRewardedAd;
     public event Action OnRewardAdViewed;
+    public event Action OnAdvertAbsence;
     public event Action LoadBannerAd;
     public event Action DeleteBannerAd;
 
@@ -27,6 +28,7 @@ public class AdsController : MonoBehaviour
     }
     public void LoadRewarded()
     {
+        Debug.Log("ASK FOR REWARD AD");
         LoadRewardedAd?.Invoke(GiveAReward);
     }
     public void LoadBanner()
@@ -40,6 +42,7 @@ public class AdsController : MonoBehaviour
 
     public void GiveAReward()
     {
+        Debug.LogWarning("REWARD APPROVED");
         OnRewardAdViewed?.Invoke();
     }
 
@@ -47,5 +50,10 @@ public class AdsController : MonoBehaviour
     {
         Debug.Log($"Close Interstial Event");
         OnInterstialAdClosed?.Invoke();
+    }
+
+    public void NotifyNoAds()
+    {
+        OnAdvertAbsence?.Invoke();
     }
 }
