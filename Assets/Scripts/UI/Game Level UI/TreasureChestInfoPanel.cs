@@ -21,7 +21,6 @@ public class TreasureChestInfoPanel : GameLevelSubPanel
     private AdsController _adsController;
 
     private bool rewardRequested = false;
-    private bool firstTreasureReceived = false;
 
     public event Action OnTreasureChestItemsCollected;
 
@@ -54,13 +53,7 @@ public class TreasureChestInfoPanel : GameLevelSubPanel
 
     public void CollectTreasures(bool getAllTreasures)
     {
-        if(!firstTreasureReceived)
-        {
-            firstTreasureReceived = true;
-            GetFirstTreasure();
-        }
-
-        if(getAllTreasures)
+        if (getAllTreasures)
         {
             if(!_adsManager.BlockAdsOptionPurchased)
             {
@@ -71,6 +64,7 @@ public class TreasureChestInfoPanel : GameLevelSubPanel
         }
         else
         {
+            GetFirstTreasure();
             OnTreasureChestItemsCollected?.Invoke();
             HidePanel();
         }
@@ -173,8 +167,7 @@ public class TreasureChestInfoPanel : GameLevelSubPanel
         if(rewardRequested)
         {
             rewardRequested = false;
-            firstTreasureReceived = false;
-            Debug.Log($"Reward for Chest");
+            GetFirstTreasure();
             GetSecondTreasure();
 
             OnTreasureChestItemsCollected?.Invoke();
