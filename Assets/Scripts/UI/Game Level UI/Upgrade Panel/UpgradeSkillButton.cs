@@ -16,10 +16,8 @@ public class UpgradeSkillButton : ButtonInteractionHandler
     private AdsController _adsController;
 
     private bool rewardRequested = false;
-    private bool firstSkillLearned = false;
 
     private int currentSkillIndex;
-    private int skillndex;
 
     private void Start()
     {
@@ -48,16 +46,13 @@ public class UpgradeSkillButton : ButtonInteractionHandler
             if (!_adsManager.BlockAdsOptionPurchased)
             {
                 rewardRequested = true;
-                currentSkillIndex = skillndex;
                 _adsController.LoadRewarded();
-                //StartCoroutine(UpgradeAdditionalSkillLevelCoroutine(skillndex));
             }
         }
         else
         {
-            firstSkillLearned = true;
 
-            //int skillndex;
+            int skillndex;
 
             if (skillUpgradeDisplayPanel.SkillType == SkillBasicTypes.Active)
             {
@@ -76,27 +71,21 @@ public class UpgradeSkillButton : ButtonInteractionHandler
     {
         if(rewardRequested)
         {
-            if (!firstSkillLearned)
+            int skillndex;
+
+            if (skillUpgradeDisplayPanel.SkillType == SkillBasicTypes.Active)
             {
-                firstSkillLearned = true;
-
-                //int skillndex;
-
-                if (skillUpgradeDisplayPanel.SkillType == SkillBasicTypes.Active)
-                {
-                    skillndex = (int)skillUpgradeDisplayPanel.ActiveSkill;
-                }
-                else
-                {
-                    skillndex = (int)skillUpgradeDisplayPanel.PassiveSkill;
-                }
-
-                _skillsManager.DefineSkillToUpgrade((int)skillUpgradeDisplayPanel.SkillType, skillndex);
+                skillndex = (int)skillUpgradeDisplayPanel.ActiveSkill;
+            }
+            else
+            {
+                skillndex = (int)skillUpgradeDisplayPanel.PassiveSkill;
             }
 
-            Debug.Log($"Ad Reward For Scroll");
+            currentSkillIndex = skillndex;
+
+            _skillsManager.DefineSkillToUpgrade((int)skillUpgradeDisplayPanel.SkillType, currentSkillIndex);
             rewardRequested = false;
-            firstSkillLearned = false;
             StartCoroutine(UpgradeAdditionalSkillLevelCoroutine(currentSkillIndex));
         }
     }
