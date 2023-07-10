@@ -21,7 +21,7 @@ public class PlayerCharactersManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SetStartCharacterCoroutine());
+        //StartCoroutine(SetStartCharacterCoroutine());
     }
 
     public void SetPlayCharacterModel(PlayerClasses model)

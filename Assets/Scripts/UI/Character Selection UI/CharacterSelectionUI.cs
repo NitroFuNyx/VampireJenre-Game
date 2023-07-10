@@ -24,10 +24,11 @@ public class CharacterSelectionUI : MainCanvasPanel
     private PlayerCharactersManager _playerCharactersManager;
 
     private ChangeActiveCharacterButton button_ChangeActiveCharacter;
-    private GameObject button_detailsCharacter;
-    private GameObject button_buyCharacter;
+    private CharacterDetailsButton button_detailsCharacter;
+    private BuyCharacterButton button_buyCharacter;
 
-    private GameObject characterCostPanel;
+    private CharacterCostPanel _characterCostPanel;
+
 
     private List<PlayerClasses> charactersList = new List<PlayerClasses>();
     private Dictionary<PlayerClasses, Sprite> charactersDictionary = new Dictionary<PlayerClasses, Sprite>();
@@ -48,12 +49,16 @@ public class CharacterSelectionUI : MainCanvasPanel
 
     #region Zenject
     [Inject]
-    private void Construct(PlayerCharacteristicsManager playerCharacteristicsManager,
-                           ChangeActiveCharacterButton changeActiveCharacterButton, PlayerCharactersManager playerCharactersManager)
+    private void Construct(PlayerCharacteristicsManager playerCharacteristicsManager, CharacterCostPanel characterCostPanel,
+                           ChangeActiveCharacterButton changeActiveCharacterButton, PlayerCharactersManager playerCharactersManager,
+                           CharacterDetailsButton characterDetailsButton, BuyCharacterButton buyCharacterButton)
     {
         _playerCharacteristicsManager = playerCharacteristicsManager;
         button_ChangeActiveCharacter = changeActiveCharacterButton;
         _playerCharactersManager = playerCharactersManager;
+        button_detailsCharacter = characterDetailsButton;
+        button_buyCharacter = buyCharacterButton;
+        _characterCostPanel = characterCostPanel;
     }
     #endregion Zenject
 
@@ -129,19 +134,22 @@ public class CharacterSelectionUI : MainCanvasPanel
     {
         UpdateCharacterSprite(visibleCharacter);
 
-        if(_playerCharacteristicsManager.CurrentPlayerData.locked)
+        if(_playerCharacteristicsManager.GetCharacterCharacteristicsData(visibleCharacter).locked)
         {
             button_ChangeActiveCharacter.gameObject.SetActive(false);
-            button_detailsCharacter.SetActive(false);
-            button_buyCharacter.SetActive(true);
-            characterCostPanel.SetActive(true);
+            button_detailsCharacter.gameObject.SetActive(false);
+            button_buyCharacter.gameObject.SetActive(true);
+            _characterCostPanel.gameObject.SetActive(true);
+
+            _characterCostPanel.UpdateCharacterCostPanel(GetPlayerClassData(visibleCharacter));
+            button_buyCharacter.UpdateButtonSprite(GetPlayerClassData(visibleCharacter));
         }
         else
         {
             button_ChangeActiveCharacter.gameObject.SetActive(true);
-            button_detailsCharacter.SetActive(true);
-            button_buyCharacter.SetActive(false);
-            characterCostPanel.SetActive(false);
+            button_detailsCharacter.gameObject.SetActive(true);
+            button_buyCharacter.gameObject.SetActive(false);
+            _characterCostPanel.gameObject.SetActive(false);
 
             if (visibleCharacter != _playerCharacteristicsManager.CurrentPlayerData.playerCharacterType)
             {
@@ -152,6 +160,22 @@ public class CharacterSelectionUI : MainCanvasPanel
                 button_ChangeActiveCharacter.SetButtonSprite(true);
             }
         }
+    }
+
+    private PlayerClassDataStruct GetPlayerClassData(PlayerClasses characterClass)
+    {
+        PlayerClassDataStruct playerClassData = new PlayerClassDataStruct();
+
+        for (int i = 0; i < classesDataSO.PlayerClassesDataList.Count; i++)
+        {
+            if (characterClass == classesDataSO.PlayerClassesDataList[i].playerClass)
+            {
+                playerClassData = classesDataSO.PlayerClassesDataList[i];
+                break;
+            }
+        }
+
+        return playerClassData;
     }
 
     private Sprite GetClassSprite(PlayerClasses characterType)

@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
-public class CharacterDetailsButton : MonoBehaviour
+public class CharacterDetailsButton : ButtonInteractionHandler
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public event Action OnCharacterDetailsButtonPressed;
 
-    // Update is called once per frame
-    void Update()
+    public override void ButtonActivated()
     {
-        
+        OnCharacterDetailsButtonPressed?.Invoke();
     }
 }

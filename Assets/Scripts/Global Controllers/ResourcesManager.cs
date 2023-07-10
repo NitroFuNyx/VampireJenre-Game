@@ -276,7 +276,6 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     }
     // End Of Test Methods
 
-
     private void AddCurrentLevelResourcesToGeneralAmount()
     {
         gameData.coinsAmount += new GameData.Secureint(currentLevelCoinsAmount.GetValue());
