@@ -13,8 +13,9 @@ public class GameProcessManager : MonoBehaviour
     [Space]
     [SerializeField] private float currentMapProgress = 0;
     [SerializeField] private float upgradeProgressValue = 100;
-    [Header("Skills")]
+    [Header("Modes")]
     [Space]
+    [SerializeField] private bool endlessBattleMode = false;
 
     private SpawnEnemiesManager _spawnEnemiesManager;
     private MainUI _mainUI;

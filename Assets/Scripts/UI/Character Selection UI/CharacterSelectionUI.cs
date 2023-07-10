@@ -131,17 +131,17 @@ public class CharacterSelectionUI : MainCanvasPanel
 
         if(_playerCharacteristicsManager.CurrentPlayerData.locked)
         {
-            //button_ChangeActiveCharacter.gameObject.SetActive(false);
-            //button_detailsCharacter.SetActive(false);
-            //button_buyCharacter.SetActive(true);
-            //characterCostPanel.SetActive(true);
+            button_ChangeActiveCharacter.gameObject.SetActive(false);
+            button_detailsCharacter.SetActive(false);
+            button_buyCharacter.SetActive(true);
+            characterCostPanel.SetActive(true);
         }
         else
         {
-            //button_ChangeActiveCharacter.gameObject.SetActive(true);
-            //button_detailsCharacter.SetActive(true);
-            //button_buyCharacter.SetActive(false);
-            //characterCostPanel.SetActive(false);
+            button_ChangeActiveCharacter.gameObject.SetActive(true);
+            button_detailsCharacter.SetActive(true);
+            button_buyCharacter.SetActive(false);
+            characterCostPanel.SetActive(false);
 
             if (visibleCharacter != _playerCharacteristicsManager.CurrentPlayerData.playerCharacterType)
             {
