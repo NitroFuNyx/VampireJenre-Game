@@ -77,10 +77,20 @@ public class PlayerComponentsManager : MonoBehaviour
 
     private void CollisionManager_PlayerOutOfHp_ExecuteReaction()
     {
-        if(!_gameProcessManager.GameVictoryResultIsBeingShown)
+        if(_gameProcessManager.CurrentGameMode == GameModes.Standart)
         {
-            _gameProcessManager.GameDefeatResultIsBeingShown = true;
+            if (!_gameProcessManager.GameVictoryResultIsBeingShown)
+            {
+                _gameProcessManager.GameDefeatResultIsBeingShown = true;
 
+                movementManager.ChangeCanMoveState(false);
+                collisionsManager.StopRegeneration();
+                collisionsManager.SetCanCheckCollisionsState(false);
+                animationsManager.SetAnimation_Die();
+            }
+        }
+        else if(_gameProcessManager.CurrentGameMode == GameModes.Deathmatch)
+        {
             movementManager.ChangeCanMoveState(false);
             collisionsManager.StopRegeneration();
             collisionsManager.SetCanCheckCollisionsState(false);

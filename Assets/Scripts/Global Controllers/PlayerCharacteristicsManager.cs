@@ -337,7 +337,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         playerPersistentData = currentPlayerData;
     }
 
-    private void GameProcessManager_PlayerLost_ExecuteReaction()
+    private void GameProcessManager_PlayerLost_ExecuteReaction(GameModes _)
     {
         ResetPlayerCharacteristicAfterBattle();
     }

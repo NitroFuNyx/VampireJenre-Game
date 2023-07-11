@@ -4,5 +4,8 @@ using Zenject;
 
 public class DeathmatchFinishPanel : GameLevelSubPanel
 {
-    
+    public void UpdatePlayerResults()
+    {
+
+    }
 }

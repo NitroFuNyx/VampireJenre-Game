@@ -36,6 +36,7 @@ public class GameLevelUI : MainCanvasPanel
 
     private VictoryPanel victoryPanel;
     private LoosePanel loosePanel;
+    private DeathmatchFinishPanel deathmatchFinishPanel;
 
     private Dictionary<GameLevelPanels, GameLevelSubPanel> subpanelsDictionary = new Dictionary<GameLevelPanels, GameLevelSubPanel>();
 
@@ -88,6 +89,7 @@ public class GameLevelUI : MainCanvasPanel
     {
         victoryPanel = subpanelsDictionary[GameLevelPanels.VictoryPanel].GetComponent<VictoryPanel>();
         loosePanel = subpanelsDictionary[GameLevelPanels.LoosePanel].GetComponent<LoosePanel>();
+        deathmatchFinishPanel = subpanelsDictionary[GameLevelPanels.DeathmatchFinishPanel].GetComponent<DeathmatchFinishPanel>();
     }
 
     private void FillSubpanelsDictionary()
@@ -168,6 +170,13 @@ public class GameLevelUI : MainCanvasPanel
         subpanelsDictionary[GameLevelPanels.LoosePanel].ShowPanel();
     }
 
+    public void ShowDeathmatchFinishPanel()
+    {
+        HideAllSubpanels();
+        deathmatchFinishPanel.UpdatePlayerResults();
+        subpanelsDictionary[GameLevelPanels.DeathmatchFinishPanel].ShowPanel();
+    }
+
     public void SetBattleModeUI(GameModes gameMode)
     {
         if(gameMode == GameModes.Standart)
@@ -198,9 +207,16 @@ public class GameLevelUI : MainCanvasPanel
         HideAllSubpanels();
     }
 
-    private void GameProcessManager_PlayerLost_ExecuteReaction()
+    private void GameProcessManager_PlayerLost_ExecuteReaction(GameModes gameMode)
     {
-        ShowLoosePanelUI();
+        if(gameMode == GameModes.Standart)
+        {
+            ShowLoosePanelUI();
+        }
+        else if(gameMode == GameModes.Deathmatch)
+        {
+            ShowDeathmatchFinishPanel();
+        }
     }
 
     private void GameProcessManager_PlayerWon_ExecuteReaction()

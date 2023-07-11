@@ -370,7 +370,7 @@ public class SkillsManager : MonoBehaviour
         ChooseFirstSkill();
     }
 
-    private void GameProcessManager_OnPlayerLost_ExecuteReaction()
+    private void GameProcessManager_OnPlayerLost_ExecuteReaction(GameModes _)
     {
         
     }

@@ -61,7 +61,6 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
 
     private void Start()
     {
-        
         _gameProcessManager.OnGameStarted += GameProcessManager_GameStarted_ExecuteReaction;
         _gameProcessManager.OnLevelDataReset += GameProcessManager_LevelDataReset_ExecuteReaction;
     }
@@ -88,7 +87,7 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     {
         gameData.coinsAmount = data.coinsAmount;
         gameData.gemsAmount = data.gemsAmount;
-
+        Debug.Log($"Gems {data.gemsAmount} Coins {data.coinsAmount}");
         OnCoinsAmountChanged?.Invoke(data.coinsAmount.GetValue());
         OnGemsAmountChanged?.Invoke(data.gemsAmount.GetValue());
     }

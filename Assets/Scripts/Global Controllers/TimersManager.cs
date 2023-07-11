@@ -124,7 +124,7 @@ public class TimersManager : MonoBehaviour
         StartStopwatch();
     }
 
-    private void GameProcessManager_PlayerLost_ExecuteReaction()
+    private void GameProcessManager_PlayerLost_ExecuteReaction(GameModes gameMode)
     {
         StopStopwatch();
     }

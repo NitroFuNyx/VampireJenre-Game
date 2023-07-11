@@ -45,7 +45,7 @@ public class GameProcessManager : MonoBehaviour
 
     #region Events Declaration
     public event Action OnGameStarted;
-    public event Action OnPlayerLost;
+    public event Action<GameModes> OnPlayerLost;
     public event Action OnPlayerRecoveryOptionUsed;
     public event Action OnPlayerWon;
     public event Action OnLevelDataReset; 
@@ -162,24 +162,30 @@ public class GameProcessManager : MonoBehaviour
         _audioManager.StopMusicAudio();
         _audioManager.PlaySFXSound_Defeat();
 
-        if(playerRecoveryOptionUsed)
+        if(currentGameMode == GameModes.Standart)
         {
-            Debug.Log($"Player Lost");
-            OnPlayerLost?.Invoke();
+            if (playerRecoveryOptionUsed)
+            {
+                Debug.Log($"Player Lost");
+                OnPlayerLost?.Invoke(currentGameMode);
+            }
+            else
+            {
+                Debug.Log($"Player Out Of Hp");
+                _gameLevelUI.ShowLoosePanelUI();
+            }
         }
-        else
+        else if(currentGameMode == GameModes.Deathmatch)
         {
-            Debug.Log($"Player Out Of Hp");
-            _gameLevelUI.ShowLoosePanelUI();
+            OnPlayerLost?.Invoke(currentGameMode);
         }
-        //ResetMapData();
     }
 
     public void GameLostSecondTime_ExecuteReaction()
     {
         _audioManager.StopMusicAudio();
         _audioManager.PlaySFXSound_Defeat();
-        OnPlayerLost?.Invoke();
+        OnPlayerLost?.Invoke(currentGameMode);
     }
 
     public void UsePlayerRecoveryOption()

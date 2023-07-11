@@ -37,7 +37,7 @@ public class PickableItemsManager : MonoBehaviour
     private void Start()
     {
         _gameProcessManager.OnGameStarted += GameProcessManager_GameStarted_ExecuteReaction;
-        _gameProcessManager.OnPlayerLost += ResetItems;
+        _gameProcessManager.OnPlayerLost += GameProcessManager_OnPlayerLost_ExecuteReaction;
         _gameProcessManager.OnPlayerWon += ResetItems;
         _gameProcessManager.OnLevelDataReset += ResetItems;
     }
@@ -45,7 +45,7 @@ public class PickableItemsManager : MonoBehaviour
     private void OnDestroy()
     {
         _gameProcessManager.OnGameStarted -= GameProcessManager_GameStarted_ExecuteReaction;
-        _gameProcessManager.OnPlayerLost -= ResetItems;
+        _gameProcessManager.OnPlayerLost -= GameProcessManager_OnPlayerLost_ExecuteReaction;
         _gameProcessManager.OnPlayerWon -= ResetItems;
         _gameProcessManager.OnLevelDataReset -= ResetItems;
     }
@@ -219,6 +219,11 @@ public class PickableItemsManager : MonoBehaviour
         //SpawnItems();
         canSpawnItems = true;
         StartCoroutine(SpawnItemsCoroutine());
+    }
+
+    private void GameProcessManager_OnPlayerLost_ExecuteReaction(GameModes _)
+    {
+        ResetItems();
     }
 
     private TreasureChestItems GetRandomTreasureChestItem()

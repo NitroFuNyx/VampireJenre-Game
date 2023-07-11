@@ -148,7 +148,7 @@ public class SpawnEnemiesManager : MonoBehaviour
         StartCoroutine(StopEnemySpawnCoroutine());
     }
 
-    private void GameProcessManager_PlayerLost_ExecuteReaction()
+    private void GameProcessManager_PlayerLost_ExecuteReaction(GameModes _)
     {
         StopEnemySpawn();
 
