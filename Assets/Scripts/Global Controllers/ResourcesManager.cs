@@ -157,9 +157,16 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         ResourceBonusItemStruct data = new ResourceBonusItemStruct();
         data.canBeCollected = false;
 
-        float gemGrantingIndex;
+        float gemGrantingIndex = 0;
 
-        gemGrantingIndex = UnityEngine.Random.Range(0, CommonValues.maxPercentAmount);
+        if(_gameProcessManager.CurrentGameMode == GameModes.Standart)
+        {
+            gemGrantingIndex = UnityEngine.Random.Range(0, CommonValues.maxPercentAmount);
+        }
+        else if(_gameProcessManager.CurrentGameMode == GameModes.Deathmatch)
+        {
+            gemGrantingIndex = CommonValues.maxPercentAmount + 1; // always not accessible
+        }
 
         if (gemGrantingIndex < gemDropDefaultPercentChance + _playerCharacteristicsManager.CurrentPlayerData.characterItemDropChancePercent)
         {
