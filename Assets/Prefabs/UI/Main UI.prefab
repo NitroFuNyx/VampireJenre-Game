@@ -12455,7 +12455,7 @@ MonoBehaviour:
   minScale: {x: 0.8, y: 0.8, z: 0.8}
   scaleDuration: 0.3
   standartAudio: 1
-  panelType: 9
+  panelType: 5
   standartButtonSprite: {fileID: 21300000, guid: 7a7778faaff1ccf48b120b083cc20307,
     type: 3}
   highlightedButtonSprite: {fileID: 21300000, guid: de6c071970adfe34e863a8da49eeac50,
@@ -21968,7 +21968,7 @@ GameObject:
   - component: {fileID: 1931941353839024702}
   - component: {fileID: 5637305272235825621}
   m_Layer: 0
-  m_Name: Last Round Results Panel
+  m_Name: This Round Results Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36704,6 +36704,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelType: 6
+  ThisRound_DefeatedEnemyCounterText: {fileID: 6222364751182530323}
+  ThisRound_TimeText: {fileID: 2289284443106502944}
+  Best_DefeatedEnemyCounterText: {fileID: 7247282648498498467}
+  Best_TimeText: {fileID: 3835889579660745722}
 --- !u!1 &4806817331154409047
 GameObject:
   m_ObjectHideFlags: 0

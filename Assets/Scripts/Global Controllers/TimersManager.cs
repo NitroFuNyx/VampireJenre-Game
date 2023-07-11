@@ -47,6 +47,11 @@ public class TimersManager : MonoBehaviour
         return $"{GetHoursAndMinutesAmount((int)time)}:{GetSecondsAmount((int)time)}";
     }
 
+    public string GetFormatedCurrentTimeString()
+    {
+        return GetFormatedTimeString(currentStopwatchValue);
+    }
+
     private string GetHoursAndMinutesAmount(int currentTimeValue)
     {
         string amountString = "";
