@@ -225,6 +225,15 @@ public class PickableItemsManager : MonoBehaviour
     {
         int itemIndex = Random.Range(0, System.Enum.GetValues(typeof(TreasureChestItems)).Length);
         TreasureChestItems item = (TreasureChestItems)itemIndex;
+
+        if(_gameProcessManager.CurrentGameMode == GameModes.Deathmatch)
+        {
+            if(item == TreasureChestItems.Gems)
+            {
+                item = TreasureChestItems.Coins;
+            }
+        }
+
         return item;
     }
 
