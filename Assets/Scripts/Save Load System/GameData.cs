@@ -38,10 +38,11 @@ public class GameData
         skillsLevelsList = new List<TalentLevelStruct>();
     }
    
+    [Serializable]
     public struct Secureint
     {
-      private int valueOffset;
-        private int valueAmount;
+        public int valueOffset;
+        public int valueAmount;
 
         public Secureint(int coinsValue)
         {
