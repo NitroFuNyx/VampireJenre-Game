@@ -14,6 +14,7 @@ public class MainUI : MonoBehaviour
     private MainLoaderUI _mainLoaderUI;
     private MainScreenUI _mainScreenUI;
     private MenuButtonsUI _menuButtonsUI;
+    private GameLevelUI _gameLevelUI;
 
     private GameProcessManager _gameProcessManager;
 
@@ -35,12 +36,14 @@ public class MainUI : MonoBehaviour
 
     #region Zenject
     [Inject]
-    private void Construct(MainLoaderUI mainLoaderUI, MainScreenUI mainScreenUI, GameProcessManager gameProcessManager, MenuButtonsUI menuButtonsUI)
+    private void Construct(MainLoaderUI mainLoaderUI, MainScreenUI mainScreenUI, GameProcessManager gameProcessManager,
+                           MenuButtonsUI menuButtonsUI, GameLevelUI gameLevelUI)
     {
         _mainLoaderUI = mainLoaderUI;
         _mainScreenUI = mainScreenUI;
         _gameProcessManager = gameProcessManager;
         _menuButtonsUI = menuButtonsUI;
+        _gameLevelUI = gameLevelUI;
     }
     #endregion Zenject
 
@@ -60,7 +63,16 @@ public class MainUI : MonoBehaviour
     {
         //disolveImageHandler.DisolveImage(DisolveProccessFinished_ExecuteReaction);
         ActivateMainCanvasPanel(UIPanels.GameLevelUI);
-        _gameProcessManager.StartGame();
+        _gameLevelUI.SetBattleModeUI(GameModes.Standart);
+        _gameProcessManager.StartGame(GameModes.Standart);
+    }
+
+    [ContextMenu("Deathmatch")]
+    public void DeathmatchButtonPressed_ExecuteReaction()
+    {
+        ActivateMainCanvasPanel(UIPanels.GameLevelUI);
+        _gameLevelUI.SetBattleModeUI(GameModes.Deathmatch);
+        _gameProcessManager.StartGame(GameModes.Deathmatch);
     }
 
     public void ShowRewardsUI()
@@ -116,10 +128,10 @@ public class MainUI : MonoBehaviour
         
     }
 
-    private void DisolveProccessFinished_ExecuteReaction()
+    private void DisolveProccessFinished_ExecuteReaction(GameModes gameMode)
     {
         ActivateMainCanvasPanel(UIPanels.GameLevelUI);
-        _gameProcessManager.StartGame();
+        _gameProcessManager.StartGame(gameMode);
     }
 
     private void FillPanelsListAndDictionary()

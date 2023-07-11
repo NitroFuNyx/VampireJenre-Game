@@ -24,6 +24,9 @@ public class GameLevelUI : MainCanvasPanel
     [SerializeField] private Transform hpBar;
     [SerializeField] private Transform hpBarPos_WithAdBanner;
     [SerializeField] private Transform hpBarPos_WithoutAdBanner;
+    [Header("Uncommon Mode Elements")]
+    [Space]
+    [SerializeField] private CanvasGroup gemsDisplayPanel;
 
     private TimersManager _timersManager;
     private SystemTimeManager _systemTimeManager;
@@ -163,6 +166,18 @@ public class GameLevelUI : MainCanvasPanel
         HideAllSubpanels();
         loosePanel.UpdatePlayerResults();
         subpanelsDictionary[GameLevelPanels.LoosePanel].ShowPanel();
+    }
+
+    public void SetBattleModeUI(GameModes gameMode)
+    {
+        if(gameMode == GameModes.Standart)
+        {
+            gemsDisplayPanel.alpha = 1f;
+        }
+        else
+        {
+            gemsDisplayPanel.alpha = 0f;
+        }
     }
 
     private void HideAllSubpanels()

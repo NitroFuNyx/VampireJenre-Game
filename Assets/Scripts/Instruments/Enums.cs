@@ -104,3 +104,8 @@ public enum ShowNextCharacterButtonsTypes
 {
     ArrowButton, FixedCharacterButton
 }
+
+public enum GameModes
+{
+    Standart, Deathmatch
+}
