@@ -15,7 +15,7 @@ public class GameProcessManager : MonoBehaviour
     [SerializeField] private float upgradeProgressValue = 100;
     [Header("Modes")]
     [Space]
-    [SerializeField] private bool endlessBattleMode = false;
+    [SerializeField] private bool deathmatchMode = false;
 
     private SpawnEnemiesManager _spawnEnemiesManager;
     private MainUI _mainUI;
@@ -41,6 +41,7 @@ public class GameProcessManager : MonoBehaviour
     public bool PlayerRecoveryOptionUsed { get => playerRecoveryOptionUsed; private set => playerRecoveryOptionUsed = value; }
     public bool GameDefeatResultIsBeingShown { get => gameDefeatResultIsBeingShown; set => gameDefeatResultIsBeingShown = value; }
     public bool GameVictoryResultIsBeingShown { get => gameVictoryResultIsBeingShown; set => gameVictoryResultIsBeingShown = value; }
+    public bool DeathmatchMode { get => deathmatchMode; private set => deathmatchMode = value; }
 
     #region Events Declaration
     public event Action OnGameStarted;
