@@ -117,13 +117,16 @@ public class GameProcessManager : MonoBehaviour
 
     public void IncreaseCurrentProgressValue()
     {
-        currentMapProgress += mapProgressDelta;
-        OnMapProgressChanged?.Invoke(currentMapProgress, upgradeProgressValue);
-
-        if(currentMapProgress >= upgradeProgressValue)
+        if(currentGameMode == GameModes.Standart)
         {
-            _spawnEnemiesManager.SpawnBossAtCenter();
-            _audioManager.PlayMusic_Boss();
+            currentMapProgress += mapProgressDelta;
+            OnMapProgressChanged?.Invoke(currentMapProgress, upgradeProgressValue);
+
+            if (currentMapProgress >= upgradeProgressValue)
+            {
+                _spawnEnemiesManager.SpawnBossAtCenter();
+                _audioManager.PlayMusic_Boss();
+            }
         }
     }
 
