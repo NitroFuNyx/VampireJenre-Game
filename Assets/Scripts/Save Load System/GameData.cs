@@ -19,6 +19,7 @@ public class GameData
     public PlayerClasses lastPlayedClass;
     public List<PlayerBasicCharacteristicsStruct> playerClasesDataList;
     public List<TalentLevelStruct> skillsLevelsList;
+    public PlayerStatistic playerStatistics;
 
     public GameData()
     {
@@ -36,12 +37,13 @@ public class GameData
 
         playerClasesDataList = new List<PlayerBasicCharacteristicsStruct>();
         skillsLevelsList = new List<TalentLevelStruct>();
+        playerStatistics = new PlayerStatistic();
     }
-   
+   [Serializable]
     public struct Secureint
     {
-      private int valueOffset;
-        private int valueAmount;
+        public int valueOffset;
+        public int valueAmount;
 
         public Secureint(int coinsValue)
         {

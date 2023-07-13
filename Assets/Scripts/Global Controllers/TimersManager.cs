@@ -15,6 +15,7 @@ public class TimersManager : MonoBehaviour
 
     #region Events Declaration
     public event Action<string> OnStopwatchValueChanged;
+    public event Action<string> OnStopwatchTimeStop;
     #endregion Events Declaration
 
     private void Start()
@@ -142,5 +143,7 @@ public class TimersManager : MonoBehaviour
             OnStopwatchValueChanged?.Invoke(GetFormatedTimeString(currentStopwatchValue));
             yield return new WaitForEndOfFrame();
         }
+        OnStopwatchTimeStop?.Invoke(GetFormatedTimeString(currentStopwatchValue));
+        Debug.LogWarning($"Time is {currentStopwatchValue}");
     }
 }
