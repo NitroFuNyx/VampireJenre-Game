@@ -215,23 +215,6 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         }
     }
 
-    //public void AddResourceForPickingUpTreasureChest()
-    //{
-    //    float gemGrantingIndex;
-
-    //    gemGrantingIndex = UnityEngine.Random.Range(0, CommonValues.maxPercentAmount);
-
-    //    if (gemGrantingIndex < gemDropDefaultPercentChance)
-    //    {
-    //        IncreaseCurrentLevelGemsAmount(GemSurplusForKillingEnemy);
-    //    }
-    //    else
-    //    {
-    //        int coinsAmount = UnityEngine.Random.Range(CoinsSurplusForKillingEnemy_Min, CoinsSurplusForKillingEnemy_Max);
-    //        IncreaseCurrentLevelCoinsAmount(coinsAmount);
-    //    }
-    //}
-
     public TreasureChestResourceDataStruct GetResourceDataForPickingUpTreasureChest(TreasureChestItems resource)
     {
         TreasureChestResourceDataStruct resourceData = new TreasureChestResourceDataStruct();
@@ -281,6 +264,40 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         OnGemsAmountChanged?.Invoke(gameData.gemsAmount.GetValue());
     }
     // End Of Test Methods
+
+    public bool CheckIfEnoughResources(ResourcesTypes resourceType, int cost)
+    {
+        bool isEnoughResources = false;
+
+        if(resourceType == ResourcesTypes.Gems)
+        {
+            if(gameData.gemsAmount.GetValue() >= cost)
+            {
+                isEnoughResources = true;
+            }
+        }
+        else if(resourceType == ResourcesTypes.Coins)
+        {
+            if(gameData.coinsAmount.GetValue() >= cost)
+            {
+                isEnoughResources = true;
+            }
+        }
+
+        return isEnoughResources;
+    }
+
+    public void BuyDeathmatchGame(ResourcesTypes resourceType, int cost)
+    {
+        if (resourceType == ResourcesTypes.Gems)
+        {
+            DecreaseGemsAmount(cost);
+        }
+        else if (resourceType == ResourcesTypes.Coins)
+        {
+            DecreaseCoinsAmount(cost);
+        }
+    }
 
     private void AddCurrentLevelResourcesToGeneralAmount()
     {

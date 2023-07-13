@@ -16,6 +16,7 @@ public class GameData
     public bool blockAdsOptionPurchased;
     public bool freeRewardSpinUsed;
     public bool rewardForAdSpinUsed;
+    public bool deathMatchModeUsedAtCurrentDay;
     public PlayerClasses lastPlayedClass;
     public List<PlayerBasicCharacteristicsStruct> playerClasesDataList;
     public List<TalentLevelStruct> skillsLevelsList;
@@ -32,6 +33,7 @@ public class GameData
         blockAdsOptionPurchased = false;
         freeRewardSpinUsed = false;
         rewardForAdSpinUsed = false;
+        deathMatchModeUsedAtCurrentDay = false;
         lastPlayedClass = PlayerClasses.Knight;
 
         playerClasesDataList = new List<PlayerBasicCharacteristicsStruct>();

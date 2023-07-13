@@ -22,6 +22,7 @@ public class ControllersInstaller : MonoInstaller
     [SerializeField] private ChaptersProgressManager chaptersProgressManager;
     [SerializeField] private AdsManager adsManager;
     [SerializeField] private VFXManager vfxManager;
+    [SerializeField] private DeathmatchAccessManager deathmatchAccessManager;
     [Header("Player References")]
     [Space]
     [SerializeField] private PlayerExperienceManager playerExperienceManager;
@@ -49,6 +50,7 @@ public class ControllersInstaller : MonoInstaller
         Container.Bind<ChaptersProgressManager>().FromInstance(chaptersProgressManager).AsSingle().NonLazy();
         Container.Bind<AdsManager>().FromInstance(adsManager).AsSingle().NonLazy();
         Container.Bind<VFXManager>().FromInstance(vfxManager).AsSingle().NonLazy();
+        Container.Bind<DeathmatchAccessManager>().FromInstance(deathmatchAccessManager).AsSingle().NonLazy();
 
         Container.Bind<PlayerExperienceManager>().FromInstance(playerExperienceManager).AsSingle().NonLazy();
         Container.Bind<PlayerCharacteristicsManager>().FromInstance(playerCharacteristicsManager).AsSingle().NonLazy();

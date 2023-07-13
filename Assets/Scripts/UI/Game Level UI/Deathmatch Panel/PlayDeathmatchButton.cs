@@ -2,19 +2,23 @@ using Zenject;
 
 public class PlayDeathmatchButton : ButtonInteractionHandler
 {
-    private MainUI _mainUI;
+    private DeathmatchAccessManager _deathmatchAccessManager;
 
     #region Zenject
     [Inject]
-    private void Construct(MainUI mainUI)
+    private void Construct(DeathmatchAccessManager deathmatchAccessManager)
     {
-        _mainUI = mainUI;
+        _deathmatchAccessManager = deathmatchAccessManager;
     }
     #endregion Zenject
 
     public override void ButtonActivated()
     {
-        ShowAnimation_ButtonPressed();
-        _mainUI.DeathmatchButtonPressed_ExecuteReaction();
+        _deathmatchAccessManager.PlayDeathmatchButtonPressed_ExecuteReaction(ShowAnimation_ButtonPressed, ShowFailedBuyingResult);
+    }
+
+    private void ShowFailedBuyingResult()
+    {
+
     }
 }
