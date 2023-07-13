@@ -20,6 +20,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     private DataPersistanceManager _dataPersistanceManager;
     private GameProcessManager _gameProcessManager;
     private PlayerCharactersManager _playerCharactersManager;
+    private CharacterSelectionUI _characterSelectionUI;
 
     private int characterMaxLevel = 50;
 
@@ -54,11 +55,12 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     #region Zenject
     [Inject]
     private void Construct(DataPersistanceManager dataPersistanceManager, GameProcessManager gameProcessManager, 
-                           PlayerCharactersManager playerCharactersManager)
+                           PlayerCharactersManager playerCharactersManager, CharacterSelectionUI characterSelectionUI)
     {
         _dataPersistanceManager = dataPersistanceManager;
         _gameProcessManager = gameProcessManager;
         _playerCharactersManager = playerCharactersManager;
+        _characterSelectionUI = characterSelectionUI;
     }
     #endregion Zenject
 
@@ -82,6 +84,8 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
 
         SetCurrentCharacterData(data.lastPlayedClass);
         _playerCharactersManager.SetPlayCharacterModel(data.lastPlayedClass);
+        _characterSelectionUI.ChangeVisibleCharacterButtonPressed_ExecuteReaction(ShowNextCharacterButtonsTypes.FixedCharacterButton,
+                                                                                  SelectionArrowTypes.Left, data.lastPlayedClass);
     }
 
     public void SaveData(GameData data)
@@ -333,7 +337,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         playerPersistentData = currentPlayerData;
     }
 
-    private void GameProcessManager_PlayerLost_ExecuteReaction()
+    private void GameProcessManager_PlayerLost_ExecuteReaction(GameModes _)
     {
         ResetPlayerCharacteristicAfterBattle();
     }
@@ -449,7 +453,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     }
     #endregion Active Skills Upgrade Methods
 
-    private PlayerBasicCharacteristicsStruct GetCharacterCharacteristicsData(PlayerClasses characterType)
+    public PlayerBasicCharacteristicsStruct GetCharacterCharacteristicsData(PlayerClasses characterType)
     {
         PlayerBasicCharacteristicsStruct characterData = new PlayerBasicCharacteristicsStruct();
 

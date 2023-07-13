@@ -39,9 +39,9 @@ public class GetUpButton : ButtonInteractionHandler
         Debug.Log($"Get Up Button Pressed {buttonPressed}");
         if (!buttonPressed)
         {
-            buttonPressed = true;
+            //buttonPressed = true;
             ShowAnimation_ButtonPressed();
-            StartCoroutine(ActivateDelayedButtonMethodCoroutine(SetButtonDisabled));
+            //StartCoroutine(ActivateDelayedButtonMethodCoroutine(SetButtonDisabled));
 
             if(!_adsManager.BlockAdsOptionPurchased)
             {
@@ -62,7 +62,8 @@ public class GetUpButton : ButtonInteractionHandler
         if(rewardRequested)
         {
             rewardRequested = false;
-            Debug.Log($"Reward Loose Panel");
+            buttonPressed = true;
+            SetButtonDisabled();
             _gameProcessManager.UsePlayerRecoveryOption();
         }
     }

@@ -41,28 +41,29 @@ public class UpgradeSkillButton : ButtonInteractionHandler
 
     public override void ButtonActivated()
     {
-        int skillndex;
-
-        if (skillUpgradeDisplayPanel.SkillType == SkillBasicTypes.Active)
-        {
-            skillndex = (int)skillUpgradeDisplayPanel.ActiveSkill;
-        }
-        else
-        {
-            skillndex = (int)skillUpgradeDisplayPanel.PassiveSkill;
-        }
-
-        _skillsManager.DefineSkillToUpgrade((int)skillUpgradeDisplayPanel.SkillType, skillndex);
-
         if (doubleUpgrade)
         {
             if (!_adsManager.BlockAdsOptionPurchased)
             {
                 rewardRequested = true;
-                currentSkillIndex = skillndex;
                 _adsController.LoadRewarded();
-                //StartCoroutine(UpgradeAdditionalSkillLevelCoroutine(skillndex));
             }
+        }
+        else
+        {
+
+            int skillndex;
+
+            if (skillUpgradeDisplayPanel.SkillType == SkillBasicTypes.Active)
+            {
+                skillndex = (int)skillUpgradeDisplayPanel.ActiveSkill;
+            }
+            else
+            {
+                skillndex = (int)skillUpgradeDisplayPanel.PassiveSkill;
+            }
+
+            _skillsManager.DefineSkillToUpgrade((int)skillUpgradeDisplayPanel.SkillType, skillndex);
         }
     }
 
@@ -70,7 +71,20 @@ public class UpgradeSkillButton : ButtonInteractionHandler
     {
         if(rewardRequested)
         {
-            Debug.Log($"Ad Reward For Scroll");
+            int skillndex;
+
+            if (skillUpgradeDisplayPanel.SkillType == SkillBasicTypes.Active)
+            {
+                skillndex = (int)skillUpgradeDisplayPanel.ActiveSkill;
+            }
+            else
+            {
+                skillndex = (int)skillUpgradeDisplayPanel.PassiveSkill;
+            }
+
+            currentSkillIndex = skillndex;
+
+            _skillsManager.DefineSkillToUpgrade((int)skillUpgradeDisplayPanel.SkillType, currentSkillIndex);
             rewardRequested = false;
             StartCoroutine(UpgradeAdditionalSkillLevelCoroutine(currentSkillIndex));
         }

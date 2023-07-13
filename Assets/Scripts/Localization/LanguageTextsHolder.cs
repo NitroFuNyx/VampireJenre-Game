@@ -20,6 +20,7 @@ namespace Localization
         public RoadmapUIData roadmapUITexts;
         public SkillsInfoUIData skillsInfoUITexts;
         public AdsBlockerPurchasedUIData adsBlockerPurchasedUITexts;
+        public NoAdsUIData noAdsUITexts;
     }
 
     [Serializable]
@@ -173,5 +174,12 @@ namespace Localization
     public class AdsBlockerPurchasedUIData
     {
         public string titleText;
+    }
+
+    [Serializable]
+    public class NoAdsUIData
+    {
+        public string sorryText;
+        public string messageText;
     }
 }

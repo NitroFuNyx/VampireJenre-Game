@@ -17,7 +17,7 @@ public enum SettingsPanels
 
 public enum GameLevelPanels
 {
-    PausePanel, LevelUpgradePanel, VictoryPanel, LoosePanel, SkillScrollInfoPanel, TreasureChestInfoPanel
+    PausePanel, LevelUpgradePanel, VictoryPanel, LoosePanel, SkillScrollInfoPanel, TreasureChestInfoPanel, DeathmatchFinishPanel
 }
 
 public enum PoolItemsTypes
@@ -103,4 +103,9 @@ public enum SelectionArrowTypes
 public enum ShowNextCharacterButtonsTypes
 {
     ArrowButton, FixedCharacterButton
+}
+
+public enum GameModes
+{
+    Standart, Deathmatch
 }

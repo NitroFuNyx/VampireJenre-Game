@@ -39,7 +39,8 @@ public class GameData
         skillsLevelsList = new List<TalentLevelStruct>();
         playerStatistics = new PlayerStatistic();
     }
-   [Serializable]
+   
+    [Serializable]
     public struct Secureint
     {
         public int valueOffset;

@@ -13,9 +13,13 @@ public class SpawnEnemiesManager : MonoBehaviour
     [Header("Spawn Data")]
     [Space]
     [SerializeField] private int spawnAmountInOneWave;
-    [SerializeField] private int spawnAmountDelta;
     [SerializeField] private float spawnDelay = 8f;
-    [SerializeField] private int maxEnemiesAmount = 20;
+    [Space]
+    [SerializeField] private int firstTresholdLevel = 3;
+    [SerializeField] private int firstTresholdMaxEnemiesAmount = 10;
+    [Space]
+    [SerializeField] private int secondTresholdLevel = 10;
+    [SerializeField] private int secondTresholdMaxEnemiesAmount = 20;
     [Header("Enemies On Map")]
     [Space]
     [SerializeField] private List<EnemyComponentsManager> enemiesOnMapList = new List<EnemyComponentsManager>();
@@ -80,13 +84,20 @@ public class SpawnEnemiesManager : MonoBehaviour
 
     public void SpawnEnemiesWave()
     {
-        if(_playerExperienceManager.CurrentLevel < 10 && enemiesOnMapList.Count < maxEnemiesAmount)
+        if (_playerExperienceManager.CurrentLevel <= firstTresholdLevel && enemiesOnMapList.Count < firstTresholdMaxEnemiesAmount)
         {
             spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave);
             spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave);
             spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave);
         }
-        else if(_playerExperienceManager.CurrentLevel >= 10)
+        else if (_playerExperienceManager.CurrentLevel > firstTresholdLevel && _playerExperienceManager.CurrentLevel < secondTresholdLevel && 
+                enemiesOnMapList.Count < secondTresholdMaxEnemiesAmount)
+        {
+            spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave);
+            spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave);
+            spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave);
+        }
+        else if(_playerExperienceManager.CurrentLevel >= secondTresholdLevel)
         {
             spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave);
             spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave);
@@ -137,7 +148,7 @@ public class SpawnEnemiesManager : MonoBehaviour
         StartCoroutine(StopEnemySpawnCoroutine());
     }
 
-    private void GameProcessManager_PlayerLost_ExecuteReaction()
+    private void GameProcessManager_PlayerLost_ExecuteReaction(GameModes _)
     {
         StopEnemySpawn();
 
@@ -155,13 +166,12 @@ public class SpawnEnemiesManager : MonoBehaviour
     {
         if(_playerExperienceManager.CurrentLevel < 10)
         {
-            spawnAmountInOneWave = 3;
+            spawnAmountInOneWave = 2;
         }
         else
         {
             spawnAmountInOneWave = 6;
         }
-        Debug.Log($"Spawning {spawnAmountInOneWave} Enemies At One Category");
     }
 
     private IEnumerator SpawnEnemiesWavesCoroutine()

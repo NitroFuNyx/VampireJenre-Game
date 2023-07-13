@@ -42,9 +42,9 @@ public class MultiplyCoinsButton : ButtonInteractionHandler
     {
         if(!buttonPressed)
         {
-            buttonPressed = true;
+            //buttonPressed = true;
             ShowAnimation_ButtonPressed();
-            StartCoroutine(ActivateDelayedButtonMethodCoroutine(SetButtonDisabled));
+            //StartCoroutine(ActivateDelayedButtonMethodCoroutine(SetButtonDisabled));
 
             if(!_adsManager.BlockAdsOptionPurchased)
             {
@@ -66,7 +66,8 @@ public class MultiplyCoinsButton : ButtonInteractionHandler
         if(rewardRequested)
         {
             rewardRequested = false;
-            Debug.Log($"Reward Win Panel");
+            buttonPressed = true;
+            SetButtonDisabled();
             victoryPanel.MultiplyCoinsButtonPressed_ExecuteReaction();
         }   
     }

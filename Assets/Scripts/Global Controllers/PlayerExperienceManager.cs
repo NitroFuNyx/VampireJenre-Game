@@ -80,7 +80,7 @@ public class PlayerExperienceManager : MonoBehaviour
         OnPlayerLevelDataUpdated?.Invoke(currentLevel);
     }
 
-    private void GameProcessManager_PlayerLost_ExecuteReaction()
+    private void GameProcessManager_PlayerLost_ExecuteReaction(GameModes _)
     {
         ResetPlayerProgress();
     }

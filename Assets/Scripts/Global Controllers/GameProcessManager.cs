@@ -13,8 +13,9 @@ public class GameProcessManager : MonoBehaviour
     [Space]
     [SerializeField] private float currentMapProgress = 0;
     [SerializeField] private float upgradeProgressValue = 100;
-    [Header("Skills")]
+    [Header("Modes")]
     [Space]
+    [SerializeField] private GameModes currentGameMode;
 
     private SpawnEnemiesManager _spawnEnemiesManager;
     private MainUI _mainUI;
@@ -40,10 +41,11 @@ public class GameProcessManager : MonoBehaviour
     public bool PlayerRecoveryOptionUsed { get => playerRecoveryOptionUsed; private set => playerRecoveryOptionUsed = value; }
     public bool GameDefeatResultIsBeingShown { get => gameDefeatResultIsBeingShown; set => gameDefeatResultIsBeingShown = value; }
     public bool GameVictoryResultIsBeingShown { get => gameVictoryResultIsBeingShown; set => gameVictoryResultIsBeingShown = value; }
+    public GameModes CurrentGameMode { get => currentGameMode; }
 
     #region Events Declaration
     public event Action OnGameStarted;
-    public event Action OnPlayerLost;
+    public event Action<GameModes> OnPlayerLost;
     public event Action OnPlayerRecoveryOptionUsed;
     public event Action OnPlayerWon;
     public event Action OnLevelDataReset; 
@@ -64,6 +66,7 @@ public class GameProcessManager : MonoBehaviour
         _treasureChestInfoPanel.OnTreasureChestItemsCollected += TreasureChestInfoPanel_OnTreasureChestItemsCollected_ExecuteReaction;
 
         _adsController.OnInterstialAdClosed += AdsController_InterstialAdClosed_ExecuteReaction;
+        _adsController.OnAdvertAbsence += AdsController_OnAdvertAbsence_ExecuteReaction;
     }
 
     private void OnDestroy()
@@ -79,6 +82,7 @@ public class GameProcessManager : MonoBehaviour
         _treasureChestInfoPanel.OnTreasureChestItemsCollected -= TreasureChestInfoPanel_OnTreasureChestItemsCollected_ExecuteReaction;
 
         _adsController.OnInterstialAdClosed -= AdsController_InterstialAdClosed_ExecuteReaction;
+        _adsController.OnAdvertAbsence -= AdsController_OnAdvertAbsence_ExecuteReaction;
     }
 
     #region Zenject
@@ -100,9 +104,10 @@ public class GameProcessManager : MonoBehaviour
     }
     #endregion Zenject
 
-    public void StartGame()
+    public void StartGame(GameModes gameMode)
     {
         battleStarted = true;
+        currentGameMode = gameMode;
         gameDefeatResultIsBeingShown = false;
         gameVictoryResultIsBeingShown = false;
         OnGameStarted?.Invoke();
@@ -112,13 +117,16 @@ public class GameProcessManager : MonoBehaviour
 
     public void IncreaseCurrentProgressValue()
     {
-        currentMapProgress += mapProgressDelta;
-        OnMapProgressChanged?.Invoke(currentMapProgress, upgradeProgressValue);
-
-        if(currentMapProgress >= upgradeProgressValue)
+        if(currentGameMode == GameModes.Standart)
         {
-            _spawnEnemiesManager.SpawnBossAtCenter();
-            _audioManager.PlayMusic_Boss();
+            currentMapProgress += mapProgressDelta;
+            OnMapProgressChanged?.Invoke(currentMapProgress, upgradeProgressValue);
+
+            if (currentMapProgress >= upgradeProgressValue)
+            {
+                _spawnEnemiesManager.SpawnBossAtCenter();
+                _audioManager.PlayMusic_Boss();
+            }
         }
     }
 
@@ -154,24 +162,30 @@ public class GameProcessManager : MonoBehaviour
         _audioManager.StopMusicAudio();
         _audioManager.PlaySFXSound_Defeat();
 
-        if(playerRecoveryOptionUsed)
+        if(currentGameMode == GameModes.Standart)
         {
-            Debug.Log($"Player Lost");
-            OnPlayerLost?.Invoke();
+            if (playerRecoveryOptionUsed)
+            {
+                Debug.Log($"Player Lost");
+                OnPlayerLost?.Invoke(currentGameMode);
+            }
+            else
+            {
+                Debug.Log($"Player Out Of Hp");
+                _gameLevelUI.ShowLoosePanelUI();
+            }
         }
-        else
+        else if(currentGameMode == GameModes.Deathmatch)
         {
-            Debug.Log($"Player Out Of Hp");
-            _gameLevelUI.ShowLoosePanelUI();
+            OnPlayerLost?.Invoke(currentGameMode);
         }
-        //ResetMapData();
     }
 
     public void GameLostSecondTime_ExecuteReaction()
     {
         _audioManager.StopMusicAudio();
         _audioManager.PlaySFXSound_Defeat();
-        OnPlayerLost?.Invoke();
+        OnPlayerLost?.Invoke(currentGameMode);
     }
 
     public void UsePlayerRecoveryOption()
@@ -234,6 +248,15 @@ public class GameProcessManager : MonoBehaviour
     {
         ResetMapProgress();
         _systemTimeManager.ResumeGame();
+    }
+
+    private void AdsController_OnAdvertAbsence_ExecuteReaction()
+    {
+        if(battleStarted)
+        {
+            _systemTimeManager.PauseGame();
+        }
+        _mainUI.ShowNoAdsUI();
     }
     
     private IEnumerator StartGameCoroutine()

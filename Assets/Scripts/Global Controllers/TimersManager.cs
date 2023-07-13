@@ -48,6 +48,11 @@ public class TimersManager : MonoBehaviour
         return $"{GetHoursAndMinutesAmount((int)time)}:{GetSecondsAmount((int)time)}";
     }
 
+    public string GetFormatedCurrentTimeString()
+    {
+        return GetFormatedTimeString(currentStopwatchValue);
+    }
+
     private string GetHoursAndMinutesAmount(int currentTimeValue)
     {
         string amountString = "";
@@ -125,7 +130,7 @@ public class TimersManager : MonoBehaviour
         StartStopwatch();
     }
 
-    private void GameProcessManager_PlayerLost_ExecuteReaction()
+    private void GameProcessManager_PlayerLost_ExecuteReaction(GameModes gameMode)
     {
         StopStopwatch();
     }

@@ -61,7 +61,6 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
 
     private void Start()
     {
-        
         _gameProcessManager.OnGameStarted += GameProcessManager_GameStarted_ExecuteReaction;
         _gameProcessManager.OnLevelDataReset += GameProcessManager_LevelDataReset_ExecuteReaction;
     }
@@ -88,7 +87,7 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
     {
         gameData.coinsAmount = data.coinsAmount;
         gameData.gemsAmount = data.gemsAmount;
-
+        Debug.Log($"Gems {data.gemsAmount} Coins {data.coinsAmount}");
         OnCoinsAmountChanged?.Invoke(data.coinsAmount.GetValue());
         OnGemsAmountChanged?.Invoke(data.gemsAmount.GetValue());
     }
@@ -157,9 +156,16 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         ResourceBonusItemStruct data = new ResourceBonusItemStruct();
         data.canBeCollected = false;
 
-        float gemGrantingIndex;
+        float gemGrantingIndex = 0;
 
-        gemGrantingIndex = UnityEngine.Random.Range(0, CommonValues.maxPercentAmount);
+        if(_gameProcessManager.CurrentGameMode == GameModes.Standart)
+        {
+            gemGrantingIndex = UnityEngine.Random.Range(0, CommonValues.maxPercentAmount);
+        }
+        else if(_gameProcessManager.CurrentGameMode == GameModes.Deathmatch)
+        {
+            gemGrantingIndex = CommonValues.maxPercentAmount + 1; // always not accessible
+        }
 
         if (gemGrantingIndex < gemDropDefaultPercentChance + _playerCharacteristicsManager.CurrentPlayerData.characterItemDropChancePercent)
         {
@@ -275,7 +281,6 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         OnGemsAmountChanged?.Invoke(gameData.gemsAmount.GetValue());
     }
     // End Of Test Methods
-
 
     private void AddCurrentLevelResourcesToGeneralAmount()
     {

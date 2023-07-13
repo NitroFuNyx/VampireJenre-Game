@@ -19,6 +19,9 @@ public class UIInstaller : MonoInstaller
     [Space]
     [SerializeField] private CharacterSelectionUI characterSelectionUI;
     [SerializeField] private ChangeActiveCharacterButton changeActiveCharacterButton;
+    [SerializeField] private CharacterDetailsButton characterDetailsButton;
+    [SerializeField] private BuyCharacterButton buyCharacterButton;
+    [SerializeField] private CharacterCostPanel characterCostPanel;
     [Header("Talent UI")]
     [Space]
     [SerializeField] private TalentWheel talentWheel;
@@ -39,6 +42,9 @@ public class UIInstaller : MonoInstaller
 
         Container.Bind<CharacterSelectionUI>().FromInstance(characterSelectionUI).AsSingle().NonLazy();
         Container.Bind<ChangeActiveCharacterButton>().FromInstance(changeActiveCharacterButton).AsSingle().NonLazy();
+        Container.Bind<CharacterDetailsButton>().FromInstance(characterDetailsButton).AsSingle().NonLazy();
+        Container.Bind<BuyCharacterButton>().FromInstance(buyCharacterButton).AsSingle().NonLazy();
+        Container.Bind<CharacterCostPanel>().FromInstance(characterCostPanel).AsSingle().NonLazy();
 
         Container.Bind<TalentWheel>().FromInstance(talentWheel).AsSingle().NonLazy();
         Container.Bind<TalentBoughtInfoPanel>().FromInstance(talentBoughtInfoPanel).AsSingle().NonLazy();
