@@ -27,6 +27,10 @@ public class GameLevelUI : MainCanvasPanel
     [Header("Uncommon Mode Elements")]
     [Space]
     [SerializeField] private CanvasGroup gemsDisplayPanel;
+    [Header("Map And Player Level Bars")]
+    [Space]
+    [SerializeField] private CanvasGroup standartModeBar;
+    [SerializeField] private CanvasGroup deathmatchModeBar;
 
     private TimersManager _timersManager;
     private SystemTimeManager _systemTimeManager;
@@ -182,10 +186,14 @@ public class GameLevelUI : MainCanvasPanel
         if(gameMode == GameModes.Standart)
         {
             gemsDisplayPanel.alpha = 1f;
+            standartModeBar.alpha = 1f;
+            deathmatchModeBar.alpha = 0f;
         }
         else
         {
             gemsDisplayPanel.alpha = 0f;
+            standartModeBar.alpha = 0f;
+            deathmatchModeBar.alpha = 1f;
         }
     }
 
