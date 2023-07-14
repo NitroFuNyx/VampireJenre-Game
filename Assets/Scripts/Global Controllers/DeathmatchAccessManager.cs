@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 using Zenject;
 
@@ -7,7 +8,7 @@ public class DeathmatchAccessManager : MonoBehaviour, IDataPersistance
     [Header("Deathmathc Buying Data")]
     [Space]
     [SerializeField] private ResourcesTypes buyingCurrency = ResourcesTypes.Gems;
-    [SerializeField] private int cost = 4;
+    [SerializeField] private int deatmatchPurchaseCost = 500;
 
     private DataPersistanceManager _dataPersistanceManager;
     private SystemTimeManager _systemTimeManager;
@@ -15,6 +16,10 @@ public class DeathmatchAccessManager : MonoBehaviour, IDataPersistance
     private ResourcesManager _resourcesManager;
 
     private bool deathMatchModeUsedAtCurrentDay = false;
+
+    public int DeatmatchPurchaseCost { get => deatmatchPurchaseCost; }
+
+    public event Action OnDeathmatchUiUpdateRequired;
 
     private void Awake()
     {
@@ -46,12 +51,13 @@ public class DeathmatchAccessManager : MonoBehaviour, IDataPersistance
 
     public void PlayDeathmatchButtonPressed_ExecuteReaction(System.Action OnBuyingProcessSuccessfull, System.Action OnBuyingProccessFailed)
     {
-        if(!deathMatchModeUsedAtCurrentDay && _resourcesManager.CheckIfEnoughResources(buyingCurrency, cost))
+        if(!deathMatchModeUsedAtCurrentDay && _resourcesManager.CheckIfEnoughResources(buyingCurrency, deatmatchPurchaseCost))
         {
             deathMatchModeUsedAtCurrentDay = true;
-            _resourcesManager.BuyDeathmatchGame(buyingCurrency, cost);
+            _resourcesManager.BuyDeathmatchGame(buyingCurrency, deatmatchPurchaseCost);
             _dataPersistanceManager.SaveGame();
             OnBuyingProcessSuccessfull?.Invoke();
+            OnDeathmatchUiUpdateRequired?.Invoke();
             _mainUI.DeathmatchButtonPressed_ExecuteReaction();
         }
         else
@@ -74,8 +80,7 @@ public class DeathmatchAccessManager : MonoBehaviour, IDataPersistance
         {
             if (deathMatchModeUsedAtCurrentDay)
             {
-                //OnSpinButtonUpdateRequired?.Invoke();
-                // update button
+                OnDeathmatchUiUpdateRequired?.Invoke();
             }
         }
     }

@@ -10,10 +10,23 @@ public class PlayDeathmatchButton : ButtonInteractionHandler
     [SerializeField] private int scaleAnimationFrequency = 2;
     [SerializeField] private float scaleAnimationDuration = 0.5f;
     [SerializeField] private Color disabledColor;
+    [Header("Sprites")]
+    [Space]
+    [SerializeField] private Sprite buttonPressedSprite;
 
     private DeathmatchAccessManager _deathmatchAccessManager;
 
     private bool buttonActivated = false;
+
+    private void Start()
+    {
+        _deathmatchAccessManager.OnDeathmatchUiUpdateRequired += DeathmatchUiUpdateRequired_ExecuteReaction;
+    }
+
+    private void OnDestroy()
+    {
+        _deathmatchAccessManager.OnDeathmatchUiUpdateRequired -= DeathmatchUiUpdateRequired_ExecuteReaction;
+    }
 
     #region Zenject
     [Inject]
@@ -48,5 +61,10 @@ public class PlayDeathmatchButton : ButtonInteractionHandler
     {
         buttonActivated = false;
         ShowAnimation_ButtonPressed();
+    }
+
+    private void DeathmatchUiUpdateRequired_ExecuteReaction()
+    {
+        buttonImage.sprite = buttonPressedSprite;
     }
 }
