@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [Serializable]
 public struct RewardDataStruct
@@ -242,4 +243,44 @@ public struct PlayerClassDataStruct
     public string characterName;
     public ResourcesTypes buyingCurrency;
     public float price;
+}
+
+[Serializable]
+public struct Secureint
+{
+    public int valueOffset;
+    public int valueAmount;
+
+    public Secureint(int coinsValue)
+    {
+        valueOffset = Random.Range(-1000, 1000);
+        valueAmount = coinsValue + valueOffset;
+    }
+
+    public int GetValue()
+    {
+        return valueAmount - valueOffset;
+    }
+
+    public override string ToString()
+    {
+        return GetValue().ToString();
+    }
+
+    public static Secureint operator +(Secureint i1, Secureint i2)
+    {
+        return new Secureint(i1.GetValue() + i2.GetValue());
+    }
+    public static Secureint operator -(Secureint i1, Secureint i2)
+    {
+        return new Secureint(i1.GetValue() - i2.GetValue());
+    }
+    public static Secureint operator *(Secureint i1, Secureint i2)
+    {
+        return new Secureint(i1.GetValue() * i2.GetValue());
+    }
+    public static Secureint operator /(Secureint i1, Secureint i2)
+    {
+        return new Secureint(i1.GetValue() / i2.GetValue());
+    }
 }

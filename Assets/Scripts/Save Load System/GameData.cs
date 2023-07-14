@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Save_Load_System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,7 +20,7 @@ public class GameData
     public PlayerClasses lastPlayedClass;
     public List<PlayerBasicCharacteristicsStruct> playerClasesDataList;
     public List<TalentLevelStruct> skillsLevelsList;
-    public PlayerStatistic playerStatistics;
+    public PlayerStatsData playerStatsData;
 
     public GameData()
     {
@@ -37,46 +38,8 @@ public class GameData
 
         playerClasesDataList = new List<PlayerBasicCharacteristicsStruct>();
         skillsLevelsList = new List<TalentLevelStruct>();
-        playerStatistics = new PlayerStatistic();
+        playerStatsData = new PlayerStatsData();
     }
    
-    [Serializable]
-    public struct Secureint
-    {
-        public int valueOffset;
-        public int valueAmount;
-
-        public Secureint(int coinsValue)
-        {
-            valueOffset = Random.Range(-1000, 1000);
-            valueAmount = coinsValue + valueOffset;
-        }
-
-        public int GetValue()
-        {
-            return valueAmount - valueOffset;
-        }
-
-        public override string ToString()
-        {
-            return GetValue().ToString();
-        }
-
-        public static Secureint operator +(Secureint i1, Secureint i2)
-        {
-            return new Secureint(i1.GetValue() + i2.GetValue());
-        }
-        public static Secureint operator -(Secureint i1, Secureint i2)
-        {
-            return new Secureint(i1.GetValue() - i2.GetValue());
-        }
-        public static Secureint operator *(Secureint i1, Secureint i2)
-        {
-            return new Secureint(i1.GetValue() * i2.GetValue());
-        }
-        public static Secureint operator /(Secureint i1, Secureint i2)
-        {
-            return new Secureint(i1.GetValue() / i2.GetValue());
-        }
-    }
+    
 }
