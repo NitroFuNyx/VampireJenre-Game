@@ -61,6 +61,11 @@ public class PlayerCollisionsManager : MonoBehaviour
             {
                 DecreaseHp(20);
             }
+
+            if(other.TryGetComponent(out AcidPuddle acid))
+            {
+                DecreaseHp(acid.DamageAmountToPlayer);
+            }
         }
     }
 
