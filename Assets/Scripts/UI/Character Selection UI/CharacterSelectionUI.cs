@@ -78,14 +78,14 @@ public class CharacterSelectionUI : MainCanvasPanel
     {
         button_ChangeActiveCharacter.OnChangeActiveCharacterButtonPressed += ChangeActiveCharacterButtonPressed_ExecuteReaction;
 
-        //_playerCharactersManager.OnCharacterChanged += PlayerCharactersManager_OnCharacterChanged_ExecuteReaction;
+        button_buyCharacter.OnNewCharacterBought += CharacterBought_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
     {
         button_ChangeActiveCharacter.OnChangeActiveCharacterButtonPressed -= ChangeActiveCharacterButtonPressed_ExecuteReaction;
 
-        //_playerCharactersManager.OnCharacterChanged -= PlayerCharactersManager_OnCharacterChanged_ExecuteReaction;
+        button_buyCharacter.OnNewCharacterBought -= CharacterBought_ExecuteReaction;
     }
 
     private void FillCharactersListAndDictionary()
@@ -231,7 +231,6 @@ public class CharacterSelectionUI : MainCanvasPanel
         {
             visibleCharacter = playerClass;
         }
-        
 
         UpdateCharacterDisplayData();
     }
@@ -241,11 +240,10 @@ public class CharacterSelectionUI : MainCanvasPanel
         _playerCharacteristicsManager.SetCurrentCharacterData(visibleCharacter);
         _playerCharactersManager.SetPlayCharacterModel(visibleCharacter);
     }
-    #endregion Buttons Events
 
-    //private void PlayerCharactersManager_OnCharacterChanged_ExecuteReaction(PlayerClasses playerClass)
-    //{
-    //    visibleCharacter = playerClass;
-    //    UpdateCharacterDisplayData();
-    //}
+    private void CharacterBought_ExecuteReaction(PlayerClasses playerClass)
+    {
+        UpdateCharacterDisplayData();
+    }
+    #endregion Buttons Events
 }

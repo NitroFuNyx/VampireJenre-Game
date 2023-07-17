@@ -21,6 +21,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     private GameProcessManager _gameProcessManager;
     private PlayerCharactersManager _playerCharactersManager;
     private CharacterSelectionUI _characterSelectionUI;
+    private BuyCharacterButton _buyCharacterButton;
 
     private int characterMaxLevel = 50;
 
@@ -40,7 +41,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
         _gameProcessManager.OnPlayerWon += GameProcessManager_PlayerWon_ExecuteReaction;
 
-        //_playerCharactersManager.OnCharacterChanged += PlayerCharactersManager_OnCharacterChanged_ExecuteReaction;
+        _buyCharacterButton.OnNewCharacterBought += CharacterBought_ExecuteReaction;
     }
 
     private void OnDestroy()
@@ -49,18 +50,20 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
         _gameProcessManager.OnPlayerWon -= GameProcessManager_PlayerWon_ExecuteReaction;
 
-        //_playerCharactersManager.OnCharacterChanged -= PlayerCharactersManager_OnCharacterChanged_ExecuteReaction;
+        _buyCharacterButton.OnNewCharacterBought -= CharacterBought_ExecuteReaction;
     }
 
     #region Zenject
     [Inject]
     private void Construct(DataPersistanceManager dataPersistanceManager, GameProcessManager gameProcessManager, 
-                           PlayerCharactersManager playerCharactersManager, CharacterSelectionUI characterSelectionUI)
+                           PlayerCharactersManager playerCharactersManager, CharacterSelectionUI characterSelectionUI,
+                           BuyCharacterButton buyCharacterButton)
     {
         _dataPersistanceManager = dataPersistanceManager;
         _gameProcessManager = gameProcessManager;
         _playerCharactersManager = playerCharactersManager;
         _characterSelectionUI = characterSelectionUI;
+        _buyCharacterButton = buyCharacterButton;
     }
     #endregion Zenject
 
@@ -457,11 +460,11 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     {
         PlayerBasicCharacteristicsStruct characterData = new PlayerBasicCharacteristicsStruct();
 
-        for(int i = 0; i < playerCharacteristicsSO.PlayerBasicDataLists.Count; i++)
+        for(int i = 0; i < charactersClasesDataList.Count; i++)
         {
-            if(playerCharacteristicsSO.PlayerBasicDataLists[i].playerCharacterType == characterType)
+            if(charactersClasesDataList[i].playerCharacterType == characterType)
             {
-                characterData = playerCharacteristicsSO.PlayerBasicDataLists[i];
+                characterData = charactersClasesDataList[i];
             }
         }
 
@@ -483,8 +486,19 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         _dataPersistanceManager.SaveGame();
     }
 
-    private void PlayerCharactersManager_OnCharacterChanged_ExecuteReaction(PlayerClasses playerClass)
+    private void CharacterBought_ExecuteReaction(PlayerClasses playerClass)
     {
-        SetCurrentCharacterData(playerClass);
+        for (int i = 0; i < charactersClasesDataList.Count; i++)
+        {
+            if (playerClass == charactersClasesDataList[i].playerCharacterType)
+            {
+                PlayerBasicCharacteristicsStruct tempStruct = charactersClasesDataList[i];
+                tempStruct.locked = false;
+                charactersClasesDataList[i] = tempStruct;
+                break;
+            }
+        }
+
+        _dataPersistanceManager.SaveGame();
     }
 }

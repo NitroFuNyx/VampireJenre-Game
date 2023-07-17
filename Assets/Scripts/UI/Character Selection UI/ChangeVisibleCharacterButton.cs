@@ -15,10 +15,21 @@ public class ChangeVisibleCharacterButton : ButtonInteractionHandler
 
     private CharacterSelectionUI _characterSelectionUI;
 
+    public PlayerClasses PlayerClass { get => playerClass; set => playerClass = value; }
+
+    private void Start()
+    {
+        if(buttonType == ShowNextCharacterButtonsTypes.FixedCharacterButton)
+        {
+            _characterSelectionUI = FindObjectOfType<CharacterSelectionUI>();
+        }
+    }
+
     #region Zenject
     [Inject]
     private void Construct(CharacterSelectionUI characterSelectionUI)
     {
+        if(buttonType == ShowNextCharacterButtonsTypes.ArrowButton)
         _characterSelectionUI = characterSelectionUI;
     }
     #endregion Zenject

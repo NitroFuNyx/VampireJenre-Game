@@ -299,6 +299,18 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         }
     }
 
+    public void BuyCharacter(ResourcesTypes resourceType, int cost)
+    {
+        if (resourceType == ResourcesTypes.Gems)
+        {
+            DecreaseGemsAmount(cost);
+        }
+        else if (resourceType == ResourcesTypes.Coins)
+        {
+            DecreaseCoinsAmount(cost);
+        }
+    }
+
     private void AddCurrentLevelResourcesToGeneralAmount()
     {
         gameData.coinsAmount += new Secureint(currentLevelCoinsAmount.GetValue());
