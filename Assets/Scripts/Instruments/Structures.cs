@@ -85,7 +85,11 @@ public struct PlayerBasicCharacteristicsStruct
     public float characterCritPower;
     public float characterRegenerationPercent;
     public float characterItemDropChancePercent; 
-    public float characterCoinsSurplusPercent;  
+    public float characterCoinsSurplusPercent;
+
+    public float currentClassProgressValue_Speed;
+    public float currentClassProgressValue_Damage;
+    public float currentClassProgressValue_Health;
 
     public PlayerSkillsCharacteristicsStruct playerSkillsData;
 }
@@ -243,6 +247,18 @@ public struct PlayerClassDataStruct
     public string characterName;
     public ResourcesTypes buyingCurrency;
     public float price;
+
+    public float startSpeedValue;
+    public float maxSpeedValue;
+    public float levelUpgradeSpeedValue;
+
+    public float startDamageValue;
+    public float maxDamageValue;
+    public float levelUpgradeDamageValue;
+
+    public float startHealthValue;
+    public float maxHealthValue;
+    public float levelUpgradeHealthValue;
 }
 
 [Serializable]

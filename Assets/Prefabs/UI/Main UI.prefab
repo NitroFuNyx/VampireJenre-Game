@@ -2337,7 +2337,7 @@ MonoBehaviour:
     type: 3}
   characterSelectionPanel: {fileID: 5630140290014847300}
   baseCharacatersInfoPanel: {fileID: 4750184052654613598}
-  characterUpgradePanel: {fileID: 8499188482095824486}
+  characterClassUpgradePanel: {fileID: 2181435957380553651}
 --- !u!1 &707871661
 GameObject:
   m_ObjectHideFlags: 0
@@ -8439,7 +8439,7 @@ GameObject:
   - component: {fileID: 4523367192957076296}
   - component: {fileID: 8099645217301726753}
   m_Layer: 0
-  m_Name: Progress Bar Panel (1)
+  m_Name: Damage Progress Bar Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14815,7 +14815,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1381349506958968070}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -15866,7 +15866,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -22717,8 +22717,9 @@ GameObject:
   - component: {fileID: 2041819916059645493}
   - component: {fileID: 8688672597976356790}
   - component: {fileID: 5833398996112833903}
+  - component: {fileID: 1574886463955846995}
   m_Layer: 0
-  m_Name: Progress bar filling Image
+  m_Name: Damage progress bar filling Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22782,6 +22783,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1574886463955846995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2662361228510208093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0458f91a69e244486e35a7df6888bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressBarImage: {fileID: 5833398996112833903}
 --- !u!1 &2673023422173948472
 GameObject:
   m_ObjectHideFlags: 0
@@ -31227,7 +31241,7 @@ GameObject:
   - component: {fileID: 2627927450497946921}
   - component: {fileID: 7766765404927665668}
   m_Layer: 0
-  m_Name: Progress Bar Panel (2)
+  m_Name: Health Progress Bar Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41833,8 +41847,9 @@ GameObject:
   - component: {fileID: 6568250602801626444}
   - component: {fileID: 1018763979591770792}
   - component: {fileID: 8839382318072831846}
+  - component: {fileID: 1768399689464604430}
   m_Layer: 0
-  m_Name: Progress bar filling Image
+  m_Name: Speed progress bar filling Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41898,6 +41913,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1768399689464604430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5586877865849411629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0458f91a69e244486e35a7df6888bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressBarImage: {fileID: 8839382318072831846}
 --- !u!1 &5620856885465773124
 GameObject:
   m_ObjectHideFlags: 0
@@ -42744,7 +42772,7 @@ GameObject:
   - component: {fileID: 3650670264471737022}
   - component: {fileID: 2544960739511454479}
   - component: {fileID: 8213008957261724162}
-  - component: {fileID: 8499188482095824486}
+  - component: {fileID: 2181435957380553651}
   m_Layer: 0
   m_Name: Character Upgrade Panel
   m_TagString: Untagged
@@ -42821,11 +42849,11 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5742068010917833892}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &8499188482095824486
+--- !u!114 &2181435957380553651
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42834,9 +42862,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 5742068010917833892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5530ddec867602147bbf911f910079ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b9608b7f7cf8db4986ca08c85321e84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterImage: {fileID: 7833211147307103943}
+  characterName: {fileID: 5836785443856564195}
+  characterLevel: {fileID: 2302655029514789608}
+  speedValueText: {fileID: 1239543818462637155}
+  damageValueText: {fileID: 174278134169217634}
+  healthValueText: {fileID: 5563110366547518146}
+  speedValueProgressBar: {fileID: 1768399689464604430}
+  damageValueProgressBar: {fileID: 1574886463955846995}
+  healthValueProgressBar: {fileID: 1687770281592695368}
 --- !u!1 &5761904170952105470
 GameObject:
   m_ObjectHideFlags: 0
@@ -47486,7 +47523,7 @@ GameObject:
   - component: {fileID: 6681345280059828210}
   - component: {fileID: 174278134169217634}
   m_Layer: 0
-  m_Name: Characteristic Value Text
+  m_Name: Damage Value Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49065,7 +49102,7 @@ GameObject:
   - component: {fileID: 5768576242461361215}
   - component: {fileID: 5563110366547518146}
   m_Layer: 0
-  m_Name: Characteristic Value Text
+  m_Name: Health Value Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53644,7 +53681,7 @@ GameObject:
   - component: {fileID: 4650400104699624490}
   - component: {fileID: 1239543818462637155}
   m_Layer: 0
-  m_Name: Characteristic Value Text
+  m_Name: Speed Value Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53779,8 +53816,9 @@ GameObject:
   - component: {fileID: 7618059037777943772}
   - component: {fileID: 1428394321139960127}
   - component: {fileID: 139073776993167744}
+  - component: {fileID: 1687770281592695368}
   m_Layer: 0
-  m_Name: Progress bar filling Image
+  m_Name: Health progress bar filling Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53844,6 +53882,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1687770281592695368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7375683375547372214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0458f91a69e244486e35a7df6888bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressBarImage: {fileID: 139073776993167744}
 --- !u!1 &7393943265841622489
 GameObject:
   m_ObjectHideFlags: 0
@@ -62484,7 +62535,7 @@ GameObject:
   - component: {fileID: 8152533711383750907}
   - component: {fileID: 4757690033998113904}
   m_Layer: 0
-  m_Name: Progress Bar Panel
+  m_Name: Speed Progress Bar Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
