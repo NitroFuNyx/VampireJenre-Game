@@ -20,6 +20,9 @@ public class SpawnEnemiesManager : MonoBehaviour
     [Space]
     [SerializeField] private int secondTresholdLevel = 10;
     [SerializeField] private int secondTresholdMaxEnemiesAmount = 20;
+    [Space]
+    [SerializeField] private int thirdTresholdLevel = 20;
+    [SerializeField] private int thirdTresholdEnemiesInWaveMultiplyer = 2;
     [Header("Enemies On Map")]
     [Space]
     [SerializeField] private List<EnemyComponentsManager> enemiesOnMapList = new List<EnemyComponentsManager>();
@@ -97,11 +100,17 @@ public class SpawnEnemiesManager : MonoBehaviour
             spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave);
             spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave);
         }
-        else if(_playerExperienceManager.CurrentLevel >= secondTresholdLevel)
+        else if(_playerExperienceManager.CurrentLevel >= secondTresholdLevel && _playerExperienceManager.CurrentLevel < thirdTresholdLevel)
         {
             spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave);
             spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave);
             spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave);
+        }
+        else if (_playerExperienceManager.CurrentLevel >= thirdTresholdLevel)
+        {
+            spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave * thirdTresholdEnemiesInWaveMultiplyer);
+            spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave * thirdTresholdEnemiesInWaveMultiplyer);
+            spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave * thirdTresholdEnemiesInWaveMultiplyer);
         }
     }
 
