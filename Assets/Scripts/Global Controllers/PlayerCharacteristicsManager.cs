@@ -7,6 +7,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     [Header("Start Data")]
     [Space]
     [SerializeField] private PlayerCharacteristicsSO playerCharacteristicsSO;
+    [SerializeField] private PlayerClassesDataSO playerClassesDataSO;
     [SerializeField] private PlayerBasicCharacteristicsStruct playerPersistentData;
     [Header("Current Data")]
     [Space]
@@ -23,7 +24,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     private CharacterSelectionUI _characterSelectionUI;
     private BuyCharacterButton _buyCharacterButton;
 
-    private int characterMaxLevel = 50;
+    private int characterMaxLevel = 10;
 
     public PlayerBasicCharacteristicsStruct CurrentPlayerData { get => currentPlayerData; private set => currentPlayerData = value; }
     public PlayerCharacteristicsSO PlayerCharactersClasesDataSO { get => playerCharacteristicsSO; }
@@ -107,6 +108,29 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         }
     }
     #endregion Save/Load Methods
+
+    public PlayerBasicCharacteristicsStruct GetCharacterClassStartValues(int characterIndex)
+    {
+        PlayerBasicCharacteristicsStruct data = new PlayerBasicCharacteristicsStruct();
+        data = playerCharacteristicsSO.PlayerBasicDataLists[characterIndex];
+
+        data.characterSpeed = (playerCharacteristicsSO.StartStandartSpeed *
+                              playerClassesDataSO.PlayerClassesDataList[characterIndex].startSpeedPercentValue) /
+                              CommonValues.maxPercentAmount;
+        data.currentClassProgressValue_Speed = playerClassesDataSO.PlayerClassesDataList[characterIndex].startSpeedPercentValue;
+
+        data.characterDamageIncreasePercent = (playerCharacteristicsSO.StartStandartDamage *
+                              playerClassesDataSO.PlayerClassesDataList[characterIndex].startDamagePercentValue) /
+                              CommonValues.maxPercentAmount;
+        data.currentClassProgressValue_Damage = playerClassesDataSO.PlayerClassesDataList[characterIndex].startDamagePercentValue;
+
+        data.characterHp = (playerCharacteristicsSO.StartStandartHealth *
+                              playerClassesDataSO.PlayerClassesDataList[characterIndex].startHealthPercentValue) /
+                              CommonValues.maxPercentAmount;
+        data.currentClassProgressValue_Health = playerClassesDataSO.PlayerClassesDataList[characterIndex].startHealthPercentValue;
+
+        return data;
+    }
 
     public void UpgradePlayerData_DueToTalentAquired(TalentDataStruct talentData)
     {
@@ -321,6 +345,25 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     public void UpgradeCharacterClassData(PlayerClasses playerClass)
     {
 
+    }
+
+    public bool CheckIfCharacterClassIsFullyUpgraded(PlayerClasses playerClass)
+    {
+        bool isFullyUpgraded = false;
+
+        for (int i = 0; i < charactersClasesDataList.Count; i++)
+        {
+            if (charactersClasesDataList[i].playerCharacterType == playerClass)
+            {
+                if (charactersClasesDataList[i].characterLevel == characterMaxLevel)
+                {
+                    isFullyUpgraded = true;
+                }
+                break;
+            }
+        }
+
+        return isFullyUpgraded;
     }
 
     public void ResetPlayerCharacteristicAfterBattle()

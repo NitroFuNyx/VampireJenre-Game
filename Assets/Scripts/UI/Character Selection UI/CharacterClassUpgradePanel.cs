@@ -53,10 +53,10 @@ public class CharacterClassUpgradePanel : PanelActivationManager
         damageValueText.text = $"{visbleCharacterCharacteristicsData.currentClassProgressValue_Damage}";
         healthValueText.text = $"{visbleCharacterCharacteristicsData.currentClassProgressValue_Health}";
 
-        Debug.Log($"Current {visbleCharacterCharacteristicsData.currentClassProgressValue_Speed} Max {classData.maxSpeedValue}");
+        Debug.Log($"Current {visbleCharacterCharacteristicsData.currentClassProgressValue_Speed} Max {classData.maxSpeedPercentValue}");
 
-        speedValueProgressBar.UpdateValue(visbleCharacterCharacteristicsData.currentClassProgressValue_Speed, classData.maxSpeedValue);
-        damageValueProgressBar.UpdateValue(visbleCharacterCharacteristicsData.currentClassProgressValue_Damage, classData.maxDamageValue);
-        healthValueProgressBar.UpdateValue(visbleCharacterCharacteristicsData.currentClassProgressValue_Health, classData.maxHealthValue);
+        speedValueProgressBar.UpdateValue(visbleCharacterCharacteristicsData.currentClassProgressValue_Speed, classData.maxSpeedPercentValue);
+        damageValueProgressBar.UpdateValue(visbleCharacterCharacteristicsData.currentClassProgressValue_Damage, classData.maxDamagePercentValue);
+        healthValueProgressBar.UpdateValue(visbleCharacterCharacteristicsData.currentClassProgressValue_Health, classData.maxHealthPercentValue);
     }
 }

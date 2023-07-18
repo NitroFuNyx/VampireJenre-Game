@@ -248,17 +248,17 @@ public struct PlayerClassDataStruct
     public ResourcesTypes buyingCurrency;
     public float price;
 
-    public float startSpeedValue;
-    public float maxSpeedValue;
-    public float levelUpgradeSpeedValue;
+    public float startSpeedPercentValue;
+    public float maxSpeedPercentValue;
+    public float levelUpgradeSpeedPercentValue;
 
-    public float startDamageValue;
-    public float maxDamageValue;
-    public float levelUpgradeDamageValue;
+    public float startDamagePercentValue;
+    public float maxDamagePercentValue;
+    public float levelUpgradeDamagePercentValue;
 
-    public float startHealthValue;
-    public float maxHealthValue;
-    public float levelUpgradeHealthValue;
+    public float startHealthPercentValue;
+    public float maxHealthPercentValue;
+    public float levelUpgradeHealthPercentValue;
 }
 
 [Serializable]
