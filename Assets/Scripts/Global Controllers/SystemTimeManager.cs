@@ -11,7 +11,10 @@ public class SystemTimeManager : MonoBehaviour, IDataPersistance
     private bool newGameReward = false;
     private bool newDay = false;
 
+    private int todayToLastDayPlayingDelta = 0;
+
     public bool NewDay { get => newDay; private set => newDay = value; }
+    public int TodayToLastDayPlayingDelta { get => todayToLastDayPlayingDelta; private set => todayToLastDayPlayingDelta = value; }
 
     private void Awake()
     {
@@ -32,10 +35,12 @@ public class SystemTimeManager : MonoBehaviour, IDataPersistance
         {
             Debug.Log($"Get Reward New Game");
             newDay = true;
+            todayToLastDayPlayingDelta = 0;
         }
         else
         {
             CheckDayOfPlaying(data.lastDayPlaying);
+            todayToLastDayPlayingDelta = System.DateTime.Now.DayOfYear - data.lastDayPlaying;
         }
     }
 
