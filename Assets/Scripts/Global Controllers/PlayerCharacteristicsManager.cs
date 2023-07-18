@@ -30,6 +30,8 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     public PlayerCharacteristicsSO PlayerCharactersClasesDataSO { get => playerCharacteristicsSO; }
     public List<PlayerBasicCharacteristicsStruct> CharactersClasesDataList { get => charactersClasesDataList; }
 
+    public event System.Action OnCharacterClassUpgraded;
+
     private void Awake()
     {
         //currentPlayerData = GetCharacterCharacteristicsData(PlayerClasses.Knight);
@@ -315,21 +317,36 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         }
     }
 
-    [ContextMenu("Upgrade")]
-    public void UpgradeCharacterLevel()
+    public void UpgradeCharacterClassData(PlayerClasses playerClass)
     {
         PlayerBasicCharacteristicsStruct tempSkillStruct = new PlayerBasicCharacteristicsStruct();
 
-        for(int i = 0; i < charactersClasesDataList.Count; i++)
+        for (int i = 0; i < charactersClasesDataList.Count; i++)
         {
-            if(charactersClasesDataList[i].playerCharacterType == currentPlayerData.playerCharacterType)
+            if (charactersClasesDataList[i].playerCharacterType == playerClass)
             {
                 tempSkillStruct = charactersClasesDataList[i];
-                if(charactersClasesDataList[i].characterLevel < characterMaxLevel)
+                if (charactersClasesDataList[i].characterLevel < characterMaxLevel)
                 {
                     tempSkillStruct.characterLevel++;
+
+                    tempSkillStruct.characterSpeed += GetUpgradeValueForSingleClassCharacteristic(playerClassesDataSO.PlayerClassesDataList[i].levelUpgradeSpeedPercentValue, playerCharacteristicsSO.StartStandartSpeed);
+                    tempSkillStruct.currentClassProgressValue_Speed += playerClassesDataSO.PlayerClassesDataList[i].levelUpgradeSpeedPercentValue;
+
+                    tempSkillStruct.characterDamageIncreasePercent += GetUpgradeValueForSingleClassCharacteristic(playerClassesDataSO.PlayerClassesDataList[i].levelUpgradeDamagePercentValue, playerCharacteristicsSO.StartStandartDamage);
+                    tempSkillStruct.currentClassProgressValue_Damage += playerClassesDataSO.PlayerClassesDataList[i].levelUpgradeDamagePercentValue;
+
+                    tempSkillStruct.characterHp += GetUpgradeValueForSingleClassCharacteristic(playerClassesDataSO.PlayerClassesDataList[i].levelUpgradeHealthPercentValue, playerCharacteristicsSO.StartStandartHealth);
+                    tempSkillStruct.currentClassProgressValue_Health += playerClassesDataSO.PlayerClassesDataList[i].levelUpgradeHealthPercentValue;
+
+
                     charactersClasesDataList[i] = tempSkillStruct;
-                    currentPlayerData = charactersClasesDataList[i];
+                    if(currentPlayerData.playerCharacterType == playerClass)
+                    {
+                        currentPlayerData = charactersClasesDataList[i];
+                    }
+
+                    OnCharacterClassUpgraded?.Invoke();
                 }
                 else
                 {
@@ -342,9 +359,10 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         _dataPersistanceManager.SaveGame();
     }
 
-    public void UpgradeCharacterClassData(PlayerClasses playerClass)
+    private float GetUpgradeValueForSingleClassCharacteristic(float upgradePercent, float defaultValue)
     {
-
+        float upgradeValue = (defaultValue * upgradePercent) / CommonValues.maxPercentAmount;
+        return upgradeValue;
     }
 
     public bool CheckIfCharacterClassIsFullyUpgraded(PlayerClasses playerClass)

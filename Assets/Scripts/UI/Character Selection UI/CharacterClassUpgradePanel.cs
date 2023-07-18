@@ -26,6 +26,17 @@ public class CharacterClassUpgradePanel : PanelActivationManager
     private CharacterSelectionUI _characterSelectionUI;
 
     PlayerBasicCharacteristicsStruct visbleCharacterCharacteristicsData;
+    PlayerClassDataStruct visibleCharacterClassData;
+
+    private void Start()
+    {
+        _playerCharacteristicsManager.OnCharacterClassUpgraded += PlayerCharacteristicsManager_CharacterUpgraded_ExecuteReaction;
+    }
+
+    private void OnDestroy()
+    {
+        _playerCharacteristicsManager.OnCharacterClassUpgraded -= PlayerCharacteristicsManager_CharacterUpgraded_ExecuteReaction;
+    }
 
     #region Zenject
     [Inject]
@@ -39,6 +50,7 @@ public class CharacterClassUpgradePanel : PanelActivationManager
     public void UpdateCharacterClassData(PlayerClassDataStruct classData)
     {
         visbleCharacterCharacteristicsData = _playerCharacteristicsManager.GetCharacterCharacteristicsData(_characterSelectionUI.VisibleCharacter);
+        visibleCharacterClassData = classData;
 
         characterName.text = $"{classData.characterName}";
         characterLevel.text = $"{visbleCharacterCharacteristicsData.characterLevel}";
@@ -58,5 +70,13 @@ public class CharacterClassUpgradePanel : PanelActivationManager
         speedValueProgressBar.UpdateValue(visbleCharacterCharacteristicsData.currentClassProgressValue_Speed, classData.maxSpeedPercentValue);
         damageValueProgressBar.UpdateValue(visbleCharacterCharacteristicsData.currentClassProgressValue_Damage, classData.maxDamagePercentValue);
         healthValueProgressBar.UpdateValue(visbleCharacterCharacteristicsData.currentClassProgressValue_Health, classData.maxHealthPercentValue);
+    }
+
+    private void PlayerCharacteristicsManager_CharacterUpgraded_ExecuteReaction()
+    {
+        visbleCharacterCharacteristicsData = _playerCharacteristicsManager.GetCharacterCharacteristicsData(_characterSelectionUI.VisibleCharacter);
+
+        characterLevel.text = $"{visbleCharacterCharacteristicsData.characterLevel}";
+        SetProgressBarsValues(visibleCharacterClassData);
     }
 }
