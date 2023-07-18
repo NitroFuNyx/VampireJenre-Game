@@ -71,3 +71,10 @@ public class DisolveMaterialReferences
 {
     public const string FadeValue = "_Fade";
 }
+
+public class ScenesNames
+{
+    public const string MainUI = "Main UI";
+    public const string Cementary = "Cementary";
+    public const string Castle = "Castle";
+}
