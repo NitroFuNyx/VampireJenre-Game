@@ -18,6 +18,10 @@ public class EnemiesCharacteristicsManager : MonoBehaviour
     [Header("Upgrade Data Per Chapter")]
     [Space]
     [SerializeField] private float allCharacteristicsUpgradePercent = 5f;
+    [Header("Finish Upgrade Data")]
+    [Space]
+    [SerializeField] private int massiveLevelUpgradeTreshold = 20;
+    [SerializeField] private int massiveLevelUpgradeMultiplyer = 2;
 
     private PlayerExperienceManager _playerExperienceManager;
     private ChaptersProgressManager _chaptersProgressManager;
@@ -53,9 +57,19 @@ public class EnemiesCharacteristicsManager : MonoBehaviour
     private void PlayerExperienceManager_OnPlayerGotNewLevel_ExecuteReaction()
     {
         EnemyDataStruct newEnemyData = currentEnemiesData;
-        newEnemyData.hp += hpUpgradeValue;
-        newEnemyData.damage += damageUpgradeValue;
-        newEnemyData.speed += baseSpeedUpgradeValue;
+
+        if(_playerExperienceManager.CurrentLevel < massiveLevelUpgradeTreshold)
+        {
+            newEnemyData.hp += hpUpgradeValue;
+            newEnemyData.damage += damageUpgradeValue;
+            newEnemyData.speed += baseSpeedUpgradeValue;
+        }
+        else
+        {
+            newEnemyData.hp *= massiveLevelUpgradeMultiplyer;
+            newEnemyData.damage *= massiveLevelUpgradeMultiplyer;
+            newEnemyData.speed *= massiveLevelUpgradeMultiplyer;
+        }
 
         currentEnemiesData = newEnemyData;
 
