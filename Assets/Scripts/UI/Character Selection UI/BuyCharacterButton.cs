@@ -43,7 +43,7 @@ public class BuyCharacterButton : ButtonInteractionHandler
     {
         if(_resourcesManager.CheckIfEnoughResources(currentVisibleCharacterData.buyingCurrency, (int)currentVisibleCharacterData.price))
         {
-            _resourcesManager.BuyCharacter(currentVisibleCharacterData.buyingCurrency, (int)currentVisibleCharacterData.price);
+            _resourcesManager.SpentResource(currentVisibleCharacterData.buyingCurrency, (int)currentVisibleCharacterData.price);
             ShowAnimation_ButtonPressed();
             OnNewCharacterBought?.Invoke(currentVisibleCharacterData.playerClass);
         }

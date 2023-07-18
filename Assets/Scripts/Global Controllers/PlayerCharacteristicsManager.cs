@@ -318,6 +318,11 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         _dataPersistanceManager.SaveGame();
     }
 
+    public void UpgradeCharacterClassData(PlayerClasses playerClass)
+    {
+
+    }
+
     public void ResetPlayerCharacteristicAfterBattle()
     {
         currentPlayerData = playerPersistentData;
