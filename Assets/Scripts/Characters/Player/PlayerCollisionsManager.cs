@@ -42,6 +42,14 @@ public class PlayerCollisionsManager : MonoBehaviour
         //}
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.TryGetComponent(out AcidPuddle acid))
+        {
+            DecreaseHp(acid.DamageAmountToPlayer);
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (canCheckCollisions)
@@ -60,11 +68,6 @@ public class PlayerCollisionsManager : MonoBehaviour
             if (other.gameObject.layer == Layers.BossProjectile)
             {
                 DecreaseHp(20);
-            }
-
-            if(other.TryGetComponent(out AcidPuddle acid))
-            {
-                DecreaseHp(acid.DamageAmountToPlayer);
             }
         }
     }
