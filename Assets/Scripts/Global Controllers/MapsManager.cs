@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class MapsManager : MonoBehaviour
@@ -20,7 +21,7 @@ public class MapsManager : MonoBehaviour
 
     private void Start()
     {
-        SetLevelMap(LevelMaps.Cementary);
+        StartCoroutine(SetStartMapCoroutine());
     }
 
     public void PressButton_ChangeMap(SelectionArrowTypes buttonArrowType)
@@ -53,5 +54,12 @@ public class MapsManager : MonoBehaviour
     {
         currentLevelMap = map;
         OnMapChanged?.Invoke(currentLevelMap);
+    }
+
+    private IEnumerator SetStartMapCoroutine()
+    {
+        yield return null;
+        yield return null;
+        SetLevelMap(LevelMaps.Cementary);
     }
 }

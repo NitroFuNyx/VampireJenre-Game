@@ -8,26 +8,34 @@ public class MainScreenUI : MainCanvasPanel
     [Header("Images")]
     [Space]
     [SerializeField] private List<Image> chaptersProgressImagesList = new List<Image>();
+    [Header("Sprites")]
+    [Space]
+    [SerializeField] private Sprite cementaryMainScreenSprite;
+    [SerializeField] private Sprite castleMainScreenSprite;
 
     private ChaptersProgressManager _chaptersProgressManager;
+    private MapsManager _mapsManager;
 
     private void Start()
     {
         ChangeProgressImages(_chaptersProgressManager.FinishedChaptersCounter);
 
         _chaptersProgressManager.OnChaptersProgressUpdated += ChaptersProgressManager_OnChaptersProgressUpdated_ExecuteReaction;
+        _mapsManager.OnMapChanged += MapsManager_OnMapChanged_ExecuteReaction;
     }
 
     private void OnDestroy()
     {
         _chaptersProgressManager.OnChaptersProgressUpdated -= ChaptersProgressManager_OnChaptersProgressUpdated_ExecuteReaction;
+        _mapsManager.OnMapChanged -= MapsManager_OnMapChanged_ExecuteReaction;
     }
 
     #region Zenject
     [Inject]
-    private void Construct(ChaptersProgressManager chaptersProgressManager)
+    private void Construct(ChaptersProgressManager chaptersProgressManager, MapsManager mapsManager)
     {
         _chaptersProgressManager = chaptersProgressManager;
+        _mapsManager = mapsManager;
     }
     #endregion Zenject
 
@@ -59,5 +67,19 @@ public class MainScreenUI : MainCanvasPanel
     private void ChaptersProgressManager_OnChaptersProgressUpdated_ExecuteReaction(int finishedChaptersCounter)
     {
         ChangeProgressImages(finishedChaptersCounter);
+    }
+
+    private void MapsManager_OnMapChanged_ExecuteReaction(LevelMaps map)
+    {
+        if(map == LevelMaps.Cementary)
+        {
+            chaptersProgressImagesList[0].sprite = cementaryMainScreenSprite;
+            ChangeProgressImages(_chaptersProgressManager.FinishedChaptersCounter);
+        }
+        else
+        {
+            chaptersProgressImagesList[0].sprite = castleMainScreenSprite;
+            ChangeProgressImages(0);
+        }
     }
 }
