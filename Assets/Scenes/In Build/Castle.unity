@@ -1534,7 +1534,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.15
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1577,7 +1577,7 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 16857
+  m_ColorTemperature: 20000
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -6959,7 +6959,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4253173814476226281}
   m_Layer: 0
-  m_Name: "\u041B\u0438\u0448\u043D\u0435\u0435"
+  m_Name: Additional
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72267,7 +72267,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7075248258414919845}
   m_LocalRotation: {x: -0.70123744, y: 0.09091784, z: 0.09091784, w: 0.70123744}
-  m_LocalPosition: {x: 26.69, y: 0.45, z: -7.82}
+  m_LocalPosition: {x: 26.54, y: 0.5, z: -8.4}
   m_LocalScale: {x: 0.952418, y: 0.939448, z: 1.170199}
   m_ConstrainProportionsScale: 0
   m_Children: []
