@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 65da39fad4fa0ea41aade0cab4baae28,
+    type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: cf54e04323fb0f641bbe9fb8193aac64,
     type: 2}
 --- !u!196 &4
@@ -189,7 +190,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 18
+  m_Intensity: 28
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -345,8 +346,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 0.896049, b: 1, a: 1}
-  m_Intensity: 16
-  m_Range: 12
+  m_Intensity: 24
+  m_Range: 16
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -393,7 +394,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 12
+  m_ShadowRadius: 16
   m_ShadowAngle: 0
 --- !u!1 &51542177
 GameObject:
@@ -460,7 +461,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 22
+  m_Intensity: 36
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -575,7 +576,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 22
+  m_Intensity: 36
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -764,7 +765,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 18
+  m_Intensity: 28
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -879,8 +880,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 0.896049, b: 1, a: 1}
-  m_Intensity: 16
-  m_Range: 12
+  m_Intensity: 24
+  m_Range: 16
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -927,7 +928,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 12
+  m_ShadowRadius: 16
   m_ShadowAngle: 0
 --- !u!1 &245176877
 GameObject:
@@ -994,8 +995,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 0.896049, b: 1, a: 1}
-  m_Intensity: 16
-  m_Range: 12
+  m_Intensity: 24
+  m_Range: 16
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -1042,7 +1043,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 12
+  m_ShadowRadius: 16
   m_ShadowAngle: 0
 --- !u!1 &265157563
 GameObject:
@@ -1109,7 +1110,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 22
+  m_Intensity: 36
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1224,8 +1225,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 0.896049, b: 1, a: 1}
-  m_Intensity: 16
-  m_Range: 12
+  m_Intensity: 24
+  m_Range: 16
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -1272,7 +1273,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 12
+  m_ShadowRadius: 16
   m_ShadowAngle: 0
 --- !u!1 &370277213
 GameObject:
@@ -1339,7 +1340,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 22
+  m_Intensity: 36
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1454,7 +1455,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 18
+  m_Intensity: 28
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1684,7 +1685,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 18
+  m_Intensity: 28
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1799,7 +1800,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 30
+  m_Intensity: 45
   m_Range: 17
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1914,7 +1915,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 18
+  m_Intensity: 28
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2029,8 +2030,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 0.896049, b: 1, a: 1}
-  m_Intensity: 16
-  m_Range: 12
+  m_Intensity: 24
+  m_Range: 16
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -2077,7 +2078,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 12
+  m_ShadowRadius: 16
   m_ShadowAngle: 0
 --- !u!4 &670240873 stripped
 Transform:
@@ -2150,8 +2151,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 0.896049, b: 1, a: 1}
-  m_Intensity: 16
-  m_Range: 12
+  m_Intensity: 24
+  m_Range: 16
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -2198,7 +2199,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 12
+  m_ShadowRadius: 16
   m_ShadowAngle: 0
 --- !u!1 &804206481
 GameObject:
@@ -2265,7 +2266,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 18
+  m_Intensity: 28
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2416,7 +2417,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 18
+  m_Intensity: 28
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2531,7 +2532,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 22
+  m_Intensity: 36
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2646,7 +2647,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 22
+  m_Intensity: 36
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2905,7 +2906,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 30
+  m_Intensity: 45
   m_Range: 17
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3059,7 +3060,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 22
+  m_Intensity: 36
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3174,7 +3175,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 22
+  m_Intensity: 36
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3289,7 +3290,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 22
+  m_Intensity: 36
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3404,7 +3405,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 18
+  m_Intensity: 28
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3630,8 +3631,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 0.896049, b: 1, a: 1}
-  m_Intensity: 16
-  m_Range: 12
+  m_Intensity: 24
+  m_Range: 16
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -3678,7 +3679,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 12
+  m_ShadowRadius: 16
   m_ShadowAngle: 0
 --- !u!1 &1267065526
 GameObject:
@@ -3745,7 +3746,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 18
+  m_Intensity: 28
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3860,7 +3861,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 22
+  m_Intensity: 36
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -4010,8 +4011,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 0.896049, b: 1, a: 1}
-  m_Intensity: 16
-  m_Range: 12
+  m_Intensity: 24
+  m_Range: 16
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -4058,7 +4059,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 12
+  m_ShadowRadius: 16
   m_ShadowAngle: 0
 --- !u!1001 &1309607822
 PrefabInstance:
@@ -4269,8 +4270,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 0.896049, b: 1, a: 1}
-  m_Intensity: 16
-  m_Range: 12
+  m_Intensity: 24
+  m_Range: 16
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -4317,7 +4318,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 12
+  m_ShadowRadius: 16
   m_ShadowAngle: 0
 --- !u!1 &1427758341
 GameObject:
@@ -4384,7 +4385,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 22
+  m_Intensity: 36
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -4499,8 +4500,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 0.896049, b: 1, a: 1}
-  m_Intensity: 16
-  m_Range: 12
+  m_Intensity: 24
+  m_Range: 16
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -4547,7 +4548,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 12
+  m_ShadowRadius: 16
   m_ShadowAngle: 0
 --- !u!1 &1456027130
 GameObject:
@@ -4945,8 +4946,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 0.896049, b: 1, a: 1}
-  m_Intensity: 16
-  m_Range: 12
+  m_Intensity: 24
+  m_Range: 16
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -4993,7 +4994,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 12
+  m_ShadowRadius: 16
   m_ShadowAngle: 0
 --- !u!1001 &1704292186
 PrefabInstance:
@@ -5204,7 +5205,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 22
+  m_Intensity: 36
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -5319,7 +5320,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 18
+  m_Intensity: 28
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -5434,7 +5435,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 22
+  m_Intensity: 36
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -5549,7 +5550,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 22
+  m_Intensity: 36
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -5738,8 +5739,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 0.896049, b: 1, a: 1}
-  m_Intensity: 16
-  m_Range: 12
+  m_Intensity: 24
+  m_Range: 16
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -5786,7 +5787,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 12
+  m_ShadowRadius: 16
   m_ShadowAngle: 0
 --- !u!1 &1988538802
 GameObject:
@@ -5853,7 +5854,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 18
+  m_Intensity: 28
   m_Range: 12
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -5974,8 +5975,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 0.896049, b: 1, a: 1}
-  m_Intensity: 16
-  m_Range: 12
+  m_Intensity: 24
+  m_Range: 16
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -6022,7 +6023,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 12
+  m_ShadowRadius: 16
   m_ShadowAngle: 0
 --- !u!1 &1576300381159500
 GameObject:
@@ -10416,7 +10417,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 30
+  m_Intensity: 45
   m_Range: 17
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -10478,7 +10479,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 30
+  m_Intensity: 45
   m_Range: 17
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -56261,7 +56262,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6777429, b: 0, a: 1}
-  m_Intensity: 30
+  m_Intensity: 45
   m_Range: 17
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
