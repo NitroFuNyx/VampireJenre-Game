@@ -8,11 +8,12 @@ public class ScenesManager : MonoBehaviour
     private MapsManager _mapsManager;
 
     private Dictionary<LevelMaps, string> scenesDictionary = new Dictionary<LevelMaps, string>();
-    private List<LevelMaps> scenesList = new List<LevelMaps>();
+
+    private Scene currentlyActiveAdditiveScene;
 
     private void Awake()
     {
-        FillScenesDictionaryAndList();
+        FillScenesDictionary();
     }
 
     private void Start()
@@ -38,15 +39,13 @@ public class ScenesManager : MonoBehaviour
     public void LoadLevelScene(LevelMaps map)
     {
         SceneManager.LoadScene(scenesDictionary[map], LoadSceneMode.Additive);
+        currentlyActiveAdditiveScene = SceneManager.GetSceneByName(scenesDictionary[map]);
     }
 
-    private void FillScenesDictionaryAndList()
+    private void FillScenesDictionary()
     {
         scenesDictionary.Add(LevelMaps.Cementary, ScenesNames.Cementary);
         scenesDictionary.Add(LevelMaps.Castle, ScenesNames.Castle);
-
-        scenesList.Add(LevelMaps.Cementary);
-        scenesList.Add(LevelMaps.Castle);
     }
 
     private void SubscribeOnEvents()
@@ -61,16 +60,10 @@ public class ScenesManager : MonoBehaviour
 
     private void MapsManager_OnMapChanged_ExecuteReaction(LevelMaps map)
     {
-        for(int i = 0; i < scenesList.Count; i++)
+        if(currentlyActiveAdditiveScene.name != scenesDictionary[map])
         {
-            if(scenesList[i] != map)
-            {
-                SceneManager.UnloadSceneAsync(scenesDictionary[map]);
-            }
-            else
-            {
-                LoadLevelScene(map);
-            }
+            SceneManager.UnloadScene(currentlyActiveAdditiveScene);
+            LoadLevelScene(map);
         }
     }
 }
