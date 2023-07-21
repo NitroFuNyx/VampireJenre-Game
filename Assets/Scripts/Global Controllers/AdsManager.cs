@@ -88,6 +88,12 @@ public class AdsManager : MonoBehaviour, IDataPersistance
         return activeConnection;
     }
 
+    public void RestorePurchasedAdBlocker()
+    {
+        blockAdsOptionPurchased = true;
+        _dataPersistanceManager.SaveGame();
+    }
+
     private void PlayerExperienceManager_OnPlayerGottNewLevel_ExecuteReaction()
     {
         if(!blockAdsOptionPurchased)
