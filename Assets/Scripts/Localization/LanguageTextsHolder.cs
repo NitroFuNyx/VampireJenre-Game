@@ -36,6 +36,7 @@ namespace Localization
         public string storyButtonText;
         public string privacyPolicyButtonText;
         public string backButtonText;
+        public string restoreIapButtonText;
     }
 
     [Serializable]

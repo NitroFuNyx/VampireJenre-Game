@@ -7,7 +7,8 @@ public class SettingsUITextsLanguageHandler : TextsLanguageUpdateHandler
 {
     [Header("Texts")]
     [Space]
-    [SerializeField] private TextMeshProUGUI changeLanguageButtonText;
+    [SerializeField] private List<TextMeshProUGUI> changeLanguageButtonTextList = new List<TextMeshProUGUI>();
+    [SerializeField] private TextMeshProUGUI restoreIAPButtonText;
     [SerializeField] private TextMeshProUGUI storyButtonText;
     [SerializeField] private TextMeshProUGUI privacyPolicyButtonText;
     [Header("Common Texts")]
@@ -19,7 +20,12 @@ public class SettingsUITextsLanguageHandler : TextsLanguageUpdateHandler
 
     public override void OnLanguageChange_ExecuteReaction(LanguageTextsHolder languageHolder)
     {
-        changeLanguageButtonText.text = languageHolder.data.settingsUITexts.changeLanguageButtonText;
+        for(int i = 0; i < changeLanguageButtonTextList.Count; i++)
+        {
+            changeLanguageButtonTextList[i].text = languageHolder.data.settingsUITexts.changeLanguageButtonText;
+        }
+
+        restoreIAPButtonText.text = languageHolder.data.settingsUITexts.restoreIapButtonText;
         storyButtonText.text = languageHolder.data.settingsUITexts.storyButtonText;
         privacyPolicyButtonText.text = languageHolder.data.settingsUITexts.privacyPolicyButtonText;
 
