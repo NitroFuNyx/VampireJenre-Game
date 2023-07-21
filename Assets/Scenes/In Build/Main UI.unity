@@ -8072,6 +8072,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3938941085594604143}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3938941085594604145 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1274777263316030897, guid: 28be598c0dcdf5141ac0b373e60c3231,
+    type: 3}
+  m_PrefabInstance: {fileID: 3938941085594604143}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 309e874cad6e18749b98aa8ae11d3eb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4607836227784106768
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8715,6 +8727,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4277848417741339199, guid: f7add5797b424f547b1ef86ffba2daab,
+        type: 3}
+      propertyPath: onTransactionsRestored.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3938941085594604145}
     - target: {fileID: 4339202674615446371, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
       propertyPath: m_SizeDelta.y
@@ -9006,6 +9023,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6713806943889228878, guid: f7add5797b424f547b1ef86ffba2daab,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6917369793305405045, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
