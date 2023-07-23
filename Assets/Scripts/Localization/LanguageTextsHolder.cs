@@ -27,6 +27,9 @@ namespace Localization
     public class MainScreenUIData
     {
         public string playButtonText;
+        public string playDeathmatchButtonText;
+        public string deathmatchFinishedText;
+        public string deathmatchPanelTitleText;
     }
 
     [Serializable]
@@ -54,6 +57,7 @@ namespace Localization
         public DefeatPanelData defeatPanelTexts;
         public SkillScrollPanelData skillScrollPanelTexts;
         public TreasureChestPanelData treasureChestPanelTexts;
+        public DeathmatchPanelData deathmatchPanelTexts;
         public string menuButtonText;
     }
 
@@ -100,6 +104,16 @@ namespace Localization
         public string getAllTreasuresButtonText;
         public string firstTreasureText;
         public string secondTreasureText;
+    }
+
+    [Serializable]
+    public class DeathmatchPanelData
+    {
+        public string panelTitleText;
+        public string bestResultsPanelTitleText;
+        public string roundResultsPanelTitleText;
+        public string timeText;
+        public string enemiesText;
     }
 
     [Serializable]

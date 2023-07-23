@@ -32,6 +32,13 @@ public class GameLevelUITextsLanguageHandler : TextsLanguageUpdateHandler
     [SerializeField] private TextMeshProUGUI treasurePanelGetAllTreasuresText;
     [SerializeField] private List<TextMeshProUGUI> treasurePanelFirstTreasureTextsList = new List<TextMeshProUGUI>();
     [SerializeField] private List<TextMeshProUGUI> treasurePanelSecondTreasureTextsList = new List<TextMeshProUGUI>();
+    [Header("Deathmatch Panel Texts")]
+    [Space]
+    [SerializeField] private TextMeshProUGUI deathmatchPanelTitleText;
+    [SerializeField] private TextMeshProUGUI bestResultsPanelTitleText;
+    [SerializeField] private TextMeshProUGUI roundResultsPanelTitleText;
+    [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private TextMeshProUGUI enemiesText;
     [Header("Common Texts")]
     [Space]
     [SerializeField] private List<TextMeshProUGUI> menuButtonsTextsList = new List<TextMeshProUGUI>();
@@ -58,7 +65,13 @@ public class GameLevelUITextsLanguageHandler : TextsLanguageUpdateHandler
         treasurePanelGetOneTreasureText.text = languageHolder.data.gameLevelUITexts.treasureChestPanelTexts.getOneTreasureButtonText;
         treasurePanelGetAllTreasuresText.text = languageHolder.data.gameLevelUITexts.treasureChestPanelTexts.getAllTreasuresButtonText;
 
-        for(int i = 0; i < treasurePanelFirstTreasureTextsList.Count; i++)
+        deathmatchPanelTitleText.text = languageHolder.data.gameLevelUITexts.deathmatchPanelTexts.panelTitleText;
+        bestResultsPanelTitleText.text = languageHolder.data.gameLevelUITexts.deathmatchPanelTexts.bestResultsPanelTitleText;
+        roundResultsPanelTitleText.text = languageHolder.data.gameLevelUITexts.deathmatchPanelTexts.roundResultsPanelTitleText;
+        timeText.text = languageHolder.data.gameLevelUITexts.deathmatchPanelTexts.timeText;
+        enemiesText.text = languageHolder.data.gameLevelUITexts.deathmatchPanelTexts.enemiesText;
+
+        for (int i = 0; i < treasurePanelFirstTreasureTextsList.Count; i++)
         {
             treasurePanelFirstTreasureTextsList[i].text = languageHolder.data.gameLevelUITexts.treasureChestPanelTexts.firstTreasureText;
         }

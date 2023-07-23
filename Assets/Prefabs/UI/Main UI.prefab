@@ -2135,7 +2135,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 607485774}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -37168,7 +37168,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4745594715236899953}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -37724,7 +37724,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4745594716602092297}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -38246,6 +38246,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playButtonText: {fileID: 4745594715431935257}
+  playDeathmatchButtonText: {fileID: 301602505013847818}
+  deathmatchFinishedText: {fileID: 2378325299652898247}
+  deathmatchPanelTitleText: {fileID: 5076563486556190672}
 --- !u!1 &4863335464884624687
 GameObject:
   m_ObjectHideFlags: 0
@@ -61837,10 +61840,16 @@ MonoBehaviour:
   treasurePanelSecondTreasureTextsList:
   - {fileID: 7131352859992398775}
   - {fileID: 7719704543449009789}
+  deathmatchPanelTitleText: {fileID: 8498084482107730990}
+  bestResultsPanelTitleText: {fileID: 4959708031240870116}
+  roundResultsPanelTitleText: {fileID: 4482495906554134734}
+  timeText: {fileID: 5522580893559332900}
+  enemiesText: {fileID: 7823837723569516939}
   menuButtonsTextsList:
   - {fileID: 1161189668}
   - {fileID: 4555143355466767317}
   - {fileID: 3005671304253380253}
+  - {fileID: 1315120920606114087}
 --- !u!1 &8373826262264695585
 GameObject:
   m_ObjectHideFlags: 0
@@ -64489,7 +64498,7 @@ GameObject:
   - component: {fileID: 4167407130537826720}
   - component: {fileID: 4482495906554134734}
   m_Layer: 0
-  m_Name: Best Results Title Text
+  m_Name: Round Statistic Title Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
