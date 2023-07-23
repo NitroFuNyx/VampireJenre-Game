@@ -1,4 +1,5 @@
 using UnityEngine;
+using Save_Load_System;
 using Zenject;
 
 public class ControllersInstaller : MonoInstaller
@@ -28,6 +29,7 @@ public class ControllersInstaller : MonoInstaller
     [Space]
     [SerializeField] private PlayerExperienceManager playerExperienceManager;
     [SerializeField] private PlayerCharacteristicsManager playerCharacteristicsManager;
+    [SerializeField] private PlayerStatisticsManager playerStatisticsManager;
     [SerializeField] private SkillsManager skillsManager;
     [SerializeField] private PlayerCharactersManager playerCharactersManager;
     [SerializeField] private PlayerAnimationsManager playerAnimationsManager;
@@ -56,6 +58,7 @@ public class ControllersInstaller : MonoInstaller
 
         Container.Bind<PlayerExperienceManager>().FromInstance(playerExperienceManager).AsSingle().NonLazy();
         Container.Bind<PlayerCharacteristicsManager>().FromInstance(playerCharacteristicsManager).AsSingle().NonLazy();
+        Container.Bind<PlayerStatisticsManager>().FromInstance(playerStatisticsManager).AsSingle().NonLazy();
         Container.Bind<SkillsManager>().FromInstance(skillsManager).AsSingle().NonLazy();
         Container.Bind<PlayerCharactersManager>().FromInstance(playerCharactersManager).AsSingle().NonLazy();
         Container.Bind<PlayerAnimationsManager>().FromInstance(playerAnimationsManager).AsSingle().NonLazy();
