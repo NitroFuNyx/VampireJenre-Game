@@ -109,7 +109,7 @@ public class SpawnEnemiesManager : MonoBehaviour
             }
             else if (_mapsManager.CurrentLevelMap == LevelMaps.Castle)
             {
-                spawner_InCastle.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave);
+                spawner_InCastle.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave);
                 spawner_InCastle.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave);
                 spawner_InCastle.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave);
             }
