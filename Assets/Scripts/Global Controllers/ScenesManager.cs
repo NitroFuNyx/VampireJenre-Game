@@ -11,6 +11,8 @@ public class ScenesManager : MonoBehaviour
 
     private Scene currentlyActiveAdditiveScene;
 
+    public Scene CurrentlyActiveAdditiveScene { get => currentlyActiveAdditiveScene; }
+
     private void Awake()
     {
         FillScenesDictionary();

@@ -5,11 +5,14 @@ using Zenject;
 
 public class SpawnEnemiesManager : MonoBehaviour
 {
-    [Header("Spawners")]
+    [Header("Spawners Cementary")]
     [Space]
     [SerializeField] private EnemySpawner spawner_BeyondMap;
     [SerializeField] private EnemySpawner spawner_OnMap;
     [SerializeField] private EnemySpawner spawner_AtGates;
+    [Header("Spawners Castle")]
+    [Space]
+    [SerializeField] private EnemySpawner spawner_InCastle;
     [Header("Spawn Data")]
     [Space]
     [SerializeField] private int spawnAmountInOneWave;
@@ -30,6 +33,7 @@ public class SpawnEnemiesManager : MonoBehaviour
     private GameProcessManager _gameProcessManager;
     private PlayerExperienceManager _playerExperienceManager;
     private ChaptersProgressManager _chaptersProgressManager;
+    private MapsManager _mapsManager;
 
     private bool canSpawnEnemies = true;
 
@@ -50,11 +54,12 @@ public class SpawnEnemiesManager : MonoBehaviour
     #region Zenject
     [Inject]
     private void Construct(GameProcessManager gameProcessManager, PlayerExperienceManager playerExperienceManager, 
-                           ChaptersProgressManager chaptersProgressManager)
+                           ChaptersProgressManager chaptersProgressManager, MapsManager mapsManager)
     {
         _gameProcessManager = gameProcessManager;
         _playerExperienceManager = playerExperienceManager;
         _chaptersProgressManager = chaptersProgressManager;
+        _mapsManager = mapsManager;
     }
     #endregion Zenject
 
@@ -67,17 +72,24 @@ public class SpawnEnemiesManager : MonoBehaviour
     [ContextMenu("Spawn Boss")]
     public void SpawnBossAtCenter()
     {
-        if(_chaptersProgressManager.FinishedChaptersCounter == 0)
+        if(_mapsManager.CurrentLevelMap == LevelMaps.Cementary)
         {
-            spawner_AtGates.SpawnBoss(PoolItemsTypes.Zombie_Boss);
+            if (_chaptersProgressManager.FinishedChaptersCounter == 0)
+            {
+                spawner_AtGates.SpawnBoss(PoolItemsTypes.Zombie_Boss);
+            }
+            else if (_chaptersProgressManager.FinishedChaptersCounter == 1)
+            {
+                spawner_AtGates.SpawnBoss(PoolItemsTypes.Orc_Boss);
+            }
+            else
+            {
+                spawner_AtGates.SpawnBoss(PoolItemsTypes.Demon_Boss);
+            }
         }
-        else if (_chaptersProgressManager.FinishedChaptersCounter == 1)
+        else if(_mapsManager.CurrentLevelMap == LevelMaps.Castle)
         {
-            spawner_AtGates.SpawnBoss(PoolItemsTypes.Orc_Boss);
-        }
-        else
-        {
-            spawner_AtGates.SpawnBoss(PoolItemsTypes.Demon_Boss);
+            spawner_InCastle.SpawnBoss(PoolItemsTypes.Zombie_Boss);
         }
 
         canSpawnEnemies = false;
@@ -89,28 +101,64 @@ public class SpawnEnemiesManager : MonoBehaviour
     {
         if (_playerExperienceManager.CurrentLevel <= firstTresholdLevel && enemiesOnMapList.Count < firstTresholdMaxEnemiesAmount)
         {
-            spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave);
-            spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave);
-            spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave);
+            if(_mapsManager.CurrentLevelMap == LevelMaps.Cementary)
+            {
+                spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave);
+                spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave);
+                spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave);
+            }
+            else if (_mapsManager.CurrentLevelMap == LevelMaps.Castle)
+            {
+                spawner_InCastle.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave);
+                spawner_InCastle.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave);
+                spawner_InCastle.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave);
+            }
         }
         else if (_playerExperienceManager.CurrentLevel > firstTresholdLevel && _playerExperienceManager.CurrentLevel < secondTresholdLevel && 
                 enemiesOnMapList.Count < secondTresholdMaxEnemiesAmount)
         {
-            spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave);
-            spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave);
-            spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave);
+            if (_mapsManager.CurrentLevelMap == LevelMaps.Cementary)
+            {
+                spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave);
+                spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave);
+                spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave);
+            }
+            else if (_mapsManager.CurrentLevelMap == LevelMaps.Castle)
+            {
+                spawner_InCastle.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave);
+                spawner_InCastle.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave);
+                spawner_InCastle.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave);
+            }
         }
         else if(_playerExperienceManager.CurrentLevel >= secondTresholdLevel && _playerExperienceManager.CurrentLevel < thirdTresholdLevel)
         {
-            spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave);
-            spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave);
-            spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave);
+            if (_mapsManager.CurrentLevelMap == LevelMaps.Cementary)
+            {
+                spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave);
+                spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave);
+                spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave);
+            }
+            else if (_mapsManager.CurrentLevelMap == LevelMaps.Castle)
+            {
+                spawner_InCastle.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave);
+                spawner_InCastle.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave);
+                spawner_InCastle.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave);
+            }
         }
         else if (_playerExperienceManager.CurrentLevel >= thirdTresholdLevel)
         {
-            spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave * thirdTresholdEnemiesInWaveMultiplyer);
-            spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave * thirdTresholdEnemiesInWaveMultiplyer);
-            spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave * thirdTresholdEnemiesInWaveMultiplyer);
+            if (_mapsManager.CurrentLevelMap == LevelMaps.Cementary)
+            {
+                spawner_BeyondMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave * thirdTresholdEnemiesInWaveMultiplyer);
+                spawner_OnMap.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave * thirdTresholdEnemiesInWaveMultiplyer);
+                spawner_AtGates.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave * thirdTresholdEnemiesInWaveMultiplyer);
+            }
+            else if (_mapsManager.CurrentLevelMap == LevelMaps.Castle)
+            {
+                spawner_InCastle.SpawnEnemyWave(PoolItemsTypes.Enemy_Ghost, spawnAmountInOneWave * thirdTresholdEnemiesInWaveMultiplyer);
+                spawner_InCastle.SpawnEnemyWave(PoolItemsTypes.Enemy_Skeleton, spawnAmountInOneWave * thirdTresholdEnemiesInWaveMultiplyer);
+                spawner_InCastle.SpawnEnemyWave(PoolItemsTypes.Enemy_Zombie, spawnAmountInOneWave * thirdTresholdEnemiesInWaveMultiplyer);
+            }
         }
     }
 
@@ -164,6 +212,7 @@ public class SpawnEnemiesManager : MonoBehaviour
         spawner_BeyondMap.ReturnAllEnemiesToPool();
         spawner_OnMap.ReturnAllEnemiesToPool();
         spawner_AtGates.ReturnAllEnemiesToPool();
+        spawner_InCastle.ReturnAllEnemiesToPool();
     }
 
     private void GameProcessManager_PlayerWon_ExecuteReaction()
@@ -199,5 +248,6 @@ public class SpawnEnemiesManager : MonoBehaviour
         spawner_BeyondMap.ReturnAllEnemiesToPool();
         spawner_OnMap.ReturnAllEnemiesToPool();
         spawner_AtGates.ReturnAllEnemiesToPool();
+        spawner_InCastle.ReturnAllEnemiesToPool();
     }
 }

@@ -11,6 +11,8 @@ public class MapsManager : MonoBehaviour
 
     private List<LevelMaps> levelMapsList = new List<LevelMaps>();
 
+    public LevelMaps CurrentLevelMap { get => currentLevelMap; }
+
     public event Action<LevelMaps> OnMapChanged;
 
     private void Awake()
