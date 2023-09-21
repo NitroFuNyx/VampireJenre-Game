@@ -76,6 +76,7 @@ public struct PlayerBasicCharacteristicsStruct
     public PlayerClasses playerCharacterType;
     public bool locked;
     public int characterLevel;
+    public int weaponLevel;
     public float characterHp; 
     public float characterSpeed;
     public float skillsRangeIncreasePercent;
@@ -259,6 +260,19 @@ public struct PlayerClassDataStruct
     public float startHealthPercentValue;
     public float maxHealthPercentValue;
     public float levelUpgradeHealthPercentValue;
+}
+
+[Serializable]
+public struct WeaponUpgradeDataStruct
+{
+    public PlayerClasses playerClass;
+    public ResourcesTypes buyingCurrency;
+    public float price;
+    public PassiveCharacteristicsTypes characteristicForUpgrade;
+    public float upgradeValue;
+    public int maxWeaponLevel;
+
+    public List<Sprite> weaponSpritesList;
 }
 
 [Serializable]

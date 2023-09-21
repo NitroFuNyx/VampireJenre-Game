@@ -8159,6 +8159,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 29e4beccb7f832548964c1c6a27f6b6e,
         type: 2}
+    - target: {fileID: 9153055591968125031, guid: 656b64f5db9f31843acf89dc33cf2355,
+        type: 3}
+      propertyPath: weaponUpgradeDataSO
+      value: 
+      objectReference: {fileID: 11400000, guid: c1bbd16af81f76e4f849b982608b2022,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 656b64f5db9f31843acf89dc33cf2355, type: 3}
 --- !u!114 &4607836227784106769 stripped
@@ -8899,6 +8905,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1706925415513683381, guid: f7add5797b424f547b1ef86ffba2daab,
+        type: 3}
+      propertyPath: panelType
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1716707534660202170, guid: f7add5797b424f547b1ef86ffba2daab,
         type: 3}
