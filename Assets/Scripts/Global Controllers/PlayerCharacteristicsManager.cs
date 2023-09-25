@@ -361,22 +361,28 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         _dataPersistanceManager.SaveGame();
     }
 
-    public void UpgradePlayerWeapon(PlayerClasses playerClass)
+    public WeaponUpgradeDataStruct GetWeaponUpgradeData(PlayerClasses playerClass)
     {
-        PlayerBasicCharacteristicsStruct tempSkillStruct = new PlayerBasicCharacteristicsStruct();
-
         WeaponUpgradeDataStruct weaponUpgradeData = weaponUpgradeDataSO.WeaponUpgradeDataList[0];
 
         for (int i = 0; i < weaponUpgradeDataSO.WeaponUpgradeDataList.Count; i++)
         {
-            if(weaponUpgradeDataSO.WeaponUpgradeDataList[i].playerClass == playerClass)
+            if (weaponUpgradeDataSO.WeaponUpgradeDataList[i].playerClass == playerClass)
             {
                 weaponUpgradeData = weaponUpgradeDataSO.WeaponUpgradeDataList[i];
                 break;
             }
         }
 
-        
+        return weaponUpgradeData;
+    }
+
+    public void UpgradePlayerWeapon(PlayerClasses playerClass)
+    {
+        PlayerBasicCharacteristicsStruct tempSkillStruct = new PlayerBasicCharacteristicsStruct();
+
+        WeaponUpgradeDataStruct weaponUpgradeData = GetWeaponUpgradeData(playerClass);
+
 
         for (int i = 0; i < charactersClasesDataList.Count; i++)
         {
