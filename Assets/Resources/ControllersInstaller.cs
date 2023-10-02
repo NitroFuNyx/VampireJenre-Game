@@ -23,6 +23,7 @@ public class ControllersInstaller : MonoInstaller
     [SerializeField] private AdsManager adsManager;
     [SerializeField] private VFXManager vfxManager;
     [SerializeField] private DeathmatchAccessManager deathmatchAccessManager;
+    [SerializeField] private DailyRewardsItemManager dailyRewardsItemManager;
     [Header("Player References")]
     [Space]
     [SerializeField] private PlayerExperienceManager playerExperienceManager;
@@ -51,6 +52,7 @@ public class ControllersInstaller : MonoInstaller
         Container.Bind<AdsManager>().FromInstance(adsManager).AsSingle().NonLazy();
         Container.Bind<VFXManager>().FromInstance(vfxManager).AsSingle().NonLazy();
         Container.Bind<DeathmatchAccessManager>().FromInstance(deathmatchAccessManager).AsSingle().NonLazy();
+        Container.Bind<DailyRewardsItemManager>().FromInstance(dailyRewardsItemManager).AsSingle().NonLazy();
 
         Container.Bind<PlayerExperienceManager>().FromInstance(playerExperienceManager).AsSingle().NonLazy();
         Container.Bind<PlayerCharacteristicsManager>().FromInstance(playerCharacteristicsManager).AsSingle().NonLazy();

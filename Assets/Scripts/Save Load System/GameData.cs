@@ -12,6 +12,7 @@ public class GameData
     public Secureint gemsAmount;
     public int finishedChaptersCounter;
     public int lastDayPlaying;
+    public int daysInARow;
     public bool soundMuted;
     public bool canVibrate;
     public bool blockAdsOptionPurchased;

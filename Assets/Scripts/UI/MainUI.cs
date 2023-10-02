@@ -58,6 +58,7 @@ public class MainUI : MonoBehaviour
         ActivateMainCanvasPanel(UIPanels.RoadmapUI);
         panelsDictionary[UIPanels.MenuButtonsUI].ShowPanel();
     }
+    
 
     public void PlayButtonPressed_ExecuteReaction()
     {
@@ -106,6 +107,15 @@ public class MainUI : MonoBehaviour
     {
         ActivateMainCanvasPanel(UIPanels.MainScreenPanel);
         ShowMenuButtonsUI();
+    }
+    public void ShowDailyRewardsUI()
+    {
+        ActivateMainCanvasPanel(UIPanels.DailyRewardsUI);
+        ShowMenuButtonsUI();
+    }
+    public void HideDailyRewardsUI()
+    {
+        panelsDictionary[UIPanels.DailyRewardsUI].HidePanel();
     }
 
     public void ShowNoAdsUI()
