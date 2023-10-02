@@ -12,6 +12,8 @@ public class ChangeActiveCharacterButton : ButtonInteractionHandler
 
     public override void ButtonActivated()
     {
+        ShowAnimation_ButtonPressed();
+        SetButtonSprite(true);
         OnChangeActiveCharacterButtonPressed?.Invoke();
     }
 

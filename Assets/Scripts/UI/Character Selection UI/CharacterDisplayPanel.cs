@@ -15,6 +15,9 @@ public class CharacterDisplayPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI classText;
     [SerializeField] private TextMeshProUGUI characterNameText;
+    [Header("Buttons")]
+    [Space]
+    [SerializeField] private ChangeVisibleCharacterButton changeVisibleCharacterButton;
 
     public void SetCharacterData(PlayerClassDataStruct characterInfo, int level)
     {
@@ -24,5 +27,7 @@ public class CharacterDisplayPanel : MonoBehaviour
         characterNameText.text = $"{characterInfo.characterName}";
 
         levelText.text = $"{level}";
+
+        changeVisibleCharacterButton.PlayerClass = characterClass;
     }
 }

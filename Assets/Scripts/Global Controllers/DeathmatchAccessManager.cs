@@ -54,7 +54,7 @@ public class DeathmatchAccessManager : MonoBehaviour, IDataPersistance
         if(!deathMatchModeUsedAtCurrentDay && _resourcesManager.CheckIfEnoughResources(buyingCurrency, deatmatchPurchaseCost))
         {
             deathMatchModeUsedAtCurrentDay = true;
-            _resourcesManager.BuyDeathmatchGame(buyingCurrency, deatmatchPurchaseCost);
+            _resourcesManager.SpentResource(buyingCurrency, deatmatchPurchaseCost);
             _dataPersistanceManager.SaveGame();
             OnBuyingProcessSuccessfull?.Invoke();
             OnDeathmatchUiUpdateRequired?.Invoke();

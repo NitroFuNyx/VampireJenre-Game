@@ -18,7 +18,7 @@ public class CharacterSelectionUI : MainCanvasPanel
     [Space]
     [SerializeField] private Transform characterSelectionPanel;
     [SerializeField] private PanelActivationManager baseCharacatersInfoPanel;
-    [SerializeField] private PanelActivationManager characterUpgradePanel;
+    [SerializeField] private CharacterClassUpgradePanel characterClassUpgradePanel;
 
     private PlayerCharacteristicsManager _playerCharacteristicsManager;
     private PlayerCharactersManager _playerCharactersManager;
@@ -34,6 +34,8 @@ public class CharacterSelectionUI : MainCanvasPanel
     private Dictionary<PlayerClasses, Sprite> charactersDictionary = new Dictionary<PlayerClasses, Sprite>();
 
     private PlayerClasses visibleCharacter;
+
+    public PlayerClasses VisibleCharacter { get => visibleCharacter; }
 
     private void Start()
     {
@@ -65,27 +67,31 @@ public class CharacterSelectionUI : MainCanvasPanel
     public override void PanelActivated_ExecuteReaction()
     {
         baseCharacatersInfoPanel.ShowPanel();
-        characterUpgradePanel.HidePanel();
+        characterClassUpgradePanel.HidePanel();
     }
 
     public override void PanelDeactivated_ExecuteReaction()
     {
         baseCharacatersInfoPanel.ShowPanel();
-        characterUpgradePanel.HidePanel();
+        characterClassUpgradePanel.HidePanel();
     }
 
     private void SubscribeOnEvents()
     {
         button_ChangeActiveCharacter.OnChangeActiveCharacterButtonPressed += ChangeActiveCharacterButtonPressed_ExecuteReaction;
 
-        //_playerCharactersManager.OnCharacterChanged += PlayerCharactersManager_OnCharacterChanged_ExecuteReaction;
+        button_detailsCharacter.OnCharacterDetailsButtonPressed += CharacterDetailsButtonPressed_ExecuteReaction;
+
+        button_buyCharacter.OnNewCharacterBought += CharacterBought_ExecuteReaction;
     }
 
     private void UnsubscribeFromEvents()
     {
         button_ChangeActiveCharacter.OnChangeActiveCharacterButtonPressed -= ChangeActiveCharacterButtonPressed_ExecuteReaction;
 
-        //_playerCharactersManager.OnCharacterChanged -= PlayerCharactersManager_OnCharacterChanged_ExecuteReaction;
+        button_detailsCharacter.OnCharacterDetailsButtonPressed -= CharacterDetailsButtonPressed_ExecuteReaction;
+
+        button_buyCharacter.OnNewCharacterBought -= CharacterBought_ExecuteReaction;
     }
 
     private void FillCharactersListAndDictionary()
@@ -231,7 +237,6 @@ public class CharacterSelectionUI : MainCanvasPanel
         {
             visibleCharacter = playerClass;
         }
-        
 
         UpdateCharacterDisplayData();
     }
@@ -241,11 +246,17 @@ public class CharacterSelectionUI : MainCanvasPanel
         _playerCharacteristicsManager.SetCurrentCharacterData(visibleCharacter);
         _playerCharactersManager.SetPlayCharacterModel(visibleCharacter);
     }
-    #endregion Buttons Events
 
-    //private void PlayerCharactersManager_OnCharacterChanged_ExecuteReaction(PlayerClasses playerClass)
-    //{
-    //    visibleCharacter = playerClass;
-    //    UpdateCharacterDisplayData();
-    //}
+    private void CharacterDetailsButtonPressed_ExecuteReaction()
+    {
+        baseCharacatersInfoPanel.HidePanel();
+        characterClassUpgradePanel.ShowPanel();
+        characterClassUpgradePanel.UpdateCharacterClassData(GetPlayerClassData(visibleCharacter));
+    }
+
+    private void CharacterBought_ExecuteReaction(PlayerClasses playerClass)
+    {
+        UpdateCharacterDisplayData();
+    }
+    #endregion Buttons Events
 }

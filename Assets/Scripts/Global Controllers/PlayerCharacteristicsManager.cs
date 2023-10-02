@@ -7,6 +7,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     [Header("Start Data")]
     [Space]
     [SerializeField] private PlayerCharacteristicsSO playerCharacteristicsSO;
+    [SerializeField] private PlayerClassesDataSO playerClassesDataSO;
     [SerializeField] private PlayerBasicCharacteristicsStruct playerPersistentData;
     [Header("Current Data")]
     [Space]
@@ -21,12 +22,15 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     private GameProcessManager _gameProcessManager;
     private PlayerCharactersManager _playerCharactersManager;
     private CharacterSelectionUI _characterSelectionUI;
+    private BuyCharacterButton _buyCharacterButton;
 
-    private int characterMaxLevel = 50;
+    private int characterMaxLevel = 10;
 
     public PlayerBasicCharacteristicsStruct CurrentPlayerData { get => currentPlayerData; private set => currentPlayerData = value; }
     public PlayerCharacteristicsSO PlayerCharactersClasesDataSO { get => playerCharacteristicsSO; }
     public List<PlayerBasicCharacteristicsStruct> CharactersClasesDataList { get => charactersClasesDataList; }
+
+    public event System.Action OnCharacterClassUpgraded;
 
     private void Awake()
     {
@@ -40,7 +44,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         _gameProcessManager.OnPlayerLost += GameProcessManager_PlayerLost_ExecuteReaction;
         _gameProcessManager.OnPlayerWon += GameProcessManager_PlayerWon_ExecuteReaction;
 
-        //_playerCharactersManager.OnCharacterChanged += PlayerCharactersManager_OnCharacterChanged_ExecuteReaction;
+        _buyCharacterButton.OnNewCharacterBought += CharacterBought_ExecuteReaction;
     }
 
     private void OnDestroy()
@@ -49,18 +53,20 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         _gameProcessManager.OnPlayerLost -= GameProcessManager_PlayerLost_ExecuteReaction;
         _gameProcessManager.OnPlayerWon -= GameProcessManager_PlayerWon_ExecuteReaction;
 
-        //_playerCharactersManager.OnCharacterChanged -= PlayerCharactersManager_OnCharacterChanged_ExecuteReaction;
+        _buyCharacterButton.OnNewCharacterBought -= CharacterBought_ExecuteReaction;
     }
 
     #region Zenject
     [Inject]
     private void Construct(DataPersistanceManager dataPersistanceManager, GameProcessManager gameProcessManager, 
-                           PlayerCharactersManager playerCharactersManager, CharacterSelectionUI characterSelectionUI)
+                           PlayerCharactersManager playerCharactersManager, CharacterSelectionUI characterSelectionUI,
+                           BuyCharacterButton buyCharacterButton)
     {
         _dataPersistanceManager = dataPersistanceManager;
         _gameProcessManager = gameProcessManager;
         _playerCharactersManager = playerCharactersManager;
         _characterSelectionUI = characterSelectionUI;
+        _buyCharacterButton = buyCharacterButton;
     }
     #endregion Zenject
 
@@ -104,6 +110,29 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         }
     }
     #endregion Save/Load Methods
+
+    public PlayerBasicCharacteristicsStruct GetCharacterClassStartValues(int characterIndex)
+    {
+        PlayerBasicCharacteristicsStruct data = new PlayerBasicCharacteristicsStruct();
+        data = playerCharacteristicsSO.PlayerBasicDataLists[characterIndex];
+
+        data.characterSpeed = (playerCharacteristicsSO.StartStandartSpeed *
+                              playerClassesDataSO.PlayerClassesDataList[characterIndex].startSpeedPercentValue) /
+                              CommonValues.maxPercentAmount;
+        data.currentClassProgressValue_Speed = playerClassesDataSO.PlayerClassesDataList[characterIndex].startSpeedPercentValue;
+
+        data.characterDamageIncreasePercent = (playerCharacteristicsSO.StartStandartDamage *
+                              playerClassesDataSO.PlayerClassesDataList[characterIndex].startDamagePercentValue) /
+                              CommonValues.maxPercentAmount;
+        data.currentClassProgressValue_Damage = playerClassesDataSO.PlayerClassesDataList[characterIndex].startDamagePercentValue;
+
+        data.characterHp = (playerCharacteristicsSO.StartStandartHealth *
+                              playerClassesDataSO.PlayerClassesDataList[characterIndex].startHealthPercentValue) /
+                              CommonValues.maxPercentAmount;
+        data.currentClassProgressValue_Health = playerClassesDataSO.PlayerClassesDataList[characterIndex].startHealthPercentValue;
+
+        return data;
+    }
 
     public void UpgradePlayerData_DueToTalentAquired(TalentDataStruct talentData)
     {
@@ -288,21 +317,36 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         }
     }
 
-    [ContextMenu("Upgrade")]
-    public void UpgradeCharacterLevel()
+    public void UpgradeCharacterClassData(PlayerClasses playerClass)
     {
         PlayerBasicCharacteristicsStruct tempSkillStruct = new PlayerBasicCharacteristicsStruct();
 
-        for(int i = 0; i < charactersClasesDataList.Count; i++)
+        for (int i = 0; i < charactersClasesDataList.Count; i++)
         {
-            if(charactersClasesDataList[i].playerCharacterType == currentPlayerData.playerCharacterType)
+            if (charactersClasesDataList[i].playerCharacterType == playerClass)
             {
                 tempSkillStruct = charactersClasesDataList[i];
-                if(charactersClasesDataList[i].characterLevel < characterMaxLevel)
+                if (charactersClasesDataList[i].characterLevel < characterMaxLevel)
                 {
                     tempSkillStruct.characterLevel++;
+
+                    tempSkillStruct.characterSpeed += GetUpgradeValueForSingleClassCharacteristic(playerClassesDataSO.PlayerClassesDataList[i].levelUpgradeSpeedPercentValue, playerCharacteristicsSO.StartStandartSpeed);
+                    tempSkillStruct.currentClassProgressValue_Speed += playerClassesDataSO.PlayerClassesDataList[i].levelUpgradeSpeedPercentValue;
+
+                    tempSkillStruct.characterDamageIncreasePercent += GetUpgradeValueForSingleClassCharacteristic(playerClassesDataSO.PlayerClassesDataList[i].levelUpgradeDamagePercentValue, playerCharacteristicsSO.StartStandartDamage);
+                    tempSkillStruct.currentClassProgressValue_Damage += playerClassesDataSO.PlayerClassesDataList[i].levelUpgradeDamagePercentValue;
+
+                    tempSkillStruct.characterHp += GetUpgradeValueForSingleClassCharacteristic(playerClassesDataSO.PlayerClassesDataList[i].levelUpgradeHealthPercentValue, playerCharacteristicsSO.StartStandartHealth);
+                    tempSkillStruct.currentClassProgressValue_Health += playerClassesDataSO.PlayerClassesDataList[i].levelUpgradeHealthPercentValue;
+
+
                     charactersClasesDataList[i] = tempSkillStruct;
-                    currentPlayerData = charactersClasesDataList[i];
+                    if(currentPlayerData.playerCharacterType == playerClass)
+                    {
+                        currentPlayerData = charactersClasesDataList[i];
+                    }
+
+                    OnCharacterClassUpgraded?.Invoke();
                 }
                 else
                 {
@@ -313,6 +357,31 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         }
 
         _dataPersistanceManager.SaveGame();
+    }
+
+    private float GetUpgradeValueForSingleClassCharacteristic(float upgradePercent, float defaultValue)
+    {
+        float upgradeValue = (defaultValue * upgradePercent) / CommonValues.maxPercentAmount;
+        return upgradeValue;
+    }
+
+    public bool CheckIfCharacterClassIsFullyUpgraded(PlayerClasses playerClass)
+    {
+        bool isFullyUpgraded = false;
+
+        for (int i = 0; i < charactersClasesDataList.Count; i++)
+        {
+            if (charactersClasesDataList[i].playerCharacterType == playerClass)
+            {
+                if (charactersClasesDataList[i].characterLevel == characterMaxLevel)
+                {
+                    isFullyUpgraded = true;
+                }
+                break;
+            }
+        }
+
+        return isFullyUpgraded;
     }
 
     public void ResetPlayerCharacteristicAfterBattle()
@@ -457,11 +526,11 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     {
         PlayerBasicCharacteristicsStruct characterData = new PlayerBasicCharacteristicsStruct();
 
-        for(int i = 0; i < playerCharacteristicsSO.PlayerBasicDataLists.Count; i++)
+        for(int i = 0; i < charactersClasesDataList.Count; i++)
         {
-            if(playerCharacteristicsSO.PlayerBasicDataLists[i].playerCharacterType == characterType)
+            if(charactersClasesDataList[i].playerCharacterType == characterType)
             {
-                characterData = playerCharacteristicsSO.PlayerBasicDataLists[i];
+                characterData = charactersClasesDataList[i];
             }
         }
 
@@ -483,8 +552,19 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
         _dataPersistanceManager.SaveGame();
     }
 
-    private void PlayerCharactersManager_OnCharacterChanged_ExecuteReaction(PlayerClasses playerClass)
+    private void CharacterBought_ExecuteReaction(PlayerClasses playerClass)
     {
-        SetCurrentCharacterData(playerClass);
+        for (int i = 0; i < charactersClasesDataList.Count; i++)
+        {
+            if (playerClass == charactersClasesDataList[i].playerCharacterType)
+            {
+                PlayerBasicCharacteristicsStruct tempStruct = charactersClasesDataList[i];
+                tempStruct.locked = false;
+                charactersClasesDataList[i] = tempStruct;
+                break;
+            }
+        }
+
+        _dataPersistanceManager.SaveGame();
     }
 }

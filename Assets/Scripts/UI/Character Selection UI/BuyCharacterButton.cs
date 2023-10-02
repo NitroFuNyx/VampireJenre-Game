@@ -15,7 +15,7 @@ public class BuyCharacterButton : ButtonInteractionHandler
     private ResourcesManager _resourcesManager;
     private PlayerClassDataStruct currentVisibleCharacterData;
 
-    public event Action OnBuyCharacterButtonPressed;
+    public event Action<PlayerClasses> OnNewCharacterBought;
 
     #region Zenject
     [Inject]
@@ -29,7 +29,7 @@ public class BuyCharacterButton : ButtonInteractionHandler
     {
         currentVisibleCharacterData = classData;
 
-        if (CanBeBought())
+        if (_resourcesManager.CheckIfEnoughResources(currentVisibleCharacterData.buyingCurrency, (int)currentVisibleCharacterData.price))
         {
             buttonImage.sprite = activeSprite;
         }
@@ -41,32 +41,11 @@ public class BuyCharacterButton : ButtonInteractionHandler
 
     public override void ButtonActivated()
     {
-        if(CanBeBought())
+        if(_resourcesManager.CheckIfEnoughResources(currentVisibleCharacterData.buyingCurrency, (int)currentVisibleCharacterData.price))
         {
-            OnBuyCharacterButtonPressed?.Invoke();
+            _resourcesManager.SpentResource(currentVisibleCharacterData.buyingCurrency, (int)currentVisibleCharacterData.price);
+            ShowAnimation_ButtonPressed();
+            OnNewCharacterBought?.Invoke(currentVisibleCharacterData.playerClass);
         }
-    }
-
-    private bool CanBeBought()
-    {
-        bool canBeBought = false;
-
-        int resourceAmount = 0;
-
-        if (currentVisibleCharacterData.buyingCurrency == ResourcesTypes.Gems)
-        {
-            resourceAmount = _resourcesManager.GameData.gemsAmount.GetValue();
-        }
-        else
-        {
-            resourceAmount = _resourcesManager.GameData.coinsAmount.GetValue();
-        }
-
-        if (resourceAmount >= currentVisibleCharacterData.price)
-        {
-            canBeBought = true;
-        }
-
-        return canBeBought;
     }
 }

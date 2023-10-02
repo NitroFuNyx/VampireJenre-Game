@@ -113,3 +113,8 @@ public enum GameModes
 {
     Standart, Deathmatch
 }
+
+public enum LevelMaps
+{
+    Cementary, Castle
+}

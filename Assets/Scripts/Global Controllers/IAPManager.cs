@@ -26,4 +26,9 @@ public class IAPManager : MonoBehaviour
             _adsManager.PurchaseAdsBlocker();
         }
     }
+
+    public void OnPurchaseRestored(bool _, string __)
+    {
+        _adsManager.RestorePurchasedAdBlocker();
+    }
 }

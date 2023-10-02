@@ -1,4 +1,5 @@
 using UnityEngine;
+using Save_Load_System;
 using Zenject;
 
 public class ControllersInstaller : MonoInstaller
@@ -23,11 +24,14 @@ public class ControllersInstaller : MonoInstaller
     [SerializeField] private AdsManager adsManager;
     [SerializeField] private VFXManager vfxManager;
     [SerializeField] private DeathmatchAccessManager deathmatchAccessManager;
+    [SerializeField] private MapsManager mapsManager;
     [SerializeField] private DailyRewardsItemManager dailyRewardsItemManager;
+
     [Header("Player References")]
     [Space]
     [SerializeField] private PlayerExperienceManager playerExperienceManager;
     [SerializeField] private PlayerCharacteristicsManager playerCharacteristicsManager;
+    [SerializeField] private PlayerStatisticsManager playerStatisticsManager;
     [SerializeField] private SkillsManager skillsManager;
     [SerializeField] private PlayerCharactersManager playerCharactersManager;
     [SerializeField] private PlayerAnimationsManager playerAnimationsManager;
@@ -53,9 +57,12 @@ public class ControllersInstaller : MonoInstaller
         Container.Bind<VFXManager>().FromInstance(vfxManager).AsSingle().NonLazy();
         Container.Bind<DeathmatchAccessManager>().FromInstance(deathmatchAccessManager).AsSingle().NonLazy();
         Container.Bind<DailyRewardsItemManager>().FromInstance(dailyRewardsItemManager).AsSingle().NonLazy();
+        Container.Bind<MapsManager>().FromInstance(mapsManager).AsSingle().NonLazy();
 
+        
         Container.Bind<PlayerExperienceManager>().FromInstance(playerExperienceManager).AsSingle().NonLazy();
         Container.Bind<PlayerCharacteristicsManager>().FromInstance(playerCharacteristicsManager).AsSingle().NonLazy();
+        Container.Bind<PlayerStatisticsManager>().FromInstance(playerStatisticsManager).AsSingle().NonLazy();
         Container.Bind<SkillsManager>().FromInstance(skillsManager).AsSingle().NonLazy();
         Container.Bind<PlayerCharactersManager>().FromInstance(playerCharactersManager).AsSingle().NonLazy();
         Container.Bind<PlayerAnimationsManager>().FromInstance(playerAnimationsManager).AsSingle().NonLazy();

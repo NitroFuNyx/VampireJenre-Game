@@ -488,6 +488,13 @@ public class SkillsManager : MonoBehaviour
             {
                 availableSkillsList.Remove(passiveSkillsTakenList[i].skillType);
             }
+
+            if(passiveSkillsTakenList[i].skillType == PassiveSkills.IncreaseProjectileAmount &&
+               passiveSkillsTakenList[i].skillLevel == SkillsInGameValues.maxSkillLevelForSkill_IncreaseProjectilesAmount
+               && availableSkillsList.Contains(passiveSkillsTakenList[i].skillType))
+            {
+                availableSkillsList.Remove(passiveSkillsTakenList[i].skillType);
+            }
         }
 
         if (passiveSkillsTakenList.Count == SkillsInGameValues.maxSkillsInCategoryAmount)

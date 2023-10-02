@@ -17,15 +17,18 @@ MonoBehaviour:
     locked: 0
     characterLevel: 0
     characterHp: 100
-    characterSpeed: 4.5
+    characterSpeed: 3
     skillsRangeIncreasePercent: 0
-    characterDamageIncreasePercent: 0
+    characterDamageIncreasePercent: 5
     characterDamageReductionPercent: 0
     characterCritChance: 0
     characterCritPower: 0
     characterRegenerationPercent: 0
     characterItemDropChancePercent: 0
     characterCoinsSurplusPercent: 0
+    currentClassProgressValue_Speed: 100
+    currentClassProgressValue_Damage: 100
+    currentClassProgressValue_Health: 100
     playerSkillsData:
       playerForceWaveData:
         damage: 0
@@ -74,8 +77,8 @@ MonoBehaviour:
   - playerCharacterType: 1
     locked: 1
     characterLevel: 0
-    characterHp: 90
-    characterSpeed: 4.68
+    characterHp: 0
+    characterSpeed: 0
     skillsRangeIncreasePercent: 0
     characterDamageIncreasePercent: 0
     characterDamageReductionPercent: 0
@@ -84,6 +87,9 @@ MonoBehaviour:
     characterRegenerationPercent: 0
     characterItemDropChancePercent: 0
     characterCoinsSurplusPercent: 0
+    currentClassProgressValue_Speed: 125
+    currentClassProgressValue_Damage: 90
+    currentClassProgressValue_Health: 90
     playerSkillsData:
       playerForceWaveData:
         damage: 0
@@ -132,8 +138,8 @@ MonoBehaviour:
   - playerCharacterType: 2
     locked: 1
     characterLevel: 0
-    characterHp: 90
-    characterSpeed: 3.37
+    characterHp: 0
+    characterSpeed: 0
     skillsRangeIncreasePercent: 0
     characterDamageIncreasePercent: 0
     characterDamageReductionPercent: 0
@@ -142,6 +148,9 @@ MonoBehaviour:
     characterRegenerationPercent: 0
     characterItemDropChancePercent: 0
     characterCoinsSurplusPercent: 0
+    currentClassProgressValue_Speed: 90
+    currentClassProgressValue_Damage: 125
+    currentClassProgressValue_Health: 90
     playerSkillsData:
       playerForceWaveData:
         damage: 0
@@ -187,3 +196,6 @@ MonoBehaviour:
         damage: 0
         size: 0
         cooldown: 0
+  startStandartSpeed: 3
+  startStandartDamage: 5
+  startStandartHealth: 100

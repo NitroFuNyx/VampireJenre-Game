@@ -51,6 +51,8 @@ public class PlayerComponentsManager : MonoBehaviour
     {
         collisionsManager.OnPlayerOutOfHp += CollisionManager_PlayerOutOfHp_ExecuteReaction;
         collisionsManager.OnDamageReceived += CollisionManager_DamageReceived_ExecuteReaction;
+        //collisionsManager.OnStairsColliderEnter += CollisionManager_StairsColliderEnter_ExecuteReaction;
+        //collisionsManager.OnStairsColliderExit += CollisionManager_StairsColliderExit_ExecuteReaction;
 
         _gameProcessManager.OnPlayerWon += GameProcessManager_PlayerWon_ExecuteReaction;
         _gameProcessManager.OnLevelDataReset += GameProcessManager_LevelDataReset_ExecuteReaction;
@@ -65,6 +67,8 @@ public class PlayerComponentsManager : MonoBehaviour
     {
         collisionsManager.OnPlayerOutOfHp -= CollisionManager_PlayerOutOfHp_ExecuteReaction;
         collisionsManager.OnDamageReceived -= CollisionManager_DamageReceived_ExecuteReaction;
+        //collisionsManager.OnStairsColliderEnter -= CollisionManager_StairsColliderEnter_ExecuteReaction;
+        //collisionsManager.OnStairsColliderExit -= CollisionManager_StairsColliderExit_ExecuteReaction;
 
         _gameProcessManager.OnPlayerWon -= GameProcessManager_PlayerWon_ExecuteReaction;
         _gameProcessManager.OnLevelDataReset -= GameProcessManager_LevelDataReset_ExecuteReaction;
@@ -101,6 +105,16 @@ public class PlayerComponentsManager : MonoBehaviour
     private void CollisionManager_DamageReceived_ExecuteReaction()
     {
         _hapticManager.Vibrate();
+    }
+
+    private void CollisionManager_StairsColliderEnter_ExecuteReaction()
+    {
+        movementManager.ChangeRigidBodyConstraintY(true);
+    }
+
+    private void CollisionManager_StairsColliderExit_ExecuteReaction()
+    {
+        movementManager.ChangeRigidBodyConstraintY(false);
     }
 
     private void GameProcessManager_OnPlayerRecoveryOptionUsed_ExecuteReaction()

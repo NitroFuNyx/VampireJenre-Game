@@ -24,6 +24,8 @@ public class PlayerCollisionsManager : MonoBehaviour
     public event Action OnPlayerOutOfHp;
     public event Action OnDamageReceived;
     public event Action<float, float> OnHpAmountChanged;
+    public event Action OnStairsColliderEnter;
+    public event Action OnStairsColliderExit;
     #endregion Events Declaration
 
     private void Start()
@@ -40,6 +42,14 @@ public class PlayerCollisionsManager : MonoBehaviour
         //        DecreaseHp(_enemiesCharacteristicsManager.CurrentEnemiesData.damage);
         //    }
         //}
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.TryGetComponent(out AcidPuddle acid))
+        {
+            DecreaseHp(acid.DamageAmountToPlayer);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -60,6 +70,22 @@ public class PlayerCollisionsManager : MonoBehaviour
             if (other.gameObject.layer == Layers.BossProjectile)
             {
                 DecreaseHp(20);
+            }
+
+            if (other.TryGetComponent(out StairsCollider stairs))
+            {
+                OnStairsColliderEnter?.Invoke();
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (canCheckCollisions)
+        {
+            if (other.TryGetComponent(out StairsCollider stairs))
+            {
+                OnStairsColliderExit?.Invoke();
             }
         }
     }

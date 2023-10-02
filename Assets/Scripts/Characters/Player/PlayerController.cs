@@ -66,4 +66,16 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(0f, transform.position.y, 0f);
         transform.rotation = Quaternion.identity;
     }
+
+    public void ChangeRigidBodyConstraintY(bool freezePositionY)
+    {
+        if(freezePositionY)
+        {
+            playerRigidBody.constraints = RigidbodyConstraints.FreezePositionY;
+        }
+        else
+        {
+            playerRigidBody.constraints &= ~RigidbodyConstraints.FreezePositionY;
+        }
+    }
 }

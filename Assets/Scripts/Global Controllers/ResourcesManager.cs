@@ -287,7 +287,7 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         return isEnoughResources;
     }
 
-    public void BuyDeathmatchGame(ResourcesTypes resourceType, int cost)
+    public void SpentResource(ResourcesTypes resourceType, int cost)
     {
         if (resourceType == ResourcesTypes.Gems)
         {
@@ -297,6 +297,7 @@ public class ResourcesManager : MonoBehaviour, IDataPersistance
         {
             DecreaseCoinsAmount(cost);
         }
+        _dataPersistanceManager.SaveGame();
     }
 
     private void AddCurrentLevelResourcesToGeneralAmount()

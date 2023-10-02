@@ -16,12 +16,14 @@ public class SystemTimeManager : MonoBehaviour, IDataPersistance
     [SerializeField]private int lastDay;
     [SerializeField]private int consecutiveDays = 0;
     private int daysToCompleteCycle = 7;
+    private int todayToLastDayPlayingDelta = 0;
 
     private bool _isRewardClaimed;
     private MainUI _mainUI;
     private DailyRewardsItemManager _dailyRewardsItemManager;
     public bool NewDay { get => newDay; private set => newDay = value; }
-    
+    public int TodayToLastDayPlayingDelta { get => todayToLastDayPlayingDelta; private set => todayToLastDayPlayingDelta = value; }
+
     private void Awake()
     {
         _dataPersistanceManager.AddObjectToSaveSystemObjectsList(this);
@@ -43,9 +45,12 @@ public class SystemTimeManager : MonoBehaviour, IDataPersistance
         {
             Debug.Log($"Get Reward New Game");
             newDay = true;
+            todayToLastDayPlayingDelta = 0;
         }
         else
         {
+            CheckDayOfPlaying(data.lastDayPlaying);
+            todayToLastDayPlayingDelta = System.DateTime.Now.DayOfYear - data.lastDayPlaying;
             lastDay = data.lastDayPlaying;
             consecutiveDays = data.daysInARow;
         }

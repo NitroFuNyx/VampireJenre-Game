@@ -81,7 +81,8 @@ public class DataPersistanceManager : MonoBehaviour
     {
         for(int i = 0; i <_playerCharacteristicsManager.PlayerCharactersClasesDataSO.PlayerBasicDataLists.Count; i++)
         {
-            gameData.playerClasesDataList.Add(_playerCharacteristicsManager.PlayerCharactersClasesDataSO.PlayerBasicDataLists[i]);
+            //gameData.playerClasesDataList.Add(_playerCharacteristicsManager.PlayerCharactersClasesDataSO.PlayerBasicDataLists[i]);
+            gameData.playerClasesDataList.Add(_playerCharacteristicsManager.GetCharacterClassStartValues(i));
         }
     }
 
