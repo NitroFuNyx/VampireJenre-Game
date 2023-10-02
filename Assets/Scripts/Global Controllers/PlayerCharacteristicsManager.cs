@@ -8,6 +8,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     [Space]
     [SerializeField] private PlayerCharacteristicsSO playerCharacteristicsSO;
     [SerializeField] private PlayerClassesDataSO playerClassesDataSO;
+    [SerializeField] private WeaponUpgradeDataSO weaponUpgradeDataSO;
     [SerializeField] private PlayerBasicCharacteristicsStruct playerPersistentData;
     [Header("Current Data")]
     [Space]
@@ -31,6 +32,7 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
     public List<PlayerBasicCharacteristicsStruct> CharactersClasesDataList { get => charactersClasesDataList; }
 
     public event System.Action OnCharacterClassUpgraded;
+    public event System.Action OnWeaponUpgraded;
 
     private void Awake()
     {
@@ -347,6 +349,70 @@ public class PlayerCharacteristicsManager : MonoBehaviour, IDataPersistance
                     }
 
                     OnCharacterClassUpgraded?.Invoke();
+                }
+                else
+                {
+                    // Show Max Level Message
+                }
+                break;
+            }
+        }
+
+        _dataPersistanceManager.SaveGame();
+    }
+
+    public WeaponUpgradeDataStruct GetWeaponUpgradeData(PlayerClasses playerClass)
+    {
+        WeaponUpgradeDataStruct weaponUpgradeData = weaponUpgradeDataSO.WeaponUpgradeDataList[0];
+
+        for (int i = 0; i < weaponUpgradeDataSO.WeaponUpgradeDataList.Count; i++)
+        {
+            if (weaponUpgradeDataSO.WeaponUpgradeDataList[i].playerClass == playerClass)
+            {
+                weaponUpgradeData = weaponUpgradeDataSO.WeaponUpgradeDataList[i];
+                break;
+            }
+        }
+
+        return weaponUpgradeData;
+    }
+
+    public void UpgradePlayerWeapon(PlayerClasses playerClass)
+    {
+        PlayerBasicCharacteristicsStruct tempSkillStruct = new PlayerBasicCharacteristicsStruct();
+
+        WeaponUpgradeDataStruct weaponUpgradeData = GetWeaponUpgradeData(playerClass);
+
+
+        for (int i = 0; i < charactersClasesDataList.Count; i++)
+        {
+            if (charactersClasesDataList[i].playerCharacterType == playerClass)
+            {
+                tempSkillStruct = charactersClasesDataList[i];
+                if (charactersClasesDataList[i].weaponLevel < weaponUpgradeData.maxWeaponLevel)
+                {
+                    tempSkillStruct.weaponLevel++;
+
+                    if(weaponUpgradeData.characteristicForUpgrade == PassiveCharacteristicsTypes.DecreaseIncomeDamage)
+                    {
+                        tempSkillStruct.characterDamageReductionPercent += weaponUpgradeData.upgradeValue;
+                    }
+                    else if(weaponUpgradeData.characteristicForUpgrade == PassiveCharacteristicsTypes.IncreaseMovementSpeed)
+                    {
+                        tempSkillStruct.characterSpeed += weaponUpgradeData.upgradeValue;
+                    }
+                    else if (weaponUpgradeData.characteristicForUpgrade == PassiveCharacteristicsTypes.IncreaseDamage)
+                    {
+                        tempSkillStruct.characterDamageIncreasePercent += weaponUpgradeData.upgradeValue;
+                    }
+
+                    charactersClasesDataList[i] = tempSkillStruct;
+                    if (currentPlayerData.playerCharacterType == playerClass)
+                    {
+                        currentPlayerData = charactersClasesDataList[i];
+                    }
+
+                    OnWeaponUpgraded?.Invoke();
                 }
                 else
                 {
